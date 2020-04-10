@@ -7,12 +7,12 @@ El proyecto **BunkerStore** será un e-commerce. Imaginemos por un segundo que u
 ## Constructores del BUNKER
 
 ###### Malena Trejo
-Le tomó 34 años llegar a la recta final de su doctorado en letras y siendo ya profesora de latín en la UNLP decidió que era momento de probar con otros lenguajes. Encontró en el desarrollo web la combinación justa de lengiaje, amor por las matemáticas y la curiosidad de nuevas tecnologías. 
+Le tomó 34 años llegar a la recta final de su doctorado en letras y siendo ya profesora de latín en la UNLP decidió que era momento de probar con otros lenguajes. Encontró en el desarrollo web la combinación justa de lenguaje, amor por las matemáticas y la curiosidad por nuevas tecnologías. 
 
 
 
 ###### Juan Ignacio Erglis
-Alias Nacho, gracias a él bajamos un poco el promedio de antigüedad. Técnico electrónico y mecánico automotriz apasionado de la conducción. Se desempeña en el departamento ce compras y contabilidad de una gerenciadora de salud. El orden es un pequeño punto que quisiera mejorar.
+Alias Nacho, gracias a él bajamos un poco el promedio de antigüedad. Técnico electrónico y mecánico automotriz apasionado de la conducción. Se desempeña en el departamento de compras y contabilidad de una gerenciadora de salud. El orden es un pequeño punto que quisiera mejorar.
 
 
 

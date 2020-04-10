@@ -28,7 +28,7 @@ Técnico electrónico, casi licenciado en administración de empresas (si, acá 
 
 ## Utilizacion
 
-Ingresar a ```http://localhost/proyecto/index.html``` 
+Ingresar a ```http://``` 
 
 
 

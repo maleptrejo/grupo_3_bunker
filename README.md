@@ -2,7 +2,7 @@
 
 El proyecto **BunkerStore** será un e-commerce. Imaginemos por un segundo que un apocalipsis zombie se desata en el mundo (y, seamos sinceros, va a pasar tarde o temprano) nos encontramos un bunker. Que quisieras encontrarte dentro? Una linterna? La tenemos! Comida? Claro que si! Articulos de aseo personal? Listo! Repuestos? Seguro! Tu amor imposible de la secundaria esperando que seas su única salvación? Eh, bueno, quizás no lo tengamos absolutamente todo. Pero en resumidas cuentas en **BunkerStore** la idea es la de ofrecer gran variedad de rubros en un sólo lugar.
 
-#####Publico Objetivo
+##### Publico Objetivo
 Aficionados y expertos en camping, senderismo y outdoor en general. Jóvenes y jóvenes-adultos acostumbrados a utilizar plataformas online para hacer compras. Profesionales independientes que llevan sus gustos y hobbies un poco más allá.
 
 

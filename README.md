@@ -2,6 +2,9 @@
 
 El proyecto **BunkerStore** será un e-commerce. Imaginemos por un segundo que un apocalipsis zombie se desata en el mundo (y, seamos sinceros, va a pasar tarde o temprano) nos encontramos un bunker. Que quisieras encontrarte dentro? Una linterna? La tenemos! Comida? Claro que si! Articulos de aseo personal? Listo! Repuestos? Seguro! Tu amor imposible de la secundaria esperando que seas su única salvación? Eh, bueno, quizás no lo tengamos absolutamente todo. Pero en resumidas cuentas en **BunkerStore** la idea es la de ofrecer gran variedad de rubros en un sólo lugar.
 
+#####Publico Objetivo
+Aficionados y expertos en camping, senderismo y outdoor en general. Jóvenes y jóvenes-adultos acostumbrados a utilizar plataformas online para hacer compras. Profesionales independientes que llevan sus gustos y hobbies un poco más allá.
+
 
 
 ## Constructores del BUNKER
@@ -17,18 +20,18 @@ Alias Nacho, gracias a él bajamos un poco el promedio de antigüedad. Técnico 
 
 
 ###### Federico Garcia
-Técnico electrónico, casi licenciado en administración de empresas (si, acá algo raro pasó), curioso por naturaleza. Ha sido más tiempo ejecutivos de cuentas en empresas de diversos rubros industriales, que padre. Persona entuciasta, colavorativa y por momentos algo obstinado. A los 36 años consideró necesario un cambio de rumbo en su vida.
+Técnico electrónico, casi licenciado en administración de empresas (si, acá algo raro pasó), curioso por naturaleza. Ha sido más tiempo ejecutivos de cuentas en empresas de diversos rubros industriales, que padre. Persona entuciasta, colaborativa y por momentos algo obstinado. A los 36 años consideró necesario un cambio de rumbo en su vida.
 
 
 ## Instalacion
 
-```git clone https://github.com/alezvi/empty-project-example```
+git clone https://github.com/maleptrejo/grupo_3_bunker.git
 
 
 
 ## Utilizacion
 
-Ingresar a ```http://localhost/proyecto/index.html``` 
+Ingresar a ```http://``` 
 
 
 
@@ -36,8 +39,20 @@ Ingresar a ```http://localhost/proyecto/index.html```
 
 #### Herramientas
 
-- [ClickUp para la gestion de las tareas](https://clickup.com)
-- NodeJS
+- [ClickUp para la gestión de las tareas](https://clickup.com)
+- [Pencil Project para la creación de los wireframe](https://pencil.evolus.vn/)
+- [NodeJS para pruebas y desarrollo](https://nodejs.org/es/)
+- [Visual Studio Code para la creación y edición de archivos](https://code.visualstudio.com/)
+- [ghostwriter para la creación y edición de archivos .md](http://wereturtle.github.io/ghostwriter/)
+
+
+#### Fuentes de inspiracion
+
+- [Horse Power](https://www.horsepowercorp.com/)
+- [Collage Crafting](https://collagecrafting.com/en/products/all)
+- [Only Once](http://onlyonceshop.com/)
+- [Nixon](https://www.nixon.com/us/en)
+- [Falabella](https://www.falabella.com.ar/falabella-ar/)
 
 
 

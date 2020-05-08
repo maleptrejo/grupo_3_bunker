@@ -1,0 +1,71 @@
+/* *******sección pie  de sitio****** */
+
+
+
+footer h6 {
+    color: #353535;
+    font-size: 1.2em;
+    
+   
+}
+
+footer p {
+    color: #666666;
+    
+}
+
+.row-pie {
+
+    color: whitesmoke;
+}
+
+.row-pie h6 {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+
+
+.row-pie li a {
+    font-size: 0.8em;
+}
+
+.col-redes {
+  
+    display: inline-flex;
+    justify-content: space-around;
+} 
+
+.container-pie {
+    background-color: #353535;
+}
+
+@media (min-width: 1000px) {
+    .row-pie h6 {
+        font-size: 1.5em;
+    }
+
+    .row-pie li a {
+        font-size: 1em;
+    }
+    
+    .col-redes {
+        justify-content: flex-end;
+    }
+
+    .col-redes ul a {
+        padding: 5px;
+        font-size: 1.5em;
+    }
+
+    footer .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    footer .container p {
+        padding-top: 1vh;
+    }
+}

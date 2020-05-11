@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <script src="https://kit.fontawesome.com/a0c0bb4f74.js" crossorigin="anonymous"></script>
+    
+    <link href="https://fonts.googleapis.com/css?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Red+Hat+Display&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./bunker.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+</head>
+<body id="wrapper">
+    
+    <header class="">
+        <div class="container" id="top">
+            <div class="row">
+
+
+                
+                    <div id="#header" class="col-1 col-lg-1">
+                            <a href="#" id="menu_on">
+                              <span class="cruz"></span>
+                              <span class="cruz"></span>
+                              <span class="cruz"></span>
+                            </a>
+                        </div>
+                
+
+
+                <div class="col-8 col-lg-4 logo-bunker">
+                    <a href="app.html">
+                        <h1>BUNKER <img src="./imagenes/light-beer.svg" alt="" class="bombilla">  </h1> 
+                    </a> 
+                </div>
+                
+          
+                
+                <!-- ****** -->
+                <div class="col-lg-5 buscador-lg">
+                    <form action="" method="get" class="search-form">
+                        <input type="text" name="search" placeholder="Buscá aquí" class="search-form_inputLG">
+                        <button type="submit" class="search-form_buttonLG"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                
+                <!-- ****** -->
+
+                <div class="col-1 col-lg-1 icon-fav pt-3 ">
+                    <button><i class="fas fa-heart"></i></button>
+                </div>
+                
+                
+                <!-- <div class="col-1 icono icon-user">
+                    <button id="user-toggle"><i class="fas fa-user-astronaut icono"></i></button>
+                </div> -->
+
+                <!-- <script>
+                    
+
+
+                        $("#user-toggle").click(function(){
+                            $(".opciones-user").toggle("slow");
+                        });
+
+                        
+                </script> -->
+
+                
+                
+                <div class="col-1 col-lg-1 icono icon-carrito">
+                    <a href=""><i class="fas fa-shopping-cart"></i></a>
+                </div>
+                
+                
+            </div>
+        </div>
+
+        <!-- <div class="opciones-user">
+            <div class="opciones-usuario">
+                <ul class="pt-2 pb-2">
+                    <li class="pl-3"><a href="">LOGIN</a></li>
+                    <li> | </li>
+                    <li><a href="">CERRAR SESIÓN</a></li>
+                    
+                </ul>
+                <ul class="corazon pt-2 pb-2">
+                    <li><a href=""><i class="fas fa-heart"></i></a></li>
+                </ul>
+            </div>
+
+        </div> -->
+        
+        <form action="" method="get" class="search-form buscador-mini">
+            <input type="text" name="search" placeholder="Buscar productos, marcas y más" class="search-form_input">
+            <button type="submit" class="search-form_button"><i class="fas fa-search fa-lg"></i></button>
+        </form>
+        
+    </header>
+    
+    <nav class="desplegable">	
+            <ul>
+                <li><a href="app.html">Home</a></li>
+                <li><a href="#">Outdoor</a></li>
+                <li><a href="#">Taller</a></li>
+                <li><a href="#">Diseño sustentable</a></li>
+            </ul>
+            <ul>
+                <li><a href="form-registro.html">LOGIN</a></li>
+                <li><a href="">CERRAR SESIÓN</a></li>
+
+            </ul>
+    </nav>
+  
+          <script type="text/javascript">
+            $( document ).ready(function() {
+              $('#menu_on').click(function(){ // Al hacer click...
+                 $('body').toggleClass('visible_menu'); // Añadimos o eliminamos la clase 'visible_menu' al body
+               })
+            });
+          </script>
+
+
+<a href="#wrapper"><button type="button" class="btn btn-dark boton-fijo ml-3 mb-3 "><i class="fas fa-chevron-up"></i></button> </a>
+
+    
+    <main class="">
+        <div class="container">
+                <div aria-label="breadcrumb rounded-0 ">
+                        <ol class="breadcrumb pl-0 bg-white">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Login</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Nuevo Usuario</li>
+                        </ol>
+                    </div>
+        </div> 
+
+    <section class="container registro">
+            
+    <form class="needs-validation mt-3 form-new-user" novalidate>
+            <h2 class="c-acc">Crear cuenta</h2>
+            
+            <div class=" datos-usuario">
+                <h5 class="acc-subs">Datos del usuario</h5>
+                <div class="form-row flex-column">
+                    <div class="col-12 col-md-6 mb-6">
+                        <label for="validationCustom01"></label>
+                        <input type="text" class="form-control" id="validationCustom01" placeholder="Nombre" required>
+                        <div class="valid-feedback">
+                            Nombre válido
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom02"></label>
+                        <input type="text" class="form-control" id="validationCustom02" placeholder="Apellido" required>
+                        <div class="valid-feedback">
+                            Apellido válido
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            
+            <div class=" info-cuenta">
+                <h5 class="acc-subs">Información de la cuenta</h5>
+                <div class="form-row">
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustomX"></label>
+                        <input type="email" class="form-control" id="validationCustomX" placeholder="Email" required>
+                        <div class="valid-feedback">
+                            Email válido
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustomX"></label>
+                        <input type="email" class="form-control" id="validationCustomX" placeholder="Confirmar email" required>
+                        <div class="valid-feedback">
+                            Email válido
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="form-row">
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom03"></label>
+                        <input type="password" class="form-control" id="validationCustom03" placeholder="Contraseña" required>
+                        
+                    </div>
+                    
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom03"></label>
+                        <input type="password" class="form-control" id="validationCustom03" placeholder="Confirmar contraseña" required>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+     
+        <div class="form-group term-cond">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                <label class="form-check-label pl-2" for="invalidCheck">
+                    Acepto los términos y condiciones
+                </label>
+                <div class="invalid-feedback">
+                    Debes aceptar los términos y condiciones.
+                </div>
+            </div>
+        </div>
+        <button class="btn  boton-registro" type="submit">Crear cuenta</button>
+    </form>
+    
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+
+
+
+
+    </section>
+        
+
+
+
+
+
+
+        
+    </main>
+    
+    
+    <section class="pie-sitio">
+        <div class="container-fluid container-pie pt-2 pb-3">
+            <div class="row row-pie">
+                
+                <div class="col-4 col-lg-2 col-company">
+                    <h6>Compañía</h6>
+                    <br>
+                    <div>
+                        <ul>
+                            <li><a href="">Acerca de  nosotros</a></li>
+                            <li><a href="">Trabajá con nosotros</a></li>
+                            <li><a href="">Equipo</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+                <div class="col-5 col-lg-7 col-costumer">
+                    
+                    <h6>Atención al cliente</h6>
+                    <br>
+                    <div>
+                        <ul>
+                            <li><a href="">Cambios y devoluciones</a></li>
+                            <li><a href="">FAQs</a></li>
+                            <li><a href="">Contacto</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+                <div class="col-3 col-lg-3  col-redes">
+                    <ul><a href=""><i class="fab fa-instagram"></i></a></ul>
+                    <ul><a href=""><i class="fab fa-facebook"></i></a></ul>
+                    <ul><a href=""><i class="fab fa-twitter-square"></i></a></ul>
+                    
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        <footer class="pt-2">
+            <div class="container pt-2">
+                <h6>Proyecto Integrador | Desarrollo Full Stack DH</h6>
+                <p>Grupo 3 BUNKER- Fede | Nacho | Male </p>
+            </div>
+        </footer>
+        
+    </section>
+    
+    
+    
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+</body>
+</html>

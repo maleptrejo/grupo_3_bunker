@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>Document</title>
+  
+  
+  <script src="https://kit.fontawesome.com/a0c0bb4f74.js" crossorigin="anonymous"></script>
+  
+  <link href="https://fonts.googleapis.com/css?family=Black+Ops+One&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="./header.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+</head>
+<body>
+  
+  <header>
+    <div class="container">
+      <div class="row">
+        
+        <div id= "menu" class="col-1 menu-hamburguesa">
+          <button class="icono hamburguesa">
+            <i class="fas fa-bars"></i>
+          </button>
+          <script>
+            $("#menu").click(function(){
+              $(".menu-colapse").toggle();
+            });
+          </script>
+          
+        </div>
+        
+        <div class="col-9 col-lg-4 logo-bunker">
+          <a href="">
+          <h1>BUNKER <img src="./imagenes/light-beer.svg" alt="" class="bombilla">  </h1> 
+          </a> 
+        </div>
+
+        <!-- <i class="fab fa-periscope"></i> -->
+
+        <!-- ****** -->
+        <div class="col col-lg-5 buscador-lg">
+            <form action="" method="get" class="search-form">
+                <input type="text" name="search" placeholder="Buscar productos, marcas y más" class="search-form_input">
+                <button type="submit" class="search-form_button"><i class="fas fa-search fa-2x"></i></button>
+              </form>
+        </div>
+
+        <!-- ****** -->
+
+        
+        <div class="col-1 icono icon-user">
+          <a href=""> <i class="fas fa-user-astronaut"></i></a>
+        </div>
+        
+        <div class="col-1 icono icon-carrito">
+          <a href=""><i class="fas fa-shopping-cart"></i></a>
+        </div>
+        
+        
+      </div>
+    </div>
+    
+    <form action="" method="get" class="search-form buscador-mini">
+      <input type="text" name="search" placeholder="Buscar productos, marcas y más" class="search-form_input">
+      <button type="submit" class="search-form_button"><i class="fas fa-search fa-lg"></i></button>
+    </form>
+    
+  </header>
+  
+  <nav class="navbar container-fluid">
+    
+    <!-- navbar-light bg-light container -->
+    
+    <div class="menu-colapse">
+      <ul class="opciones">
+        <li><a href="" id="link">Tecnología</a></li>
+        <li><a href="">Outdor</a></li>
+        <li><a href="">Deco-Hogar</a></li>
+        <li><a href="">Taller</a></li>
+        
+        
+        
+      </ul>
+    </div>
+  </nav>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  
+</body>
+
+</html>

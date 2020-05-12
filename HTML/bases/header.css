@@ -1,0 +1,237 @@
+/*Para max-width 425 (mobile L) */
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+ul, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+}
+
+li>a:hover {
+  color:white;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:visited {
+  color:inherit;
+}
+
+
+header {
+  background-color: #353535;
+
+}
+
+.icono {
+  color: #FFCA00;
+}
+
+.hamburguesa {
+  background-color: #353535;
+  border: none;
+
+}
+
+.hamburguesa:hover {
+  background-color: #c2c2c2;
+  transition: background-color.5s;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+
+
+.menu-hamburguesa,
+.icon-user,
+.icon-carrito {
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 2em;
+}
+
+
+.logo-bunker>a>h1 {
+  font-family: 'Black Ops One', cursive;
+  color: #E9e9e9;
+  font-size:3.5em;
+  margin-top: 2vh;
+}
+
+/* .fa-periscope {
+  color:#FF2d53;
+  font-size: 0.8em;
+} */
+
+.bombilla {
+
+  width: 1em;
+}
+
+
+.buscador-lg {
+  display: none;
+}
+
+/* barrita buscadora */
+
+.search-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-form_input {
+  border: solid 1px gray;
+  display: block;
+  width: 100%;
+  padding: 7px 35px 7px 7px;
+  border-radius: 3px;
+  height: 40px;
+  font-size: 1.5em;
+}
+
+.search-form_button {
+  position: absolute;
+  padding-left: 2vw;
+  right: 3vw;
+  height: 60%;
+  background-color: #ffffff;
+  border: none;
+  border-left: solid 1px #c2c2c2;
+  color: #c2c2c2;
+  cursor: pointer;
+}
+
+/* panel desplegable */
+
+nav {
+  margin: 0px;
+  width: 100%;
+}
+
+ .navbar {
+  position: relative;
+  width: 100%;
+  padding: 0;
+}
+
+.menu-colapse {
+  display: none;
+  width:  100%;
+
+ /* este me lleva de borde a borde */
+}
+
+.menu-colapse ul{
+display: flex;
+flex-wrap: wrap;
+flex-direction: column;
+align-items: center;
+background-color: #e9e9e9;
+margin-bottom: 2px;
+}
+
+.menu-colapse li{
+margin-top: 2px;
+list-style-type: none;
+
+width: 100%;
+text-align: center;
+}
+
+
+.opciones>li {
+width: 100%;
+border-top: solid 1.5px white;
+font-size: 1.5em;
+}
+
+.opciones>li:hover {
+background-color: #353535;
+transition: background-color.5s;
+}
+
+.opciones>li:last-child {
+border-bottom: solid 1px white;
+}
+
+.opciones>li>a :hover {
+color: #e9e9e9;
+}
+
+
+@media (min-width: 1000px ) {
+
+.menu-hamburguesa,
+.icon-user,
+.icon-carrito {
+  display: flex;
+justify-content: center;
+align-items: center;
+font-size: 4em;
+}
+
+.logo-bunker>a>h1 {
+  margin-top: 1.6vh;
+}
+
+.buscador-lg {
+  display: inline;
+  padding-top: 1.5vh;
+}
+
+.buscador-mini {
+  display: none;
+}
+
+.menu-colapse{
+  width: 25%;
+  margin-left: 1.8vw;
+}
+
+/* +++++++++ */
+/* No puedo sacar espacio derecho entre fom e input */
+
+.buscador-lg>.search-form>.search-form_button {
+
+ padding-right: 1vw;
+ padding-left: 1vw;
+}
+
+.buscador-lg>form {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+
+
+
+ }
+
+
+
+

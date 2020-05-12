@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <script src="https://kit.fontawesome.com/a0c0bb4f74.js" crossorigin="anonymous"></script>
+    
+    <link href="https://fonts.googleapis.com/css?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Red+Hat+Display&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./bunker.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+</head>
+<body id="wrapper">
+    
+    <header class="">
+        <div class="container" id="top">
+            <div class="row">
+
+
+                
+                    <div id="#header" class="col-1 col-lg-1">
+                            <a href="#" id="menu_on">
+                              <span class="cruz"></span>
+                              <span class="cruz"></span>
+                              <span class="cruz"></span>
+                            </a>
+                        </div>
+                
+
+
+                <div class="col-8 col-lg-4 logo-bunker">
+                    <a href="app.html">
+                        <h1>BUNKER <img src="./imagenes/light-beer.svg" alt="" class="bombilla">  </h1> 
+                    </a> 
+                </div>
+                
+          
+                
+                <!-- ****** -->
+                <div class="col-lg-5 buscador-lg">
+                    <form action="" method="get" class="search-form">
+                        <input type="text" name="search" placeholder="Buscá aquí" class="search-form_inputLG">
+                        <button type="submit" class="search-form_buttonLG"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                
+                <!-- ****** -->
+
+                <div class="col-1 col-lg-1 icon-fav pt-3 ">
+                    <button><i class="fas fa-heart"></i></button>
+                </div>
+                
+                
+      
+                
+                
+                <div class="col-1 col-lg-1 icono icon-carrito">
+                    <a href=""><i class="fas fa-shopping-cart"></i></a>
+                </div>
+                
+                
+            </div>
+        </div>
+
+    
+        
+        <form action="" method="get" class="search-form buscador-mini">
+            <input type="text" name="search" placeholder="Buscar productos, marcas y más" class="search-form_input">
+            <button type="submit" class="search-form_button"><i class="fas fa-search fa-lg"></i></button>
+        </form>
+        
+    </header>
+    
+    <nav class="desplegable">	
+            <ul>
+                <li><a href="app.html">Home</a></li>
+                <li><a href="#">Outdoor</a></li>
+                <li><a href="#">Taller</a></li>
+                <li><a href="#">Diseño sustentable</a></li>
+            </ul>
+            <ul>
+                <li><a href="form-registro.html">LOGIN</a></li>
+                <li><a href="">CERRAR SESIÓN</a></li>
+
+            </ul>
+    </nav>
+  
+          <script type="text/javascript">
+            $( document ).ready(function() {
+              $('#menu_on').click(function(){ // Al hacer click...
+                 $('body').toggleClass('visible_menu'); // Añadimos o eliminamos la clase 'visible_menu' al body
+               })
+            });
+          </script>
+
+
+<a href="#wrapper"><button type="button" class="btn btn-dark boton-fijo ml-3 mb-3 "><i class="fas fa-chevron-up"></i></button> </a>
+
+    
+
+    <div class="container">
+        <table id="cart" class="table table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th style="width:50%">Producto</th>
+                                <th style="width:10%">Precio</th>
+                                <th style="width:8%">Cantidad</th>
+                                <th style="width:22%" class="text-center">Subtotal</th>
+                                <th style="width:10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-sm-3 hidden-xs"><img src="./imagenes/vaso-termico.png" alt="..." class="img-responsive"/></div>
+                                        <div class="col-sm-9">
+                                            <h4 class="nomargin">Vaso térmico 650ml</h4>
+                                            <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td data-th="Precio">$62.25</td>
+                                <td data-th="Cantidad" class="carrito-form">
+                                    <input type="number" class="form-control text-center" value="1">
+                                </td>
+                                <td data-th="Subtotal" class="text-center">$62.25</td>
+                                <td class="actions" data-th="">
+                                    <button class="btn btn-dark btn-sm"><i class="fa fa-refresh"></i></button>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-sm-3 hidden-xs"><img src="./imagenes/termo2.jpg" alt="..." class="img-responsive"/></div>
+                                        <div class="col-sm-9">
+                                            <h4 class="nomargin">Térmo clásico 1lts.</h4>
+                                            <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td data-th="Precio">$100.50</td>
+                                <td data-th="Cantidad" class="carrito-form">
+                                    <input type="number" class="form-control text-center" value="1">
+                                </td>
+                                <td data-th="Subtotal" class="text-center">$100.50</td>
+                                <td class="actions" data-th="">
+                                    <button class="btn btn-dark btn-sm"><i class="fa fa-refresh"></i></button>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-sm-3 hidden-xs"><img src="./imagenes/reloj.png" alt="..." class="img-responsive"/></div>
+                                        <div class="col-sm-9">
+                                            <h4 class="nomargin">Reloj deportivo rosa</h4>
+                                            <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td data-th="Precio">$26.755</td>
+                                <td data-th="Cantidad" class="carrito-form">
+                                    <input type="number" class="form-control text-center" value="1">
+                                </td>
+                                <td data-th="Subtotal" class="text-center">$26.75</td>
+                                <td class="actions" data-th="">
+                                    <button class="btn btn-dark btn-sm"><i class="fa fa-refresh"></i></button>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                </td> 
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="visible-xs">
+                                <td colspan="3" class="hidden-xs"></td>
+                                <td class="text-center"><strong>Total $ 189.50</strong></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Seguir Comprando</a></td>
+                                <td colspan="1" class="hidden-xs"></td>
+                                <td class="hidden-xs text-center"></td>
+                                <td colspan="2"><a href="#" class="btn btn-success btn-block">Comprar! <i class="fa fa-angle-right"></i></a></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+    </div>
+
+    <section class="pie-sitio">
+        <div class="container-fluid container-pie pt-2 pb-3">
+            <div class="row row-pie">
+                
+                <div class="col-4 col-lg-2 col-company">
+                    <h6>Compañía</h6>
+                    <br>
+                    <div>
+                        <ul>
+                            <li><a href="">Acerca de  nosotros</a></li>
+                            <li><a href="">Trabajá con nosotros</a></li>
+                            <li><a href="">Equipo</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+                <div class="col-5 col-lg-7 col-costumer">
+                    
+                    <h6>Atención al cliente</h6>
+                    <br>
+                    <div>
+                        <ul>
+                            <li><a href="">Cambios y devoluciones</a></li>
+                            <li><a href="">FAQs</a></li>
+                            <li><a href="">Contacto</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+                <div class="col-3 col-lg-3  col-redes">
+                    <ul><a href=""><i class="fab fa-instagram"></i></a></ul>
+                    <ul><a href=""><i class="fab fa-facebook"></i></a></ul>
+                    <ul><a href=""><i class="fab fa-twitter-square"></i></a></ul>
+                    
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        <footer class="pt-2">
+            <div class="container pt-2">
+                <h6>Proyecto Integrador | Desarrollo Full Stack DH</h6>
+                <p>Grupo 3 BUNKER- Fede | Nacho | Male </p>
+            </div>
+        </footer>
+        
+    </section>
+    
+
+
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    
+</body>
+</html>

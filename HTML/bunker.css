@@ -743,8 +743,23 @@ footer p {
  
 } 
 
+/* *********carrito********* */
 
+.img-responsive{
+  width: 100%;
+}
 
+/* CSS BOOTSNIPP */
+.table>tbody>tr>td, .table>tfoot>tr>td{
+  vertical-align: middle;
+}
+.btn-danger{
+  width: 32px !important;
+  margin-top: 3px;
+}
+.btn-dark{
+  margin-top: 3px;
+}
 
 
 /* *******Media  queries****** */
@@ -1025,7 +1040,58 @@ div.tarjetas-producto>a>p {
       font-size: 1.5em;
   }
 
+ 
 
    }
 
+   @media screen and (max-width: 600px) { 
+ /* *********carrito********* */
+  table th {
+      font-size: 2em;
+    }
 
+ table#cart tbody td .form-control{
+  width:20%;
+  display: inline !important;
+  }
+  tbody > tr > td:nth-child(4){
+      text-align: left !important;
+  }
+.actions .btn{
+  width:34%;
+  margin:1.5em 0;
+  }
+  .btn-danger{
+      width: 34% !important;
+  }
+ .actions{
+      display: flex;
+      flex-flow: wrap column;
+  }
+  .carrito-form>.form-control{
+      height: calc(1.1rem + .75rem + 2px);
+  }
+
+table#cart thead{
+      display: none;
+  }
+table#cart tbody td{ 
+      display: block; padding: .6rem; min-width:320px;
+  }
+table#cart tbody tr td:first-child{
+      background: #333; color: #fff;
+  }
+table#cart tbody td:before{
+  content: attr(data-th); font-weight: bold;
+      display: inline-block; width: 7rem;
+  }
+  table#cart tbody tr td:last-child :not(td:before){
+  }
+
+
+
+table#cart tfoot td{display:block; }
+table#cart tfoot td .btn{display:block;}
+
+
+   }

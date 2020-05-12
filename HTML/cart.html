@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- META -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="./cart.css">
+
+    <!-- SCRIPTS -->
+    <script src="https://kit.fontawesome.com/3837eef92e.js" crossorigin="anonymous"></script>
+    <title>SHOPPING-CART</title>
+</head>
+<body>
+    <div class="container">
+        <table id="cart" class="table table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th style="width:50%">Producto</th>
+                                <th style="width:10%">Precio</th>
+                                <th style="width:8%">Cantidad</th>
+                                <th style="width:22%" class="text-center">Subtotal</th>
+                                <th style="width:10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-sm-3 hidden-xs"><img src="./imagenes/vaso-termico.png" alt="..." class="img-responsive"/></div>
+                                        <div class="col-sm-9">
+                                            <h4 class="nomargin">Vaso térmico 650ml</h4>
+                                            <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td data-th="Precio">$62.25</td>
+                                <td data-th="Cantidad">
+                                    <input type="number" class="form-control text-center" value="1">
+                                </td>
+                                <td data-th="Subtotal" class="text-center">$62.25</td>
+                                <td class="actions" data-th="">
+                                    <button class="btn btn-dark btn-sm"><i class="fa fa-refresh"></i></button>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-sm-3 hidden-xs"><img src="./imagenes/termo2.jpg" alt="..." class="img-responsive"/></div>
+                                        <div class="col-sm-9">
+                                            <h4 class="nomargin">Térmo clásico 1lts.</h4>
+                                            <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td data-th="Precio">$100.50</td>
+                                <td data-th="Cantidad">
+                                    <input type="number" class="form-control text-center" value="1">
+                                </td>
+                                <td data-th="Subtotal" class="text-center">$100.50</td>
+                                <td class="actions" data-th="">
+                                    <button class="btn btn-dark btn-sm"><i class="fa fa-refresh"></i></button>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                </td> 
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-sm-3 hidden-xs"><img src="./imagenes/reloj.png" alt="..." class="img-responsive"/></div>
+                                        <div class="col-sm-9">
+                                            <h4 class="nomargin">Reloj deportivo rosa</h4>
+                                            <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td data-th="Precio">$26.755</td>
+                                <td data-th="Cantidad">
+                                    <input type="number" class="form-control text-center" value="1">
+                                </td>
+                                <td data-th="Subtotal" class="text-center">$26.75</td>
+                                <td class="actions" data-th="">
+                                    <button class="btn btn-dark btn-sm"><i class="fa fa-refresh"></i></button>
+                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+                                </td> 
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="visible-xs">
+                                <td colspan="3" class="hidden-xs"></td>
+                                <td class="text-center"><strong>Total $ 189.50</strong></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Seguir Comprando</a></td>
+                                <td colspan="1" class="hidden-xs"></td>
+                                <td class="hidden-xs text-center"></td>
+                                <td colspan="2"><a href="#" class="btn btn-success btn-block">Comprar! <i class="fa fa-angle-right"></i></a></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+    </div>
+
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

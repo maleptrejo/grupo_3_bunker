@@ -39,7 +39,7 @@ Ingresar a ```http://```
 
 #### Herramientas
 
-- [ClickUp para la gestión de las tareas](https://clickup.com)
+- [ClickUp para la gestión de las tareas](https://app.clickup.com/3019803/v/l/f/3261130?pr=3039430)
 - [Pencil Project para la creación de los wireframe](https://pencil.evolus.vn/)
 - [NodeJS para pruebas y desarrollo](https://nodejs.org/es/)
 - [Visual Studio Code para la creación y edición de archivos](https://code.visualstudio.com/)

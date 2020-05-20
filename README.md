@@ -33,7 +33,9 @@ git clone https://github.com/maleptrejo/grupo_3_bunker.git
 
 Ingresar a ```http://``` 
 
+## Tablero de trabajo
 
+ingresar a https://app.clickup.com/3019803/v/l/li/7383041
 
 ## Recursos
 

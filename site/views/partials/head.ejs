@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <script src="https://kit.fontawesome.com/a0c0bb4f74.js" crossorigin="anonymous"></script>
+    
+    <link href="https://fonts.googleapis.com/css?family=Black+Ops+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Red+Hat+Display&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../stylesheets/bunker.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+</head>
+<body id="wrapper">
+    
+    <header class="">
+        <div class="container" id="top">
+            <div class="row">
+
+
+                
+                    <div id="#header" class="col-1 col-lg-1">
+                            <a href="#" id="menu_on">
+                              <span class="cruz"></span>
+                              <span class="cruz"></span>
+                              <span class="cruz"></span>
+                            </a>
+                        </div>
+                
+
+
+                <div class="col-8 col-lg-4 logo-bunker">
+                    <a href="app.html">
+                        <h1>BUNKER <img src="./imagenes/light-beer.svg" alt="" class="bombilla">  </h1> 
+                    </a> 
+                </div>
+                
+          
+                
+                <!-- ****** -->
+                <div class="col-lg-5 buscador-lg">
+                    <form action="" method="get" class="search-form">
+                        <input type="text" name="search" placeholder="Buscá aquí" class="search-form_inputLG">
+                        <button type="submit" class="search-form_buttonLG"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                
+                <!-- ****** -->
+
+                <div class="col-1 col-lg-1 icon-fav pt-3 ">
+                    <button><i class="fas fa-heart"></i></button>
+                </div>
+                
+                
+      
+                
+                
+                <div class="col-1 col-lg-1 icono icon-carrito">
+                    <a href=""><i class="fas fa-shopping-cart"></i></a>
+                </div>
+                
+                
+            </div>
+        </div>
+
+    
+        
+        <form action="" method="get" class="search-form buscador-mini">
+            <input type="text" name="search" placeholder="Buscar productos, marcas y más" class="search-form_input">
+            <button type="submit" class="search-form_button"><i class="fas fa-search fa-lg"></i></button>
+        </form>
+        
+    </header>
+    
+    <nav class="desplegable">	
+            <ul>
+                <li><a href="app.html">Home</a></li>
+                <li><a href="#">Outdoor</a></li>
+                <li><a href="#">Taller</a></li>
+                <li><a href="#">Diseño sustentable</a></li>
+            </ul>
+            <ul>
+                <li><a href="form-registro.html">LOGIN</a></li>
+                <li><a href="">CERRAR SESIÓN</a></li>
+
+            </ul>
+    </nav>
+  
+          <script type="text/javascript">
+            $( document ).ready(function() {
+              $('#menu_on').click(function(){ // Al hacer click...
+                 $('body').toggleClass('visible_menu'); // Añadimos o eliminamos la clase 'visible_menu' al body
+               })
+            });
+          </script>
+
+
+<a href="#wrapper"><button type="button" class="btn btn-dark boton-fijo ml-3 mb-3 "><i class="fas fa-chevron-up"></i></button> </a>

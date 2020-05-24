@@ -1,45 +1,54 @@
-<%- include('./partials.head'); -%>
-<form class="product mt-3 form-ingresar-prod" novalidate>
+<!DOCTYPE html>
+<html lang="es">
+
+    <%- include('partials/head', {title: 'Inicio'}) %>
+
+
+<form  action="/carga" method="post" enctype="multipart/form-data" class="product mt-3 form-ingresar-prod" novalidate>
     <h2 class="c-acc m-3 pt-3">Crear producto</h2>
     <h5 class="acc-subs pt-3">Datos del Producto</h5>
     <div class="form-row flex-row">
         <div class="col-12 col-md-6 mb-6">
             <label for="nombre">Nombre</label>
-            <input type="text" class="form-control" id="nombre" placeholder="Nombre del producto" required>
+            <input type="text" class="form-input" name= "nombre" id="nombre" placeholder="Nombre del producto" required>
         </div>
         <div class="col-md-6 mb-6">
             <label for="marca">Marca</label>
-            <input type="text" class="form-control" id="marca" placeholder="Marca del producto" required>
+            <input type="text" class="form-input" name= "marca" id="marca" placeholder="Marca del producto" required>
         </div>
     </div>
     <div class="form-row flex-row cor">
-        <div class="col-6 col-md-6 col-lg-3 mb-6">
-            <label for="precio">Moneda</label>
+        <!-- <div class="col-6 col-md-6 col-lg-3 mb-6">
+            <label for="moneda">Moneda</label>
             <label class="sr-only" for="inlineFormCustomSelect"></label>
             <select class="custom-select" id="inlineFormCustomSelect">
                 <option selected>Moneda</option>
                 <option value="pesos">(ARG) $</option>
                 <option value="dolares">(USA) U$S</option>
             </select>
-        </div>
+        </div> -->
         <div class="col-6 col-md-6 col-lg-3 mb-6">
             <label for="precio">Precio</label>
-            <input type="number" class="form-control" id="precio" placeholder="Precio unitario" required>
+            <input type="number" name="precio" class="form-input" id="precio" placeholder="Precio unitario" required>
+        </div>
+        <div class="col-6 col-md-6 col-lg-3 mb-6">
+            <label for="descuento">Descuento (en porcentaje)</label>
+            <input type="number" name="descuento" class="form-input" id="descuento" placeholder="Descuento" required>
         </div>
     </div>
     <div class="form-row flex-column">
         <div class="col-12 col-md-12 mb-6">
             <label for="descripcion">Descripcion</label>
-            <textarea name="descripcion" class="form-control" cols="30" rows="10"
+            <textarea name="descripcion" id="descripcion" class="form-input" cols="30" rows="10"
             placeholder="Escriba una breve descripción"></textarea>
         </div>
         <div class="col-md-6 mb-6">
             <label for="categorias"></label>
-            <select name="categorias" class="custom-select">
+            <select name="categorias" class="form-input" id="categorias">
                 <option selected>*Categorias*</option>
-                <option value="bazar">Bazar</option>
-                <option value="carpas">Carpas</option>
-                <option value="etc">ETc</option>
+                <option value="outdoor">Outdoor</option>
+                <option value="talles">Taller</option>
+                <option value="sustentables">Diseño sustentable</option>
             </select>
         </div>
     </div>
@@ -55,39 +64,39 @@
         <div class="col-xs-12 col-md-6 mb-2">
                
             <div class="custom-file">
-                <input type="file" class="custom-file-input" id="customFileLang" lang="es">
-                <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
+                <input id="archivo"type="file"name="archivo"class="file">
+                <label class="custom-file-label" for="archivo">Seleccionar Archivo</label>
             </div>
         </div>    
-        <div class="col-xs-12 col-md-6 mb-2">    
+        <!-- <div class="col-xs-12 col-md-6 mb-2">    
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="customFileLang" lang="es">
                 <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
             </div>
-        </div> 
-        <div class="col-xs-12 col-md-6 mb-2">
+        </div>  -->
+        <!-- <div class="col-xs-12 col-md-6 mb-2">
                
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="customFileLang" lang="es">
                 <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
             </div>
-        </div>    
-        <div class="col-xs-12 col-md-6 mb-2">    
+        </div>     -->
+        <!-- <div class="col-xs-12 col-md-6 mb-2">    
             <div class="custom-file">
                 <input type="file" class="custom-file-input" id="customFileLang" lang="es">
                 <label class="custom-file-label" for="customFileLang">Seleccionar Archivo</label>
             </div>
-        </div> 
+        </div>  -->
         
     </div>    
         
         
-    <div class="form-row"> 
+    <!-- <div class="form-row"> 
         <div class="col-12 col-md-6 mb-6">
             <h5 class="mt-3">Confirmar contraseña</h5>
             <input type="password" class="form-control"     id="validationCustom03" placeholder="Contraseña"    required>
         </div>
-    </div>    
+    </div>     -->
     
     
     
@@ -98,6 +107,9 @@
 <button class="btn btn-bunker mb-5 mt-5" type="submit">Crear Producto</button>
 </div>
 </form>
-<%- include('./partials.footer'); -%>
+<%- include('partials/footer') %>
+
+</body>	
+</html>
 
 

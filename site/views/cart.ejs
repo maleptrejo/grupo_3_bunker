@@ -1,4 +1,9 @@
-<%- include('./partials.head'); -%>
+<!DOCTYPE html>
+<html lang="es">
+
+    <%- include('partials/head', {title: 'Inicio'}) %>
+
+
 <main>
     <div class="container container-carrito">
         <table id="cart" class="table table-hover table-condensed">
@@ -87,5 +92,7 @@
                         </tfoot>
                     </table>
     </div>
-</main>
-<%- include('./partials.footer'); -%>
+</main><%- include('partials/footer') %>
+
+</body>	
+</html>

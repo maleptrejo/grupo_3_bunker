@@ -6,4 +6,5 @@ router.delete('/celular/:id', (req, res)=> {
   
    celulares=celularesFiltrados;
 
-   
+
+})

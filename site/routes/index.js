@@ -7,18 +7,19 @@ const fs = require('fs');
 const path = require('path');
 const multer=require('multer');
 
+
 const usersFilePath= path.join(__dirname, '../data/usuarios.json');
 const usersObjeto = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
 
 const prod2FilePath= path.join(__dirname, '../data/productos2.json');
-const prod2Objeto = JSON.parse(fs.readFileSync(prod2FilePath, 'utf-8'));
+var prod2Objeto = JSON.parse(fs.readFileSync(prod2FilePath, 'utf-8'));
 
-const prodFilePath= path.join(__dirname, '../data/productos2.json');
-const prodObjeto = JSON.parse(fs.readFileSync(prodFilePath, 'utf-8'));
+// const prodFilePath= path.join(__dirname, '../data/productos2.json');
+// const prodObjeto = JSON.parse(fs.readFileSync(prodFilePath, 'utf-8'));
 
 
 
-prodObjeto.pu
+
 
 // console.log(usersObjeto[1]);
 
@@ -116,6 +117,77 @@ res.send ('vuelve por post')
 
 })
 
+
+
+//ruta y controlador de edicion de producto
+
+router.get('/edit/:productId', function(req, res){
+
+
+
+  let productId = req.params.productId;
+
+  let productToEdit=prod2Objeto.find(producto=> producto.id==productId);
+
+  console.log(productToEdit)
+
+  res.render('edicion', {prod2Objeto: prod2Objeto, productToEdit});
+  
+});
+
+router.put ('/edit/:productId',  upload.any(), function (req, res){
+
+   console.log(req.body.nombre);
+
+
+  let productId = req.params.productId;
+ let productToEdit=prod2Objeto.find(producto=> producto.id==productId);
+
+ 
+
+
+   productToEdit.nombre=req.body.nombre;
+   productToEdit.marca=req.body.marca;
+ productToEdit.descripcion=req.body.descripcion;
+   productToEdit.precio=req.body.precio;
+   productToEdit.descuento=req.body.descuento;
+
+  
+
+
+   if  ( req.files.length != 0 ) {
+ 
+     productToEdit.imagen1 = req.files[0].filename;
+   } 
+
+  //prod2Objeto.forEach(function(producto){
+
+  // })
+
+
+
+
+  fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
+
+
+  res.send ('Objeto editado')
+});
+
+router.delete('/edit/:productId', function(req, res){
+console.log (req.params.productId)
+
+
+let productosFiltrados=prod2Objeto.filter(producto=> producto.id!=req.params.productId)
+
+prod2Objeto=productosFiltrados;
+
+fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
+
+
+res.send ('Objeto Borrado')
+
+
+})
 
 
 

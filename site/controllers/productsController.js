@@ -49,8 +49,12 @@ const products = {
     },
     detail: (req, res, next) => {
         let productoDetallado = prod2Objeto.find(producto => producto.id == req.params.id);
-        res.send(productoDetallado);
-        //res.render('producto', {productoDetallado:productoDetallado});
+        
+        if(productoDetallado == undefined){
+            res.send ("No existe el producto");
+        } 
+        res.render('producto2', {productoDetallado:productoDetallado});
+        
     },
     edit: (req, res) => {
      let productId = req.params.productId;

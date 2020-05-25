@@ -758,6 +758,15 @@ footer>div>h6{
 } 
 
 /* *******form carga de producto******** */
+.div-form-carga label {
+  margin-right: 3vw;
+  max-width: 5vw;
+  display: flex;
+}
+
+textarea#descripcion{
+  width: 85vw;
+}
 
 .form-ingresar-prod {
   font-size: 1.3em;
@@ -1196,6 +1205,17 @@ div.tarjetas-producto>a>p {
     .c-acc {
       padding-left: 2vw;
     }
+
+    
+      textarea#descripcion {
+        width: 20vw;
+    }
+
+    .form-ingresar-prod input {
+     
+      width: 20vw;
+  }
+    
 }
 
 

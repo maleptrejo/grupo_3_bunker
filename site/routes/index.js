@@ -7,33 +7,55 @@ const fs = require('fs');
 const path = require('path');
 const multer=require('multer');
 
+const usersFilePath= path.join(__dirname, '../data/usuarios.json');
+const usersObjeto = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
 
-const objetosPath= path.join(__dirname, '..', 'data', 'productos2.json');
+const prod2FilePath= path.join(__dirname, '../data/productos2.json');
+const prod2Objeto = JSON.parse(fs.readFileSync(prod2FilePath, 'utf-8'));
 
-let productos = JSON.parse(fs.readFileSync(objetosPath, 'utf-8' ));
+const prodFilePath= path.join(__dirname, '../data/productos2.json');
+const prodObjeto = JSON.parse(fs.readFileSync(prodFilePath, 'utf-8'));
+
+
+
+prodObjeto.pu
+
+// console.log(usersObjeto[1]);
+
+let arrayUsuarios=[];
+arrayUsuarios.push(usersObjeto[1]);
+arrayUsuarios.push(usersObjeto[2]);
+
+// console.log(arrayUsuarios);
+
+
+
+
 
 
 
 var storage= multer.diskStorage({
-  destination:function(req,file,cb){
-    cb(null,'public/images/productos/')
+destination:function(req,file,cb){
+cb(null,'public/images/productos/')
     },
-    filename:function(req,file,cb){
-    cb(null,Date.now()+path.extname(file.originalname)); //Appending extension
-    }
-})
+ filename:function(req,file,cb){
+ cb(null,Date.now()+path.extname(file.originalname)); //Appending extension
+  }
+ })
 
 var upload = multer({ storage: storage,
   fileFilter: function (req, file, cb) {
   if (!file.originalname.match(/\.(pdf|doc|docx|jpg)$/)) {
-  return cb(new Error('Error en el tipo de archivo.'));
+ return cb(new Error('Error en el tipo de archivo.'));
   }
   cb(null, true);
-  }
+ }
   });
 
 
-
+  function isEmptyObject(objeto){
+    return !Object.keys(objeto).length;
+  }
 
 
 //fin metodos producto
@@ -53,52 +75,44 @@ router.get ('/carga', (req, res)=> {
 
 router.post ('/carga', upload.any(), (req, res)=>{
 
-let producto ={
-  id: 0,
-  nombre: null,
-  marca: null,
-  descripcion: null,
-  imagen1: undefined,
-  precio: null,
-  descuento: null,
-}
+  let producto ={
+    id: 0,
+    nombre: null,
+    marca: null,
+    descripcion: null,
+    imagen1: undefined,
+    precio: null,
+    descuento: null,
+  }
 
-function isEmptyObject(objeto){
-  return !Object.keys(objeto).length;
-}
+  if (isEmptyObject(prod2Objeto)){
 
-console.log(isEmptyObject(productos))
 
-if (isEmptyObject(productos)){
-  producto.id=1;
-} else {
+
+    producto.id=1;
+  } else {
+    producto.id=prod2Objeto[prod2Objeto.length-1].id+1;
+  }
+
+  if (req.files == undefined) {
+    producto.imagen1 = 'n/a';
+   } else {
+    producto.imagen1 = req.files[0].filename;
+   }
+
+
+  producto.nombre=req.body.nombre;
+  producto.marca=req.body.marca;
+  producto.descripcion=req.body.descripcion;
+  producto.precio=req.body.precio;
+  producto.descuento=req.body.descuento;
   
- producto.id=productos[productos.lenght-1].id+1;
-  
-}
+  prod2Objeto.push(producto)
 
-producto.nombre=req.body.nombre;
-producto.marca=req.body.marca;
-producto.descripcion=req.body.descripcion;
-producto.precio=req.body.precio;
-producto.descuento=req.body.descuento;
-// producto.imagen1=req.files[0].filename;
-
-console.log(productos);
-
-console.log(typeof(productos))
-
-if (isEmptyObject(productos)){
-  productos=producto;
-} else {
+  fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
 
 
-}
- 
-
-
-
-fs.writeFileSync (objetosPath, JSON.stringify (productos));
+res.send ('vuelve por post')
 
 })
 

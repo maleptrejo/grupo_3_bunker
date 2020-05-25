@@ -12,7 +12,7 @@
         <h5 class="acc-subs pt-3">Datos del Producto</h5>
     </div>
 
-    <form  action="/edit/<%= productToEdit.id%>?_method=PUT" method="post" enctype="multipart/form-data" class="product mt-3 form-ingresar-prod" novalidate>
+    <form  action="/products/edit/<%= productToEdit.id%>?_method=PUT" method="post" enctype="multipart/form-data" class="product mt-3 form-ingresar-prod" novalidate>
      
         
         <div class="form-row flex-row ">
@@ -127,7 +127,7 @@
    
 </form>
 
-<form  action="/edit/<%= productToEdit.id%>?_method=DELETE" method="post"  class="product mt-3 form-ingresar-prod" novalidate>
+<form  action="/products/edit/<%= productToEdit.id%>?_method=DELETE" method="post"  class="product mt-3 form-ingresar-prod" novalidate>
     
     <div class="button-container-submit">
        

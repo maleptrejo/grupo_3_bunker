@@ -1,0 +1,140 @@
+*{
+    font-family: 'Red Hat Text', sans-serif;
+}
+.img-responsive{
+    width: 100%;
+}
+
+/* CSS BOOTSNIPP
+.table>tbody>tr>td, .table>tfoot>tr>td{
+    vertical-align: middle;
+} */
+ /* .btn-danger{
+    width: 32px !important;
+    margin-top: 3px;
+}
+.btn-dark{
+    margin-top: 5px;
+}
+
+.actions .btn {
+    width: 15px;
+}
+ */
+
+ button.btn.btn-sm {
+    background-color:#353535;
+    color: #fff;
+    width: 4vw;
+    font-size: 1em;
+   margin-bottom: 2vh;
+}
+
+button.btn.btn-sm.red:hover {
+    background-color: #ff2d53;
+}
+
+button.btn.btn-sm.red{
+    background-color: #c2c2c2;
+}
+
+button.btn.btn-sm.yellow:hover {
+    background-color: #ffca00;
+}
+
+.btn-comprar {
+    background-color: #c2c2c2;
+    border: #c2c2c2;
+    color: #fff;
+}
+
+.btn.btn-comprar:hover {
+    background-color: #ff2d53;
+    box-shadow: 1px 1px 10px #e47589;
+}
+
+.btn.btn-seguir {
+    color:#666666;
+}
+
+.btn.btn-seguir:hover {
+    color:#ff2d53;
+    font-weight: bold;
+}
+ 
+
+
+
+@media  (max-width: 600px) {
+
+   
+
+    button.btn.btn-sm {
+        background-color:#353535;
+        color: #fff;
+        width: fit-content;
+        font-size: 1.5em;
+        padding: 0 2vh;
+    }
+
+    button.btn.btn-sm.red:hover {
+        background-color: #ff2d53;
+    }
+
+    button.btn.btn-sm.yellow:hover {
+        background-color: #ffca00;
+    }
+
+   
+    
+
+  
+
+    .actions {
+        margin-left: 1vw;
+    }
+
+    table#cart tbody td .form-control{
+		width:20%;
+		display: inline !important;
+    }
+    tbody > tr > td:nth-child(4){
+        text-align: left !important;
+    }
+	.actions .btn{
+		width:34%;
+		margin:1.5em 0;
+    }
+    .btn-danger{
+        width: 34% !important;
+    }
+ 	.actions{
+        display: flex;
+        flex-flow: wrap column;
+    }
+    .carrito-form>.form-control{
+        height: calc(1.1rem + .75rem + 2px);
+    }
+
+	table#cart thead{
+        display: none;
+    }
+	table#cart tbody td{
+        display: block; padding: .6rem; min-width:320px;
+    }
+	table#cart tbody tr td:first-child{
+        background; color: #fff;
+    }
+	table#cart tbody td:before{
+		content: attr(data-th); font-weight: bold;
+        display: inline-block; width: 7rem;
+    }
+    table#cart tbody tr td:last-child :not(td:before){
+    }
+
+
+
+	table#cart tfoot td{display:block; }
+	table#cart tfoot td .btn{display:block;}
+
+} 

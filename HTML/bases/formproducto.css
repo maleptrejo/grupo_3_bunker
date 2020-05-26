@@ -13,25 +13,25 @@
    font-weight: bold;
 }
 
-.form-row{
+/* .form-row{
     padding-left: 3%;
     padding-right: 3%;
-}
+} */
 
 
 
 
-.form-group {
+/* .form-group {
     padding-top: 5px;
     padding-left: 3%;
-}
+} */
 
-.custom
+/* .custom */
 
-.btn-primary {
+.btn-bunker {
     margin-left: 3%;
-    background-color: #666666 !important;
-    border-color: g#666666 !important;
+    background-color: #666666 ;
+    border-color: #666666 ;
 }
 
 

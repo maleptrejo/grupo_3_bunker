@@ -1,4 +1,29 @@
-# Grupo 3 - BunkerStore - Retrospectiva
+# Grupo 3 - BunkerStore - 
+
+# Retrospectiva Sprint3
+##### Start doing
++ Emperzar antes. Administrar mejor los plazos. 
+
+##### More of
++ Sistematizar las consignas del sprint (para no descubrir al final que no entendimos una consigna).
++ Investigación.
+
+##### Keep doing
++ Planificar el trabajo.
++ Usar las metodologías y herramientas sugeridas por el sprint.
++ Trabajar en equipo incluso las tareas repartidas.
++ Comunicación constante.
+
+
+##### Less of
++ dejar para el sprint la instancia de repaso de temas dados.
+
+##### Stop doing
++ Procrastinación.
+
+
+
+# Retrospectiva Sprint2
 
 ## Modelo "Starfish"
 Discutiendo y trabajando en equipo organizamos los siguientes puntos en una retrospectiva de modelo estrella de mar. Tratamos de hacer foco en las fortalezas y debilidades que fuimos descubriendo a lo largo del segundo sprint y usando como punto de partida la experiencia del primero. 
@@ -23,4 +48,4 @@ Discutiendo y trabajando en equipo organizamos los siguientes puntos en una retr
 
 ##### Stop doing
 - Ponernos metas muy ambiciosas. A veces queremos hacer cosas que todavía no están a nuestro alcance e invertimos mucho tiempo en solucionar algo que tal vez no es objetivo del sprint y nos demora otras tareas.
-- Confiarnos en los tiempos. Todavía podemos tener dificultades para definir cuanto tiempo no lleva una determinada tarea y eso nos repercute en la planificación de los tiempos que habíamos establecido. 
+- Confiarnos en los tiempos. Todavía podemos tener dificultades para definir cuanto tiempo no lleva una determinada tarea y eso nos repercute en la planificación de los tiempos que habíamos establecido.

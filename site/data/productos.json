@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1,
+        "name": "prueba",
+        "brand": "prueba",
+        "currency": "prueba",
+        "price": 100,
+        "category": "prueba",
+        "image1": "prueba",
+        "image2": "prueba",
+        "image3": "prueba"
+    },
+    {
+        "id": 2,
+        "name": "prueba",
+        "brand": "prueba",
+        "currency": "prueba",
+        "price": 100,
+        "category": "prueba",
+        "image1": "prueba",
+        "image2": "prueba",
+        "image3": "prueba"
+    }
+]

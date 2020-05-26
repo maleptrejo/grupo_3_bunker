@@ -21,49 +21,43 @@ let productos = JSON.parse(fs.readFileSync(path.join(__dirname,'../data/producto
 
 var storage= multer.diskStorage({
     destination:function(req,file,cb){
-    cb(null,'public/images/productos/')
-        },
-     filename:function(req,file,cb){
-     cb(null,Date.now()+path.extname(file.originalname)); //Appending extension
-      }
-     })
-    
-    var upload = multer({ storage: storage,
-      fileFilter: function (req, file, cb) {
-      if (!file.originalname.match(/\.(pdf|doc|docx|jpg)$/)) {
-     return cb(new Error('Error en el tipo de archivo.'));
-      }
-      cb(null, true);
-     }
-      });
-    
-    
-      function isEmptyObject(objeto){
-        return !Object.keys(objeto).length;
-      }
+        cb(null,'public/images/productos/')
+    },
+    filename:function(req,file,cb){
+        cb(null,Date.now()+path.extname(file.originalname)); //Appending extension
+    }
+})
+
+var upload = multer({ storage: storage,
+    fileFilter: function (req, file, cb) {
+        if (!file.originalname.match(/\.(pdf|doc|docx|jpg)$/)) {
+            return cb(new Error('Error en el tipo de archivo.'));
+        }
+        cb(null, true);
+    }
+});
+
+
+function isEmptyObject(objeto){
+    return !Object.keys(objeto).length;
+}
 
 /************** MODULE TO EXPORT **************/
 const products = {
     list: (req, res, next) => {
-        res.send(prod2Objeto)
+        res.render('producto2', {productoDetallado:prod2Objeto});
     },
     detail: (req, res, next) => {
-        let productoDetallado = prod2Objeto.find(producto => producto.id == req.params.id);
-        
-        if(productoDetallado == undefined){
+        let encontrado = prod2Objeto.find(producto => producto.id == req.params.id);
+        if(encontrado == undefined){
             res.send ("No existe el producto");
-        } 
-        res.render('producto2', {productoDetallado:productoDetallado});
-        
+        };
+        res.render('producto2', {productoDetallado:encontrado});
     },
     edit: (req, res) => {
-     let productId = req.params.productId;
-     let productToEdit=prod2Objeto.find(producto=> producto.id==productId);
-  
-     console.log(productToEdit)
-  
-     res.render('edicion', {prod2Objeto: prod2Objeto, productToEdit});
-
+        let productId = req.params.productId;
+        let productToEdit=prod2Objeto.find(producto=> producto.id==productId);
+        res.render('edicion', {prod2Objeto: prod2Objeto, productToEdit});
     },
     createForm: (req, res) =>{
         res.render('carga');
@@ -77,51 +71,36 @@ const products = {
             imagen1: undefined,
             precio: null,
             descuento: null,
-          }
-        
-          if (isEmptyObject(prod2Objeto)){
-        
-        
-        
+        };
+        if (isEmptyObject(prod2Objeto)){
             producto.id=1;
-          } else {
+        } else {
             producto.id=prod2Objeto[prod2Objeto.length-1].id+1;
-          }
-        
-          if (req.files == undefined) {
+        };
+        if (req.files == undefined) {
             producto.imagen1 = 'n/a';
-           } else {
+        } else {
             producto.imagen1 = req.files[0].filename;
-           }
-        
-        
-          producto.nombre=req.body.nombre;
-          producto.marca=req.body.marca;
-          producto.descripcion=req.body.descripcion;
-          producto.precio=req.body.precio;
-          producto.descuento=req.body.descuento;
-          
-          prod2Objeto.push(producto)
-        
-          fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
-        
-        
-        res.send ('vuelve por post')
+        };
+        producto.nombre=req.body.nombre;
+        producto.marca=req.body.marca;
+        producto.descripcion=req.body.descripcion;
+        producto.precio=req.body.precio;
+        producto.descuento=req.body.descuento;
+        prod2Objeto.push(producto)
+        fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
+        res.render ('producto2', {productoDetallado:producto})
     },
     
     delete: (req,res)=>{
-        let productosFiltrados=prod2Objeto.filter(producto=> producto.id!=req.params.productId)
-  
-         prod2Objeto=productosFiltrados;
-  
-         fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
-  
-  
-        res.send ('Objeto Borrado')
+        let productosFiltrados=prod2Objeto.filter(producto=> producto.id!=req.params.productId);
+        prod2Objeto=productosFiltrados;
+        fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
+        res.redirect ('/products');
     }
-
     
-
+    
+    
 };
 
 /************** EXPORTING MODULE **************/

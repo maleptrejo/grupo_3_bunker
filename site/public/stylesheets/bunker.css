@@ -546,7 +546,35 @@ h2 {
 }
 
 
+/* ****** vision perfil usuario*********/
+.container-user {
+  min-height: 1000px;
+  
+}
 
+.datos-user-container>div>h1{
+  font-size: 3.5em;
+  
+  margin-bottom: 2vh;
+  margin-left: 2.5vw;
+}
+
+
+.datos1 {
+
+  
+} 
+
+.datos-personales {
+  margin-top: 3.5vh;
+  font-size: 3em;
+}
+
+
+.datos2 {
+  font-size: 2em;
+  margin-left:3vw;
+}
 
 
 
@@ -1107,6 +1135,10 @@ div.col-12.pb-4 h2 {
   font-size: 1.8em;
 }
 
+
+
+
+
   /* ****vision del producto***** */
 
   .producto-mobile {
@@ -1181,6 +1213,15 @@ div.tarjetas-producto>a>p {
       padding-top: 1vh;
   }
 
+/******* pagina user ********/
+.datos-user-container>div>h1 {
+  margin-left: 1vw;
+}
+
+.datos2 {
+  font-size: 2em;
+  margin-left:1vw;
+}
 
 
   /* ******pagina producto****** */

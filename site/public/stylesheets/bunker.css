@@ -590,6 +590,8 @@ h2 {
 
 .breadcrumb {
   margin-top: 2vh;
+  font-size: 1.5em;
+
 }
 
 
@@ -784,6 +786,12 @@ footer>div>h6{
   margin-bottom: 4vh;
  
 } 
+
+/* ******login******* */
+
+h2.c-acc-user {
+  font-size: 3em;
+}
 
 /* *******form carga de producto******** */
 .div-form-carga label {
@@ -1222,14 +1230,18 @@ div.tarjetas-producto>a>p {
   font-size: 2em;
   margin-left:1vw;
 }
+/* ******login******* */
 
+h2.c-acc-user {
+  font-size: 3em;
+}
 
   /* ******pagina producto****** */
 
   .breadcrumb {
       padding-left: unset;
       margin-top: 2vh;
-      font-size: 1.5em;
+     
   }
 
  

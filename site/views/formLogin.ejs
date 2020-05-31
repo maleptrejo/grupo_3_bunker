@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <%- include('partials/head', {title: 'Inicio'}) %>
+    <main class="">
+        <div class="container">
+                <div aria-label="breadcrumb rounded-0 ">
+                        <ol class="breadcrumb pl-0 bg-white">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Usuario</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Login</li>
+                        </ol>
+                    </div>
+        </div> 
+
+    <section class="container registro">
+            
+    <form class="needs-validation mt-3 form-new-user" novalidate>
+            <h2 class="c-acc-user">Iniciar Sesión</h2>
+            
+           
+            
+            <div class=" info-cuenta">
+                
+                <div class="form-row email mb-5">
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustomX"></label>
+                        <input type="email" class="form-control" id="validationCustomX" placeholder="Email" required>
+                        <div class="valid-feedback">
+                            Email válido
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustomX"></label>
+                        <input type="email" class="form-control" id="validationCustomX" placeholder="Confirmar email" required>
+                        <div class="valid-feedback">
+                            Email válido
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
+                <div class="form-row contraseña">
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom03"></label>
+                        <input type="password" class="form-control" id="validationCustom03" placeholder="Contraseña" required>
+                        
+                    </div>
+                    
+                    <div class="col-md-6 mb-6">
+                        <label for="validationCustom03"></label>
+                        <input type="password" class="form-control" id="validationCustom03" placeholder="Confirmar contraseña" required>
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+     
+      
+        <div class="mt-5">
+                <button class="btn  boton-registro" type="submit">Iniciar Sesión</button>
+        </div>
+    </form>
+   
+    </section>
+        
+    </main>
+    <%- include('partials/footer') %>
+
+</body>	
+</html>

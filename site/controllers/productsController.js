@@ -33,10 +33,25 @@ const products = {
         productoDetallado.push(encontrado);
         res.render('producto2', {productoDetallado:productoDetallado});
     },
-    edit: (req, res) => {
+    editForm: (req, res) => {
         let productId = req.params.productId;
         let productToEdit=prod2Objeto.find(producto=> producto.id==productId);
         res.render('edicion', {prod2Objeto: prod2Objeto, productToEdit});
+    },
+    edit: (req, res) => {
+        let productId = req.params.productId;
+        let index = prod2Objeto.findIndex(producto => producto.id === req.params.productId);
+        let productToEdit=prod2Objeto.find(producto=> producto.id==productId);
+        productToEdit.nombre=req.body.nombre;
+        productToEdit.marca=req.body.marca;
+        productToEdit.descripcion=req.body.descripcion;
+        productToEdit.precio=req.body.precio;
+        productToEdit.descuento=req.body.descuento;
+        let productoEditado = [];
+        prod2Objeto[index] = productToEdit;
+        productoEditado.push(productToEdit);
+        fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
+        res.render('producto2', {productoDetallado:productoEditado});
     },
     createForm: (req, res) =>{
         res.render('carga');
@@ -67,12 +82,12 @@ const products = {
         producto.precio=req.body.precio;
         producto.descuento=req.body.descuento;
         let productoCargado = [];
-        prod2Objeto.push(producto)
+        prod2Objeto.push(producto);
         productoCargado.push(producto);
         fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
-        res.render ('producto2', {productoDetallado:productoCargado})
+        res.render ('producto2', {productoDetallado:productoCargado});
     },
-        delete: (req,res)=>{
+    delete: (req,res)=>{
         let productosFiltrados=prod2Objeto.filter(producto=> producto.id!=req.params.productId);
         prod2Objeto=productosFiltrados;
         fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));

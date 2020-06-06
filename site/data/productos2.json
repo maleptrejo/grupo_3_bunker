@@ -1,1 +1,74 @@
-[{"id":1,"nombre":"Carpa","marca":"BOITE","descripcion":"Carpa dos personas","imagen1":"1590367033908.jpg","precio":"2000","descuento":"20"},{"id":2,"nombre":"Linterna Recargable","marca":"Rayovac","descripcion":"Linterna recargable","imagen1":"1590367842801.jpg","precio":"500","descuento":"10"},{"id":3,"imagen1":"1590374267454.jpg","nombre":"Hervidor de camping","marca":"Igloo","descripcion":"Hervidor eléctrico de camping","precio":"250","descuento":"0"},{"id":4,"nombre":"Lucille","marca":"Negan Factory","descripcion":"Hermosa herramienta para matar Zombies, te aseguro que seras el centro de la fiesta.","imagen1":"1590975681880.jpg","precio":"12345","descuento":"0"},{"id":5,"nombre":"Strykezone 380","marca":"Bowtech","descripcion":"Elimina cómodamente y a una distancia prudencial todos los Zombies que quieras. La puntería no viene incluida.","imagen1":"1590978489913.jpg","precio":"98765","descuento":"0"},{"id":6,"nombre":"Zombie Killer","marca":"No Brand","descripcion":"Queres decapitar Zombies como Michonne? No lo dudes mas, la Zombie Killer es para vos","imagen1":"1591462611958.jpg","precio":"5462","descuento":"0"}]
+[
+    {
+        "id": 1,
+        "nombre": "Carpa",
+        "marca": "BOITE",
+        "descripcion": "Carpa dos personas",
+        "imagen1": "1590367033908.jpg",
+        "precio": "2000",
+        "descuento": "20"
+    },
+    {
+        "id": 2,
+        "nombre": "Linterna Recargable",
+        "marca": "Rayovac",
+        "descripcion": "Linterna recargable",
+        "imagen1": "1590367842801.jpg",
+        "precio": "500",
+        "descuento": "10"
+    },
+    {
+        "id": 3,
+        "nombre": "Hervidor de camping",
+        "marca": "Igloo",
+        "descripcion": "Hervidor eléctrico de camping, que mas esperabas.",
+        "imagen1": "1590374267454.jpg",
+        "precio": "350",
+        "descuento": "0"
+    },
+    {
+        "id": 4,
+        "nombre": "Lucille",
+        "marca": "Negan Factory",
+        "descripcion": "Hermosa herramienta para matar Zombies, te aseguro que seras el centro de la fiesta.",
+        "imagen1": "1590975681880.jpg",
+        "precio": "12345",
+        "descuento": "0"
+    },
+    {
+        "id": 5,
+        "nombre": "Strykezone 380",
+        "marca": "Bowtech",
+        "descripcion": "Elimina cómodamente y a una distancia prudencial todos los Zombies que quieras. La puntería no viene incluida.",
+        "imagen1": "1590978489913.jpg",
+        "precio": "99999",
+        "descuento": "0"
+    },
+    {
+        "id": 6,
+        "nombre": "Zombie Killer",
+        "marca": "No Brand",
+        "descripcion": "Queres decapitar Zombies como Michonne? No lo dudes mas, la Zombie Killer es para vos",
+        "imagen1": "1591462611958.jpg",
+        "precio": "5462",
+        "descuento": "0"
+    },
+    {
+        "id": 7,
+        "nombre": "Renault 4",
+        "marca": "Duravit",
+        "descripcion": "El autito irrompible de la Argentina, compratelo YA!!!!",
+        "imagen1": "1591472636231.jpg",
+        "precio": "250",
+        "descuento": "10"
+    },
+    {
+        "id": 8,
+        "nombre": "OneVision",
+        "marca": "Motorola",
+        "descripcion": "Alto celular!!!!",
+        "imagen1": "1591477309639.jpg",
+        "precio": "65000",
+        "descuento": "10"
+    }
+]

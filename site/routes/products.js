@@ -2,7 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
-const fs = require('fs');
 const multer = require('multer');
 
 /*************** MULTER CONFIG ***************/
@@ -27,7 +26,7 @@ function isEmptyObject(objeto){
 }
 
 /************ REQUIRED CONTROLLER ************/
-var productsController = require(path.join(__dirname,'../controllers/productsController'));
+const productsController = require(path.join(__dirname,'../controllers/productsController'));
 
 /****************** ROUTES ******************/
 router.get('/', productsController.list);

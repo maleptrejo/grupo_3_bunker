@@ -1,7 +1,7 @@
 /************** REQUIRED MODULES **************/
 const fs = require('fs');
 const path = require('path');
-const multer=require('multer');
+//const multer=require('multer');
 
 /*************** REQUIRED FILES ***************/
 const usersFilePath= path.join(__dirname, '../data/usuarios.json');

@@ -1,13 +1,15 @@
-var express = require('express');
-var router = express.Router();
+/************** REQUIRED MODULES **************/
+const express = require('express');
+const router = express.Router();
+const path = require('path');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.render('vistaPerfil');
-});
+/************ REQUIRED CONTROLLER ************/
+const usersController = require(path.join(__dirname,'../controllers/usersController'));
 
-router.get('/login', function(req, res, next) {
-  res.render('formLogin');
-});
+/****************** ROUTES ******************/
+router.get('/perfil', usersController.vistaPerfil);
+router.get('/login', usersController.formLogin);
+router.post('/login/val', usersController.login);
 
+/************** EXPORTED MODULE **************/
 module.exports = router;

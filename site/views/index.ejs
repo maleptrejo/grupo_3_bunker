@@ -78,88 +78,43 @@
       <div class="container products-wrapper">
           <div class="row">
               
+              <% promotions.forEach(product=> { %>
               
+            
+                <div class="col-12 col-sm-6 col-lg-3">
+                    <section class="product-box">
+                        <a href="/products/<%=product.id%>">
+                            <figure class="product-box_image">
+                                <img src="./images/productos/<%=product.imagen1%>" alt="imagen de producto">
+                            </figure>
+                            <article class="product-box_data">
+                                <div class="precio-oferta">
+                                    
+                                    <h2>$<%=product.precio%></h2>
+                                    <span><%=product.descuento%>% OFF</span>
+                                </div>
+                                
+                                
+                                <p><%=product.nombre%> <span>
+
+                                </span> <span><%=product.marca%></span></p>
+                                
+                            </article>
+                        </a>
+                    </section>
+                </div>
+
+
+
+             <% }) %>
               
-              <div class="col-12 col-sm-6 col-lg-3">
-                  <section class="product-box">
-                      <a href="producto.html">
-                          <figure class="product-box_image">
-                              <img src="./imagenes/reloj.png" alt="imagen de producto">
-                          </figure>
-                          <article class="product-box_data">
-                              <div class="precio-oferta">
-                                  
-                                  <h2>$6.500</h2>
-                                  <span>40% OFF</span>
-                              </div>
-                              
-                              
-                              <p>Reloj Baby-G <span>Casio</span></p>
-                              
-                          </article>
-                      </a>
-                  </section>
-              </div>
-              <div class="col-12 col-sm-6 col-lg-3">
-                  <section class="product-box">
-                      <a href="producto.html">
-                          <figure class="product-box_image">
-                              <img src="./imagenes/carpa.png" alt="imagen de producto">
-                          </figure>
-                          <article class="product-box_data">
-                              <div class="precio-oferta">
-                                  
-                                  <h2>$3500</h2>
-                                  <span>50% OFF</span>
-                              </div>
-                              
-                              
-                              <p>Carpa 2 personas <span>Waterdog</span></p>
-                              
-                          </article>
-                      </a>
-                  </section>
-              </div>
-              <div class="col-12 col-sm-6 col-lg-3">
-                  <section class="product-box">
-                      <a href="producto.html">
-                          <figure class="product-box_image">
-                              <img src="./imagenes/mochila.png" alt="imagen de producto">
-                          </figure>
-                          <article class="product-box_data">
-                              <div class="precio-oferta">
-                                  
-                                  <h2>$8.300</h2>
-                                  <span>20% OFF</span>
-                              </div>
-                              
-                              
-                              <p>Mochila 80lt <span>Montagne</span></p>
-                              
-                          </article>
-                      </a>
-                  </section>
-              </div>
-              <div class="col-12 col-sm-6 col-lg-3">
-                  <section class="product-box">
-                      <a href="producto.html">
-                          <figure class="product-box_image">
-                              <img src="./imagenes/termo1.jpg" alt="imagen de producto">
-                          </figure>
-                          <article class="product-box_data">
-                              <div class="precio-oferta">
-                                  
-                                  <h2>$3.000</h2>
-                                  <span>20% OFF</span>
-                              </div>
-                              
-                              
-                              <p>Termo clásico 1lt <span>Stanley</span></p>
-                              
-                          </article>
-                      </a>
-                  </section>
-              </div>
+          
+
+
+
+
+
+              
           </div>
       </div>
       
@@ -217,9 +172,39 @@
           <div class="container products-wrapper">
               <div class="row">
                   
+
+                <% lastArrival.forEach(product=> { %>
+              
+            
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <section class="product-box">
+                            <a href="/products/<%=product.id%>">
+                                <figure class="product-box_image">
+                                    <img src="./images/productos/<%=product.imagen1%>" alt="imagen de producto">
+                                </figure>
+                                <article class="product-box_data">
+                                    <div class="precio-oferta">
+                                        
+                                        <h2>$<%=product.precio%></h2>
+                                        <span><%=product.descuento%>% OFF</span>
+                                    </div>
+                                    
+                                    
+                                    <p><%=product.nombre%> <span>
+                                        
+                                    </span> <span><%=product.marca%></span></p>
+                                    
+                                </article>
+                            </a>
+                        </section>
+                    </div>
+    
+    
+    
+                 <% }) %>
                   
                   
-                  <div class="col-12 col-sm-6 col-lg-3">
+                  <!-- <div class="col-12 col-sm-6 col-lg-3">
                       <section class="product-box">
                           <a href="producto.html">
                               <figure class="product-box_image">
@@ -298,7 +283,7 @@
                               </article>
                           </a>
                       </section>
-                  </div>
+                  </div> -->
               </div>
           </div>
           

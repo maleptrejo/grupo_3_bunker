@@ -112,37 +112,48 @@
                 </div>
                 <div class="row relacionados">
                     
+                    <% lastArrival.forEach(product=> { %>
+                      
                     <div class="card col-6 col-lg-3" style="width: 18rem;">
-                        <div class="marco-tarjetas"><a href=""> <img src="../imagenes/reloj.png" class="card-img-top" alt="..."></a></div>
+                     
+                        <div class="marco-tarjetas"><a href="/products/<%=product.id%>"> <img src="../images/productos/<%=product.imagen1%>" class="card-img-top" alt="..."></a></div>
                         <div class="card-body">
-                            <h5 class="card-text">Reloj Baby-g Casio</h5>
-                            <p>$6500 </p>
+                            <h5 class="card-text"><%=product.nombre%> <span>
+                                        
+                            </span><%=product.marca%></h5>
+                            <p>$ <%=product.precio%></p>
+                        
                         </div>
+                  
+                
                     </div>
-                    <div class="card col-6 col-lg-3" style="width: 18rem;">
+
+                    <% }) %>
+
+                    <!-- <div class="card col-6 col-lg-3" style="width: 18rem;">
                         <div class="marco-tarjetas"><a href=""> <img src="../imagenes/carpa.png" class="card-img-top" alt="..."></a></div>
                         
                         <div class="card-body">
                             <h5 class="card-text">Carpa Waterdog</h5>
                             <p>$3500 </p>
                         </div>
-                    </div>
-                    <div class="card col-6 col-lg-3" style="width: 18rem;">
+                    </div> -->
+                    <!-- <div class="card col-6 col-lg-3" style="width: 18rem;">
                         <div class="marco-tarjetas"> <a href=""> <img src="../imagenes/mochila.png" class="card-img-top" alt="..."></a></div>
                         
                         <div class="card-body">
                             <h5 class="card-text">Mochila 80lt Montagne</h5>
                             <p>$8300 </p>
                         </div>
-                    </div>
-                    <div class="card col-6 col-lg-3" style="width: 18rem;">
+                    </div> -->
+                    <!-- <div class="card col-6 col-lg-3" style="width: 18rem;">
                         <div class="marco-tarjetas"> <a href=""> <img src="../imagenes/vaso-termico.png" class="card-img-top" alt="..."></a></div>
                         
                         <div class="card-body">
                             <h5 class="card-text">Vaso térmico Contigo</h5>
                             <p>$1200 </p>
                         </div>
-                    </div>
+                    </div> -->
                     
                 </div>
                 

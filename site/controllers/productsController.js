@@ -92,6 +92,9 @@ const products = {
         prod2Objeto=productosFiltrados;
         fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
         res.redirect ('/products');
+    },
+    root: (req, res) => {
+        res.render('index', {prod2Objeto: prod2Objeto});
     }
 };
 

@@ -10,6 +10,8 @@ const usersController = require(path.join(__dirname,'../controllers/usersControl
 router.get('/perfil', usersController.vistaPerfil);
 router.get('/login', usersController.formLogin);
 router.post('/login/val', usersController.login);
+router.get ('/create', usersController.createUser);
+router.post('/create', usersController.registro);
 
 /************** EXPORTED MODULE **************/
 module.exports = router;

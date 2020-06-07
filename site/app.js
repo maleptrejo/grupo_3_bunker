@@ -12,6 +12,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productsRouter = require('./routes/products');
 
+
 /**************** APP EXPRESS ****************/
 var app = express();
 
@@ -32,6 +33,7 @@ app.use(session({secret:"bunkerStoreRules"}));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
+
 
 /*** CATCH 404 & FORWARD TO ERROR HANDLER ***/
 app.use(function(req, res, next) {

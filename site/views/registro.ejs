@@ -3,6 +3,7 @@
 
     <%- include('partials/head', {title: 'Inicio'}) %>
     <main class="">
+        
         <div class="container">
                 <div aria-label="breadcrumb rounded-0 ">
                         <ol class="breadcrumb pl-0 bg-white">
@@ -15,7 +16,7 @@
 
     <section class="container registro">
             
-    <form class="needs-validation mt-3 form-new-user" novalidate>
+    <form action="/users/create" method="post" class="needs-validation mt-3 form-new-user" novalidate>
             <h2 class="c-acc">Crear cuenta</h2>
             
             <div class=" datos-usuario">
@@ -23,14 +24,14 @@
                 <div class="form-row flex-column">
                     <div class="col-12 col-md-6 mb-6">
                         <label for="validationCustom01"></label>
-                        <input type="text" class="form-control" id="validationCustom01" placeholder="Nombre" required>
+                        <input name="name" type="text" class="form-control" id="validationCustom01" placeholder="Nombre" required>
                         <div class="valid-feedback">
                             Nombre válido
                         </div>
                     </div>
                     <div class="col-md-6 mb-6">
                         <label for="validationCustom02"></label>
-                        <input type="text" class="form-control" id="validationCustom02" placeholder="Apellido" required>
+                        <input name="sName" type="text" class="form-control" id="validationCustom02" placeholder="Apellido" required>
                         <div class="valid-feedback">
                             Apellido válido
                         </div>
@@ -46,7 +47,7 @@
                 <div class="form-row">
                     <div class="col-md-6 mb-6">
                         <label for="validationCustomX"></label>
-                        <input type="email" class="form-control" id="validationCustomX" placeholder="Email" required>
+                        <input name ="email" type="email" class="form-control" id="validationCustomX" placeholder="Email" required>
                         <div class="valid-feedback">
                             Email válido
                         </div>
@@ -65,13 +66,13 @@
                 <div class="form-row">
                     <div class="col-md-6 mb-6">
                         <label for="validationCustom03"></label>
-                        <input type="password" class="form-control" id="validationCustom03" placeholder="Contraseña" required>
+                        <input type="password" class="form-control" id="validationCustom03" placeholder="Contraseña" name="password" required>
                         
                     </div>
                     
                     <div class="col-md-6 mb-6">
                         <label for="validationCustom03"></label>
-                        <input type="password" class="form-control" id="validationCustom03" placeholder="Confirmar contraseña" required>
+                        <input type="password" class="form-control" id="validationCustom03" placeholder="Confirmar contraseña" name="cpassword" required>
                         
                     </div>
                     

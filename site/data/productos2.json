@@ -24,7 +24,7 @@
         "descripcion": "Hervidor eléctrico de camping, que mas esperabas.",
         "imagen1": "1590374267454.jpg",
         "precio": "350",
-        "descuento": "0"
+        "descuento": "40"
     },
     {
         "id": 4,
@@ -33,7 +33,7 @@
         "descripcion": "Hermosa herramienta para matar Zombies, te aseguro que seras el centro de la fiesta.",
         "imagen1": "1590975681880.jpg",
         "precio": "12345",
-        "descuento": "0"
+        "descuento": "30"
     },
     {
         "id": 5,
@@ -60,7 +60,7 @@
         "descripcion": "El autito irrompible de la Argentina, compratelo YA!!!!",
         "imagen1": "1591472636231.jpg",
         "precio": "250",
-        "descuento": "10"
+        "descuento": "0"
     },
     {
         "id": 8,
@@ -69,6 +69,6 @@
         "descripcion": "Alto celular!!!!",
         "imagen1": "1591477309639.jpg",
         "precio": "65000",
-        "descuento": "10"
+        "descuento": "0"
     }
 ]

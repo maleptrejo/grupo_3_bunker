@@ -34,9 +34,9 @@ router.get ('/create', productsController.createForm);
 router.post('/carga', upload.any(), productsController.create);
 
 router.get('/:id', productsController.detail);
+
 router.get('/:productId/edit', productsController.editForm); 
- 
-router.put ('/edit/:productId',  upload.any(), productsController.edit);
+ router.put ('/edit/:productId',  upload.any(), productsController.edit);
 router.delete('/edit/:productId', productsController.delete);
 
 /************** EXPORTED MODULE **************/

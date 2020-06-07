@@ -31,7 +31,10 @@ const products = {
         };
         let productoDetallado =[];
         productoDetallado.push(encontrado);
-        res.render('producto2', {productoDetallado:productoDetallado});
+
+        let lastArrival = prod2Objeto.slice (prod2Objeto.length-4);
+
+        res.render('producto2', {productoDetallado:productoDetallado, lastArrival});
     },
     editForm: (req, res) => {
         let productId = req.params.productId;
@@ -94,7 +97,21 @@ const products = {
         res.redirect ('/products');
     },
     root: (req, res) => {
-        res.render('index', {prod2Objeto: prod2Objeto});
+    
+            let prodPromotion=prod2Objeto.filter(producto=>{
+                
+                return Number(producto.descuento)>0
+            });
+           
+
+            let promotions= prodPromotion.slice(prodPromotion.length-4);
+
+        let lastArrival = prod2Objeto.slice (prod2Objeto.length-4);
+
+        
+
+
+        res.render('index', {prod2Objeto: prod2Objeto, promotions, lastArrival });
     }
 };
 

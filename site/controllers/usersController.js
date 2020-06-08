@@ -2,7 +2,15 @@
 var bcrypt = require('bcrypt');
 var fs = require('fs');
 const path = require('path');
+// var { validationResult } = require('express-validator');
+// let registerValidation = require('../middlewares/validators/register');
 
+// let errors= [];
+
+// let user = {
+//     email: '',
+//     password: '',
+//   }
 /*************** REQUIRED FILES ***************/
 
 
@@ -26,27 +34,27 @@ const users = {
         res.send(req.body);
     },
     createUser: (req,res,next)=>{
+       
         res.render('registro');
+        // {data: user, errors: []}
+       
     },
 
     registro: (req, res, next) => {
+    
+    // let errors = validationResult(req);
 
+    // if (errors.isEmpty()) {
+    //     res.render('dashboard')
+    //   }
+        
+    
 
     if (req.body.email==req.body.cemail) {
 
       let usuarioEntrante= usuarios.find(usuario=> {
            return req.body.email==usuario.email;
         })
-
-        // let usuarioEntrante= usuarios.forEach(usuario => {
-        //     if (usuario.email==req.body.email) {
-        //         return usuario;
-        //     }
-        // });
-
-
-
-       
 
         if (usuarioEntrante==undefined) {
             if(req.body.password == req.body.cpassword){
@@ -95,20 +103,20 @@ const users = {
     
     
             } else {
-                res.send ('Las contraseñas no coinciden. Volver al formulario y reiniciar el registro');
+        res.send ('Las contraseñas no coinciden. Volver al formulario y reiniciar el registro');
+        // errors.push('Las contraseñas no coinciden.');
+        // res.render('registro',{errors:errors});
+                
+  
             }
         }else {
-            res.send ('El mail ya se encuentra registrado')
+     res.send ('El mail ya se encuentra registrado')
+            
         }
-
-        
-
-
-
-
 
     } else {
         res.send ('Los mails no coinciden. Volver atrás para recargar la página.')
+       
     }
 
     },

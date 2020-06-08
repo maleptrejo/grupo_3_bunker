@@ -15,7 +15,9 @@
         </div> 
 
     <section class="container registro">
-      
+            <% errors.forEach(error => { %>
+                <p><%= error.msg %></p>
+            <% }) %> 
  
             
     <form action="/users/create" method="post" class="needs-validation mt-3 form-new-user" enctype="multipart/form-data" novalidate>

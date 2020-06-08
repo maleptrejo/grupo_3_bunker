@@ -2,19 +2,19 @@
 var bcrypt = require('bcrypt');
 var fs = require('fs');
 const path = require('path');
-// var { validationResult } = require('express-validator');
-// let registerValidation = require('../middlewares/validators/register');
 
-// let errors= [];
-
-// let user = {
-//     email: '',
-//     password: '',
-//   }
+var { validationResult } = require('express-validator');
 /*************** REQUIRED FILES ***************/
 
 
 /****************** AUXILIAR ******************/
+let user = {
+    email: '',
+    password: '',
+  }
+
+
+
 const usersFilePath= path.join(__dirname, '../data/usuarios.json');
 let usuarios = JSON.parse(fs.readFileSync(usersFilePath, {encoding: 'utf-8'}));
 
@@ -35,29 +35,17 @@ const users = {
     },
     createUser: (req,res,next)=>{
        
-        res.render('registro');
-        // {data: user, errors: []}
+        res.render('registro', {data: user, errors: []});
+        
        
     },
 
     registro: (req, res, next) => {
     
-    // let errors = validationResult(req);
-
-    // if (errors.isEmpty()) {
-    //     res.render('dashboard')
-    //   }
         
-    
-
-    if (req.body.email==req.body.cemail) {
-
-      let usuarioEntrante= usuarios.find(usuario=> {
-           return req.body.email==usuario.email;
-        })
-
-        if (usuarioEntrante==undefined) {
-            if(req.body.password == req.body.cpassword){
+        let errors = validationResult(req)
+        console.log(errors);
+        if (errors.isEmpty()) {
      
                 let passEncripted = bcrypt.hashSync(req.body.password, 10);
     
@@ -77,8 +65,7 @@ const users = {
                     newUser.id=usuarios[usuarios.length-1].id+1;
                 };
     
-              
-                console.log('req.files: '+ req.files);
+            
                 //cargas avatar
                 if (isEmptyObject(req.files)){
                     newUser.avatar = 'noAvatar.jpeg';
@@ -99,25 +86,13 @@ const users = {
     
                 let userShow=newUser;
                 res.render('vistaPerfil', {userShow:userShow});
-    
-    
-    
-            } else {
-        res.send ('Las contraseñas no coinciden. Volver al formulario y reiniciar el registro');
-        // errors.push('Las contraseñas no coinciden.');
-        // res.render('registro',{errors:errors});
-                
-  
-            }
-        }else {
-     res.send ('El mail ya se encuentra registrado')
-            
-        }
 
-    } else {
-        res.send ('Los mails no coinciden. Volver atrás para recargar la página.')
-       
-    }
+            }else {
+                res.render('registro', {
+                    data : {...user, ...req.body},
+                    errors: errors.array()
+                  })
+            }
 
     },
 

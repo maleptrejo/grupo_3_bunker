@@ -3,7 +3,10 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const multer = require('multer');
-// let registerValidation = require('../middlewares/validators/register');
+
+var {check} = require('express-validator')
+let errorsRegister=require('../middlewares/validators/errorsRegister')
+
 
 /************ MULTER CONFIG **************/
 var storage= multer.diskStorage({
@@ -31,8 +34,8 @@ router.get('/perfil', usersController.vistaPerfil);
 router.get('/login', usersController.formLogin);
 router.post('/login/val', usersController.login);
 router.get ('/create', usersController.createUser);
-router.post('/create', upload.any(), usersController.registro);
-// antes de upload,registerValidation debería ir registerValidation,
+router.post('/create',  errorsRegister, upload.any(), usersController.registro);
+
 
 /************** EXPORTED MODULE **************/
 module.exports = router;

@@ -21,9 +21,9 @@ var upload = multer({ storage: storage,
     cb(null, true);
   }
 });
-function isEmptyObject(objeto){
-  return !Object.keys(objeto).length;
-}
+//function isEmptyObject(objeto){
+//  return !Object.keys(objeto).length;
+//}
 
 /************ REQUIRED CONTROLLER ************/
 const productsController = require(path.join(__dirname,'../controllers/productsController'));

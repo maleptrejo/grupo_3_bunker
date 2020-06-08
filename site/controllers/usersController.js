@@ -28,60 +28,92 @@ const users = {
     createUser: (req,res,next)=>{
         res.render('registro');
     },
+
     registro: (req, res, next) => {
-        //let mailCheck = undefined;
-       // mailCheck = usuarios.find(userJeison => //usuarios.email);
-       // console.log(mailCheck);
-      //  if (mailCheck != undefined){
-       //     res.send ("El usuario ya se //encuentra registrado");
-      //  }
 
-        if(req.body.password == req.body.cpassword){
-            let passEncripted = bcrypt.hashSync(req.body.password, 10);
-            let newUser ={
-                id: 0,
-                name: null,
-                sName: null,
-                email: null,
-                password: null,
-                avatar: undefined,
-            };
 
-            if (isEmptyObject(usuarios)){
-                newUser.id=1;
+    if (req.body.email==req.body.cemail) {
+
+      let usuarioEntrante= usuarios.find(usuario=> {
+           return req.body.email==usuario.email;
+        })
+
+        // let usuarioEntrante= usuarios.forEach(usuario => {
+        //     if (usuario.email==req.body.email) {
+        //         return usuario;
+        //     }
+        // });
+
+
+
+       
+
+        if (usuarioEntrante==undefined) {
+            if(req.body.password == req.body.cpassword){
+     
+                let passEncripted = bcrypt.hashSync(req.body.password, 10);
+    
+                let newUser ={
+                    id: 0,
+                    email: null,
+                    name: null,
+                    sName: null,
+                    password: null,
+                    avatar: undefined,
+                };
+    
+                //cargas id
+                if (isEmptyObject(usuarios)){
+                    newUser.id=1;
+                } else {
+                    newUser.id=usuarios[usuarios.length-1].id+1;
+                };
+    
+              
+                console.log('req.files: '+ req.files);
+                //cargas avatar
+                if (isEmptyObject(req.files)){
+                    newUser.avatar = 'noAvatar.jpeg';
+                } else {
+                    newUser.avatar = req.files[0].filename;
+                };
+    
+                newUser.name = req.body.name;
+                newUser.sName = req.body.sName;
+                newUser.password = passEncripted;
+                newUser.email= req.body.email;
+    
+               
+    
+                usuarios.push(newUser);
+                fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
+               
+    
+                let userShow=newUser;
+                res.render('vistaPerfil', {userShow:userShow});
+    
+    
+    
             } else {
-                newUser.id=usuarios[usuarios.length-1].id+1;
-            };
-
-            console.log(req.files)
-            if (req.files == undefined){
-                newUser.avatar = "noAvatar.jpeg";
-            } else {
-                newUser.avatar = req.files[0].filename;
-            };
+                res.send ('Las contraseñas no coinciden. Volver al formulario y reiniciar el registro');
+            }
+        }else {
+            res.send ('El mail ya se encuentra registrado')
+        }
 
         
-            newUser.name = req.body.name;
-            newUser.sName = req.body.sName;
-            
-            if(req.body.email != req.body.cemail){
-                res.send("Los campos de email deben ser iguales")
-                 } else {
-                 newUser.email = req.body.email;
-              }
 
-            newUser.password = passEncripted;
-            
-            ususarios.push(newUser);
-            fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
-            res.send (newUser);
-           // res.redirect('/vistaPerfil');
-            
-        }else{
-            res.send('LAS CONTRASEÑAS NO COINCIDEN!');
-        }
+
+
+
+
+    } else {
+        res.send ('Los mails no coinciden. Volver atrás para recargar la página.')
     }
-};
 
+    },
+
+/////////////////
+}
 /************** EXPORTED MODULE **************/
 module.exports = users;

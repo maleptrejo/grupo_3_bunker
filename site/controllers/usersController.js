@@ -26,8 +26,10 @@ const users = {
     vistaPerfil: (req, res, next) => {
         res.render('vistaPerfil');
     },
+
     formLogin: (req, res, next) => {
-        if (req.session !=undefined) {
+        if (req.session.usuarioLogeado !=undefined) {
+            console.log(req.session)
             res.send ('Ya estás logueado')
         }
         res.render('formLogin');
@@ -47,7 +49,7 @@ const users = {
                 
                 req.session.usuarioLogeado=usuarioEntrante;
 
-                res.send('anda');
+               res.redirect('/')
 
 
          }else {
@@ -153,6 +155,15 @@ const users = {
        
     }
 
+    },
+    close: (req, res) => {
+        req.session.destroy();
+       
+        res.redirect('/users/login');
+    },
+    cartEnter: (req, res) => {
+
+        res.render('cart');
     },
 
 /////////////////

@@ -2,8 +2,7 @@
 var bcrypt = require('bcrypt');
 var fs = require('fs');
 const path = require('path');
-
-var { validationResult } = require('express-validator');
+var {check, validationResult, body} = require('express-validator')
 /*************** REQUIRED FILES ***************/
 
 
@@ -11,7 +10,7 @@ var { validationResult } = require('express-validator');
 let user = {
     email: '',
     password: '',
-  }
+}
 
 
 
@@ -34,69 +33,50 @@ const users = {
         res.send(req.body);
     },
     createUser: (req,res,next)=>{
-       
+        
         res.render('registro', {data: user, errors: []});
         
-       
-    },
-
-    registro: (req, res, next) => {
-    
         
-        let errors = validationResult(req)
-        console.log(errors);
-        if (errors.isEmpty()) {
-     
-                let passEncripted = bcrypt.hashSync(req.body.password, 10);
-    
-                let newUser ={
-                    id: 0,
-                    email: null,
-                    name: null,
-                    sName: null,
-                    password: null,
-                    avatar: undefined,
-                };
-    
-                //cargas id
-                if (isEmptyObject(usuarios)){
-                    newUser.id=1;
-                } else {
-                    newUser.id=usuarios[usuarios.length-1].id+1;
-                };
-    
-            
-                //cargas avatar
-                if (isEmptyObject(req.files)){
-                    newUser.avatar = 'noAvatar.jpeg';
-                } else {
-                    newUser.avatar = req.files[0].filename;
-                };
-    
-                newUser.name = req.body.name;
-                newUser.sName = req.body.sName;
-                newUser.password = passEncripted;
-                newUser.email= req.body.email;
-    
-               
-    
-                usuarios.push(newUser);
-                fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
-               
-    
-                let userShow=newUser;
-                res.render('vistaPerfil', {userShow:userShow});
-
-            }else {
-                res.render('registro', {
-                    data : {...user, ...req.body},
-                    errors: errors.array()
-                  })
-            }
-
     },
-
-/////////////////
+    registro: (req, res, next) => {
+        let errors = validationResult(req);
+        console.log(errors);
+        console.log(req.body.name);
+        if (errors.isEmpty()){
+            let passEncripted = bcrypt.hashSync(req.body.password, 10);
+            let newUser ={
+                id: 0,
+                name: null,
+                sName: null,
+                email: null,
+                password: null,
+                avatar: null
+            };
+            if (isEmptyObject(usuarios)){
+                newUser.id=1;
+            } else {
+                newUser.id=usuarios[usuarios.length-1].id+1;
+            };
+            console.log(newUser.id);
+            newUser.name = req.body.name;
+            newUser.sName = req.body.sName;
+            newUser.email = req.body.email;
+            newUser.password = passEncripted;
+            // if (req.files == undefined){
+            //     newUser.avatar = "index.png";
+            // } else {
+            //     newUser.avatar = req.files[0].filename;
+            // };
+            usuarios.push(newUser);
+            fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
+            res.render('vistaPerfil', {userShow:newUser});  
+        }else{
+            return res.render('registro', {errors:errors.errors});
+        }
+        
+    },
+    
 }
+
 /************** EXPORTED MODULE **************/
 module.exports = users;

@@ -30,7 +30,7 @@ const users = {
     formLogin: (req, res, next) => {
         if (req.session.usuarioLogeado !=undefined) {
             console.log(req.session)
-            res.send ('Ya estás logueado')
+            res.redirect('/');
         }
         res.render('formLogin');
     },
@@ -63,7 +63,7 @@ const users = {
 
     check: (req, res) => {
         if (req.session.usuarioLogeado==undefined) {
-            res.send ('No estás logueado')
+            res.render ('redireccion')
         }else {
             res.send ('el usuario es' + req.session.usuarioLogeado.name)
         }

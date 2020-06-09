@@ -32,6 +32,10 @@ resave: false,
     saveUninitialized: true
 }));
 
+// app.use(function(req,res,next) {
+//   res.locals.usuarioLogeado =req.session.usuarioLogeado;
+// })
+
 /****************** ROUTES ******************/
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

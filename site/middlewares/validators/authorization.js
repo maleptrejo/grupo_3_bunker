@@ -1,10 +1,18 @@
 function authorization (req,res,next) {
 
-    if(req.session.usuarioLogeado.email != 'admin@admin.com') {
-        res.send('esta página es sólo para administradores')
+    if (req.session.usuarioLogeado!=undefined) {
+        if(req.session.usuarioLogeado.email == 'admin@admin.com') {
+       
+   
+            next();
+        }else {
+         res.render('noAdmin')
+        }
     } else {
-        next();
+        res.redirect('/')
     }
+
+    
 };
 
 

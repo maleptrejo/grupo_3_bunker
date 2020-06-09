@@ -1,6 +1,6 @@
 function cartAccess (req, res, next) {
     if (req.session.usuarioLogeado==undefined){
-        res.send ('Necesitás estar logueado para continuar')
+       res.render('redireccion')
     } else {
         next();
     }

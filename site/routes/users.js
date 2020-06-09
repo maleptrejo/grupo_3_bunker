@@ -8,6 +8,7 @@ const multer = require('multer');
 let guest=require('../middlewares/validators/guest');
 let authorization=require('../middlewares/validators/authorization');
 let cartAccess =require('../middlewares/validators/cartAccess');
+let logout=require('../middlewares/validators/logout');
 
 /************ MULTER CONFIG **************/
 var storage= multer.diskStorage({
@@ -37,8 +38,8 @@ router.post('/login/val', usersController.enter);
 router.get('/check', usersController.check);
 router.get ('/create', usersController.createUser);
 router.post('/create', upload.any(), usersController.registro);
-router.get('/logout', usersController.close);
-router.get('/cart',cartAccess, usersController.cartEnter);
+router.get('/logout',logout, usersController.close);
+router.get('/cart', cartAccess, usersController.cartEnter);
 // antes de upload,registerValidation debería ir registerValidation,
 
 /************** EXPORTED MODULE **************/

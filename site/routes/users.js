@@ -8,6 +8,11 @@ var {check, validationResult, body} = require('express-validator');
 let errorsRegister=require('../middlewares/validators/errorsRegister');
 
 
+let guest=require('../middlewares/validators/guest');
+let authorization=require('../middlewares/validators/authorization');
+let cartAccess =require('../middlewares/validators/cartAccess');
+let logout=require('../middlewares/validators/logout');
+
 /************ MULTER CONFIG **************/
 var storage= multer.diskStorage({
   destination:function(req,file,cb){
@@ -31,8 +36,9 @@ const usersController = require(path.join(__dirname,'../controllers/usersControl
 
 /****************** ROUTES ******************/
 router.get('/perfil', usersController.vistaPerfil);
-router.get('/login', usersController.formLogin);
-router.post('/login/val', usersController.login);
+router.get('/login',guest, usersController.formLogin);
+router.post('/login/val', usersController.enter);
+router.get('/check', usersController.check);
 router.get ('/create', usersController.createUser);
 router.post('/create', [
   check('name').isLength({min:1}).withMessage('El campo nombre debe contener al menos un caracter'),

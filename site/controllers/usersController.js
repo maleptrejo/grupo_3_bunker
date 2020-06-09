@@ -25,13 +25,49 @@ const users = {
     vistaPerfil: (req, res, next) => {
         res.render('vistaPerfil');
     },
+
     formLogin: (req, res, next) => {
+        if (req.session.usuarioLogeado !=undefined) {
+            console.log(req.session)
+            res.redirect('/');
+        }
         res.render('formLogin');
     },
-    login: (req, res, next) => {
+
+
+    enter: (req, res)=>{
         
-        res.send(req.body);
+        let usuarioEntrante= usuarios.find(usuario=> {
+           
+            return req.body.email==usuario.email;
+         });
+         console.log(usuarioEntrante!=undefined)
+
+         if (usuarioEntrante!=undefined) { 
+            if(bcrypt.compareSync(req.body.password, usuarioEntrante.password)){
+                
+                req.session.usuarioLogeado=usuarioEntrante;
+
+               res.redirect('/')
+
+
+         }else {
+             res.send ('La contraseña es incorrecta');
+         }
+
+        } else {
+            res.send ('No existe el usuario');
+        }
     },
+
+    check: (req, res) => {
+        if (req.session.usuarioLogeado==undefined) {
+            res.render ('redireccion')
+        }else {
+            res.send ('el usuario es' + req.session.usuarioLogeado.name)
+        }
+    },
+   
     createUser: (req,res,next)=>{
         
         res.render('registro', {data: user, errors: []});
@@ -75,7 +111,17 @@ const users = {
         }
         
     },
-    
+    close: (req, res) => {
+        req.session.destroy();
+       
+        res.redirect('/users/login');
+    },
+    cartEnter: (req, res) => {
+
+        res.render('cart');
+    },
+
+/////////////////
 }
 
 /************** EXPORTED MODULE **************/

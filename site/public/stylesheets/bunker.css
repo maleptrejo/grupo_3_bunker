@@ -551,6 +551,13 @@ h2 {
 }
 
 
+/* ******redirect****** */
+
+.redireccion {
+  min-height: 550px;
+}
+
+
 /* ****** vision perfil usuario*********/
 .container-user {
   min-height: 1000px;
@@ -948,6 +955,13 @@ td>input.form-control {
 
 
 @media (min-width: 1440px ) {
+
+  /* ****redireccion***** */
+
+  .redireccion {
+    min-height: 550px;
+  }
+
 
   #top {
 

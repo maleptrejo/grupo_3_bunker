@@ -27,7 +27,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
 /*********** APP LEVEL MIDDLEWARE ***********/
-app.use(session({secret:"bunkerStoreRules"}));
+app.use(session({secret:"bunkerStoreRules",
+resave: false,
+    saveUninitialized: true
+}));
+
+// app.use(function(req,res,next) {
+//   res.locals.usuarioLogeado =req.session.usuarioLogeado;
+// })
 
 /****************** ROUTES ******************/
 app.use('/', indexRouter);

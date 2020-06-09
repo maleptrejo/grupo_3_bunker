@@ -4,6 +4,8 @@ const router = express.Router();
 const path = require('path');
 const multer = require('multer');
 
+let authorization=require('../middlewares/validators/authorization');
+
 /*************** MULTER CONFIG ***************/
 var storage= multer.diskStorage({
   destination:function(req,file,cb){
@@ -21,9 +23,9 @@ var upload = multer({ storage: storage,
     cb(null, true);
   }
 });
-function isEmptyObject(objeto){
-  return !Object.keys(objeto).length;
-}
+//function isEmptyObject(objeto){
+//  return !Object.keys(objeto).length;
+//}
 
 /************ REQUIRED CONTROLLER ************/
 const productsController = require(path.join(__dirname,'../controllers/productsController'));
@@ -35,7 +37,7 @@ router.post('/carga', upload.any(), productsController.create);
 
 router.get('/:id', productsController.detail);
 
-router.get('/:productId/edit', productsController.editForm); 
+router.get('/:productId/edit', authorization, productsController.editForm); 
  router.put ('/edit/:productId',  upload.any(), productsController.edit);
 router.delete('/edit/:productId', productsController.delete);
 

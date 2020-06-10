@@ -58,6 +58,8 @@ router.post('/create', [
   }).withMessage('Este email ya esta registrado')
 ], usersController.registro);
 router.post('/avatar', upload.any(), usersController.avatar);
+router.get('/cart', cartAccess, usersController.cartEnter);
+router.get('/logout',logout, usersController.close);
 
 /************** EXPORTED MODULE **************/
 module.exports = router;

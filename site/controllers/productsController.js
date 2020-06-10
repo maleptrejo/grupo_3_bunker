@@ -1,46 +1,23 @@
 /************** REQUIRED MODULES **************/
-
 const fs = require('fs');
 const path = require('path');
-const multer=require('multer');
+//const multer=require('multer');
 
-
+/*************** REQUIRED FILES ***************/
 const usersFilePath= path.join(__dirname, '../data/usuarios.json');
 const usersObjeto = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
 
 const prod2FilePath= path.join(__dirname, '../data/productos2.json');
 var prod2Objeto = JSON.parse(fs.readFileSync(prod2FilePath, 'utf-8'));
 
-// console.log(usersObjeto[1]);s
 let arrayUsuarios=[];
 arrayUsuarios.push(usersObjeto[1]);
 arrayUsuarios.push(usersObjeto[2]);
 
 /****************** AUXILIAR ******************/
-let productos = JSON.parse(fs.readFileSync(path.join(__dirname,'../data/productos.json')), 'utf8');
-
-var storage= multer.diskStorage({
-    destination:function(req,file,cb){
-        cb(null,'public/images/productos/')
-    },
-    filename:function(req,file,cb){
-        cb(null,Date.now()+path.extname(file.originalname)); //Appending extension
-    }
-})
-
-var upload = multer({ storage: storage,
-    fileFilter: function (req, file, cb) {
-        if (!file.originalname.match(/\.(pdf|doc|docx|jpg)$/)) {
-            return cb(new Error('Error en el tipo de archivo.'));
-        }
-        cb(null, true);
-    }
-});
-
-
 function isEmptyObject(objeto){
     return !Object.keys(objeto).length;
-}
+};
 
 /************** MODULE TO EXPORT **************/
 const products = {
@@ -52,12 +29,32 @@ const products = {
         if(encontrado == undefined){
             res.send ("No existe el producto");
         };
-        res.render('producto2', {productoDetallado:encontrado});
+        let productoDetallado =[];
+        productoDetallado.push(encontrado);
+
+        let lastArrival = prod2Objeto.slice (prod2Objeto.length-4);
+
+        res.render('producto2', {productoDetallado:productoDetallado, lastArrival});
     },
-    edit: (req, res) => {
+    editForm: (req, res) => {
         let productId = req.params.productId;
         let productToEdit=prod2Objeto.find(producto=> producto.id==productId);
         res.render('edicion', {prod2Objeto: prod2Objeto, productToEdit});
+    },
+    edit: (req, res) => {
+        let productId = req.params.productId;
+        let index = prod2Objeto.findIndex(producto => producto.id === req.params.productId);
+        let productToEdit=prod2Objeto.find(producto=> producto.id==productId);
+        productToEdit.nombre=req.body.nombre;
+        productToEdit.marca=req.body.marca;
+        productToEdit.descripcion=req.body.descripcion;
+        productToEdit.precio=req.body.precio;
+        productToEdit.descuento=req.body.descuento;
+        let productoEditado = [];
+        prod2Objeto[index] = productToEdit;
+        productoEditado.push(productToEdit);
+        fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
+        res.render('producto2', {productoDetallado:productoEditado});
     },
     createForm: (req, res) =>{
         res.render('carga');
@@ -87,21 +84,36 @@ const products = {
         producto.descripcion=req.body.descripcion;
         producto.precio=req.body.precio;
         producto.descuento=req.body.descuento;
-        prod2Objeto.push(producto)
+        let productoCargado = [];
+        prod2Objeto.push(producto);
+        productoCargado.push(producto);
         fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
-        res.render ('producto2', {productoDetallado:producto})
+        res.render ('producto2', {productoDetallado:productoCargado});
     },
-    
     delete: (req,res)=>{
         let productosFiltrados=prod2Objeto.filter(producto=> producto.id!=req.params.productId);
         prod2Objeto=productosFiltrados;
         fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
         res.redirect ('/products');
+    },
+    root: (req, res) => {
+    
+            let prodPromotion=prod2Objeto.filter(producto=>{
+                
+                return Number(producto.descuento)>0
+            });
+           
+
+            let promotions= prodPromotion.slice(prodPromotion.length-4);
+
+        let lastArrival = prod2Objeto.slice (prod2Objeto.length-4);
+
+        
+
+
+        res.render('index', {prod2Objeto: prod2Objeto, promotions, lastArrival });
     }
-    
-    
-    
 };
 
-/************** EXPORTING MODULE **************/
+/************** EXPORTED MODULE **************/
 module.exports = products;

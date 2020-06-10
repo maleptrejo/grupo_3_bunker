@@ -174,6 +174,7 @@ header {
 .icono {
 color: #FFCA00;
 background-color: #353535;
+font-size: 3em;
 }
 
 
@@ -191,7 +192,7 @@ margin-left: 1vw;
 }
 
 .icon-fav {
-  display: flex;
+display: flex;
 justify-content: center;
 align-items: center;
 margin-right:1vw;
@@ -201,6 +202,7 @@ margin-left: 1vw;
 
 .logo-bunker {
   padding-left: 7vw;
+
 }
 
 .logo-bunker>a>h1 {
@@ -222,10 +224,13 @@ width: 1em;
   padding-bottom:2vh;
 }
 
-.icon-user button {
+.fa-user-astronaut button {
   background-color: #353535;
   border: unset;
+  
 }
+
+
 
 .buscador-lg {
 display: none;
@@ -546,7 +551,42 @@ h2 {
 }
 
 
+/* ******redirect****** */
 
+.redireccion {
+  min-height: 550px;
+}
+
+
+/* ****** vision perfil usuario*********/
+.container-user {
+  min-height: 1000px;
+  
+}
+
+.datos-user-container>div>h1{
+  font-size: 3.5em;
+  
+  margin-bottom: 2vh;
+  margin-left: 2.5vw;
+}
+
+
+.datos1 {
+
+  
+} 
+
+.datos-personales {
+  margin-top: 3.5vh;
+  font-size: 3em;
+}
+
+
+.datos2 {
+  font-size: 2em;
+  margin-left:3vw;
+}
 
 
 
@@ -562,6 +602,8 @@ h2 {
 
 .breadcrumb {
   margin-top: 2vh;
+  font-size: 1.5em;
+
 }
 
 
@@ -757,6 +799,12 @@ footer>div>h6{
  
 } 
 
+/* ******login******* */
+
+h2.c-acc-user {
+  font-size: 3em;
+}
+
 /* *******form carga de producto******** */
 .div-form-carga label {
   margin-right: 3vw;
@@ -908,6 +956,13 @@ td>input.form-control {
 
 @media (min-width: 1440px ) {
 
+  /* ****redireccion***** */
+
+  .redireccion {
+    min-height: 550px;
+  }
+
+
   #top {
 
     padding: 0;
@@ -953,11 +1008,20 @@ td>input.form-control {
       padding-bottom: 1vh;
   } 
 
-  .icon-fav .fa-heart {
+  /* .icon-fav .fa-heart .fa-user-astronaut{
       font-size: 6em;
 
+  } */
+
+  .fa-user-astronaut button {
+    background-color: #353535;
+    border: unset;
   }
 
+  .fa-user-astronaut {
+   
+  
+  }
 
 
   .logo-bunker {
@@ -1012,6 +1076,7 @@ td>input.form-control {
       padding-right: 1vw;
       padding-top: 0.3vw;
       border: unset;
+      background-color: unset;
 
   }
 
@@ -1107,6 +1172,10 @@ div.col-12.pb-4 h2 {
   font-size: 1.8em;
 }
 
+
+
+
+
   /* ****vision del producto***** */
 
   .producto-mobile {
@@ -1181,14 +1250,27 @@ div.tarjetas-producto>a>p {
       padding-top: 1vh;
   }
 
+/******* pagina user ********/
+.datos-user-container>div>h1 {
+  margin-left: 1vw;
+}
 
+.datos2 {
+  font-size: 2em;
+  margin-left:1vw;
+}
+/* ******login******* */
+
+h2.c-acc-user {
+  font-size: 3em;
+}
 
   /* ******pagina producto****** */
 
   .breadcrumb {
       padding-left: unset;
       margin-top: 2vh;
-      font-size: 1.5em;
+     
   }
 
  

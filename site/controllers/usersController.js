@@ -120,6 +120,9 @@ const users = {
 
         res.render('cart');
     },
+    avatar: (req, res) => {
+        res.render('avatar');
+    }
 
 /////////////////
 }

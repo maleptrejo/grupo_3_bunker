@@ -125,8 +125,32 @@ const users = {
     },
     cargarAvatar: (req, res) => {
 
-        res.send ('llegue')
-    },
+
+        if(req.session.usuarioLogeado==undefined ) {
+            res.send ('no hay session')
+        }
+
+        
+
+        let userAvatar= usuarios.find(usuario=> {
+          
+            return usuario.email==req.session.usuarioLogeado.email;
+         });
+
+         console.log(userAvatar);
+
+         userAvatar.avatar= req.files[0].filename;
+         
+         let index = usuarios.findIndex(usuario => usuario.email === req.session.usuarioLogeado.email);
+     
+         usuarios [index] = userAvatar;
+
+         fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
+
+         res.redirect('/')
+
+
+    }
 
     
 

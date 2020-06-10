@@ -14,22 +14,16 @@ let cartAccess =require('../middlewares/validators/cartAccess');
 let logout=require('../middlewares/validators/logout');
 
 /************ MULTER CONFIG **************/
-var storage= multer.diskStorage({
-  destination:function(req,file,cb){
-    cb(null,'public/images/usuarios/')
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname,'..','public','images','usuarios'))
   },
-  filename:function(req,file,cb){
-    cb(null,Date.now()+path.extname(file.originalname));
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
   }
 })
-var upload = multer({ storage: storage,
-  fileFilter: function (req, file, cb) {
-    if (!file.originalname.match(/\.(pdf|doc|docx|jpg|jpeg)$/)) {
-      return cb(new Error('Error en el tipo de archivo.'));
-    }
-    cb(null, true);
-  }
-});
+ 
+var upload = multer({ storage: storage })
 
 /************ REQUIRED CONTROLLER ************/
 const usersController = require(path.join(__dirname,'../controllers/usersController'));
@@ -57,12 +51,13 @@ router.post('/create', [
     let usuarios = JSON.parse(fs.readFileSync(usersFilePath, {encoding: 'utf-8'}));
     for (let i = 0; i < usuarios.length; i++) {
       if (usuarios[i].email == valor) {
-        return false;
+      return false;
       };
     };
     return true;
   }).withMessage('Este email ya esta registrado')
-], upload.any(), usersController.registro);
+], usersController.registro);
+router.post('/avatar', upload.any(), usersController.avatar);
 router.get('/cart', cartAccess, usersController.cartEnter);
 router.get('/logout',logout, usersController.close);
 

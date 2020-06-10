@@ -76,8 +76,6 @@ const users = {
     },
     registro: (req, res, next) => {
         let errors = validationResult(req);
-        console.log(errors);
-        console.log(req.body.name);
         if (errors.isEmpty()){
             let passEncripted = bcrypt.hashSync(req.body.password, 10);
             let newUser ={
@@ -93,23 +91,25 @@ const users = {
             } else {
                 newUser.id=usuarios[usuarios.length-1].id+1;
             };
-            console.log(newUser.id);
             newUser.name = req.body.name;
             newUser.sName = req.body.sName;
             newUser.email = req.body.email;
             newUser.password = passEncripted;
-            // if (req.files == undefined){
-            //     newUser.avatar = "index.png";
-            // } else {
-            //     newUser.avatar = req.files[0].filename;
-            // };
             usuarios.push(newUser);
             fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
-            res.render('vistaPerfil', {userShow:newUser});  
+            res.render('registro', {errors:undefined})
         }else{
-            return res.render('registro', {errors:errors.errors});
-        }
-        
+            res.render('registro', {errors:errors.errors});
+        };    
+    },
+    avatar:(req, res) => {
+        if (req.files.length == 0){
+            usuarios[usuarios.length-1].avatar = 'noAvatar.jpeg';
+        } else{
+            usuarios[usuarios.length-1].avatar = req.files[0].filename;
+        };
+        fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
+        res.render('vistaPerfil', {userShow:usuarios[usuarios.length-1]});
     },
     close: (req, res) => {
         req.session.destroy();

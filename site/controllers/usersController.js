@@ -98,6 +98,9 @@ const users = {
             newUser.sName = req.body.sName;
             newUser.email = req.body.email;
             newUser.password = passEncripted;
+            newUser.avatar = 'noAvatar.jpeg';
+
+           
             // if (req.files == undefined){
             //     newUser.avatar = "index.png";
             // } else {

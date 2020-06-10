@@ -150,7 +150,11 @@ const users = {
 
          fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
 
-         res.redirect('/')
+        //  res.redirect('/')
+
+        
+
+        res.render('vistaPerfil', {userShow:userAvatar});  
 
 
     }

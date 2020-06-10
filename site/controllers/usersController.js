@@ -122,7 +122,13 @@ const users = {
     },
     avatar: (req, res) => {
         res.render('avatar');
-    }
+    },
+    cargarAvatar: (req, res) => {
+
+        res.send ('llegue')
+    },
+
+    
 
 /////////////////
 }

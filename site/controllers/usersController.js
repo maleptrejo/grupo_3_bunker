@@ -157,6 +157,36 @@ const users = {
         res.render('vistaPerfil', {userShow:userAvatar});  
 
 
+    },
+    editForm: (req, res) => {
+        res.render('editUserForm', {userData: req.session.usuarioLogeado});
+    },
+    editData: (req, res) => {
+
+        if(req.session.usuarioLogeado==undefined ) {
+            res.send ('no hay session')
+        }
+
+        let userEdit = usuarios.find(usuario=> {
+            return usuario.email==req.session.usuarioLogeado.email;
+         });
+
+         userEdit.name=req.body.name;
+         userEdit.sName=req.body.sName;
+         userEdit.Email=req.body.email;
+
+         
+
+
+
+         let index = usuarios.findIndex(usuario => usuario.email === req.session.usuarioLogeado.email);
+     
+         usuarios [index] = userEdit;
+
+         fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
+
+         res.render('vistaPerfil', {userShow:userEdit}); 
+
     }
 
     

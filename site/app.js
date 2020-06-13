@@ -32,9 +32,10 @@ resave: false,
     saveUninitialized: true
 }));
 
-// app.use(function(req,res,next) {
-//   res.locals.usuarioLogeado =req.session.usuarioLogeado;
-// })
+app.use(function(req,res,next) {
+res.locals.usuarioLogeado =req.session.usuarioLogeado;
+next();
+})
 
 /****************** ROUTES ******************/
 app.use('/', indexRouter);

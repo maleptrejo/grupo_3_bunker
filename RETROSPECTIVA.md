@@ -1,5 +1,31 @@
 # Grupo 3 - BunkerStore - 
 
+# Retrospectiva Sprint4
+##### Start doing
++ Emperzar antes. Administrar mejor los plazos. 
++ Implementar "botón antipánico": poner un plazo en el que, si las tareas individuales no están hechas, avisar al grupo y poner esa tarea como prioridad 1 de todos.
++ Atender testeo post merge en git.
+
+##### More of
++ Sistematizar las consignas del sprint.
++ Chekeos rápidos internos: testear si el código funciona.
++ Gap analysis: análisis de qué falta para llegar a donde queremos estar.
+
+
+##### Keep doing
++ Planificar el trabajo.
++ Usar las metodologías y herramientas sugeridas por el sprint.
++ Trabajar en equipo incluso las tareas repartidas.
++ Comunicación constante.
+
+
+##### Less of
++ dejar para el sprint la instancia de repaso de temas dados.
+
+##### Stop doing
++ Procrastinación.
+
+
 # Retrospectiva Sprint3
 ##### Start doing
 + Emperzar antes. Administrar mejor los plazos. 

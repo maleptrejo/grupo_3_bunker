@@ -95,6 +95,14 @@ const users = {
             newUser.sName = req.body.sName;
             newUser.email = req.body.email;
             newUser.password = passEncripted;
+            newUser.avatar = 'noAvatar.jpeg';
+
+           
+            // if (req.files == undefined){
+            //     newUser.avatar = "index.png";
+            // } else {
+            //     newUser.avatar = req.files[0].filename;
+            // };
             usuarios.push(newUser);
             fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
             res.render('registro', {errors:undefined})
@@ -120,6 +128,73 @@ const users = {
 
         res.render('cart');
     },
+    avatar: (req, res) => {
+        res.render('avatar');
+    },
+    cargarAvatar: (req, res) => {
+
+
+        if(req.session.usuarioLogeado==undefined ) {
+            res.send ('no hay session')
+        }
+
+        
+
+        let userAvatar= usuarios.find(usuario=> {
+          
+            return usuario.email==req.session.usuarioLogeado.email;
+         });
+
+         console.log(userAvatar);
+
+         userAvatar.avatar= req.files[0].filename;
+         
+         let index = usuarios.findIndex(usuario => usuario.email === req.session.usuarioLogeado.email);
+     
+         usuarios [index] = userAvatar;
+
+         fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
+
+        //  res.redirect('/')
+
+        
+
+        res.render('vistaPerfil', {userShow:userAvatar});  
+
+
+    },
+    editForm: (req, res) => {
+        res.render('editUserForm', {userData: req.session.usuarioLogeado});
+    },
+    editData: (req, res) => {
+
+        if(req.session.usuarioLogeado==undefined ) {
+            res.send ('no hay session')
+        }
+
+        let userEdit = usuarios.find(usuario=> {
+            return usuario.email==req.session.usuarioLogeado.email;
+         });
+
+         userEdit.name=req.body.name;
+         userEdit.sName=req.body.sName;
+         userEdit.Email=req.body.email;
+
+         
+
+
+
+         let index = usuarios.findIndex(usuario => usuario.email === req.session.usuarioLogeado.email);
+     
+         usuarios [index] = userEdit;
+
+         fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
+
+         res.render('vistaPerfil', {userShow:userEdit}); 
+
+    }
+
+    
 
 /////////////////
 }

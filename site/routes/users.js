@@ -60,6 +60,33 @@ router.post('/create', [
 router.post('/avatar', upload.any(), usersController.avatar);
 router.get('/cart', cartAccess, usersController.cartEnter);
 router.get('/logout',logout, usersController.close);
+router.get('/avatar',cartAccess, usersController.avatar);
+router.post('/avatar', upload.any(), usersController.cargarAvatar);
+
+router.get('/edit', usersController.editForm);
+router.post('/edit', [
+  check('name').isLength({min:1}).withMessage('El campo nombre debe contener al menos un caracter'),
+  check('sName').isLength({min:1}).withMessage('El campo apellido debe contener al menos un caracter'),
+  check('email').isEmail().withMessage('El formato del email no es válido'),
+  check('password').isLength({min:8, max:12}).withMessage('La contraseña debe contener entre 8 y 12 caracteres'),
+  body('cPassword').custom(function(cpassword,{req}){
+    if (cpassword == req.body.password){
+      return true;
+    }else {
+      return false;
+    }
+  }).withMessage('Las contraseñas no coinciden'),
+  body('email').custom(function(valor, {req}){
+    let usersFilePath= path.join(__dirname, '../data/usuarios.json');
+    let usuarios = JSON.parse(fs.readFileSync(usersFilePath, {encoding: 'utf-8'}));
+    for (let i = 0; i < usuarios.length; i++) {
+      if (usuarios[i].email == valor) {
+        return false;
+      };
+    };
+    return true;
+  }).withMessage('Este email ya esta registrado')
+], usersController.editData);
 
 /************** EXPORTED MODULE **************/
 module.exports = router;

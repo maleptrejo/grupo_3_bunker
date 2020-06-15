@@ -30,24 +30,26 @@ module.exports = (sequelize, dataTypes) => {
     };
     let config = {
         tableName: 'products',
-        timestamps: false
+        timestamps: true,
+        createdAt: 'created_at',
+        updatedAt: 'updated_at'
     };
     const Product = sequelize.define(alias, cols, config)
 
-    // Product.associate = (models) => {
-    //    Producto.belongsTo(models.Brand, {
-    //        as: "brands",
-    //        foreignKey: "brand_id"
-    //    })
-    //    Product.belongsTo(models.Discount, {
-    //     as: "discounts",
-    //     foreignKey: "discount_id"
-    //    })
-    //    Product.belongsTo(models.Category, {
-    //     as: "categories",
-    //     foreignKey: "category_id"
-    //    })
-    // }
+    Product.associate = (models) => {
+       Product.belongsTo(models.Brands, {
+           as: "brands",
+           foreignKey: "brand_id"
+       })
+       Product.belongsTo(models.Discounts, {
+            as: "discounts",
+            foreignKey: "brand_id"
+        })
+        Product.belongsTo(models.Categories, {
+            as: "categories",
+            foreignKey: "category_id"
+        })
+    }
 
     return Product;
 }

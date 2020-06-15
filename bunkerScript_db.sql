@@ -5,55 +5,55 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema bunkerDB
+-- Schema bunker_db
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema bunkerDB
+-- Schema bunker_db
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `bunkerDB` DEFAULT CHARACTER SET utf8 ;
-USE `bunkerDB` ;
+CREATE SCHEMA IF NOT EXISTS `bunker_db` DEFAULT CHARACTER SET utf8 ;
+USE `bunker_db` ;
 
 -- -----------------------------------------------------
--- Table `bunkerDB`.`discounts`
+-- Table `bunker_db`.`discounts`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bunkerDB`.`discounts` (
+CREATE TABLE IF NOT EXISTS `bunker_db`.`discounts` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `created_at` TIMESTAMP NOT NULL,
   `updated_at` TIMESTAMP NULL,
-  `level` TINYINT UNSIGNED NOT NULL,
+  `level` DOUBLE(3,2) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `level_UNIQUE` (`level` ASC) VISIBLE);
+  UNIQUE INDEX `level_UNIQUE` (`level` ASC));
 
 
 -- -----------------------------------------------------
--- Table `bunkerDB`.`brands`
+-- Table `bunker_db`.`brands`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bunkerDB`.`brands` (
-  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL,
-  `updated_at` TIMESTAMP NULL,
-  `name` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE);
-
-
--- -----------------------------------------------------
--- Table `bunkerDB`.`categories`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bunkerDB`.`categories` (
+CREATE TABLE IF NOT EXISTS `bunker_db`.`brands` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `created_at` TIMESTAMP NOT NULL,
   `updated_at` TIMESTAMP NULL,
   `name` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC) VISIBLE);
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC));
 
 
 -- -----------------------------------------------------
--- Table `bunkerDB`.`products`
+-- Table `bunker_db`.`categories`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bunkerDB`.`products` (
+CREATE TABLE IF NOT EXISTS `bunker_db`.`categories` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `created_at` TIMESTAMP NOT NULL,
+  `updated_at` TIMESTAMP NULL,
+  `name` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC));
+
+
+-- -----------------------------------------------------
+-- Table `bunker_db`.`products`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bunker_db`.`products` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `created_at` TIMESTAMP NOT NULL,
   `updated_at` TIMESTAMP NULL,
@@ -63,31 +63,32 @@ CREATE TABLE IF NOT EXISTS `bunkerDB`.`products` (
   `brand_id` BIGINT UNSIGNED NOT NULL,
   `discount_id` BIGINT UNSIGNED NOT NULL,
   `category_id` BIGINT UNSIGNED NOT NULL,
+  `stock` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `discount_idx` (`discount_id` ASC) VISIBLE,
-  INDEX `brand_idx` (`brand_id` ASC) VISIBLE,
-  INDEX `category_idx` (`category_id` ASC) VISIBLE,
+  INDEX `discount_idx` (`discount_id` ASC),
+  INDEX `brand_idx` (`brand_id` ASC),
+  INDEX `category_idx` (`category_id` ASC),
   CONSTRAINT `discount`
     FOREIGN KEY (`discount_id`)
-    REFERENCES `bunkerDB`.`discounts` (`id`)
+    REFERENCES `bunker_db`.`discounts` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `brand`
     FOREIGN KEY (`brand_id`)
-    REFERENCES `bunkerDB`.`brands` (`id`)
+    REFERENCES `bunker_db`.`brands` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `category`
     FOREIGN KEY (`category_id`)
-    REFERENCES `bunkerDB`.`categories` (`id`)
+    REFERENCES `bunker_db`.`categories` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
--- Table `bunkerDB`.`users`
+-- Table `bunker_db`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bunkerDB`.`users` (
+CREATE TABLE IF NOT EXISTS `bunker_db`.`users` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `created_at` TIMESTAMP NOT NULL,
   `updated_at` TIMESTAMP NULL,
@@ -95,90 +96,91 @@ CREATE TABLE IF NOT EXISTS `bunkerDB`.`users` (
   `password` VARCHAR(150) NOT NULL,
   `avatar` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC));
 
 
 -- -----------------------------------------------------
--- Table `bunkerDB`.`cart`
+-- Table `bunker_db`.`cart`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bunkerDB`.`cart` (
+CREATE TABLE IF NOT EXISTS `bunker_db`.`cart` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `created_at` TIMESTAMP NOT NULL,
-  `update_at` TIMESTAMP NOT NULL,
+  `update_at` TIMESTAMP NULL,
   `purchased_at` TIMESTAMP NULL,
   `user_id` BIGINT UNSIGNED NULL,
-  `total` FLOAT(12,2) UNSIGNED NULL DEFAULT 0,
+  `total` FLOAT(12,2) UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
-  INDEX `cart_belongs_to_user_idx` (`user_id` ASC) VISIBLE,
+  INDEX `cart_belongs_to_user_idx` (`user_id` ASC),
   CONSTRAINT `cart_belongs_to_user`
     FOREIGN KEY (`user_id`)
-    REFERENCES `bunkerDB`.`users` (`id`)
+    REFERENCES `bunker_db`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
--- Table `bunkerDB`.`cart_product`
+-- Table `bunker_db`.`cart_product`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bunkerDB`.`cart_product` (
+CREATE TABLE IF NOT EXISTS `bunker_db`.`cart_product` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `created_at` TIMESTAMP NOT NULL,
-  `update_at` TIMESTAMP NOT NULL,
+  `update_at` TIMESTAMP NULL,
+  `price` FLOAT(12,2) UNSIGNED NOT NULL,
   `quantity` SMALLINT UNSIGNED NULL DEFAULT 1,
   `cart_id` BIGINT UNSIGNED NULL,
   `product_id` BIGINT UNSIGNED NULL,
-  `price` FLOAT(12,2) UNSIGNED NOT NULL,
+  `subtotal` FLOAT(12,2) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `product_belongs_to_cart_idx` (`product_id` ASC) VISIBLE,
-  INDEX `cart_has_products_idx` (`cart_id` ASC) VISIBLE,
+  INDEX `product_belongs_to_cart_idx` (`product_id` ASC),
+  INDEX `cart_has_products_idx` (`cart_id` ASC),
   CONSTRAINT `product_belongs_to_cart`
     FOREIGN KEY (`product_id`)
-    REFERENCES `bunkerDB`.`products` (`id`)
+    REFERENCES `bunker_db`.`products` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `cart_has_products`
     FOREIGN KEY (`cart_id`)
-    REFERENCES `bunkerDB`.`cart` (`id`)
+    REFERENCES `bunker_db`.`cart` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
--- Table `bunkerDB`.`customers`
+-- Table `bunker_db`.`customers`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bunkerDB`.`customers` (
+CREATE TABLE IF NOT EXISTS `bunker_db`.`customers` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `created_at` TIMESTAMP NOT NULL,
-  `update_at` TIMESTAMP NOT NULL,
+  `update_at` TIMESTAMP NULL,
   `name` VARCHAR(100) NOT NULL,
   `surname` VARCHAR(100) NOT NULL,
   `adress` VARCHAR(100) NOT NULL,
   `country` VARCHAR(100) NOT NULL,
   `user_id` BIGINT UNSIGNED NULL,
   PRIMARY KEY (`id`),
-  INDEX `customer_is_an_user_idx` (`user_id` ASC) VISIBLE,
+  INDEX `customer_is_an_user_idx` (`user_id` ASC),
   CONSTRAINT `customer_is_an_user`
     FOREIGN KEY (`user_id`)
-    REFERENCES `bunkerDB`.`users` (`id`)
+    REFERENCES `bunker_db`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
 
 -- -----------------------------------------------------
--- Table `bunkerDB`.`admins`
+-- Table `bunker_db`.`admins`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bunkerDB`.`admins` (
+CREATE TABLE IF NOT EXISTS `bunker_db`.`admins` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `created_at` TIMESTAMP NOT NULL,
-  `update_at` TIMESTAMP NOT NULL,
+  `update_at` TIMESTAMP NULL,
   `name` VARCHAR(100) NOT NULL,
   `sname` VARCHAR(100) NOT NULL,
   `user_id` BIGINT UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `admin_is_an_user_idx` (`user_id` ASC) VISIBLE,
+  INDEX `admin_is_an_user_idx` (`user_id` ASC),
   CONSTRAINT `admin_is_an_user`
     FOREIGN KEY (`user_id`)
-    REFERENCES `bunkerDB`.`users` (`id`)
+    REFERENCES `bunker_db`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 

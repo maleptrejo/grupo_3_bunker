@@ -19,8 +19,8 @@ USE `bunker_db` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bunker_db`.`discounts` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL,
-  `updated_at` TIMESTAMP NULL,
+  `created_at` TIMESTAMP NOT NULL CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL CURRENT_TIMESTAMP,
   `level` DOUBLE(3,2) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `level_UNIQUE` (`level` ASC));
@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS `bunker_db`.`discounts` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bunker_db`.`brands` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL,
-  `updated_at` TIMESTAMP NULL,
+`created_at` TIMESTAMP NOT NULL CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL CURRENT_TIMESTAMP,
   `name` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC));
@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS `bunker_db`.`brands` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bunker_db`.`categories` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL,
-  `updated_at` TIMESTAMP NULL,
+ `created_at` TIMESTAMP NOT NULL CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL CURRENT_TIMESTAMP,
   `name` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `name_UNIQUE` (`name` ASC));
@@ -55,8 +55,8 @@ CREATE TABLE IF NOT EXISTS `bunker_db`.`categories` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bunker_db`.`products` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL,
-  `updated_at` TIMESTAMP NULL,
+ `created_at` TIMESTAMP NOT NULL CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL CURRENT_TIMESTAMP,
   `name` VARCHAR(100) NOT NULL,
   `price` FLOAT(12,2) UNSIGNED NOT NULL,
   `description` TEXT NULL,
@@ -90,8 +90,8 @@ CREATE TABLE IF NOT EXISTS `bunker_db`.`products` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bunker_db`.`users` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL,
-  `updated_at` TIMESTAMP NULL,
+ `created_at` TIMESTAMP NOT NULL CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL CURRENT_TIMESTAMP,
   `email` VARCHAR(150) NOT NULL,
   `password` VARCHAR(150) NOT NULL,
   `avatar` VARCHAR(100) NOT NULL,
@@ -104,8 +104,8 @@ CREATE TABLE IF NOT EXISTS `bunker_db`.`users` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bunker_db`.`cart` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL,
-  `update_at` TIMESTAMP NULL,
+`created_at` TIMESTAMP NOT NULL CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL CURRENT_TIMESTAMP,
   `purchased_at` TIMESTAMP NULL,
   `user_id` BIGINT UNSIGNED NULL,
   `total` FLOAT(12,2) UNSIGNED NOT NULL DEFAULT 0,
@@ -123,8 +123,8 @@ CREATE TABLE IF NOT EXISTS `bunker_db`.`cart` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bunker_db`.`cart_product` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL,
-  `update_at` TIMESTAMP NULL,
+ `created_at` TIMESTAMP NOT NULL CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL CURRENT_TIMESTAMP,
   `price` FLOAT(12,2) UNSIGNED NOT NULL,
   `quantity` SMALLINT UNSIGNED NULL DEFAULT 1,
   `cart_id` BIGINT UNSIGNED NULL,
@@ -150,8 +150,8 @@ CREATE TABLE IF NOT EXISTS `bunker_db`.`cart_product` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bunker_db`.`customers` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL,
-  `update_at` TIMESTAMP NULL,
+`created_at` TIMESTAMP NOT NULL CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL CURRENT_TIMESTAMP,
   `name` VARCHAR(100) NOT NULL,
   `surname` VARCHAR(100) NOT NULL,
   `adress` VARCHAR(100) NOT NULL,
@@ -171,8 +171,8 @@ CREATE TABLE IF NOT EXISTS `bunker_db`.`customers` (
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bunker_db`.`admins` (
   `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `created_at` TIMESTAMP NOT NULL,
-  `update_at` TIMESTAMP NULL,
+ `created_at` TIMESTAMP NOT NULL CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP NULL CURRENT_TIMESTAMP,
   `name` VARCHAR(100) NOT NULL,
   `sname` VARCHAR(100) NOT NULL,
   `user_id` BIGINT UNSIGNED NOT NULL,

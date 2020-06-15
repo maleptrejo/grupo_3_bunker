@@ -6,6 +6,7 @@ const fs = require('fs');
 const multer = require('multer');
 var {check, validationResult, body} = require('express-validator');
 let errorsRegister=require('../middlewares/validators/errorsRegister');
+const db = require('../db/models');
 
 
 let guest=require('../middlewares/validators/guest');
@@ -87,6 +88,17 @@ router.post('/edit', [
     return true;
   }).withMessage('Este email ya esta registrado')
 ], usersController.editData);
+
+router.get('/database', (req, res) => {
+ 
+
+  db.Users.findAll().then(usuario=> {
+    res.send(usuario)
+  })
+
+ 
+
+})
 
 /************** EXPORTED MODULE **************/
 module.exports = router;

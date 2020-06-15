@@ -1,7 +1,7 @@
 module.exports= (sequelize, Types) => {
-    const Users=sequelize.define (
+    const Categories=sequelize.define (
         //alias
-        'Users',
+        'Categories',
 
          //columns
         {
@@ -11,23 +11,16 @@ module.exports= (sequelize, Types) => {
                 primaryKey: true,
                 allowNull: false
             },
-            email: {
-                type: Types.STRING(150),
+            name: {
+                type: Types.STRING(100),
                 allowNull: false,
                 unique: true
 
-            },
-            password: {
-                type: Types.STRING(150)
-
-            },
-            avatar: {
-                type: Types.STRING(100)
             }
         },
     
         //config
-        {tableName: "Users",
+        {tableName: "Categories",
         underscored: true,
         timestamps: true,
         createdAt: 'created_at',
@@ -36,9 +29,11 @@ module.exports= (sequelize, Types) => {
 
         )
 
-        //associate
+        
 
-        return Users;
+        //associate
+        
+        return Categories;
 }
 
 

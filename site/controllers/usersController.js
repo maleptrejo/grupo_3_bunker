@@ -49,26 +49,23 @@ const users = {
        db.Users.findOne({
              where: {
                  email: req.body.email
+  
              }
          }).then((resultado)=> {
 
-            // console.log(usuarioEntrante)
 
-            if (resultado) {
+            if (resultado==null) {
+                res.send ('No existe el usuario');
+            } else { 
+            
                 if(bcrypt.compareSync(req.body.password, resultado.password)){
                 
-                    req.session.usuarioLogeado=resultado;
+                    req.session.usuarioLogeado=resultado.dataValues;
     
                    res.redirect('/')
 
-            }else {
-                res.send ('No existe el usuario');
             }
-
-
-
-       
-
+           
          //******** */
           //  } );
         //  if (usuarioEntrante) {
@@ -106,6 +103,7 @@ const users = {
        
     })
 
+
 },
 
 
@@ -113,7 +111,7 @@ const users = {
         if (req.session.usuarioLogeado==undefined) {
             res.render ('redireccion')
         }else {
-            res.send ('el usuario es' + req.session.usuarioLogeado.name)
+            res.send ('el usuario es' + req.session.usuarioLogeado.email)
         }
     },
    
@@ -196,6 +194,7 @@ const users = {
     avatar: (req, res) => {
         res.render('avatar');
     },
+
     cargarAvatar: (req, res) => {
 
 
@@ -203,31 +202,52 @@ const users = {
             res.send ('no hay session')
         }
 
-        
+        //////******** */
 
-        let userAvatar= usuarios.find(usuario=> {
+        db.Users.update({
+
+            avatar: req.files[0].filename
+
+            },
+           {where: {
+                email: req.session.usuarioLogeado.email
+            }}
+            
+            ).then((resultado)=> { 
+                // res.send ('ok')
+                
+                res.render('vistaPerfil', {userShow:req.session.usuarioLogeado}); 
+            })
+        },
+
+           // console.log(usuarioEntrante)
+
+
+        ////********** */
+
+        // let userAvatar= usuarios.find(usuario=> {
           
-            return usuario.email==req.session.usuarioLogeado.email;
-         });
+        //     return usuario.email==req.session.usuarioLogeado.email;
+        //  });
 
-         console.log(userAvatar);
+        //  console.log(userAvatar);
 
-         userAvatar.avatar= req.files[0].filename;
+        //  userAvatar.avatar= req.files[0].filename;
          
-         let index = usuarios.findIndex(usuario => usuario.email === req.session.usuarioLogeado.email);
+        //  let index = usuarios.findIndex(usuario => usuario.email === req.session.usuarioLogeado.email);
      
-         usuarios [index] = userAvatar;
+        //  usuarios [index] = userAvatar;
 
-         fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
+        //  fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
 
         //  res.redirect('/')
 
         
 
-        res.render('vistaPerfil', {userShow:userAvatar});  
+    //     res.render('vistaPerfil', {userShow:userAvatar});  
 
 
-    },
+    // },
     editForm: (req, res) => {
         res.render('editUserForm', {userData: req.session.usuarioLogeado});
     },
@@ -237,32 +257,60 @@ const users = {
             res.send ('no hay session')
         }
 
-        let userEdit = usuarios.find(usuario=> {
-            return usuario.email==req.session.usuarioLogeado.email;
-         });
+        // if(bcrypt.compareSync(req.body.password, resultado.password)){
+                
+        //     req.session.usuarioLogeado=resultado.dataValues;
 
-         userEdit.name=req.body.name;
-         userEdit.sName=req.body.sName;
-         userEdit.Email=req.body.email;
+        //    res.redirect('/')
+        // }
+        
 
-         
+        //////******** */
+
+        db.Users.update({
+
+            email: req.body.email,
+
+            },
+           {where: {
+                email: req.session.usuarioLogeado.email
+            }}
+            
+            ).then((resultado)=> { 
+                // res.send ('ok')
+                
+                res.render('vistaPerfil', {userShow:req.session.usuarioLogeado}); 
+            })
+        },
 
 
 
-         let index = usuarios.findIndex(usuario => usuario.email === req.session.usuarioLogeado.email);
+
+
+        //**********lo de abajo va con json */
+
+        // let userEdit = usuarios.find(usuario=> {
+        //     return usuario.email==req.session.usuarioLogeado.email;
+        //  });
+
+        //  userEdit.name=req.body.name;
+        //  userEdit.sName=req.body.sName;
+        //  userEdit.Email=req.body.email;
+
+        //  let index = usuarios.findIndex(usuario => usuario.email === req.session.usuarioLogeado.email);
      
-         usuarios [index] = userEdit;
+        //  usuarios [index] = userEdit;
 
-         fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
+        //  fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
 
-         res.render('vistaPerfil', {userShow:userEdit}); 
+        //  res.render('vistaPerfil', {userShow:userEdit}); 
 
-    }
+    // }
 
     
 
 /////////////////
-}
+    }
 
 /************** EXPORTED MODULE **************/
 module.exports = users;

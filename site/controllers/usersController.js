@@ -2,15 +2,17 @@
 var bcrypt = require('bcrypt');
 var fs = require('fs');
 const path = require('path');
-var {check, validationResult, body} = require('express-validator')
+var {check, validationResult, body} = require('express-validator');
+
+const db= require('../database/models');
 /*************** REQUIRED FILES ***************/
 
 
 /****************** AUXILIAR ******************/
 let user = {
-    email: '',
-    password: '',
-}
+         email: '',
+   password: '',
+ }
 
 
 
@@ -37,28 +39,75 @@ const users = {
 
     enter: (req, res)=>{
         
-        let usuarioEntrante= usuarios.find(usuario=> {
+        // let usuarioEntrante= usuarios.find(usuario=> {
            
-            return req.body.email==usuario.email;
-         });
-         console.log(usuarioEntrante!=undefined)
+        //     return req.body.email==usuario.email;
+        //  });
 
-         if (usuarioEntrante!=undefined) { 
-            if(bcrypt.compareSync(req.body.password, usuarioEntrante.password)){
+         
+
+       db.Users.findOne({
+             where: {
+                 email: req.body.email
+             }
+         }).then((resultado)=> {
+
+            // console.log(usuarioEntrante)
+
+            if (resultado) {
+                if(bcrypt.compareSync(req.body.password, resultado.password)){
                 
-                req.session.usuarioLogeado=usuarioEntrante;
+                    req.session.usuarioLogeado=resultado;
+    
+                   res.redirect('/')
 
-               res.redirect('/')
+            }else {
+                res.send ('No existe el usuario');
+            }
 
 
-         }else {
-             res.send ('La contraseña es incorrecta');
-         }
 
-        } else {
-            res.send ('No existe el usuario');
-        }
-    },
+       
+
+         //******** */
+          //  } );
+        //  if (usuarioEntrante) {
+        //     if(bcrypt.compareSync(req.body.password, usuarioEntrante.password)){
+                
+        //         req.session.usuarioLogeado=usuarioEntrante;
+
+        //        res.redirect('/')
+
+        //  } else {
+        //     res.send ('No existe el usuario');
+        //  }
+
+         //*********esto de arriba va */
+         
+    //      if (usuarioEntrante!=undefined) { 
+    //         if(bcrypt.compareSync(req.body.password, usuarioEntrante.password)){
+                
+    //             req.session.usuarioLogeado=usuarioEntrante;
+
+    //            res.redirect('/')
+
+
+    //      }else {
+    //          res.send ('La contraseña es incorrecta');
+    //      }
+
+    //     // } else {
+    //     //     res.send ('No existe el usuario');
+    //     // }
+    // }
+
+
+}
+       
+    })
+
+},
+
 
     check: (req, res) => {
         if (req.session.usuarioLogeado==undefined) {
@@ -78,38 +127,54 @@ const users = {
         let errors = validationResult(req);
         if (errors.isEmpty()){
             let passEncripted = bcrypt.hashSync(req.body.password, 10);
-            let newUser ={
-                id: 0,
-                name: null,
-                sName: null,
-                email: null,
-                password: null,
-                avatar: null
-            };
-            if (isEmptyObject(usuarios)){
-                newUser.id=1;
-            } else {
-                newUser.id=usuarios[usuarios.length-1].id+1;
-            };
-            newUser.name = req.body.name;
-            newUser.sName = req.body.sName;
-            newUser.email = req.body.email;
-            newUser.password = passEncripted;
-            newUser.avatar = 'noAvatar.jpeg';
 
-           
+            db.Users.create({
+                
+                email: req.body.email,
+                password: passEncripted,
+                avatar: 'noAvatar.jpeg'
+
+            })
+//*****lo que sigue, va */
+            // let newUser ={
+            //     id: 0,
+            //     name: null,
+            //     sName: null,
+            //     email: null,
+            //     password: null,
+            //     avatar: null
+            // };
+
+            // if (isEmptyObject(usuarios)){
+            //     newUser.id=1;
+            // } else {
+            //     newUser.id=usuarios[usuarios.length-1].id+1;
+            // };
+            // newUser.name = req.body.name;
+            // newUser.sName = req.body.sName;
+            // newUser.email = req.body.email;
+            // newUser.password = passEncripted;
+            // newUser.avatar = 'noAvatar.jpeg';
+
+           // ****** lo que sigue NO va^^^^^^^^^^^^^^^^^^^^^^^
             // if (req.files == undefined){
             //     newUser.avatar = "index.png";
             // } else {
             //     newUser.avatar = req.files[0].filename;
             // };
-            usuarios.push(newUser);
-            fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
+        //************* lo que sigue SÏ va******** */
+
+            // usuarios.push(newUser);
+            // fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
+
+
             res.render('registro', {errors:undefined})
         }else{
             res.render('registro', {errors:errors.errors});
         };    
     },
+
+
     avatar:(req, res) => {
         if (req.files.length == 0){
             usuarios[usuarios.length-1].avatar = 'noAvatar.jpeg';

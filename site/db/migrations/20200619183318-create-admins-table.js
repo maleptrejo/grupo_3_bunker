@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Types) => {
     
-      return queryInterface.createTable('perros', {  id: {
+      return queryInterface.createTable('admins', {  id: {
         type: Types.BIGINT(20).UNSIGNED,
         autoIncrement: true,
         primaryKey: true,
@@ -23,7 +23,7 @@ module.exports = {
 
   down: (queryInterface, Sequelize) => {
     
-      return queryInterface.dropTable('perros');
+      return queryInterface.dropTable('admins');
  
   }
 };

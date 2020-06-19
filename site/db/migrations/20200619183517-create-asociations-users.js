@@ -4,28 +4,46 @@ module.exports = {
   up: (queryInterface, Types) => {
    
       return queryInterface.addColumn(
-        'gatos',
+        'customers',
         'user_id',
         {
           type: Types.BIGINT(20).UNSIGNED,
           allowNull: false,
-         
-          onDelete:'CASCADE',
           references: {
-              model: 'dueños',
+              model: 'users',
               key: 'id'
           },
           onUpdate: 'CASCADE',
           OnDelete: 'SET NULL',
 
         }
-       );
+       )
+       .then (() => {
+        return queryInterface.addColumn( 
+          'admins',
+          'user_id',
+          {
+            type: Types.BIGINT(20).UNSIGNED,
+            allowNull: false,
+            references: {
+                model: 'admins',
+                key: 'id'
+            },
+            onUpdate: 'CASCADE',
+            OnDelete: 'SET NULL',
+          }
+          );
+       });
     },
 
   down: (queryInterface, Sequelize) => {
     
-      return queryInterface.removeColumn('gatos',
-      'user_id');
+      return queryInterface.removeColumn('customers',
+      'user_id')
+      .then (()=> {
+        return queryInterface.removeColumn('admins',
+      'user_id')
+      });
    
   }
 };

@@ -267,10 +267,14 @@ const users = {
 
         //////******** */
 
+
+        
+
+
+       
+
         db.Users.update({
-
             email: req.body.email,
-
             },
            {where: {
                 email: req.session.usuarioLogeado.email

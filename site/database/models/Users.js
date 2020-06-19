@@ -36,6 +36,19 @@ module.exports= (sequelize, Types) => {
 
         )
 
-        //associate
+        Users.associate=function(models) {
+            Users.hasOne(models.Customer, {
+                foreignKey: 'user_id',
+                as: 'Customer'
+            }),
+            Users.hasOne(models.Admin, {
+                foreignKey: 'user_id',
+                as: 'Admin'
+            })
+
+        }
+
+      
+        
         return Users;
 }

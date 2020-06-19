@@ -130,9 +130,24 @@ const users = {
                 
                 email: req.body.email,
                 password: passEncripted,
-                avatar: 'noAvatar.jpeg'
+                avatar: 'noAvatar.jpeg',
+                Customer: {
+                    name: req.body.name,
+                    surname: req.body.sName,
+                    country: req.body.country,
+                    adress: req.body.adress
+                },
 
+            }, {
+                include: {
+                    model: db.Customer,
+                    as: 'Customer',
+                }
             })
+
+            
+
+
 //*****lo que sigue, va */
             // let newUser ={
             //     id: 0,
@@ -173,15 +188,15 @@ const users = {
     },
 
 
-    avatar:(req, res) => {
-        if (req.files.length == 0){
-            usuarios[usuarios.length-1].avatar = 'noAvatar.jpeg';
-        } else{
-            usuarios[usuarios.length-1].avatar = req.files[0].filename;
-        };
-        fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
-        res.render('vistaPerfil', {userShow:usuarios[usuarios.length-1]});
-    },
+    // avatar:(req, res) => {
+    //     if (req.files.length == 0){
+    //         usuarios[usuarios.length-1].avatar = 'noAvatar.jpeg';
+    //     } else{
+    //         usuarios[usuarios.length-1].avatar = req.files[0].filename;
+    //     };
+    //     fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
+    //     res.render('vistaPerfil', {userShow:usuarios[usuarios.length-1]});
+    // },
     close: (req, res) => {
         req.session.destroy();
        

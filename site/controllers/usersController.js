@@ -27,25 +27,15 @@ const users = {
     vistaPerfil: (req, res, next) => {
         res.render('vistaPerfil');
     },
-
     formLogin: (req, res, next) => {
         if (req.session.usuarioLogeado !=undefined) {
-            console.log(req.session)
+            // console.log(req.session)
             res.redirect('/');
         }
         res.render('formLogin');
     },
-
-
     enter: (req, res)=>{
         
-        // let usuarioEntrante= usuarios.find(usuario=> {
-           
-        //     return req.body.email==usuario.email;
-        //  });
-
-         
-
        db.Users.findOne({
              where: {
                  email: req.body.email
@@ -61,6 +51,8 @@ const users = {
                 if(bcrypt.compareSync(req.body.password, resultado.password)){
                 
                     req.session.usuarioLogeado=resultado.dataValues;
+
+                    // console.log(req.session.usuarioLogeado)
     
                    res.redirect('/')
 
@@ -104,9 +96,7 @@ const users = {
     })
 
 
-},
-
-
+    },
     check: (req, res) => {
         if (req.session.usuarioLogeado==undefined) {
             res.render ('redireccion')
@@ -114,7 +104,6 @@ const users = {
             res.send ('el usuario es' + req.session.usuarioLogeado.email)
         }
     },
-   
     createUser: (req,res,next)=>{
         
         res.render('registro', {data: user, errors: []});
@@ -145,49 +134,11 @@ const users = {
                 }
             })
 
-            
-
-
-//*****lo que sigue, va */
-            // let newUser ={
-            //     id: 0,
-            //     name: null,
-            //     sName: null,
-            //     email: null,
-            //     password: null,
-            //     avatar: null
-            // };
-
-            // if (isEmptyObject(usuarios)){
-            //     newUser.id=1;
-            // } else {
-            //     newUser.id=usuarios[usuarios.length-1].id+1;
-            // };
-            // newUser.name = req.body.name;
-            // newUser.sName = req.body.sName;
-            // newUser.email = req.body.email;
-            // newUser.password = passEncripted;
-            // newUser.avatar = 'noAvatar.jpeg';
-
-           // ****** lo que sigue NO va^^^^^^^^^^^^^^^^^^^^^^^
-            // if (req.files == undefined){
-            //     newUser.avatar = "index.png";
-            // } else {
-            //     newUser.avatar = req.files[0].filename;
-            // };
-        //************* lo que sigue SÏ va******** */
-
-            // usuarios.push(newUser);
-            // fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
-
-
             res.render('registro', {errors:undefined})
         }else{
             res.render('registro', {errors:errors.errors});
         };    
     },
-
-
     // avatar:(req, res) => {
     //     if (req.files.length == 0){
     //         usuarios[usuarios.length-1].avatar = 'noAvatar.jpeg';
@@ -209,15 +160,12 @@ const users = {
     avatar: (req, res) => {
         res.render('avatar');
     },
-
     cargarAvatar: (req, res) => {
 
 
         if(req.session.usuarioLogeado==undefined ) {
             res.send ('no hay session')
         }
-
-        //////******** */
 
         db.Users.update({
 
@@ -229,80 +177,67 @@ const users = {
             }}
             
             ).then((resultado)=> { 
-                // res.send ('ok')
                 
                 res.render('vistaPerfil', {userShow:req.session.usuarioLogeado}); 
             })
         },
-
-           // console.log(usuarioEntrante)
-
-
-        ////********** */
-
-        // let userAvatar= usuarios.find(usuario=> {
-          
-        //     return usuario.email==req.session.usuarioLogeado.email;
-        //  });
-
-        //  console.log(userAvatar);
-
-        //  userAvatar.avatar= req.files[0].filename;
-         
-        //  let index = usuarios.findIndex(usuario => usuario.email === req.session.usuarioLogeado.email);
-     
-        //  usuarios [index] = userAvatar;
-
-        //  fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
-
-        //  res.redirect('/')
-
-        
-
-    //     res.render('vistaPerfil', {userShow:userAvatar});  
-
-
-    // },
     editForm: (req, res) => {
-        res.render('editUserForm', {userData: req.session.usuarioLogeado});
-    },
+
+      
+        db.Customer.findOne({
+            where: {
+                user_id: req.session.usuarioLogeado.id
+            }
+        }).then((resultado)=> {
+
+            let userData; 
+        if (resultado!=null) {
+           
+            userData= {
+               avatar: req.session.usuarioLogeado.avatar ,
+               name: resultado.dataValues.name,
+               surname: resultado.dataValues.surname ,
+               adress: resultado.dataValues.adress,
+               country: resultado.dataValues.country,
+               email: req.session.usuarioLogeado.email
+           } 
+             
+         } 
+
+        res.render('editUserForm', {userData: userData});
+    
+        })            
+},
     editData: (req, res) => {
 
         if(req.session.usuarioLogeado==undefined ) {
             res.send ('no hay session')
         }
-
-        // if(bcrypt.compareSync(req.body.password, resultado.password)){
-                
-        //     req.session.usuarioLogeado=resultado.dataValues;
-
-        //    res.redirect('/')
-        // }
-        
-
-        //////******** */
-
-
-        
-
-
-       
-
         db.Users.update({
+
             email: req.body.email,
+            Customer: {
+                name: req.body.name,
+                surname: req.body.sName,
+                country: req.body.country,
+                adress: req.body.adress
+            }
+
             },
            {where: {
                 email: req.session.usuarioLogeado.email
             }}
             
             ).then((resultado)=> { 
-                // res.send ('ok')
-                
                 res.render('vistaPerfil', {userShow:req.session.usuarioLogeado}); 
             })
-        },
+       
 
+     
 
+            
+
+       
 
 
 
@@ -330,6 +265,7 @@ const users = {
 
 /////////////////
     }
+};
 
 /************** EXPORTED MODULE **************/
 module.exports = users;

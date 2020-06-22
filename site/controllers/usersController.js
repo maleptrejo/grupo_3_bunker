@@ -212,6 +212,8 @@ const users = {
 },
     editData: (req, res) => {
 
+        console.log(req.body)
+
         // esto no anda. Hcaer que cambie el pass por otro lado. 
         if(req.session.usuarioLogeado==undefined ) {
             res.render ('redireccion')
@@ -222,15 +224,29 @@ const users = {
            {where: {
                 email: req.session.usuarioLogeado.email
             }}).then((user)=> { 
-                let customer = user.getCustomer()
-                customer.update({
-                name: req.body.name,
-                surname: req.body.sName,
-                country: req.body.country,
-                adress: req.body.adress
-            })
-                let objeto= resultado;
-                console.log(resultado);
+
+
+
+                db.Customer.findOne({
+                    where: {
+                        user_id: req.session.usuarioLogeado.id
+                    }
+                }).then((result)=> {
+    // let customer = user.getCustomer()
+    db.Customer.update({
+        name: req.body.name,
+        surname: req.body.sName,
+        country: req.body.country,
+        adress: req.body.adress
+    }, {
+        where: {
+            user_id: result.id
+        }
+    } )
+
+                })
+            
+
                 res.render('vistaPerfil', {userShow:req.session.usuarioLogeado}); 
             })
        

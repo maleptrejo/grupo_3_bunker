@@ -22,7 +22,17 @@ module.exports = {
     },
     avatar: {
         type: Types.STRING(100)
-    } });
+    },
+    created_at: {
+        type: Types.DATE,
+        allowNull: false,
+        
+       
+    },
+    updated_at: {
+        type: Types.DATE,
+    }
+ });
    
   },
 

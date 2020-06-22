@@ -45,7 +45,9 @@ const users = {
 
 
             if (resultado==null) {
-                res.send ('No existe el usuario');
+                  //¡¡ojo! está mandando la vista de error desde acá, no desde el middleware guest
+               res.render('errorLogin');
+                // res.send ('No existe el usuario');
             } else { 
             
                 if(bcrypt.compareSync(req.body.password, resultado.password)){
@@ -164,7 +166,7 @@ const users = {
 
 
         if(req.session.usuarioLogeado==undefined ) {
-            res.send ('no hay session')
+            res.render('errorSession')
         }
 
         db.Users.update({
@@ -210,25 +212,25 @@ const users = {
 },
     editData: (req, res) => {
 
+        // esto no anda. Hcaer que cambie el pass por otro lado. 
         if(req.session.usuarioLogeado==undefined ) {
-            res.send ('no hay session')
+            res.render ('redireccion')
         }
         db.Users.update({
-
             email: req.body.email,
-            Customer: {
+            },
+           {where: {
+                email: req.session.usuarioLogeado.email
+            }}).then((user)=> { 
+                let customer = user.getCustomer()
+                customer.update({
                 name: req.body.name,
                 surname: req.body.sName,
                 country: req.body.country,
                 adress: req.body.adress
-            }
-
-            },
-           {where: {
-                email: req.session.usuarioLogeado.email
-            }}
-            
-            ).then((resultado)=> { 
+            })
+                let objeto= resultado;
+                console.log(resultado);
                 res.render('vistaPerfil', {userShow:req.session.usuarioLogeado}); 
             })
        

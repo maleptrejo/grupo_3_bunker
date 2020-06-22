@@ -23,17 +23,19 @@ if (req.session.usuarioLogeado==undefined){
            country: resultado.dataValues.country,
        } 
     res.render('vistaPerfil', {userShow:userView})       
-     } else {   
-        res.send ('No existe el usuario');
-    //     res.send(resultado)
-    //     // res.render('vistaPerfil', {userShow:[req.session.usuarioLogeado, resultado ]})
-       }
-    })
+     } 
+  
+       }).catch(function(){
+           res.render('errorLogin')
+       })
 
+       
+    
 
     //  res.render('vistaPerfil', {userShow:req.session.usuarioLogeado})
 
-    
+      //     res.send(resultado)
+    //     // res.render('vistaPerfil', {userShow:[req.session.usuarioLogeado, resultado ]})
 }
 }
 

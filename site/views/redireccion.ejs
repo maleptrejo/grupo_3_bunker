@@ -4,12 +4,24 @@
 <%- include('partials/head', {title: 'Inicio'}) %>
 
 <main class="container redireccion">
-<div>
+                <div class="container">
+                                <div aria-label="breadcrumb rounded-0 breadcrumb-user">
+                                    <ol class="breadcrumb pl-0 bg-white">
+                                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="/users/login">Login</a></li>
+                                        <li class="breadcrumb-item"><a href="#">Error</a></li>
+                                        
+                                    </ol>
+                                </div>
+                            </div> 
+<div class="mt-5 mb-5 ml-3">
     <h1>Tenés que estar logueado para continuar.</h1>
 </div>
 
         <div class="button-container-submit">
-                <button class="btn btn-bunker mb-5 mt-5" type="submit"><a href="/users/login">LOGIN</a></button>
+                        <div>
+                                        <img src="../../images/error.png" alt="">
+                                    </div>
         </div>
 
 

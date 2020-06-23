@@ -1,9 +1,9 @@
-'use strict';
+/*'use strict';
 
 module.exports = {
   up: (queryInterface, Types) => {
     
-      return queryInterface.createTable('perros', { 
+      return queryInterface.createTable('users', { 
     id: {
         type: Types.BIGINT(20).UNSIGNED,
         autoIncrement: true,
@@ -26,9 +26,9 @@ module.exports = {
    
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface, Types) => {
     
-      return queryInterface.dropTable('perros');
+      return queryInterface.dropTable('users');
     
   }
-};
+};*/

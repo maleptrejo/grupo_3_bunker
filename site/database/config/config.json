@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "pola4893",
-    "database": "bunker_db",
+    "password": null,
+    "database": "bunkerscript_db",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false

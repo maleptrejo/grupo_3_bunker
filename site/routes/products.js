@@ -40,7 +40,7 @@ router.post('/search', productsController.results);
 //a partir de acá, toma el segundo valor post /products/ como relativo
 router.get('/:id', productsController.detail);
 router.get('/:productId/edit', authorization, productsController.editForm); 
- router.put ('/edit/:productId',  upload.any(), productsController.edit);
+router.put ('/edit/:productId',  upload.any(), productsController.edit);
 router.delete('/edit/:productId', productsController.delete);
 
 

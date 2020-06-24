@@ -1,6 +1,9 @@
 /************** REQUIRED MODULES **************/
 const fs = require('fs');
 const path = require('path');
+const db = require(path.join(__dirname,`..`,`database`,`models`));
+const Sequelize = db.sequelize;
+const Op = Sequelize.Op;
 //const multer=require('multer');
 
 /*************** REQUIRED FILES ***************/
@@ -114,9 +117,28 @@ const products = {
         res.render('index', {prod2Objeto: prod2Objeto, promotions, lastArrival });
     },
     search: (req, res) => {
-        res.render('buscadorAdmin')
+        db.Products.findAll({
+            where: {
+                name:{[db.Sequelize.Op.like]:`%`+req.query.search+`%`}
+            },
+                include: [{association: 'brands'}, {association: 'discounts'}]
+            })
+            .then((prductsSearch) => {
+                //res.send(prductsSearch);
+                
+                res.render('productosBuscados', {productoDetallado:prductsSearch})
+            })
     },
     results: (req, res) => {
+
+
+      res.render('searchResults')
+    }
+};
+
+/************** EXPORTED MODULE **************/
+module.exports = products;
+
 
         // let producto ={
         //     id: 0,
@@ -145,29 +167,8 @@ const products = {
 //         name: req.body.name
 //     }
 // }).then((resultado)=> {
-
 //     producto.nombre=resultado.name;
-
-
-
-
-
-
-
-
-
-
-
-
-//     // res.render ('searchResults', {productoDetallado:productoCargado});
-
+//     res.render ('searchResults', {productoDetallado:productoCargado});
 //  }).catch(function(){
 //     res.send('no existe el producto')
 // })
-
-      res.render('searchResults')
-    }
-};
-
-/************** EXPORTED MODULE **************/
-module.exports = products;

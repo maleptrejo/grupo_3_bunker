@@ -59,40 +59,6 @@ const users = {
                    res.redirect('/')
 
             }
-           
-         //******** */
-          //  } );
-        //  if (usuarioEntrante) {
-        //     if(bcrypt.compareSync(req.body.password, usuarioEntrante.password)){
-                
-        //         req.session.usuarioLogeado=usuarioEntrante;
-
-        //        res.redirect('/')
-
-        //  } else {
-        //     res.send ('No existe el usuario');
-        //  }
-
-         //*********esto de arriba va */
-         
-    //      if (usuarioEntrante!=undefined) { 
-    //         if(bcrypt.compareSync(req.body.password, usuarioEntrante.password)){
-                
-    //             req.session.usuarioLogeado=usuarioEntrante;
-
-    //            res.redirect('/')
-
-
-    //      }else {
-    //          res.send ('La contraseña es incorrecta');
-    //      }
-
-    //     // } else {
-    //     //     res.send ('No existe el usuario');
-    //     // }
-    // }
-
-
 }
        
     })
@@ -212,7 +178,7 @@ const users = {
 },
     editData: (req, res) => {
 
-        console.log(req.body)
+     
 
         // esto no anda. Hcaer que cambie el pass por otro lado. 
         if(req.session.usuarioLogeado==undefined ) {
@@ -223,9 +189,7 @@ const users = {
             },
            {where: {
                 email: req.session.usuarioLogeado.email
-            }}).then((user)=> { 
-
-
+            }}).then((user)=> {               
 
                 db.Customer.findOne({
                     where: {
@@ -243,47 +207,42 @@ const users = {
             user_id: result.id
         }
     } )
+}).then((data)=> {
+    db.Customer.findOne({
+        where: {
+            user_id: req.session.usuarioLogeado.id
+        }
+    }).then((resultado)=> {
+    
+        let userData; 
+    if (resultado!=null) {
+       
+        userData= {
+           avatar: req.session.usuarioLogeado.avatar ,
+           name: resultado.dataValues.name,
+           surname: resultado.dataValues.surname ,
+           adress: resultado.dataValues.adress,
+           country: resultado.dataValues.country,
+           email: req.session.usuarioLogeado.email
+       } 
+         
+     } 
 
-                })
-            
+     //no logro cargar la nueva data en la nueva vista de perfil.
+     res.render('vistaPerfil', {userShow:req.session.usuarioLogeado, userData}); 
+    })
+})
 
-                res.render('vistaPerfil', {userShow:req.session.usuarioLogeado}); 
+
+                // res.render('vistaPerfil', {userShow:req.session.usuarioLogeado, userData}); 
             })
        
 
-     
-
-            
-
-       
-
-
-
-        //**********lo de abajo va con json */
-
-        // let userEdit = usuarios.find(usuario=> {
-        //     return usuario.email==req.session.usuarioLogeado.email;
-        //  });
-
-        //  userEdit.name=req.body.name;
-        //  userEdit.sName=req.body.sName;
-        //  userEdit.Email=req.body.email;
-
-        //  let index = usuarios.findIndex(usuario => usuario.email === req.session.usuarioLogeado.email);
-     
-        //  usuarios [index] = userEdit;
-
-        //  fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
-
-        //  res.render('vistaPerfil', {userShow:userEdit}); 
-
-    // }
-
-    
-
-/////////////////
+    },
+    controlVer: (req,res)=> {
+        res.render('panelControlAdmin')
     }
 };
 
-/************** EXPORTED MODULE **************/
+
 module.exports = users;

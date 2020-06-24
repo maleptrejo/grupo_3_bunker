@@ -88,5 +88,7 @@ router.post('/edit', [
   }).withMessage('Este email ya esta registrado')
 ], usersController.editData);
 
+router.get('/control', usersController.controlVer);
+
 /************** EXPORTED MODULE **************/
 module.exports = router;

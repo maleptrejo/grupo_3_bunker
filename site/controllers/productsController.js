@@ -22,7 +22,7 @@ function isEmptyObject(objeto){
 /************** MODULE TO EXPORT **************/
 const products = {
     list: (req, res, next) => {
-        res.render('producto2', {productoDetallado:prod2Objeto});
+        res.render('productList', {productoDetallado:prod2Objeto});
     },
     detail: (req, res, next) => {
         let encontrado = prod2Objeto.find(producto => producto.id == req.params.id);
@@ -112,6 +112,60 @@ const products = {
 
 
         res.render('index', {prod2Objeto: prod2Objeto, promotions, lastArrival });
+    },
+    search: (req, res) => {
+        res.render('buscadorAdmin')
+    },
+    results: (req, res) => {
+
+        // let producto ={
+        //     id: 0,
+        //     nombre: null,
+        //     marca: null,
+        //     descripcion: null,
+        //     imagen1: undefined,
+        //     precio: null,
+        //     descuento: null}
+        
+
+        //     producto.nombre=req.body.nombre;
+        //     producto.marca=req.body.marca;
+        //     producto.descripcion=req.body.descripcion;
+        //     producto.precio=req.body.precio;
+        //     producto.descuento=req.body.descuento;
+
+        // let productoCargado = [];
+
+        // productoCargado.push(producto);
+
+//codigo a probar cuando tengamos DB productos andando:
+
+// db.Product.findOne({
+//     where: {
+//         name: req.body.name
+//     }
+// }).then((resultado)=> {
+
+//     producto.nombre=resultado.name;
+
+
+
+
+
+
+
+
+
+
+
+
+//     // res.render ('searchResults', {productoDetallado:productoCargado});
+
+//  }).catch(function(){
+//     res.send('no existe el producto')
+// })
+
+      res.render('searchResults')
     }
 };
 

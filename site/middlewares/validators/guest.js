@@ -5,26 +5,37 @@ if (req.session.usuarioLogeado==undefined){
 
     next();
 } else {
+
+    let userLogueado= req.session.usuarioLogeado;
    
     db.Customer.findOne({
         where: {
             user_id: req.session.usuarioLogeado.id
         }
     }).then((resultado)=> {
-        
-        console.log(resultado.dataValues)
-
+   
     if (resultado!=null) {
-       let userView= {
-           avatar: req.session.usuarioLogeado.avatar ,
-           name: resultado.dataValues.name,
-           surname: resultado.dataValues.surname ,
-           adress: resultado.dataValues.adress,
-           country: resultado.dataValues.country,
-       } 
-    res.render('vistaPerfil', {userShow:userView})       
-     } 
-  
+
+        let userView= {
+            email: req.session.usuarioLogeado.email,
+            avatar: req.session.usuarioLogeado.avatar ,
+            name: resultado.dataValues.name,
+            surname: resultado.dataValues.surname ,
+            adress: resultado.dataValues.adress,
+            country: resultado.dataValues.country,
+        } 
+
+        if(req.session.usuarioLogeado.email!= 'admin@admin.com') {
+            
+         res.render('vistaPerfil', {userShow:userView})       
+          }  else {
+
+            res.render('vistaPerfilAdmin', {userShow:userView})
+        }
+
+        }
+       
+
        }).catch(function(){
            res.render('errorLogin')
        })

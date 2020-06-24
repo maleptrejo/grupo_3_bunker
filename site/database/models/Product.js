@@ -15,6 +15,11 @@ module.exports = (sequelize, dataTypes) => {
         description: {
             type: dataTypes.TEXT
         },
+        //ojo! agregué la imagen!!
+        image: {
+            type: dataTypes.STRING(100)
+        },
+        //
         brand_id: {
             type: dataTypes.BIGINT
         },

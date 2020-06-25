@@ -17,7 +17,11 @@
             
             <div class="col-12 col-md-6 mb-6 div-form-carga">
                 <label for="marca">Marca</label>
-                <input type="text" class="form-input" name= "marca" id="marca" placeholder="Marca del producto" required>
+                <select name="marca" class="form-input" id="marcas">
+                    <% for (let i=0; i<brands.length ; i++) { %>
+                        <option><%= brands[i].name %></option>
+                    <% } %>
+                </select>
             </div>
         </div>
         
@@ -38,7 +42,11 @@
             </div>
             <div class="col-12 col-md-6 mb-6 div-form-carga">
                 <label for="descuento">Descuento </label>
-                <input type="number" name="descuento" class="form-input" id="descuento" placeholder="Descuento" required>
+                <select name="descuento" class="form-input" id="descuentos">
+                    <% for (let i=0; i<discounts.length ; i++) { %>
+                        <option><%= discounts[i].level*100 %></option>
+                    <% } %>
+                </select>
             </div>
         </div>
         
@@ -50,12 +58,16 @@
                 placeholder="Escriba una breve descripción"></textarea>
             </div>
             <div class="col-md-6 mb-6">
-                <label for="categorias"></label>
-                <select name="categorias" class="form-input" id="categorias">
-                    <option selected>*Categorias*</option>
-                    <option value="outdoor">Outdoor</option>
-                    <option value="talles">Taller</option>
-                    <option value="sustentables">Diseño sustentable</option>
+                <label for="categoria"></label>
+                <select name="categoria" class="form-input" id="categoria">
+                    <% for (let i=0; i<categories.length ; i++) { %>
+                        <option><%= categories[i].name %></option>
+                    <% } %>
+                </select>
+            </div>
+            <div class="col-md-6 mb-6">
+                <label for="cantidad"></label>
+                <input type="number" name="cantidad" class="form-input" id="cantidad" placeholder="Cantidad a ingresar" required>
                 </select>
             </div>
         </div>

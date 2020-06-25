@@ -16,10 +16,10 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.TEXT
         },
         //ojo! agregué la imagen!!
-        // image: {
-        //     type: dataTypes.STRING(30)
-        // },
-        //
+        image: {
+            type: dataTypes.STRING(30)
+        },
+        
         brand_id: {
             type: dataTypes.BIGINT
         },

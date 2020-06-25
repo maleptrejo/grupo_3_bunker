@@ -59,39 +59,35 @@ const products = {
         fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
         res.render('producto2', {productoDetallado:productoEditado});
     },
-    createForm: (req, res) =>{
-        res.render('carga');
+    createForm: async(req, res) => {
+        let categories = await db.Categories.findAll({attributes: [`id`, `name`], raw: true});   
+        let brands = await db.Brands.findAll({attributes: [`id`, `name`], raw: true});
+        let discounts = await db.Discounts.findAll({attributes: [`id`, `level`], raw: true});
+        res.render(`carga`, {categories: categories, brands: brands, discounts: discounts});
     },
-    create: (req, res) => {
-        let producto ={
-            id: 0,
-            nombre: null,
-            marca: null,
-            descripcion: null,
-            imagen1: undefined,
-            precio: null,
-            descuento: null,
-        };
-        if (isEmptyObject(prod2Objeto)){
-            producto.id=1;
-        } else {
-            producto.id=prod2Objeto[prod2Objeto.length-1].id+1;
-        };
-        if (req.files == undefined) {
-            producto.imagen1 = 'n/a';
-        } else {
-            producto.imagen1 = req.files[0].filename;
-        };
-        producto.nombre=req.body.nombre;
-        producto.marca=req.body.marca;
-        producto.descripcion=req.body.descripcion;
-        producto.precio=req.body.precio;
-        producto.descuento=req.body.descuento;
-        let productoCargado = [];
-        prod2Objeto.push(producto);
-        productoCargado.push(producto);
-        fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
-        res.render ('producto2', {productoDetallado:productoCargado});
+    create: async(req, res) => {
+        let idCat = db.Categories.findOne({where:{name: req.body.categoria}})
+        let idBran = db.Brands.findOne({where:{name: req.body.marca}})
+        let idDisc = db.Discounts.findOne({where:{level: req.body.descuento/100}})
+        Promise.all([idCat, idBran, idDisc])
+            .then(([categoria, marca, descuento]) => {
+                let imagen;
+                if (req.files.length == 0) {
+                        imagen = 'noFoto.png';
+                    } else {
+                        imagen = req.files[0].filename;
+                };
+                db.Products.create({
+                    name: req.body.nombre,
+                    price: req.body.precio,
+                    description: req.body.descripcion,
+                    brand_id: marca.id,
+                    discount_id: descuento.id,
+                    image: imagen,
+                    category_id: categoria.id,
+                    stock: req.body.cantidad
+                })
+            })
     },
     delete: (req,res)=>{
         let productosFiltrados=prod2Objeto.filter(producto=> producto.id!=req.params.productId);
@@ -121,7 +117,8 @@ const products = {
             where: {
                 name:{[db.Sequelize.Op.like]:`%`+req.query.search+`%`}
             },
-                include: [{association: 'brands'}, {association: 'discounts'}]
+                include: [{association: 'brands'}, {association: 'discounts'}],
+                order: [['name', 'ASC']]
             })
             .then((prductsSearch) => {
                 //res.send(prductsSearch);
@@ -140,6 +137,7 @@ const products = {
 module.exports = products;
 
 
+/************** CREATE DB MALE **************/
         // let producto ={
         //     id: 0,
         //     nombre: null,
@@ -172,3 +170,35 @@ module.exports = products;
 //  }).catch(function(){
 //     res.send('no existe el producto')
 // })
+
+
+/************** CREATE CON JSON **************/
+// let producto ={
+        //     id: 0,
+        //     nombre: null,
+        //     marca: null,
+        //     descripcion: null,
+        //     imagen1: undefined,
+        //     precio: null,
+        //     descuento: null,
+        // };
+        // if (isEmptyObject(prod2Objeto)){
+        //     producto.id=1;
+        // } else {
+        //     producto.id=prod2Objeto[prod2Objeto.length-1].id+1;
+        // };
+        // if (req.files == undefined) {
+        //     producto.imagen1 = 'n/a';
+        // } else {
+        //     producto.imagen1 = req.files[0].filename;
+        // };
+        // producto.nombre=req.body.nombre;
+        // producto.marca=req.body.marca;
+        // producto.descripcion=req.body.descripcion;
+        // producto.precio=req.body.precio;
+        // producto.descuento=req.body.descuento;
+        // let productoCargado = [];
+        // prod2Objeto.push(producto);
+        // productoCargado.push(producto);
+        // fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
+        // res.render ('producto2', {productoDetallado:productoCargado});

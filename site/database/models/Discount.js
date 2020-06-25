@@ -2,17 +2,16 @@ module.exports = (sequelize, dataTypes) => {
     let alias = 'Discounts';
     let cols = {
         id: {
-            type: dataTypes.BIGINT(20).UNSIGNED,
+            type: dataTypes.BIGINT,
             primaryKey: true,
-            autoIncrement: true,
-            allowNull: false
+            autoIncrement: true
         },
         level: {
-            type: dataTypes.DOUBLE(3,2)
+            type: dataTypes.DOUBLE
         }
     };
     let config = {
-        tableName: 'discounts',
+        tableName: 'brands',
         timestamps: true,
         createdAt: 'created_at',
         updatedAt: 'updated_at'
@@ -20,8 +19,8 @@ module.exports = (sequelize, dataTypes) => {
     const Discount = sequelize.define(alias, cols, config)
 
     Discount.associate = (models) => {
-       Discount.hasMany(models.Product, {
-           as: "Products",
+       Discount.hasMany(models.Products, {
+           as: "products",
            foreignKey: "discount_id"
         })
     }

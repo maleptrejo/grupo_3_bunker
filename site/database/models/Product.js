@@ -2,42 +2,30 @@ module.exports = (sequelize, dataTypes) => {
     let alias = 'Products';
     let cols = {
         id: {
-            type: dataTypes.BIGINT(20).UNSIGNED,
+            type: dataTypes.BIGINT,
             primaryKey: true,
-            autoIncrement: true,
-            allowNull: false
+            autoIncrement: true
         },
         name: {
-            type: dataTypes.STRING(100)
+            type: dataTypes.STRING
         },
         price: {
-            type: dataTypes.DOUBLE(12,2).UNSIGNED
+            type: dataTypes.DOUBLE
         },
         description: {
             type: dataTypes.TEXT
         },
-        //ojo! agregué la imagen!!
-        image: {
-            type: dataTypes.STRING(30)
-        },
-        //
         brand_id: {
-            type: dataTypes.BIGINT(20).UNSIGNED,
-            references: {model: 'Brands', key: 'id'},
-                onDelete:'CASCADE'
+            type: dataTypes.BIGINT
         },
         discount_id: {
-            type: dataTypes.BIGINT(20).UNSIGNED,
-            references: {model: 'Discounts', key: 'id'},
-                onDelete:'CASCADE'
+            type: dataTypes.BIGINT
         },
         category_id: {
-            type: dataTypes.BIGINT(20).UNSIGNED,
-            references: {model: 'Categories', key: 'id'},
-                onDelete:'CASCADE'
+            type: dataTypes.BIGINT
         },
         stock: {
-            type: dataTypes.INTEGER(11)
+            type: dataTypes.INTEGER
         }
     };
     let config = {
@@ -54,8 +42,8 @@ module.exports = (sequelize, dataTypes) => {
            foreignKey: "brand_id"
        })
        Product.belongsTo(models.Discounts, {
-            as: "Discounts",
-            foreignKey: "discount_id"
+            as: "discounts",
+            foreignKey: "brand_id"
         })
         Product.belongsTo(models.Categories, {
             as: "categories",

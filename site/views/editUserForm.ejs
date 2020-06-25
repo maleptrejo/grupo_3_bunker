@@ -25,7 +25,7 @@
     <% } %>
     
     <!--PARA PODER USAR EXPRESS-VALIDATOR EN VEZ DE LA VALIDACION DEL FORMULARIO TUVE QUE ELIMINAR "needs-validation" DE LA CLASS -->       
-    <form action="/users/edit" method="post" class="mt-3 form-new-user">
+    <form action="/users/edit" method="post" class="mt-3 form-new-user form-edit">
             <h2 class="c-acc">Editar cuenta</h2>
             
             <div class=" datos-usuario">
@@ -65,7 +65,7 @@
 
                     <div class="col-md-6 mb-6">
                             <label for="cmail"></label>
-                            <input name ="cemail" type="email" class="form-control" id="cmail" placeholder="Confirmar email" value= "<%=userData.email%>">
+                            <input name ="cemail" type="email" class="form-control" id="cemail" placeholder="Confirmar email" value= "<%=userData.email%>">
                         </div>
                     
                         <div class="col-md-6 mb-6">
@@ -106,7 +106,7 @@
                     <h4 class="mb-4 pb-4">Los cambios se verán reflejados luego de reiniciar sesión.</h4>
                 </div>
                 <div class="col-md-6">
-                    <button class="btn  boton-registro" type="submit">Editar cuenta</button>
+                    <button class="btn  boton-registro js-boton-editar" type="submit">Editar cuenta</button>
                     </div>
                     <div class="col-md-6">
                         <button class="btn  boton-registro"><a href="/users/delete">ELIMINAR cuenta</a></button>
@@ -115,29 +115,13 @@
         
         
     </form>
-    
+    <script src="../scripts/validationEditUser.js"></script>
+
+
+
 
     
-    <script>
-        // Example starter JavaScript for disabling form submissions if there are invalid fields
-        (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                var forms = document.getElementsByClassName('needs-validation');
-                // Loop over them and prevent submission
-                var validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>
+  
 
     </section>
         

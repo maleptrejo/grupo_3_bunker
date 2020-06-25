@@ -278,6 +278,15 @@ cursor: pointer;
   z-index: 1;
 }
 
+
+/* destroy User */
+
+
+
+.destroy-user {
+  max-width: 450px;
+}
+
 /* **********INDEX************ */
 
 

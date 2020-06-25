@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface, Types) => {
     return queryInterface.createTable('categories', {
     id: {
-        type: Types.BIGINT(20),
+        type: Types.BIGINT(20).UNSIGNED,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false

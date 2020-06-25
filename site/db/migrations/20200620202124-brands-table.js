@@ -27,7 +27,7 @@ module.exports = {
   },
 
   down: (queryInterface, Types) => {
-    return queryInterface.dropTable('products');
+    return queryInterface.dropTable('brands');
     
   }
 };

@@ -241,6 +241,24 @@ const users = {
     },
     controlVer: (req,res)=> {
         res.render('panelControlAdmin')
+    },
+    deleteForm: (req, res)=> {
+        res.render('destroyUser')
+    },
+    deleteOk: (req, res) => {
+
+        db.Customer.destroy({
+            where: { user_id: req.session.usuarioLogeado.id}
+        }).then((resultado)=> {
+            db.Users.destroy({
+                where: {id: req.session.usuarioLogeado.id}
+            })
+        })
+
+        req.session.destroy();
+        res.render('deletedUser')
+
+        
     }
 };
 

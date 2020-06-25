@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('partials/head', {title: 'Inicio'}) %>
+
+
+<main class="container container-user">
+    
+    <div class="container">
+        <div aria-label="breadcrumb rounded-0 breadcrumb-user">
+            <ol class="breadcrumb pl-0 bg-white">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/users/edit">Editar</a></li>
+                <li class="breadcrumb-item"><a href="#">Delete</a></li>
+                
+            </ol>
+        </div>
+    </div> 
+    
+    <section class="container-wide">
+        
+        <div class="m-5">
+            <h3>Estás seguro de que querés continuar?</h3>
+            <h4>Lamentamos verte partir...</h4>
+            
+        </div>
+        <div>
+            <img class="destroy-user" src="../../images/leavingUser.png" alt="">
+        </div>
+
+      <div class="row">
+            <div class="col-md-6">
+                    <button class="btn  boton-registro" type="submit"><a href="/users/delete/ok">Sep...</a></button>
+            </div>
+            <div class="col-md-6">
+                <button class="btn  boton-registro"><a href="/users/edit">No no no!</a></button>
+                </div>
+
+      </div>
+
+      
+        
+       
+        
+   
+    
+    
+</section>
+
+
+
+</main>
+
+
+
+
+<%- include('partials/footer') %>
+
+</body>	
+</html>
+
+

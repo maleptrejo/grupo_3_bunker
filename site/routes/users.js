@@ -89,6 +89,8 @@ router.post('/edit', [
 ], usersController.editData);
 
 router.get('/control', usersController.controlVer);
+router.get('/delete', usersController.deleteForm);
+router.get('/delete/ok', usersController.deleteOk);
 
 /************** EXPORTED MODULE **************/
 module.exports = router;

@@ -229,7 +229,8 @@ const users = {
      } 
 
      //no logro cargar la nueva data en la nueva vista de perfil.
-     res.render('vistaPerfil', {userShow:req.session.usuarioLogeado, userData}); 
+    //  res.render('vistaPerfil', {userShow:req.session.usuarioLogeado, userData}); 
+    res.redirect('/')
     })
 })
 

@@ -21,11 +21,13 @@ module.exports = {
     created_at: {
       type: Types.DATE,
       allowNull: false,
+      defaultValue: Types.literal('NOW()'),
       
      
   },
   updated_at: {
       type: Types.DATE,
+      defaultValue: Types.literal('NOW()'),
   }
  });
 

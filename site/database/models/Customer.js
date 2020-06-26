@@ -1,39 +1,39 @@
 module.exports= (sequelize, Types) => {
     const Customer=sequelize.define (
         //alias
-        'Customer',
+        'Customers',
 
          //columns
         {
             id: {
-                type: Types.BIGINT(20).UNSIGNED,
+                type: Types.BIGINT,
                 autoIncrement: true,
                 primaryKey: true,
                 allowNull: false
             },
             name: {
-                type: Types.STRING(100),
+                type: Types.STRING,
                 allowNull: false,
 
             },
             surname: {
-                type: Types.STRING(100),
+                type: Types.STRING,
                 allowNull: false,
             },
             adress: {
-                type: Types.STRING(100),
+                type: Types.STRING,
                 allowNull: false,
             },
             country: {
-                type: Types.STRING(100),
+                type: Types.STRING,
                 allowNull: false,
 
             },
             user_id: {
-                type: Types.BIGINT(20).UNSIGNED,
+                type: Types.BIGINT,
                 allowNull: false,
                 references: {model: 'Users', key: 'id'},
-                onDelete:'CASCADE'
+                //  onDelete:'CASCADE'
             },
          
             
@@ -52,7 +52,7 @@ module.exports= (sequelize, Types) => {
         Customer.associate=function(models) {
             Customer.belongsTo(models.Users, {
                 foreignKey: 'user_id',
-                as: 'Users'
+                as: 'users'
             })
         }
        

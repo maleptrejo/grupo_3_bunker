@@ -6,23 +6,23 @@ module.exports= (sequelize, Types) => {
          //columns
         {
             id: {
-                type: Types.BIGINT(20).UNSIGNED,
+                type: Types.BIGINT,
                 autoIncrement: true,
                 primaryKey: true,
-                allowNull: false
+                // allowNull: false
             },
             email: {
-                type: Types.STRING(150),
+                type: Types.STRING,
                 allowNull: false,
                 unique: true
 
             },
             password: {
-                type: Types.STRING(150)
+                type: Types.STRING
 
             },
             avatar: {
-                type: Types.STRING(100)
+                type: Types.STRING
             }
         },
     
@@ -37,13 +37,13 @@ module.exports= (sequelize, Types) => {
         )
 
         Users.associate=function(models) {
-            Users.hasOne(models.Customer, {
+            Users.hasOne(models.Customers, {
                 foreignKey: 'user_id',
-                as: 'Customer'
+                as: 'customers'
             }),
             Users.hasOne(models.Admin, {
                 foreignKey: 'user_id',
-                as: 'Admin'
+                as: 'admins'
             })
 
         }

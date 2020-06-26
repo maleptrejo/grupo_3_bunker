@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Types) => {
-   
+
       return queryInterface.addColumn(
         'customers',
         'user_id',
@@ -13,37 +13,38 @@ module.exports = {
               model: 'users',
               key: 'id'
           },
-          onUpdate: 'CASCADE',
+        // OnUpdate: 'CASCADE',
           OnDelete: 'SET NULL',
 
         }
        )
        .then (() => {
-        return queryInterface.addColumn( 
+        return queryInterface.addColumn(
           'admins',
           'user_id',
           {
             type: Types.BIGINT(20).UNSIGNED,
             allowNull: false,
             references: {
-                model: 'admins',
+                model: 'users',
                 key: 'id'
             },
-            onUpdate: 'CASCADE',
+
             OnDelete: 'SET NULL',
+            // OnUpdate: 'CASCADE',
           }
           );
        });
     },
 
   down: (queryInterface, Sequelize) => {
-    
+
       return queryInterface.removeColumn('customers',
       'user_id')
       .then (()=> {
         return queryInterface.removeColumn('admins',
       'user_id')
       });
-   
+
   }
 };

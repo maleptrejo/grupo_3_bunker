@@ -41,7 +41,7 @@ module.exports= (sequelize, Types) => {
                 foreignKey: 'user_id',
                 as: 'customers'
             }),
-            Users.hasOne(models.Admin, {
+            Users.hasOne(models.Admins, {
                 foreignKey: 'user_id',
                 as: 'admins'
             })

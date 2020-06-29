@@ -44,7 +44,7 @@ module.exports= (sequelize, Types) => {
         underscored: true,
         timestamps: true,
         createdAt: 'created_at',
-        updatedAt: 'update_at'
+        updatedAt: 'updated_at'
         }
 
         )

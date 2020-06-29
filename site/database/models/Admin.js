@@ -16,11 +16,18 @@ module.exports = (sequelize, Types) => {
                 allowNull: false,
 
             },
-            name: {
+            surname: {
                 type: Types.STRING,
                 allowNull: false,
             },
-
+            adress: {
+                type: Types.STRING,
+                allowNull: false,
+            },
+            country: {
+                type: Types.STRING,
+                allowNull: false,
+            },
 
             user_id: {
                 type: Types.BIGINT,

@@ -18,6 +18,15 @@ module.exports = {
         type: Types.STRING(100),
         allowNull: false,
     },
+    adress: {
+        type: Types.STRING(100),
+        allowNull: false,
+    },
+    country: {
+        type: Types.STRING(100),
+        allowNull: false,
+
+    },
     created_at: {
       type: Types.DATE,
       allowNull: false,

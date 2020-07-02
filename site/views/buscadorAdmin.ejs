@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('partials/head', {title: 'Inicio'}) %>
+
+
+<main class="container container-user">
+    
+    <div class="container">
+        <div aria-label="breadcrumb rounded-0 breadcrumb-user">
+            <ol class="breadcrumb pl-0 bg-white">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/users/login">Perfil administrador</a></li>
+                <li class="breadcrumb-item"><a href="/users/control">Panel de control</a></li>
+                <li class="breadcrumb-item"><a href="/products/search">Buscador</a></li>
+                
+            </ol>
+        </div>
+    </div> 
+
+    <section class="buscador">
+
+            <form  action="/products/carga" method="post" enctype="multipart/form-data" class="product mt-3 form-ingresar-prod" novalidate>
+                <h2 class="c-acc m-3 pt-3">Buscar producto</h2>
+              
+                
+                <div class="form-row flex-row ">
+                    <div class="col-12 col-md-6 mb-6 div-form-carga">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-input" name= "nombre" id="nombre" placeholder="Nombre del producto" required>
+                    </div>
+                    
+                    <!-- <div class="col-12 col-md-6 mb-6 div-form-carga">
+                        <label for="marca">Marca</label>
+                        <input type="text" class="form-input" name= "marca" id="marca" placeholder="Marca del producto" required>
+                    </div> -->
+                </div>
+                
+             
+            </div>
+            
+            <div class="button-container-submit">
+                <button class="btn btn-bunker mb-5 mt-5" type="submit">Buscar Producto</button>
+            </div>
+        </form>
+        
+
+
+
+    </section>
+    
+
+   
+
+
+   
+    
+     
+    
+            
+
+
+
+</main>
+
+
+
+
+<%- include('partials/footer') %>
+
+</body>	
+</html>
+
+

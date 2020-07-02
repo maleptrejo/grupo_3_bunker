@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include('partials/head', {title: 'Inicio'}) %>
+        <main class="container">
+            <div class="row">
+                <div class="col bks-controlPanelForm">
+                    <form action="/products/extras/update" method="post">
+                        <div class="form-group">
+                            <h3>Categorias:</h3>
+                            <label for="categoryDelete">Categorias Disponibles</label>
+                            <select multiple class="form-control" id="categoryDelete" name="categoryDelete">
+                                <% for (let i=0; i<categories.length ; i++) { %>
+                                    <option><%= categories[i].name %></option>
+                                <% } %>
+                            </select>
+                            <div class="form-group form-check mt-2">
+                                <input type="checkbox" class="form-check-input" id="categoryDeleteChk" name="categoryDeleteChk" disabled>
+                                <label class="form-check-label ml-2" for="categoryDeleteChk">Borrar categoria Seleccionada</label>
+                            </div>
+                            <div class="alert alert-danger" role="alert" id="categoryAlertDelete" style="display: none;">
+                                ATENCION:<br>Al borrar una categoría se borrarán todos los productos pertenecientes a la categoría borrada.
+                            </div>
+                            <input class="form-control" type="text" placeholder="Categoria a agregar" name="categoryCreate" id="categoryCreate">
+                        </div>
+                        <div class="alert alert-success" role="alert" style="display: none;" id="categoryAlert">Información enviada</div>
+                        <button type="submit" class="btn btn-secondary" id="categoryBtn" disabled>Modificar</button>
+                    </form>
+                </div>
+                <div class="col bks-controlPanelForm">
+                    <form action="/products/extras/update" method="post">
+                        <div class="form-group">
+                            <h3>Marcas:</h3>
+                            <label for="brandDelete">Marcas Disponibles</label>
+                            <select multiple class="form-control" id="brandDelete" name="brandDelete">
+                                <% for (let i=0; i<brands.length ; i++) { %>
+                                    <option><%= brands[i].name %></option>
+                                <% } %>
+                            </select>
+                            <div class="form-group form-check mt-2">
+                                <input type="checkbox" class="form-check-input" id="brandDeleteChk" name="brandDeleteChk" disabled>
+                                <label class="form-check-label ml-2" for="brandDeleteChk">Borrar marca Seleccionada</label>
+                            </div>
+                            <div class="alert alert-danger" role="alert" id="brandAlertDelete" style="display: none;">
+                                    ATENCION:<br>Al borrar una marca se borrarán todos los productos pertenecientes a la categoría borrada.
+                            </div>
+                            <input class="form-control" type="text" placeholder="Marca a agregar" name="brandCreate" id="brandCreate">
+                        </div>
+                        <div class="alert alert-success" role="alert" style="display: none;" id="brandAlert">Información enviada</div>
+                        <button type="submit" class="btn btn-secondary" id="brandBtn" disabled>Modificar</button>
+                    </form>
+                </div>
+                <div class="col bks-controlPanelForm">
+                    <form action="/products/extras/update" method="post">
+                        <div class="form-group">
+                            <h3>Descuentos:</h3>
+                            <label for="discountDelete">Descuentos Disponibles</label>
+                            <select multiple class="form-control" id="discountDelete" name="discountDelete">
+                                <% for (let i=0; i<discounts.length ; i++) { %>
+                                    <option><%= discounts[i].level %></option>
+                                <% } %>
+                            </select>
+                            <div class="form-group form-check mt-2">
+                                <input type="checkbox" class="form-check-input" id="discountDeleteChk" name="discountDeleteChk" disabled>
+                                <label class="form-check-label ml-2" for="discountDeleteChk">Borrar descuento Seleccionada</label>
+                            </div>
+                            <div class="alert alert-danger" role="alert" id="discountAlertDelete" style="display: none;">
+                                ATENCION:<br>Al borrar un descuento los productos que tenían dicho descuento quedarán con un descuento 0.
+                            </div>
+                            <input class="form-control" type="text" placeholder="Descuento a agregar" name="discountCreate" id="discountCreate">
+                        </div>
+                        <div class="alert alert-success" role="alert" style="display: none;" id="discountAlert">Información enviada</div>
+                        <button type="submit" class="btn btn-secondary" id="discountBtn" disabled>Modificar</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <script src="../scripts/extrasValidations.js"></script>
+        <%- include('partials/footer') %>    
+    </body>	
+</html>

@@ -1,19 +1,26 @@
+const db= require('../../database/models');
+
 function authorization (req,res,next) {
+    if (req.session.usuarioLogeado==undefined){
 
-    if (req.session.usuarioLogeado!=undefined) {
-        if(req.session.usuarioLogeado.email == 'admin@admin.com') {
-       
-   
-            next();
-        }else {
-         res.render('noAdmin')
-        }
+        res.render('redireccion');
     } else {
-        res.redirect('/')
+
+        db.Admins.findOne({
+            where:{
+             user_id: req.session.usuarioLogeado.id
+            }
+        })
+        .then((resultado)=> { 
+            if(resultado!=null) { 
+                next();
+            }else{
+                res.render('adminsOnly');
+            }
+        })
     }
-
-    
 };
-
-
 module.exports=authorization;
+
+
+

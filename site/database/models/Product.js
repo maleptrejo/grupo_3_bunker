@@ -15,6 +15,10 @@ module.exports = (sequelize, dataTypes) => {
         description: {
             type: dataTypes.TEXT
         },
+        image: {
+            type: dataTypes.STRING(30)
+        },
+        
         brand_id: {
             type: dataTypes.BIGINT
         },
@@ -43,7 +47,7 @@ module.exports = (sequelize, dataTypes) => {
        })
        Product.belongsTo(models.Discounts, {
             as: "discounts",
-            foreignKey: "brand_id"
+            foreignKey: "discount_id"
         })
         Product.belongsTo(models.Categories, {
             as: "categories",

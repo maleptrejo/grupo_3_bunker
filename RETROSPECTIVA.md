@@ -1,4 +1,28 @@
 # Grupo 3 - BunkerStore - 
+
+# Retrospectiva Sprint6
+##### Start doing
++ Solucionar problemas de sprints pasados
+
+##### More of
++ Sistematizar las consignas del sprint.
++ Chekeos rápidos internos: testear si el código funciona.
++ Pedir ayuda.
+
+##### Keep doing
++ Planificar el trabajo.
++ Boton antipánico: todo el equipo trabaja en una misma tarea si llegado un plazo previo al sprint la tarea no está hecha.
++ Usar las metodologías y herramientas sugeridas por el sprint.
++ Trabajar en equipo incluso las tareas repartidas.
++ Comunicación constante.
+
+##### Less of
++ dejar para el sprint la instancia de repaso de temas dados.
+
+##### Stop doing
++ ...
+
+
 # Retrospectiva Sprint5
 ##### Start doing
 + Mergear con master en repo local.

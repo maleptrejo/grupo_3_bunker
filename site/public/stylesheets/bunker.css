@@ -781,8 +781,10 @@ footer>div>h6{
   font-weight: bold;
 }
 
-
-
+/* ******Panel de Control******* */
+.bks-controlPanelForm {
+  border-color: #666666 !important; 
+}
 
 
 /* ******formulario de registro******* */

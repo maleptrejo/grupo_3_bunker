@@ -42,13 +42,13 @@ router.post('/create', checkUser, [
   check('sName').isLength({min:1}).withMessage('El campo apellido debe contener al menos un caracter'),
   check('email').isEmail().withMessage('El formato del email no es válido'),
   check('password').isLength({min:8, max:12}).withMessage('La contraseña debe contener entre 8 y 12 caracteres'),
-//   body('cPassword').custom(function(cpassword,{req}){
-//     if (cpassword == req.body.password){
-//       return true;
-//     }else {
-//       return false;
-//     }
-//   }).withMessage('Las contraseñas no coinciden'),
+body('cPassword').custom(function(cpassword,{req}){
+     if (cpassword == req.body.password){
+      return true;
+    }else {
+       return false;
+     }
+ }).withMessage('Las contraseñas no coinciden'),
 //   body('email').custom(function(valor, {req}){
 
 //  db.Users.findOne({

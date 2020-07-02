@@ -5,7 +5,7 @@ window.onload=function() {
    
         btn.onclick= function(event){
             
-            if(checkname && checksurname && checkCountry && checkAdress && checkMail && checkPass) {
+            if(checkname && checksurname && checkCountry && checkAdress && checkMail && checkPass && checkPass2) {
                 // alert('continuamos')
                 // event.preventDefault();
             }else{
@@ -22,7 +22,7 @@ window.onload=function() {
 
     let formConfMail= document.querySelector('#cemail');
  
-    let checkname, checksurname, checkCountry, checkAdress, checkMail, checkPass= false;
+    let checkname, checksurname, checkCountry, checkAdress, checkMail, checkPass, checkPass2= false;
 
   form.name.addEventListener('keyup', function(event){
 
@@ -128,6 +128,7 @@ window.onload=function() {
                 return false;
             }else{
                 event.target.classList.replace('is-invalid', 'is-valid')
+                checkPass2=true;
                 
             }
         })

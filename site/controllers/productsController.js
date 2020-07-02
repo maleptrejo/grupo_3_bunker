@@ -34,9 +34,7 @@ const products = {
         };
         let productoDetallado =[];
         productoDetallado.push(encontrado);
-
         let lastArrival = prod2Objeto.slice (prod2Objeto.length-4);
-
         res.render('producto2', {productoDetallado:productoDetallado, lastArrival});
     },
     editForm: (req, res) => {
@@ -65,7 +63,7 @@ const products = {
         let discounts = await db.Discounts.findAll({attributes: [`id`, `level`], raw: true});
         res.render(`carga`, {categories: categories, brands: brands, discounts: discounts});
     },
-    create: async(req, res) => {
+    create: (req, res) => {
         let idCat = db.Categories.findOne({where:{name: req.body.categoria}})
         let idBran = db.Brands.findOne({where:{name: req.body.marca}})
         let idDisc = db.Discounts.findOne({where:{level: req.body.descuento/100}})
@@ -96,20 +94,12 @@ const products = {
         res.redirect ('/products');
     },
     root: (req, res) => {
-    
             let prodPromotion=prod2Objeto.filter(producto=>{
                 
                 return Number(producto.descuento)>0
             });
-           
-
             let promotions= prodPromotion.slice(prodPromotion.length-4);
-
         let lastArrival = prod2Objeto.slice (prod2Objeto.length-4);
-
-        
-
-
         res.render('index', {prod2Objeto: prod2Objeto, promotions, lastArrival });
     },
     search: (req, res) => {
@@ -117,24 +107,76 @@ const products = {
             where: {
                 name:{[db.Sequelize.Op.like]:`%`+req.query.search+`%`}
             },
-                include: [{association: 'brands'}, {association: 'discounts'}],
+                include: [{association: 'brands'}, {association: 'discounts'}, {association: 'categories'}],
                 order: [['name', 'ASC']]
             })
             .then((prductsSearch) => {
-                //res.send(prductsSearch);
-                
                 res.render('productosBuscados', {productoDetallado:prductsSearch})
             })
     },
     results: (req, res) => {
-
-
       res.render('searchResults')
+    },
+    brandsCategoriesDiscounts: (req, res) => {
+        let idCat = db.Categories.findAll({order: [['name', 'ASC']]})
+        let idBran = db.Brands.findAll({order: [['name', 'ASC']]})
+        let idDisc = db.Discounts.findAll({order: [['level', 'ASC']]})
+        Promise.all([idCat, idBran, idDisc])
+            .then(([idCat, idBran, idDisc]) => {
+                res.render('extras', {categories:idCat, brands:idBran, discounts:idDisc})
+            })
+    },
+    extrasUpdate: (req, res) => {
+        if (req.body.categoryDeleteChk = 'on'){
+            db.Categories.findOne({where:{name:req.body.categoryDelete}}).then((resultado) =>{
+                db.Products.destroy({where:{category_id:resultado.id}}).then(() => {
+                    db.Categories.destroy({where:{name:req.body.categoryDelete}})
+                })
+            })
+        }
+        if(req.body.categoryCreate != '' && req.body.categoryCreate != ' ' && req.body.categoryCreate != undefined) {
+            db.Categories.create({
+                name: req.body.categoryCreate,
+            })
+        }
+        if (req.body.brandDeleteChk = 'on'){
+            db.Brands.findOne({where:{name:req.body.brandDelete}}).then((resultado) =>{
+                db.Products.destroy({where:{brand_id:resultado.id}}).then(() => {
+                    db.Brands.destroy({where:{name:req.body.brandDelete}})
+                })
+            })
+        }
+        if(req.body.brandCreate != '' && req.body.brandCreate != ' ' && req.body.brandCreate != undefined) {
+            db.Brands.create({
+                name: req.body.brandCreate,
+            })
+        }
+        if (req.body.discountDeleteChk = 'on'){
+            console.log(req.body.discountDelete);
+            
+            let discountToDelete = db.Discounts.findOne({where:{level:Number(req.body.discountDelete)}})
+            let discountZero = db.Discounts.findOne({where:{level:0}})
+            Promise.all([discountToDelete, discountZero])
+                .then(([discountToDelete, discountZero]) => {
+                    db.Products.update({discount_id: discountZero.id},{where:{discount_id:discountToDelete.id}}).then(() => {
+                        db.Discounts.destroy({where:{id:discountToDelete.id}})
+                })
+            })
+        }
+        if(req.body.discountCreate != '' && req.body.discountCreate != ' ' && req.body.discountCreate != undefined) {
+            db.Discounts.create({
+                level: Number(req.body.discountCreate),
+            })
+        }
     }
 };
 
 /************** EXPORTED MODULE **************/
 module.exports = products;
+
+
+
+
 
 
 /************** CREATE DB MALE **************/

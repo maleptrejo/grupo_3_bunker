@@ -19,8 +19,13 @@
             </div>
             
             <div class="col-12 col-md-6 mb-6 div-form-carga">
+               
                 <label for="marca">Marca</label>
-                <input type="text" class="form-input" name= "marca" id="marca" value="<%= productToEdit.marca%>"  placeholder="<%= productToEdit.marca%>" required>
+                <select name="marca" class="form-input" id="marcas">
+                    <% for (let i=0; i<brands.length ; i++) { %>
+                        <option><%= brands[i].name %></option>
+                    <% } %>
+                </select>
             </div>
         </div>
         
@@ -37,11 +42,15 @@
             </div> -->
             <div class="col-12 col-md-6 mb-6 div-form-carga">
                 <label for="precio">Precio</label>
-                <input type="number" name="precio" class="form-input" id="precio" placeholder="<%= productToEdit.precio%>" value="<%= productToEdit.precio%>" required>
+                <input type="number" min="0" step=".1" name="precio" class="form-control form-input" id="precio" placeholder="<%= productToEdit.precio%>" value="<%= productToEdit.precio%>" >
             </div>
             <div class="col-12 col-md-6 mb-6 div-form-carga">
                 <label for="descuento">Descuento </label>
-                <input type="number" name="descuento" class="form-input" id="descuento" placeholder="<%= productToEdit.descuento%>" value="<%= productToEdit.descuento%>" required>
+                <select name="descuento" class="form-input" id="descuentos">
+                    <% for (let i=0; i<discounts.length ; i++) { %>
+                        <option><%= discounts[i].level*100 %></option>
+                    <% } %>
+                </select>
             </div>
         </div>
         
@@ -54,11 +63,15 @@
             </div>
             <div class="col-md-6 mb-6">
                 <label for="categorias"></label>
-                <select name="categorias" class="form-input" id="categorias">
-                    <option selected>*Categorias*</option>
-                    <option value="outdoor">Outdoor</option>
-                    <option value="talles">Taller</option>
-                    <option value="sustentables">Diseño sustentable</option>
+                <select name="categoria" class="form-input" id="categoria" placeholder="Elija una categoría">
+                    <% for (let i=0; i<categories.length ; i++) { %>
+                        <option><%= categories[i].name %></option>
+                    <% } %>
+                </select>
+            </div>
+            <div class="col-md-6 mb-6">
+                <label for="cantidad"></label>
+                <input type="number" min="0" name="cantidad" class="form-control form-input" id="cantidad" placeholder="Cantidad a ingresar">
                 </select>
             </div>
         </div>
@@ -70,7 +83,7 @@
 
                <div class="col-12">    
                 <div class="custom-file ">
-                    <input type="file" class="custom-file-input" name="archivo" id="archivo" lang="es">
+                    <input type="file" class="custom-file-input" name="archivo" id="archivo" lang="es" accept="image/*">
                     <label class="custom-file-label" for="archivo">Seleccionar Archivo</label>
                 </div>
             </div>   
@@ -119,7 +132,7 @@
     </div>
     
     <div class="button-container-submit">
-        <button class="btn btn-bunker mb-5 mt-5" type="submit">Guardar Cambios</button>
+        <button id="butenv" class="btn btn-bunker mb-5 mt-5" type="submit">Guardar Cambios</button>
     </div>
    
 </form>
@@ -135,7 +148,7 @@
 </form>
 
 
-
+<script src="../scripts/validCargaProd.js"></script>
 </main>
 
 

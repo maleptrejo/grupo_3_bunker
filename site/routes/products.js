@@ -31,7 +31,7 @@ var upload = multer({ storage: storage,
 const productsController = require(path.join(__dirname,'../controllers/productsController'));
 
 /****************** ROUTES ******************/
-router.get('/', productsController.list);
+router.get('/',authorization, productsController.list);
 router.get ('/create', productsController.createForm);
 router.post('/carga', upload.any(), productsController.create);
 router.get('/search', productsController.search);

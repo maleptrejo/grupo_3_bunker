@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('partials/head', {title: 'Inicio'}) %>
+<%- include(`partials/head`, {title: `Inicio`}) %>
 <main class="container">
     <form  action="/products/carga" method="post" enctype="multipart/form-data" class="product mt-3 form-ingresar-prod" novalidate>
         <h2 class="c-acc m-3 pt-3">Crear producto</h2>
@@ -14,7 +14,7 @@
                 <label for="marca">Marca</label>
                 <select name="marca" class="form-input" id="marcas">
                     <% for (let i=0; i<brands.length ; i++) { %>
-                        <option><%= brands[i].name %></option>
+                        <option value="<%= brands[i].id %>"><%= brands[i].name %></option>
                         <% } %>
                 </select>
             </div>
@@ -28,7 +28,7 @@
                 <label for="descuento">Descuento </label>
                 <select name="descuento" class="form-input" id="descuentos">
                     <% for (let i=0; i<discounts.length ; i++) { %>
-                        <option><%= discounts[i].level*100 %></option>
+                        <option value="<%= discounts[i].id %>"><%= discounts[i].level*100 %> %</option>
                     <% } %>
                 </select>
             </div>
@@ -41,7 +41,7 @@
                 <label for="categoria"></label>
                 <select name="categoria" class="form-input" id="categoria">
                     <% for (let i=0; i<categories.length ; i++) { %>
-                        <option><%= categories[i].name %></option>
+                        <option value="<%= categories[i].id %>"><%= categories[i].name %></option>
                         <% } %>
                 </select>
             </div>
@@ -67,7 +67,7 @@
         </div>
     </form>
 </main>
-<%- include('partials/footer') %>
+<%- include(`partials/footer`) %>
 </body>
 </html>
 

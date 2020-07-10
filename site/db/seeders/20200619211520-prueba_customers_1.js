@@ -1,5 +1,5 @@
-'use strict';
-const faker =require('faker');
+`use strict`;
+const faker =require(`faker`);
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -16,13 +16,13 @@ module.exports = {
 
       });
     }
-      return queryInterface.bulkInsert('customers', personalData, {});
+      return queryInterface.bulkInsert(`customers`, personalData, {});
     
   },
 
   down: (queryInterface, Sequelize) => {
     
-      return queryInterface.bulkDelete('customers', null, {});
+      return queryInterface.bulkDelete(`customers`, null, {});
    
   }
 };

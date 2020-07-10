@@ -1,4 +1,4 @@
-const db= require('../../database/models');
+const db= require(`../../database/models`);
 
 function guest (req, res, next) {
 if (req.session.usuarioLogeado==undefined){
@@ -25,28 +25,28 @@ if (req.session.usuarioLogeado==undefined){
             country: resultado.dataValues.country,
         } 
 
-        if(req.session.usuarioLogeado.email!= 'admin@admin.com') {
+        if(req.session.usuarioLogeado.email!= `admin@admin.com`) {
             
-         res.render('vistaPerfil', {userShow:userView})       
+         res.render(`vistaPerfil`, {userShow:userView})       
           }  else {
 
-            res.render('vistaPerfilAdmin', {userShow:userView})
+            res.render(`vistaPerfilAdmin`, {userShow:userView})
         }
 
         }
        
 
        }).catch(function(){
-           res.render('errorLogin')
+           res.render(`errorLogin`)
        })
 
        
     
 
-    //  res.render('vistaPerfil', {userShow:req.session.usuarioLogeado})
+    //  res.render(`vistaPerfil`, {userShow:req.session.usuarioLogeado})
 
       //     res.send(resultado)
-    //     // res.render('vistaPerfil', {userShow:[req.session.usuarioLogeado, resultado ]})
+    //     // res.render(`vistaPerfil`, {userShow:[req.session.usuarioLogeado, resultado ]})
 }
 }
 

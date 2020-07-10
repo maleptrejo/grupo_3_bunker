@@ -1,7 +1,7 @@
 module.exports= (sequelize, Types) => {
     const Customer=sequelize.define (
         //alias
-        'Customer',
+        `Customer`,
 
          //columns
         {
@@ -32,8 +32,8 @@ module.exports= (sequelize, Types) => {
             user_id: {
                 type: Types.BIGINT(20).UNSIGNED,
                 allowNull: false,
-                references: {model: 'Users', key: 'id'},
-                onDelete:'CASCADE'
+                references: {model: `Users`, key: `id`},
+                onDelete:`CASCADE`
             },
          
             
@@ -43,16 +43,16 @@ module.exports= (sequelize, Types) => {
         {tableName: "customers",
         underscored: true,
         timestamps: true,
-        createdAt: 'created_at',
-        updatedAt: 'update_at'
+        createdAt: `created_at`,
+        updatedAt: `update_at`
         }
 
         )
 
         Customer.associate=function(models) {
             Customer.belongsTo(models.Users, {
-                foreignKey: 'user_id',
-                as: 'Users'
+                foreignKey: `user_id`,
+                as: `Users`
             })
         }
        

@@ -5,7 +5,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Red Hat Display', sans-serif;
+  font-family: `Red Hat Display`, sans-serif;
 }
 
 main {
@@ -163,6 +163,13 @@ nav a{
   transform: translateX(260px);
 }
 
+.center-cropped {
+  object-fit: none;  /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 200px;
+  width: 200px;
+}
+
 
 
 /* ############3 */
@@ -208,7 +215,7 @@ margin-left: 1vw;
 }
 
 .logo-bunker>a>h1 {
-font-family: 'Black Ops One', cursive;
+font-family: `Black Ops One`, cursive;
 color: #E9e9e9;
 font-size:3.5em;
 margin-top: 2vh;
@@ -515,7 +522,7 @@ h2 {
 }
 
 .tipo-bunker {
-  font-family: 'Black Ops One', cursive;
+  font-family: `Black Ops One`, cursive;
 }
 
 .footer-data {
@@ -650,12 +657,12 @@ height: 220px;
 }
 
 .carousel-control-prev-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='353535' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns=`http://www.w3.org/2000/svg` fill=`353535` viewBox=`0 0 8 8`%3E%3Cpath d=`M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z`/%3E%3C/svg%3E");
 
 }
 
 .carousel-control-next-icon {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='353535' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns=`http://www.w3.org/2000/svg` fill=`353535` viewBox=`0 0 8 8`%3E%3Cpath d=`M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z`/%3E%3C/svg%3E");
 
 }
 

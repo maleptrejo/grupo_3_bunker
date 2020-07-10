@@ -1,7 +1,7 @@
 module.exports= (sequelize, Types) => {
     const Admin=sequelize.define (
         //alias
-        'Admin',
+        `Admin`,
 
          //columns
         {
@@ -25,7 +25,7 @@ module.exports= (sequelize, Types) => {
             user_id: {
                 type: Types.BIGINT(20).UNSIGNED,
                 allowNull: false,
-                references: {model: 'Users', key: 'id'},
+                references: {model: `Users`, key: `id`},
             },
          
             
@@ -35,16 +35,16 @@ module.exports= (sequelize, Types) => {
         {tableName: "admins",
         underscored: true,
         timestamps: true,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        createdAt: `created_at`,
+        updatedAt: `updated_at`
         }
 
         )
 
         Admin.associate=function(models) {
             Admin.belongsTo(models.Users, {
-                foreignKey: 'user_id',
-                as: 'Users'
+                foreignKey: `user_id`,
+                as: `Users`
             })
         }
        

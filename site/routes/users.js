@@ -1,5 +1,5 @@
 /************** REQUIRED MODULES **************/
-const express = require('express');
+const express = require(`express`);
 const router = express.Router();
 const path = require('path');
 const fs = require('fs');
@@ -19,17 +19,17 @@ let checkUser=require('../middlewares/validators/checkUser');
 /************ MULTER CONFIG **************/
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname,'..','public','images','usuarios'))
+    cb(null, path.join(__dirname,`..`,`public`,`images`,`usuarios`))
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    cb(null, file.fieldname + `-` + Date.now() + path.extname(file.originalname))
   }
 })
 
 var upload = multer({ storage: storage })
 
 /************ REQUIRED CONTROLLER ************/
-const usersController = require(path.join(__dirname,'../controllers/usersController'));
+const usersController = require(path.join(__dirname,`../controllers/usersController`));
 
 /****************** ROUTES ******************/
 router.get('/perfil', usersController.vistaPerfil);
@@ -66,11 +66,11 @@ body('cPassword').custom(function(cpassword,{req}){
 //   }).withMessage('Este email ya esta registrado')
 
 ], usersController.registro);
-// router.post('/avatar', upload.any(), usersController.avatar);
-router.get('/cart', cartAccess, usersController.cartEnter);
-router.get('/logout',logout, usersController.close);
-router.get('/avatar',cartAccess, usersController.avatar);
-router.post('/avatar', upload.any(), usersController.cargarAvatar);
+// router.post(`/avatar`, upload.any(), usersController.avatar);
+router.get(`/cart`, cartAccess, usersController.cartEnter);
+router.get(`/logout`,logout, usersController.close);
+router.get(`/avatar`,cartAccess, usersController.avatar);
+router.post(`/avatar`, upload.any(), usersController.cargarAvatar);
 
 router.get('/edit', usersController.editForm);
 router.post('/edit', [
@@ -85,17 +85,17 @@ router.post('/edit', [
     }else {
       return false;
     }
-  }).withMessage('Las contraseñas no coinciden'),
-  body('email').custom(function(valor, {req}){
-    let usersFilePath= path.join(__dirname, '../data/usuarios.json');
-    let usuarios = JSON.parse(fs.readFileSync(usersFilePath, {encoding: 'utf-8'}));
+  }).withMessage(`Las contraseñas no coinciden`),
+  body(`email`).custom(function(valor, {req}){
+    let usersFilePath= path.join(__dirname, `../data/usuarios.json`);
+    let usuarios = JSON.parse(fs.readFileSync(usersFilePath, {encoding: `utf-8`}));
     for (let i = 0; i < usuarios.length; i++) {
       if (usuarios[i].email == valor) {
         return false;
       };
     };
     return true;
-  }).withMessage('Este email ya esta registrado')
+  }).withMessage(`Este email ya esta registrado`)
 ], usersController.editData);
 
 

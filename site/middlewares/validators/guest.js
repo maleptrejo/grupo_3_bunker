@@ -1,4 +1,4 @@
-const db= require('../../database/models');
+const db= require(`../../database/models`);
 
 function guest (req, res, next) {
 if (req.session.usuarioLogeado==undefined){

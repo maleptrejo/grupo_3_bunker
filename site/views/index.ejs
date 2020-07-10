@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 
-    <%- include('partials/head', {title: 'Inicio'}) %>
+    <%- include(`partials/head`, {title: `Inicio`}) %>
 
 
 <main>
@@ -85,19 +85,19 @@
                     <section class="product-box">
                         <a href="/products/<%=product.id%>">
                             <figure class="product-box_image">
-                                <img src="./images/productos/<%=product.imagen1%>" alt="imagen de producto">
+                                <img src="./images/productos/<%=product.image%>" class="center-cropped" alt="imagen de producto">
                             </figure>
                             <article class="product-box_data">
                                 <div class="precio-oferta">
                                     
-                                    <h2>$<%=product.precio%></h2>
-                                    <span><%=product.descuento%>% OFF</span>
+                                    <h2>$<%=product.price%></h2>
+                                    <span><%=product.discounts.level*100%>% OFF</span>
                                 </div>
                                 
                                 
-                                <p><%=product.nombre%> <span>
+                                <p><%=product.name%> <span>
 
-                                </span> <span><%=product.marca%></span></p>
+                                </span> <span><%=product.brand%></span></p>
                                 
                             </article>
                         </a>
@@ -180,19 +180,19 @@
                         <section class="product-box">
                             <a href="/products/<%=product.id%>">
                                 <figure class="product-box_image">
-                                    <img src="./images/productos/<%=product.imagen1%>" alt="imagen de producto">
+                                    <img src="./images/productos/<%=product.image%>" class="center-cropped" alt="imagen de producto">
                                 </figure>
                                 <article class="product-box_data">
                                     <div class="precio-oferta">
                                         
-                                        <h2>$<%=product.precio%></h2>
-                                        <span><%=product.descuento%>% OFF</span>
+                                        <h2>$<%=product.price%></h2>
+                                        <span><%=product.discounts.level*100%>% OFF</span>
                                     </div>
                                     
                                     
-                                    <p><%=product.nombre%> <span>
+                                    <p><%=product.name%> <span>
                                         
-                                    </span> <span><%=product.marca%></span></p>
+                                    </span> <span><%=product.brand%></span></p>
                                     
                                 </article>
                             </a>
@@ -374,7 +374,7 @@
 
 </main>
 
-<%- include('partials/footer') %>
+<%- include(`partials/footer`) %>
 
 </body>	
 </html>

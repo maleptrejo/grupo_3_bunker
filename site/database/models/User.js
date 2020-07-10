@@ -1,7 +1,7 @@
 module.exports= (sequelize, Types) => {
     const Users=sequelize.define (
         //alias
-        'Users',
+        `Users`,
 
          //columns
         {
@@ -30,8 +30,8 @@ module.exports= (sequelize, Types) => {
         {tableName: "users",
         underscored: true,
         timestamps: true,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        createdAt: `created_at`,
+        updatedAt: `updated_at`
         }
 
         )

@@ -1,0 +1,6 @@
+//Endpoint de la API
+
+/api/products
+/api/categories
+/api/brands
+/api/discounts

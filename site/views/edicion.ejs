@@ -2,13 +2,13 @@
 <html lang="es">
 <%- include(`partials/head`, {title: `Inicio`}) %>
 <main class="container">
-    <form  action="/products/<%= productToEdit.id %>/edit?_method=PUT" method="post" enctype="multipart/form-data" class="product mt-3 form-ingresar-prod" novalidate>
-        <h2 class="c-acc m-3 pt-3">Crear producto</h2>
+    <form  action="/products/<%= productToEdit.id %>/edit?_method=PUT" method="post" enctype="multipart/form-data" class="product mt-3 form-ingresar-prod" id="formProd" novalidate>
+        <h2 class="c-acc m-3 pt-3">Editar producto</h2>
         <h5 class="acc-subs pt-3">Datos del Producto</h5>
         <div class="form-row flex-row ">
             <div class="col-12 col-md-6 mb-6 div-form-carga">
                 <label for="name">Nombre</label>
-                <input type="text" class="form-input" name= "name" id="name" value="<%= productToEdit.name %>" required>
+                <input type="text" class="form-control form-input" name= "name" id="name" value="<%= productToEdit.name %>" required>
             </div>
             <div class="col-12 col-md-6 mb-6 div-form-carga">
                 <label for="brand">Marca</label>
@@ -22,7 +22,7 @@
         <div class="form-row flex-row ">
             <div class="col-12 col-md-6 mb-6 div-form-carga">
                 <label for="price">Precio</label>
-                <input type="number" name="price" class="form-input" id="price" value="<%= productToEdit.price %>" required>
+                <input type="number" name="price"  min="0" step=".1" class="form-control form-input" id="price" value="<%= productToEdit.price %>" required>
             </div>
             <div class="col-12 col-md-6 mb-6 div-form-carga">
                 <label for="discount_id">Descuento </label>
@@ -35,7 +35,7 @@
         </div>
         <div class="form-row flex-column">
             <div class="col-12 col-md-12 mb-6">
-                <textarea name="description" id="description" class="form-input" cols="30" rows="10" value="<%= productToEdit.description %>" placeholder="<%= productToEdit.description %>"></textarea>
+                <textarea name="description" id="description" class="form-control form-input" cols="30" rows="10" value="<%= productToEdit.description %>" placeholder="<%= productToEdit.description %>"></textarea>
             </div>
             <div class="col-md-6 mb-6">
                 <label for="categor_idy"></label>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-6 mb-6">
                 <label for="stock"></label>
-                    <input type="number" name="stock" class="form-input" id="stock" value="<%= productToEdit.stock %>" required>
+                    <input type="number" name="stock" min="0"  class="form-control form-input" id="stock" value="<%= productToEdit.stock %>" required>
             </div>
         </div>
         <div class="form-row">
@@ -63,9 +63,10 @@
         </div>
         <div class="alert alert-success" role="alert" style="display: none;" id="">Información enviada</div>
         <div class="button-container-submit">
-            <button class="btn btn-bunker mb-5 mt-5" type="submit">Crear Producto</button>
+            <button class="btn btn-bunker mb-5 mt-5" id="butenv" type="submit">Editar Producto</button>
         </div>
     </form>
+    <script src="../../scripts/validEditProd.js"></script>
 </main>
 <%- include(`partials/footer`) %>
 </body>

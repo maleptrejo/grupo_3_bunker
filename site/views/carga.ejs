@@ -2,13 +2,13 @@
 <html lang="es">
 <%- include(`partials/head`, {title: `Inicio`}) %>
 <main class="container">
-    <form  action="/products/carga" method="post" enctype="multipart/form-data" class="product mt-3 form-ingresar-prod" novalidate>
+    <form  action="/products/carga" method="post" enctype="multipart/form-data" class="product mt-3 form-ingresar-prod" id="formProd" >
         <h2 class="c-acc m-3 pt-3">Crear producto</h2>
         <h5 class="acc-subs pt-3">Datos del Producto</h5>
         <div class="form-row flex-row ">
             <div class="col-12 col-md-6 mb-6 div-form-carga">
                 <label for="nombre">Nombre</label>
-                <input type="text" class="form-input" name= "nombre" id="nombre" placeholder="Nombre del producto" required>
+                <input type="text" class="form-control form-input" name= "nombre" id="nombre" placeholder="Nombre del producto" required>
             </div>
             <div class="col-12 col-md-6 mb-6 div-form-carga">
                 <label for="marca">Marca</label>
@@ -22,7 +22,7 @@
         <div class="form-row flex-row ">
             <div class="col-12 col-md-6 mb-6 div-form-carga">
                 <label for="precio">Precio</label>
-                <input type="number" name="precio" class="form-input" id="precio" placeholder="Precio unitario" required>
+                <input type="number" name="precio" min="0" step=".1" class="form-control form-input" id="precio" placeholder="Precio unitario" required>
             </div>
             <div class="col-12 col-md-6 mb-6 div-form-carga">
                 <label for="descuento">Descuento </label>
@@ -35,7 +35,7 @@
         </div>
         <div class="form-row flex-column">
             <div class="col-12 col-md-12 mb-6">
-                <textarea name="descripcion" id="descripcion" class="form-input" cols="30" rows="10" placeholder="Escriba una breve descripción"></textarea>
+                <textarea name="descripcion" id="descripcion" class="form-control form-input" cols="30" rows="10" placeholder="Escriba una breve descripción"></textarea>
             </div>
             <div class="col-md-6 mb-6">
                 <label for="categoria"></label>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-6 mb-6">
                 <label for="cantidad"></label>
-                    <input type="number" name="cantidad" class="form-input" id="cantidad" placeholder="Cantidad a ingresar" required>
+                    <input type="number"  min="0" name="cantidad" class="form-control form-input" id="cantidad" placeholder="Cantidad a ingresar" required>
             </div>
         </div>
         <div class="form-row">
@@ -56,16 +56,17 @@
             </div>
             <div class="col-12">    
                 <div class="custom-file ">
-                    <input type="file" class="custom-file-input" name="archivo" id="archivo" lang="es">
+                    <input type="file" class="custom-file-input" name="archivo" id="archivo" lang="es"  accept="image/*">
                     <label class="custom-file-label" for="archivo">Seleccionar Archivo</label>
                 </div>
             </div>   
         </div>
         <div class="alert alert-success" role="alert" style="display: none;" id="">Información enviada</div>
         <div class="button-container-submit">
-            <button class="btn btn-bunker mb-5 mt-5" type="submit">Crear Producto</button>
+            <button class="btn btn-bunker mb-5 mt-5" type="submit" id="butenv">Crear Producto</button>
         </div>
     </form>
+    <script src="../scripts/validCargaProd.js"></script>
 </main>
 <%- include(`partials/footer`) %>
 </body>

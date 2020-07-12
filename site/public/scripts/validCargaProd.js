@@ -3,7 +3,7 @@ window.onload = function(){
 
     btn.onclick= function(event){
 
-        
+       
             
         if(checknombre && checkdescripcion && checkprice && checkcantidad) {
            
@@ -21,20 +21,23 @@ window.onload = function(){
     let checknombre, checkdescripcion, checkprice, checkcantidad= false;
 
     form.nombre.addEventListener('keyup', function(event){
-  
+                
               if (event.target.value.length<3){
+                  
                   event.target.classList.add('is-invalid')
                   checknombre= false;
+                  console.log(event.target.classList)
                  
               }else{
                   event.target.classList.replace('is-invalid', 'is-valid')
                   checknombre= true;
+                  console.log(event.target.classList)
               }
           })
 
 
     form.descripcion.addEventListener ('keyup', function(event){
-
+       
         if (event.target.value.length<3){
             event.target.classList.add('is-invalid')
             checkdescripcion= false;

@@ -5,117 +5,118 @@
 
 
 <main class="container container-user">
-    
+
     <div class="container">
         <div aria-label="breadcrumb rounded-0 breadcrumb-user">
             <ol class="breadcrumb pl-0 bg-white">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Perfil</a></li>
-                
+
             </ol>
         </div>
-    </div> 
-    
+    </div>
+
     <section class="container-wide">
-        
-        <div>
-            
-        </div>
-        
+
+   
+
         <div class="row-fluid datos-user-container">
             <div class="">
                 <h1>Datos Personales</h1>
             </div>
-            
+
             <div class="datos1">
-                
+
                 <div class=row>
                    <div class="col col-sm-12 col-md-6">
                       <div class="container-avatar">
                             <div class=" avatar">
-                                    <img src="../images/usuarios/<%=userShow.avatar%>" alt="">
-                                    
+                                    <a href="/users/avatar"><img src="../images/usuarios/<%=userShow.avatar%>" alt=""></a>
+                                    <!-- <img src="../images/usuarios/<%=userShow.avatar%>" alt=""> -->
+
                                 </div>
+
+                                <div class="display-large">
+                                        <div class="button-profile">
+                                                <button type="button" class="boton-registro btn btn-secondary btn-lg btn-block rounded-sm mt-5 mb-3"><a href="/users/edit">Editar cuenta</a></button>
+                                        </div>
+                                </div>
+
+
                       </div>
-                            
-                           
+
+
+
+
                    </div>
 
-                   <div class="col col-sm-12 col-md-6">
-                        
-                              
+                   <!-- <div class="col col-sm-12 col-md-6">
+
+
                               <div>
                                   <div class="button-profile">
                                           <button type="button" class="btn btn-secondary btn-lg btn-block rounded-sm mt-5 mb-3"><a href="/users/avatar">Cambiar foto de perfil</a></button>
-                           
+
                                   </div>
                               </div>
-                     </div>
-                    
+                     </div> -->
+
                     <div class="col col-sm-12 col-md-6">
-                       <div class="container-user-data">
+                       <div class="user-data">
                             <div class="datos-personales ">
                                     <p class="font-weight-bold"><%=userShow.name%> <span> </span>  <%=userShow.surname%> </p>
                                     <p><%= userShow.email%></p>
                                     <p><%= userShow.adress%></p>
                                     <p><%= userShow.country%></p>
-                                    
-                                    
+
+
                                 </div>
 
+
+                                <div class="display-mobile">
+                                        <div class="button-profile">
+                                                <button type="button" class="btn btn-secondary btn-lg btn-block rounded-sm mt-5 mb-3"><a href="/users/edit">Editar cuenta</a></button>
+                                        </div>
+                                </div>
+
+
                        </div>
-                        
+
                     </div>
 
-                    <div class="col col-sm-12 col-md-6">
+                    <!-- <div class="col col-sm-12 col-md-6">
                             <div>
                                     <div class="button-profile">
                                             <button type="button" class="btn btn-secondary btn-lg btn-block rounded-sm mt-5 mb-3"><a href="/users/edit">Cambiar datos personales</a></button>
                                     </div>
                             </div>
-                        </div>
-
-                    
-
-                 
-                        
-                       
-                       
+                        </div> -->
 
 
-                        <script>
-                        
 
-                        
-                        </script>
 
-                  
+
+
+
+
+
+
                 </div>
-                
-                
-                
+
+
+
             </div>
-            
-            <div class="datos2">
-                <!-- <div>
-                    <a href="">Editar mis datos</a>
-                </div>
-                <div>
-                    <p>Dirección</p>
-                    <p>Ciudad</p>
-                    <p>Provincia</p>
-                    <p>País</p>
-                </div> -->
-            </div>
-            
+
+
+
         </div>
-        
-        
-        
-        
+
+
+
+
     </div>
-    
-    
+
+
 </section>
 
 
@@ -127,7 +128,7 @@
 
 <%- include(`partials/footer`) %>
 
-</body>	
+</body>
 </html>
 
 

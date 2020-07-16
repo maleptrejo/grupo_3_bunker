@@ -10,7 +10,7 @@
                 <li class="breadcrumb-item active" aria-current="page">Login</li>
             </ol>
         </div>
-    </div> 
+    </div>
     <section class="container registro">
         <form action="/users/login/val" method="POST" class="needs-validation mt-3 form-new-user" novalidate>
             <h2 class="c-acc-user">Iniciar Sesión</h2>
@@ -40,15 +40,15 @@
         </div>
     </form>
     <div>
-        <h2>Si no tenés cuenta, creala aquí</h2>
-        <div class="button-container-submit">
-                                    
-                <button class="btn btn-bunker mb-5 mt-5" type="submit"><a href="/users/create" >CREAR CUENTA</a></button>
-        </div>
+        <h2>Si no tenés cuenta, creala <a href="/users/create" class="link-hover">aquí</a>.</h2>
+        <!-- <div class="button-container-submit">
+
+                <button class="btn btn-bunker mb-5 mt-5" type="submit"><a href="/users/create" >aquí</a></button>
+        </div> -->
 
     </div>
 </section>
 </main>
 <%- include(`partials/footer`) %>
-</body>	
+</body>
 </html>

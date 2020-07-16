@@ -14,6 +14,7 @@ let authorization=require('../middlewares/validators/authorization');
 let cartAccess =require('../middlewares/validators/cartAccess');
 let logout=require('../middlewares/validators/logout');
 let checkUser=require('../middlewares/validators/checkUser');
+const createUserValidator = require(path.join(__dirname,`..`,`middlewares`,`validators`,`createUserValidator`));
 
 
 /************ MULTER CONFIG **************/
@@ -37,35 +38,7 @@ router.get('/login',guest, usersController.formLogin);
 router.post('/login/val', usersController.enter);
 router.get('/check', usersController.check);
 router.get ('/create', usersController.createUser);
-router.post('/create', checkUser, [
-  check('name').isLength({min:1}).withMessage('El campo nombre debe contener al menos un caracter'),
-  check('sName').isLength({min:1}).withMessage('El campo apellido debe contener al menos un caracter'),
-  check('email').isEmail().withMessage('El formato del email no es válido'),
-  check('password').isLength({min:8, max:12}).withMessage('La contraseña debe contener entre 8 y 12 caracteres'),
-body('cPassword').custom(function(cpassword,{req}){
-     if (cpassword == req.body.password){
-      return true;
-    }else {
-       return false;
-     }
- }).withMessage('Las contraseñas no coinciden'),
-//   body('email').custom(function(valor, {req}){
-
-//  db.Users.findOne({
-//     where: {
-//         email: req.body.email
-//     }
-// }).then((resultado)=> {
-//   console.log(resultado)
-//   if (resultado==null) {
-//     return true;
-//   }else{
-//     return false;
-//   }
-//   })
-//   }).withMessage('Este email ya esta registrado')
-
-], usersController.registro);
+router.post('/create',  createUserValidator, usersController.registro);
 // router.post(`/avatar`, upload.any(), usersController.avatar);
 router.get(`/cart`, cartAccess, usersController.cartEnter);
 router.get(`/logout`,logout, usersController.close);
@@ -73,30 +46,7 @@ router.get(`/avatar`,cartAccess, usersController.avatar);
 router.post(`/avatar`, upload.any(), usersController.cargarAvatar);
 
 router.get('/edit', usersController.editForm);
-router.post('/edit', [
-  //acá tmb reemplazar lógica por sequelize
-  check('name').isLength({min:1}).withMessage('El campo nombre debe contener al menos un caracter'),
-  check('sName').isLength({min:1}).withMessage('El campo apellido debe contener al menos un caracter'),
-  check('email').isEmail().withMessage('El formato del email no es válido'),
-  check('password').isLength({min:8, max:12}).withMessage('La contraseña debe contener entre 8 y 12 caracteres'),
-  body('cPassword').custom(function(cpassword,{req}){
-    if (cpassword == req.body.password){
-      return true;
-    }else {
-      return false;
-    }
-  }).withMessage(`Las contraseñas no coinciden`),
-  body(`email`).custom(function(valor, {req}){
-    let usersFilePath= path.join(__dirname, `../data/usuarios.json`);
-    let usuarios = JSON.parse(fs.readFileSync(usersFilePath, {encoding: `utf-8`}));
-    for (let i = 0; i < usuarios.length; i++) {
-      if (usuarios[i].email == valor) {
-        return false;
-      };
-    };
-    return true;
-  }).withMessage(`Este email ya esta registrado`)
-], usersController.editData);
+router.post('/edit', createUserValidator, usersController.editData);
 
 
 router.get('/delete', usersController.deleteForm);
@@ -115,33 +65,3 @@ router.get('/admins/delete/ok', authorization, usersController.deleteOkAdmin);
 module.exports = router;
 
 
-
-
-
-// [
-//   check('name').isLength({min:1}).withMessage('El campo nombre debe contener al menos un caracter'),
-//   check('sName').isLength({min:1}).withMessage('El campo apellido debe contener al menos un caracter'),
-//   check('email').isEmail().withMessage('El formato del email no es válido'),
-//   check('password').isLength({min:8, max:12}).withMessage('La contraseña debe contener entre 8 y 12 caracteres'),
-//   body('cPassword').custom(function(cpassword,{req}){
-//     if (cpassword == req.body.password){
-//       return true;
-//     }else {
-//       return false;
-//     }
-//   }).withMessage('Las contraseñas no coinciden'),
-//   body('email').custom(function(valor, {req}){
-
-//     //reeemplazar esta lógica por findOne de sequelize
-//     let usersFilePath= path.join(__dirname, '../data/usuarios.json');
-//     let usuarios = JSON.parse(fs.readFileSync(usersFilePath, {encoding: 'utf-8'}));
-//     for (let i = 0; i < usuarios.length; i++) {
-
-//       //si encuentra, que retorne false
-//       if (usuarios[i].email == valor) {
-//       return false;
-//       };
-//     };
-//     return true;
-//   }).withMessage('Este email ya esta registrado')
-// ]

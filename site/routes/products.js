@@ -3,7 +3,7 @@ const express = require(`express`);
 const router = express.Router();
 const path = require(`path`);
 const multer = require(`multer`);
-
+const createProducts = require ((path.join(__dirname,`..`,`middlewares`,`validators`,`createProducts`)));
 let authorization=require(`../middlewares/validators/authorization`);
 
 /*************** MULTER CONFIG ***************/
@@ -33,7 +33,7 @@ const productsController = require(path.join(__dirname,`../controllers/productsC
 /****************** ROUTES ******************/
 router.get(`/`, productsController.list);
 router.get (`/create`, productsController.createForm);
-router.post(`/carga`, upload.any(), productsController.create);
+router.post(`/carga`, createProducts, upload.any(), productsController.create);
 router.get(`/search`, productsController.search);
 router.get(`/extras`, productsController.brandsCategoriesDiscounts);
 router.post(`/extras/update`, productsController.extrasUpdate)

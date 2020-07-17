@@ -7,8 +7,6 @@ const multer = require('multer');
 var {check, validationResult, body} = require('express-validator');
 const db= require('../database/models');
 
-
-let errorsRegister=require('../middlewares/validators/errorsRegister');
 let guest=require('../middlewares/validators/guest');
 let authorization=require('../middlewares/validators/authorization');
 let cartAccess =require('../middlewares/validators/cartAccess');
@@ -44,14 +42,10 @@ router.get(`/cart`, cartAccess, usersController.cartEnter);
 router.get(`/logout`,logout, usersController.close);
 router.get(`/avatar`,cartAccess, usersController.avatar);
 router.post(`/avatar`, upload.any(), usersController.cargarAvatar);
-
 router.get('/edit', usersController.editForm);
 router.post('/edit', createUserValidator, usersController.editData);
-
-
 router.get('/delete', usersController.deleteForm);
 router.get('/delete/ok', usersController.deleteOk);
-
 router.get('/admins/edit', authorization, usersController.editFormAdmin);
 router.post('/admins/edit', usersController.editAdminData);
 router.get('/admins/avatar', authorization, usersController.avatar)

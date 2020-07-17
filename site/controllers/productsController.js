@@ -1,6 +1,7 @@
 /************** REQUIRED MODULES **************/
 const path = require(`path`);
 const db = require(path.join(__dirname,`..`,`database`,`models`));
+const {check, validationResult, body} = require(`express-validator`);
 
 /****************** AUXILIAR ******************/
 // function isEmptyObject(objeto){
@@ -70,30 +71,33 @@ const products = {
         })
     },
     createForm: async(req, res) => {
+        let errors = undefined
         let categories = await db.Categories.findAll({attributes: [`id`, `name`], raw: true});   
         let brands = await db.Brands.findAll({attributes: [`id`, `name`], raw: true});
         let discounts = await db.Discounts.findAll({attributes: [`id`, `level`], raw: true});
-        res.render(`carga`, {categories: categories, brands: brands, discounts: discounts});
+        res.render(`carga`, {categories: categories, brands: brands, discounts: discounts, errors:errors});
     },
-    create: (req, res) => {
-        let imagen;
-        if (req.files.length == 0) {
-            imagen = `noFoto.png`;
+    create: async(req, res) => {
+        let errors = validationResult(req);
+        if (errors.isEmpty()){
+            db.Products.create({
+                name: req.body.name,
+                price: req.body.price,
+                description: req.body.description,
+                brand_id: req.body.brand_id,
+                discount_id: req.body.discount_id,
+                image: `noFoto.jpg`,
+                category_id: req.body.category_id,
+                stock: req.body.stock
+            }).then((created) => {
+                res.json(created)
+            })
         } else {
-            imagen = req.files[0].filename;
-        };
-        db.Products.create({
-            name: req.body.nombre,
-            price: req.body.precio,
-            description: req.body.descripcion,
-            brand_id: req.body.marca,
-            discount_id: req.body.descuento,
-            image: imagen,
-            category_id: req.body.categoria,
-            stock: req.body.cantidad
-        }).then(() => {
-            res.redirect(`/products/create`)
-        })
+            let categories = await db.Categories.findAll({attributes: [`id`, `name`], raw: true});   
+            let brands = await db.Brands.findAll({attributes: [`id`, `name`], raw: true});
+            let discounts = await db.Discounts.findAll({attributes: [`id`, `level`], raw: true});
+            res.render('carga', {errors:errors.errors, categories: categories, brands: brands, discounts: discounts});
+        }
     },
     delete: (req,res)=>{
         db.Products.destroy({
@@ -124,9 +128,12 @@ const products = {
                 order: [[`name`, `DESC`]],
                 limit: 4
             })
-            Promise.all([promotions, lastArrival])
-            .then(([promotions, lastArrival]) => {
-                res.render(`index`, {promotions:promotions, lastArrival:lastArrival})
+            let categories = db.Categories.findAll({
+                limit: 3
+            })
+            Promise.all([promotions, lastArrival, categories])
+            .then(([promotions, lastArrival, categories]) => {
+                res.render(`index`, {promotions: promotions, lastArrival: lastArrival, categories: categories})
             })
         })
     },
@@ -139,7 +146,7 @@ const products = {
             order: [[`name`, `ASC`]]
         })
         .then((prductsSearch) => {
-            res.render(`productosBuscados`, {productoDetallado:prductsSearch})
+            res.render(`productosBuscados`, {prductsSearch:prductsSearch})
         })
     },
     brandsCategoriesDiscounts: (req, res) => {

@@ -76,7 +76,7 @@
           <h2 class="products-title">Ofertas </h2><i class="fas fa-angle-double-right"></i>
       </div>
       <div class="container products-wrapper">
-          <div class="row">
+          <div class="row d-flex justify-content-around">
               
               <% promotions.forEach(product=> { %>
               
@@ -85,7 +85,7 @@
                     <section class="product-box">
                         <a href="/products/<%=product.id%>">
                             <figure class="product-box_image">
-                                <img src="./images/productos/<%=product.image%>" class="center-cropped" alt="imagen de producto">
+                                <img src="./images/productos/<%=product.image1%>" class="center-cropped" alt="imagen de producto">
                             </figure>
                             <article class="product-box_data">
                                 <div class="precio-oferta">
@@ -130,32 +130,16 @@
       
       <div class="container-fluid">
           <div class="row no-gutters">
+            <% categories.forEach(category => { %>
               <div class="col-12 col-lg-4 secciones">
                   <div class="imagen-cat">
-                      <img src="./imagenes/outdoor.png" alt="">
+                      <img src="./imagenes/<%= category.image %>" alt="">
                   </div>
                   <div class="texto-cat">
-                      <p>Outdoor</p>
+                      <p><%= category.name %></p>
                   </div>
               </div>
-              
-              <div class="col-12 col-lg-4 secciones">
-                  <div class="imagen-cat">
-                      <img src="./imagenes/herramientas.jpg" alt="">
-                  </div>
-                  <div class="texto-cat">
-                      <p>Taller</p>
-                  </div>
-              </div>
-              
-              <div class="col-12 col-lg-4 secciones">
-                  <div class="imagen-cat">
-                      <img src="./imagenes/muebles.jpg" alt="">
-                  </div>
-                  <div class="texto-cat">
-                      <p>Diseño sustentable</p>
-                  </div>
-              </div>
+            <% }) %>
           </div>
           
           
@@ -170,7 +154,7 @@
               <h2 class="products-title">Quizás te interesen </h2><i class="fas fa-angle-double-right"></i>
           </div>
           <div class="container products-wrapper">
-              <div class="row">
+              <div class="row d-flex justify-content-around">
                   
 
                 <% lastArrival.forEach(product=> { %>
@@ -180,7 +164,7 @@
                         <section class="product-box">
                             <a href="/products/<%=product.id%>">
                                 <figure class="product-box_image">
-                                    <img src="./images/productos/<%=product.image%>" class="center-cropped" alt="imagen de producto">
+                                    <img src="./images/productos/<%=product.image1%>" class="center-cropped" alt="imagen de producto">
                                 </figure>
                                 <article class="product-box_data">
                                     <div class="precio-oferta">

@@ -11,7 +11,8 @@ var session = require(`express-session`);
 var indexRouter = require(`./routes/index`);
 var usersRouter = require(`./routes/users`);
 var productsRouter = require(`./routes/products`);
-var apiRouter = require(`./routes/api/apiProductsRouter`)
+var apiRouter = require(`./routes/api/apiProductsRouter`);
+var apiRouterUsers = require(`./routes/api/apiUsersRouter`);
 
 
 /**************** APP EXPRESS ****************/
@@ -46,7 +47,8 @@ app.use(function(req,res,next) {
 app.use(`/`, indexRouter);
 app.use(`/users`, usersRouter);
 app.use(`/products`, productsRouter);
-app.use(`/api/products`, apiRouter)
+app.use(`/api/products`, apiRouter);
+app.use(`/api/users`, apiRouterUsers);
 
 
 /*** CATCH 404 & FORWARD TO ERROR HANDLER ***/

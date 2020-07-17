@@ -64,9 +64,44 @@ button:focus {
 
 /* ########## */
 
+.container-contacts-table {
+  margin-left: 1vw;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+tbody.list-users img {
+  width:70px;
+  
+  object-fit:cover;
+  object-position: 10% 2;
+  border-radius: 50%;
+}
+
+tbody.list-users th {
+  width: 7vw;
+}
+
+tbody.list-users td {
+  font-size: 1.5em;
+}
+
+.paginator {
+  display: flex;
+  justify-content: center;
+}
+
+.paginator .paginator-text{
+  font-size: 2em;
+}
+
+
+/* ########## */
+
 .row-header {
   height: 7vh;
   padding-top: 0.8vh;
+  margin: unset;
 }
 
 #menu_on{
@@ -100,13 +135,14 @@ bottom: 0;
 }
 
 
+
 nav{
 	position: fixed;
 	top: 0;
 	bottom: 0;
 	left:-300px; /* Escondemos nuestro menú con un valor negativo */
   width: 300px;
-	z-index: 1;
+	z-index: 2;
 	padding: 90px 30px 30px;
 	background: #353535;
 	opacity: 0;
@@ -173,6 +209,7 @@ nav a{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  
 }
 
 .visible_menu #content{
@@ -235,13 +272,6 @@ justify-content:  space-around;
 }
 
 
-
-
-
-
-
-
-
 /* ****** */
 /* ############3 */
 
@@ -249,6 +279,11 @@ justify-content:  space-around;
 header {
   background-color: #353535;
   padding: 0 1vh 1vh;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-shadow: 0 3px 3px  gray;
 }
 
 .icono {
@@ -257,9 +292,7 @@ background-color: #353535;
 /* font-size: 3em; */
 }
 
-.fa-user-astronaut {
-  font-size: 3em;
-}
+
 
 /* .icon-carrito {
 display: flex;
@@ -287,8 +320,8 @@ margin-left: 1vw;
   text-align: center;
   height: 17vh;
   background-color:  #E9e9e9;
-  border-bottom: 4px solid #fefefe;
- 
+  border-bottom: 4px solid #c2c2c2;
+
 
 }
 
@@ -298,8 +331,9 @@ margin-left: 1vw;
   font-size: 5em;
 /* color: #E9e9e9; */
 /* color:#c2c2c2; */
-color: #B80617;
+color: #353535;
 margin-top: 4vh;
+text-shadow: 2px 2px 6px #c2c2c2;
 }
 .logo-bunker>a>h1>span {
   font-family: 'Black Ops One', cursive;
@@ -309,30 +343,29 @@ font-size: 0.8em;
 margin-top: 2vh;
 }
 
-
-.bombilla {
-width: 1em;
+.nav-user>li span:nth-child(2) {
+padding-left: 1vw;
+  
 }
 
 
-.icon-fav  button {
+
+/* .icon-fav  button {
   background-color: #353535;
   border: unset;
   padding-bottom:2vh;
-}
+} */
 
-.fa-user-astronaut button {
+/* .fa-user-astronaut button {
   background-color: #353535;
   border: unset;
 
-}
+} */
 
 
 
 
-.buscador-lg {
-display: none;
-}
+
 
 
 /* barrita buscadora */
@@ -1221,9 +1254,9 @@ td>input.form-control {
 
     width: 45px;
     height: 35px;
-    margin-top: 3.3vh;
+    margin-top: 0.1vh;
   }
-
+  
   #menu_on .cruz {
     width: 100%;
     height: 7px;
@@ -1257,7 +1290,7 @@ td>input.form-control {
   }
 
 
-
+/* 
   .fa-user-astronaut button {
     background-color: #353535;
     border: unset;
@@ -1266,7 +1299,7 @@ td>input.form-control {
   .fa-user-astronaut {
 
 
-  }
+  } */
 
 
   .logo-bunker {
@@ -1274,7 +1307,7 @@ td>input.form-control {
   }
   .logo-bunker>a>h1 {
     margin-top: 1.2vh;
-    font-size: 8em; 
+    font-size: 8em;
   }
 
 
@@ -1341,7 +1374,7 @@ float: right;
 
   .buscador-lg {
       display: inline;
-      padding-top: 3vh;
+      padding-top: 1vh;
     }
 
     .buscador-mini {

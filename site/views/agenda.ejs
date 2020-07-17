@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('partials/head', {title: 'Inicio'}) %>
+
+
+<main class="container container-user">
+    
+    <div class="container">
+        <div aria-label="breadcrumb rounded-0 breadcrumb-user">
+            <ol class="breadcrumb pl-0 bg-white">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/users/login">Perfil</a></li>   
+                <li class="breadcrumb-item"><a href="/users/admins/control">Panel de control</a></li>
+                <li class="breadcrumb-item"><a href="#">Contactos</a></li>
+                
+            </ol>
+        </div>
+    </div>
+    
+
+    <section class="container-contacts-table">
+        <table class="table controls-table">
+            <thead>
+                <h1 class="mb-4">Contactos</h1>
+            </thead>
+            <tbody class="list-users">
+                
+            </tbody>
+        </table>
+    </section>
+    
+    <section class="paginator">
+        <div class= "paginator-text" aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                </li>
+                
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    
+    
+    <script src="../../scripts/agenda.js"></script>
+</main>
+
+
+
+
+
+
+<%- include('partials/footer') %>
+
+</body>
+</html>
+
+

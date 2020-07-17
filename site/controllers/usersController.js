@@ -352,6 +352,11 @@ res.redirect('/')
     controlVer: (req,res)=> {
         res.render('panelControlAdmin')
     },
+
+    controlContacts: (req, res)=> {
+        res.render('agenda')
+    },
+
     deleteForm: (req, res)=> {
         res.render('destroyUser')
     },
@@ -406,6 +411,11 @@ res.redirect('/')
 
 
     },
+
+    favsShow: (req,res) => {
+        res.render('favs')
+    }
+
     // avatarAdmin: (req, res) => {
     //     res.render('avatarAdmin');
     // },

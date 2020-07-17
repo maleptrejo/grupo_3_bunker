@@ -7,11 +7,6 @@ const multer = require('multer');
 var {check, validationResult, body} = require('express-validator');
 const db= require('../database/models');
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> SP7FEG
 let guest=require('../middlewares/validators/guest');
 let authorization=require('../middlewares/validators/authorization');
 let cartAccess =require('../middlewares/validators/cartAccess');

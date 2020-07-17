@@ -20,8 +20,14 @@ module.exports = {
     description: {
       type: Types.TEXT
     },
-    image: {
-      type: Types.STRING(30)
+    image1: {
+      type: Types.STRING(100)
+    },
+    image2: {
+      type: Types.STRING(100)
+    },
+    image3: {
+      type: Types.STRING(100)
     },
     stock: {
       type: Types.INTEGER(11),

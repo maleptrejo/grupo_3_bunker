@@ -14,6 +14,10 @@ module.exports = {
         unique: true,
         allowNull: false
     },
+    image: {
+      type: Types.STRING(100),
+      allowNull: false
+    },
     created_at: {
       type: Types.DATE,
       allowNull: false,

@@ -5,7 +5,7 @@ window.onload = function(){
 
        
             
-        if(checknombre && checkdescripcion && checkprice && checkcantidad) {
+        if(checkname && checkdescription && checkprice && checkstock) {
            
         }else{
            
@@ -18,37 +18,37 @@ window.onload = function(){
     let form= document.querySelector('#formProd');
 
    
-    let checknombre, checkdescripcion, checkprice, checkcantidad= false;
+    let checkname, checkdescription, checkprice, checkstock= false;
 
-    form.nombre.addEventListener('keyup', function(event){
+    form.name.addEventListener('keyup', function(event){
                 
               if (event.target.value.length<3){
                   
                   event.target.classList.add('is-invalid')
-                  checknombre= false;
+                  checkname= false;
                   console.log(event.target.classList)
                  
               }else{
                   event.target.classList.replace('is-invalid', 'is-valid')
-                  checknombre= true;
+                  checkname= true;
                   console.log(event.target.classList)
               }
           })
 
 
-    form.descripcion.addEventListener ('keyup', function(event){
+    form.description.addEventListener ('keyup', function(event){
        
         if (event.target.value.length<3){
             event.target.classList.add('is-invalid')
-            checkdescripcion= false;
+            checkdescription= false;
            
         }else{
             event.target.classList.replace('is-invalid', 'is-valid')
-            checkdescripcion= true;
+            checkdescription= true;
         }
     })
 
-    form.precio.addEventListener ('input', function(event){
+    form.price.addEventListener ('input', function(event){
 
         if (event.target.value<1){
             event.target.classList.add('is-invalid')
@@ -60,15 +60,15 @@ window.onload = function(){
         }
     })
 
-    form.cantidad.addEventListener ('input', function(event){
+    form.stock.addEventListener ('input', function(event){
 
         if (event.target.value<1){
             event.target.classList.add('is-invalid')
-            checkcantidad= false;
+            checkstock= false;
            
         }else{
             event.target.classList.replace('is-invalid', 'is-valid')
-            checkcantidad= true;
+            checkstock= true;
         }
     })
   
@@ -89,10 +89,10 @@ window.onload = function(){
 
 
     // let formProd = document.getElementById("formProd");
-    // let prod = document.getElementById("nombre");    
-    // let price = document.getElementById("precio");    
-    // let desc = document.getElementById("descripcion");    
-    // let stock = document.getElementById("cantidad");    
+    // let prod = document.getElementById("name");    
+    // let price = document.getElementById("price");    
+    // let desc = document.getElementById("description");    
+    // let stock = document.getElementById("stock");    
     // let btnenv = document.getElementById("butenv");
       
    
@@ -107,7 +107,7 @@ window.onload = function(){
     //     if(event.target.value.length < 3){
     //         event.target.classList.add("is-invalid");
     //         checkProd = false; 
-    //         // errors.push("El campo nombre debe tener al menos 3 caracteres");
+    //         // errors.push("El campo name debe tener al menos 3 caracteres");
     //     } 
     //     else{     
     //         event.target.classList.replace("is-invalid", 'is-valid');
@@ -139,7 +139,7 @@ window.onload = function(){
 
 
 
-    // formProd.descripcion.addEventListener("keyup", function(event){
+    // formProd.description.addEventListener("keyup", function(event){
     //     if(event.target.value.length < 20){
     //         event.target.classList.add('is-invalid');
     //         errors.push("La descripción debe tener al menos 20 caracteres");
@@ -159,7 +159,7 @@ window.onload = function(){
 
 
 
-    // formProd.cantidad.addEventListener("blur", function(event){
+    // formProd.stock.addEventListener("blur", function(event){
         
     //     if(event.target.value < 1){
     //         event.target.classList.add('is-invalid');

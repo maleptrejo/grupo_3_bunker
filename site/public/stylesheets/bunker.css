@@ -217,8 +217,8 @@ nav a{
 }
 
 .center-cropped {
-  object-fit: scale-down;  /* Do not scale the image */
-  object-position: center; /* Center the image within the element */
+  object-fit: cover;
+  object-position: center;
   height: 200px;
   width: 200px;
 }
@@ -668,7 +668,7 @@ h2 {
 }
 
 .tipo-bunker {
-  font-family: `Black Ops One`, cursive;
+  font-family: "Black Ops One", cursive;
 }
 
 .footer-data {
@@ -898,7 +898,7 @@ height: 220px;
 }
 
 .marco-tarjetas {
-  height: 200px;
+  height: 230px;
   padding-top: 1.5vh;
   border-bottom: solid 1px #c2c2c2;
 }

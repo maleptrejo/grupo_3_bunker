@@ -14,11 +14,6 @@ let user = {
    password: ``,
  }
 
-
-
-const usersFilePath= path.join(__dirname, `../data/usuarios.json`);
-let usuarios = JSON.parse(fs.readFileSync(usersFilePath, {encoding: `utf-8`}));
-
 function isEmptyObject(objeto){
     return !Object.keys(objeto).length;
 };

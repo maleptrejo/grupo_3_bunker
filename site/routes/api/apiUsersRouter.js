@@ -7,6 +7,8 @@ const apiProductsCreateValidaror = require(path.join(__dirname,`..`,`..`,`middle
 
 /******************* ROUTES *******************/
 router.get(`/`, apiUsersController.list);
+router.get(`/favs_full`, apiUsersController.FavsAll);
+
 
 
 

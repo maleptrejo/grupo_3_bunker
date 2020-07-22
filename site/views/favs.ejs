@@ -17,43 +17,53 @@
     </div>
     
 
-    <section class="container-favs-table">
+    <section class="container container-favs-table table-responsive-sm">
         <table class="table favs-table">
             <thead>
                 <h1 class="mb-4">Mis Favoritos</h1>
             </thead>
-            <tbody class="list-favs">
-                
+            <tbody class="list-favs" id="list-favs">
+                   
+                        <% data.forEach(dat=> { %>
+                            <!-- <a href="/products/<%=dat.id%>">   -->
+                               
+                            <tr class="tr-fav" >
+                                    
+                                    <td style= "width: 15%"><img src="../images/productos/<%= dat.image1 %>"></td>
+                                 
+                                    <td ><a href="/products/<%=dat.id%>"><p><%= dat.name %></p><p>$<%= dat.price %></p></a></td>
+                                    <!-- <td><%= dat.brand %></td> -->
+
+                                    <!-- <td> $ <%= dat.price %></td> -->
+                                    
+
+                                    <!-- <td><%= dat.description %></td> -->
+                                    
+                                   
+                                    <td class="td-fav" ><a id="fav-comprar" class="btn" type="submit"><i class="fas fa-shopping-cart"></i></a><a href= "../api/products/favs/<%= dat.id %>" value="<%= dat.id %>" class="btn fav-quitar" onClick="delete_row(this)" >Quitar</a></td>
+                                  
+                               
+                                  </tr>
+                                </a>
+                       <% }) %>
+
+
+                   
+                         
+                        
+
             </tbody>
         </table>
     </section>
     
-    <section class="paginator">
-        <div class= "paginator-text" aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                </li>
-                
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </section>
-    
-    
-    <script src="../../scripts/agenda.js"></script>
+    <script src="../../scripts/favsDelete.js"></script>
+
+    <script>function delete_row(e)
+            {
+                e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
+            }</script>
+
+
 </main>
 
 

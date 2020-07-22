@@ -8,6 +8,7 @@ var {check, validationResult, body} = require('express-validator');
 const db= require('../database/models');
 
 let guest=require('../middlewares/validators/guest');
+let guestFav=require('../middlewares/validators/guestFav');
 let authorization=require('../middlewares/validators/authorization');
 let cartAccess =require('../middlewares/validators/cartAccess');
 let logout=require('../middlewares/validators/logout');
@@ -33,6 +34,7 @@ const usersController = require(path.join(__dirname,`../controllers/usersControl
 /****************** ROUTES ******************/
 router.get('/perfil', usersController.vistaPerfil);
 router.get('/login',guest, usersController.formLogin);
+router.get('/favoritos',guestFav, usersController.verFavs);
 router.post('/login/val', usersController.enter);
 router.get('/check', usersController.check);
 router.get ('/create', usersController.createUser);
@@ -51,7 +53,9 @@ router.post('/admins/edit', usersController.editAdminData);
 router.get('/admins/avatar', authorization, usersController.avatar)
 router.post('/admins/avatar', usersController.cargarAvatar);
 router.get('/admins/control',authorization, usersController.controlVer);
-router.get('/admins/contacts',authorization, usersController.controlContacts);
+
+router.get('/admins/contacts', authorization, usersController.controlContacts);
+// router.get('/admins/contacts',authorization, usersController.controlContacts);
 router.get('/admins/delete', authorization, usersController.deleteFormAdmin);
 router.get('/admins/delete/ok', authorization, usersController.deleteOkAdmin);
 

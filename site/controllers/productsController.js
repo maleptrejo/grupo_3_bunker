@@ -30,6 +30,7 @@ const products = {
         .then(([lastArrival, product]) => {
             let productoDetallado = []
             productoDetallado.push(product)
+            console.log(productoDetallado)
             res.render(`producto2`, {productoDetallado: productoDetallado, lastArrival: lastArrival})
         })
     },
@@ -147,6 +148,7 @@ const products = {
         })
         .then((prductsSearch) => {
             res.render(`productosBuscados`, {prductsSearch:prductsSearch})
+            console.log(prductsSearch[0].dataValues)
         })
     },
     brandsCategoriesDiscounts: (req, res) => {

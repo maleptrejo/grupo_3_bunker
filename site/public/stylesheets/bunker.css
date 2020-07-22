@@ -72,10 +72,15 @@ button:focus {
 
 tbody.list-users img {
   width:70px;
+  height: 70px;
   
-  object-fit:cover;
-  object-position: 10% 2;
+  /* object-fit:scale-down;
+  object-position: 10% 2; */
   border-radius: 50%;
+
+  object-fit: cover;
+  object-position: center;
+
 }
 
 tbody.list-users th {
@@ -95,6 +100,89 @@ tbody.list-users td {
   font-size: 2em;
 }
 
+/* ########## */
+
+tbody.list-favs img {
+  width:70px;
+  height: 70px;
+  object-fit: cover;
+  object-position: center;
+
+}
+
+/* tbody.list-favs th {
+  width: 7vw;
+ 
+} */
+
+tbody.list-favs th, td {
+  padding-left: 3vw;
+  padding-right: 3vw;
+  padding-top: 3vh;
+  vertical-align: middle !important;
+ 
+}
+
+tbody.list-favs td:nth-child(2) {
+  
+  text-overflow: ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+  
+}
+tbody.list-favs td:nth-child(2) p:nth-child(1) {
+  font-size: 1.3em;
+  font-weight: bold;
+  /* text-align: justify;
+  text-justify: inter-word; */
+  text-justify: unset;
+
+}
+
+
+tbody.list-favs td:nth-child(3) {
+
+  width: 5vw;
+}
+
+tbody.list-favs td:nth-child(3) a {
+  
+  width: 100%;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  color: #e9e9e9;
+  font-weight: bold;
+  
+}
+
+tbody.list-favs td:nth-child(3) a:hover {
+  color: #FFCA00;
+  box-shadow: 5px 5px 10px grey;
+ }
+
+
+
+tbody.list-favs td:nth-child(3) a:nth-child(1) {
+  background-color: #353535;
+  
+  margin-top: 2vh;
+  
+}
+
+tbody.list-favs td:nth-child(3) a:nth-child(2) {
+  background-color: #666666;
+  
+  margin-top: 2vh;
+  
+}
+
+/* ***** */
+
+/* ***** */
+
+.icono-fav-prod:before {
+  font-size: 3em;
+}
 
 /* ########## */
 
@@ -850,11 +938,14 @@ height: 220px;
 
 .fa-heart {
   font-size: 1em;
-  color: #ff2d53;
+  /* color: #ff2d53; */
   opacity: 0.8;
 
 }
 
+.red {
+  color: #ff2d53; 
+}
 
 
 .btn-secondary {
@@ -1213,7 +1304,12 @@ td>input.form-control {
   margin-top: 6.5vh;
 }
 
-
+tbody.list-favs td:nth-child(3) button {
+  background-color: yellow;
+  width: 100%;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+}
 
 .container-control-panel-table h1 {
   font-size: 3.5em;

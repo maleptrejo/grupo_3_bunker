@@ -16,7 +16,7 @@ const apiUsersController = {
 4.PARA HACER UNA BUSQUEDA POR NOMBRE DE PRODUCTO HAY QUE ENVIAR POR QUERYSTRING UNA KEY "search", POR DEFECTO EL ISTADO PROPORCIONA TODOS LOS ELEMENTOS DISPONIBLES EN LA BASE DE DATOS.-
 */
     list: (req, res) => {
-        let lim = req.query.limit == undefined ? 7 : Number(req.query.limit);
+        let lim = req.query.limit == undefined ? 5 : Number(req.query.limit);
         let off = req.query.start == undefined ? 0 : Number(req.query.start);
         let ord = req.query.sort == undefined ? `ASC` : Number(req.query.sort);
         db.Users.findAndCountAll({
@@ -41,6 +41,28 @@ const apiUsersController = {
                 data: users
             }
             res.json(listadoJSON)
+        })
+    },
+    FavsAll: (req, res)=> {
+        db.Favs.findAll({
+            include: [{association: `users`}],
+        })
+        .then((favs)=> {
+
+            
+            let favJson = {
+                meta: {
+                    status: 200
+                },
+                data: favs
+            }
+
+            res.json(favJson)
+
+
+        })
+        .catch(function(){
+            res.send('Error')
         })
     },
     

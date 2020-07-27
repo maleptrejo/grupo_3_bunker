@@ -101,7 +101,7 @@ tbody.list-users td {
 }
 
 /* ########## */
-
+tbody.list-cart img, 
 tbody.list-favs img {
   width:70px;
   height: 70px;
@@ -114,7 +114,7 @@ tbody.list-favs img {
   width: 7vw;
  
 } */
-
+tbody.list-cart th, td, 
 tbody.list-favs th, td {
   padding-left: 3vw;
   padding-right: 3vw;
@@ -122,7 +122,7 @@ tbody.list-favs th, td {
   vertical-align: middle !important;
  
 }
-
+tbody.list-cart td:nth-child(2),
 tbody.list-favs td:nth-child(2) {
   
   text-overflow: ellipsis;
@@ -130,6 +130,19 @@ tbody.list-favs td:nth-child(2) {
   white-space:nowrap;
   
 }
+
+tbody.list-cart td:nth-child(3)  {
+  text-overflow: ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+}
+
+tbody.list-cart td:nth-child(3) p:nth-child(1) input{
+ 
+  width: 5vw;
+}
+
+tbody.list-cart td:nth-child(3) p:nth-child(1)
 tbody.list-favs td:nth-child(2) p:nth-child(1) {
   font-size: 1.3em;
   font-weight: bold;
@@ -139,12 +152,13 @@ tbody.list-favs td:nth-child(2) p:nth-child(1) {
 
 }
 
-
+tbody.list-cart td:nth-child(4),
 tbody.list-favs td:nth-child(3) {
 
   width: 5vw;
 }
 
+tbody.list-cart td:nth-child(4) a, 
 tbody.list-favs td:nth-child(3) a {
   
   width: 100%;
@@ -154,14 +168,14 @@ tbody.list-favs td:nth-child(3) a {
   font-weight: bold;
   
 }
-
+tbody.list-cart td:nth-child(4) a:hover,
 tbody.list-favs td:nth-child(3) a:hover {
   color: #FFCA00;
   box-shadow: 5px 5px 10px grey;
  }
 
 
-
+tbody.list-cart td:nth-child(4) a:nth-child(1),
 tbody.list-favs td:nth-child(3) a:nth-child(1) {
   background-color: #353535;
   
@@ -1303,6 +1317,10 @@ td>input.form-control {
 .container-avatar {
   margin-top: 6.5vh;
 }
+
+/* tbody.list-cart td:nth-child(3) p:nth-child(1) input{
+  width: 3vw;
+} */
 
 tbody.list-favs td:nth-child(3) button {
   background-color: yellow;

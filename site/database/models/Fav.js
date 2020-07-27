@@ -6,6 +6,22 @@ module.exports = (sequelize, dataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
+        // user_id: {
+        //     type: Types.BIGINT,
+        //     allowNull: false,
+        //     references: {
+        //         model: 'Users',
+        //         key: 'id'
+        //     },
+        // },
+        // product_id: {
+        //     type: Types.BIGINT,
+        //     allowNull: false,
+        //     references: {
+        //         model: 'Products',
+        //         key: 'id'
+        //     },
+        // },
     };
     let config = {
         tableName: `favoritos`,

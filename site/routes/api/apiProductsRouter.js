@@ -8,7 +8,13 @@ const db = require(path.join(__dirname,`..`,`..`,`database`,`models`));
 
 /******************* ROUTES *******************/
 router.get(`/`, apiProductsController.list);
+router.get(`/por_cats`, apiProductsController.listPorCats);
+router.get(`/:id`, apiProductsController.prodDetail);
 router.post(`/`, apiProductsCreateValidaror, apiProductsController.create);
+router.post(`/cart/:id`, apiProductsController.addCart);
+router.delete(`/cart/:id`, apiProductsController.deleteCart);
+router.put(`/cart/:id`, apiProductsController.editCart);
+router.put(`/cart/:id/check_out`, apiProductsController.finishCart);
 router.post(`/favs/:id`, async function(req, res){
    db.Favs.findOne({
        where:{ user_id: req.session.usuarioLogeado.id,
@@ -26,7 +32,7 @@ router.post(`/favs/:id`, async function(req, res){
    })
 
  
-})
+});
 router.delete(`/favs/:id`, async function (req, res){
     console.log(req.body)
     db.Favs.destroy({
@@ -34,6 +40,8 @@ router.delete(`/favs/:id`, async function (req, res){
             product_id: req.params.id}
     })
 });
+router.get('/carts',apiProductsController.getAll );
+router.get('/carts/:customer', apiProductsController.getOne )
 
 
 

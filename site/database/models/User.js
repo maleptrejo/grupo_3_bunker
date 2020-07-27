@@ -44,6 +44,10 @@ module.exports= (sequelize, Types) => {
             Users.hasOne(models.Admins, {
                 foreignKey: 'user_id',
                 as: 'admins'
+            }),
+            Users.hasMany(models.Carts, {
+                foreignKey: 'user_id',
+                as: 'carts'
             })
 
         }

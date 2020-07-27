@@ -17,27 +17,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="row">
-                                        <div class="col-sm-3 hidden-xs"><img src="./imagenes/vaso-termico.png" alt="..." class="img-responsive"/></div>
-                                        <div class="col-sm-9">
-                                            <h4 class="nomargin">Vaso térmico 650ml</h4>
-                                            <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td data-th="Precio">$62.25</td>
-                                <td data-th="Cantidad">
-                                    <input type="number" class="form-control text-center" value="1">
-                                </td>
-                                <td data-th="Subtotal" class="text-center">$62.25</td>
-                                <td class="actions" data-th="">
-                                    <button class="btn yellow btn-sm"><i class="fa fa-refresh"></i></button>
-                                    <button class="btn red btn-sm"><i class="fa fa-trash-o"></i></button>
-                                </td> 
-                            </tr>
-                            <tr>
+                                <% data.forEach(dat=> { %>
+                                    <tr>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col-sm-3 hidden-xs"><img src="../images/productos/<%= dat.image1 %>" alt="..." class="img-responsive"/></div>
+                                                    <div class="col-sm-9">
+                                                        <h4 class="nomargin"><%= dat.name %></h4>
+                                                        <!-- <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p> -->
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td data-th="Precio">$<%= dat.price %></td>
+                                            <td data-th="Cantidad">
+                                                <input type="number" class="form-control text-center" placeholder="<%= dat.qty %>" min="0"  value="<%= dat.qty %>">
+                                            </td>
+                                            <td data-th="Subtotal" class="text-center">$<%= dat.price_prod_cart %></td>
+                                            <td class="actions" data-th="">
+                                                <!-- <button class="btn yellow btn-sm"><i class="fa fa-refresh"></i></button> -->
+
+                                                <td class="td-fav" ><a href= "../api/products/favs/<%= dat.id %>" value="<%= dat.id %>" class="btn cart-quitar" onClick="delete_row(this)" >Quitar</a></td>
+                                                <!-- <button class="btn red btn-sm"><i class="fa fa-trash-o"></i></button> -->
+                                            </td> 
+                                        </tr>
+                                    <% }) %>
+
+
+                         
+                            <!-- <tr>
                                 <td>
                                     <div class="row">
                                         <div class="col-sm-3 hidden-xs"><img src="./imagenes/termo2.jpg" alt="..." class="img-responsive"/></div>
@@ -56,8 +63,8 @@
                                     <button class="btn yellow btn-sm"><i class="fa fa-refresh"></i></button>
                                     <button class="btn red btn-sm"><i class="fa fa-trash-o"></i></button>
                                 </td> 
-                            </tr>
-                            <tr>
+                            </tr> -->
+                            <!-- <tr>
                                 <td>
                                     <div class="row">
                                         <div class="col-sm-3 hidden-xs"><img src="./imagenes/reloj.png" alt="..." class="img-responsive"/></div>
@@ -76,12 +83,12 @@
                                     <button class="btn yellow btn-sm"><i class="fa fa-refresh"></i></button>
                                     <button class="btn red btn-sm"><i class="fa fa-trash-o"></i></button>
                                 </td> 
-                            </tr>
+                            </tr> -->
                         </tbody>
                         <tfoot>
                             <tr class="visible-xs">
                                 <td colspan="3" class="hidden-xs"></td>
-                                <td class="text-center"><strong>Total $ 189.50</strong></td>
+                                <td class="text-center"><strong>Total $<%= data_cart.total_cart %></strong></td>
                             </tr>
                             <tr>
                                 <td><a href="#" class="btn btn-seguir" ><i class="fa fa-angle-left"></i> Seguir Comprando</a></td>
@@ -92,6 +99,19 @@
                         </tfoot>
                     </table>
     </div>
+    <script src="../../scripts/change_cart.js"></script> 
+    <script src="../../scripts/deleteCart.js"></script> 
+
+    <script>
+    
+    </script>
+
+
+    <script>function delete_row(e)
+            {
+                e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
+            }</script>
+  
 </main><%- include(`partials/footer`) %>
 
 </body>	

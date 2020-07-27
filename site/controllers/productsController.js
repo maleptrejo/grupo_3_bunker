@@ -201,7 +201,8 @@ const products = {
                 level: Number(req.body.discountCreate),
             })
         }
-    }
+    },
+    
 };
 
 /************** EXPORTED MODULE **************/

@@ -35,6 +35,7 @@ const usersController = require(path.join(__dirname,`../controllers/usersControl
 router.get('/perfil', usersController.vistaPerfil);
 router.get('/login',guest, usersController.formLogin);
 router.get('/favoritos',guestFav, usersController.verFavs);
+router.get('/cart',guestFav, usersController.verCart);
 router.post('/login/val', usersController.enter);
 router.get('/check', usersController.check);
 router.get ('/create', usersController.createUser);

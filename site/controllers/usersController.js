@@ -68,6 +68,88 @@ const users = {
             // }     
         })
     },
+
+    verCart: (req, res) =>{
+        db.Carts.findOne({
+            where: {
+                user_id: req.session.usuarioLogeado.id, 
+                status:true   
+            },
+            include: [{
+                association: `products`,
+                through: {
+                  attributes: ['qty', 'price'],   
+                }
+              }]
+        })
+        .then((resp)=> {
+            console.log(resp)
+            if(resp==null){
+                res.render('carritoVacio')
+            } else {
+
+
+
+            
+
+
+            let compras=[];
+            const totales=[];
+            let x=resp.dataValues.products;
+            x.forEach(e=>{
+                //e.datavalues.price=e.price
+                let price_prod=e.dataValues.price;
+                let cantidad=e.dataValues.cart_prod.dataValues.qty;
+                let price_prod_cart=price_prod*cantidad;
+
+                let c={
+                    id: e.dataValues.id,
+                    name: e.dataValues.name,
+                    price: e.dataValues.price,
+                    image1: e.dataValues.image1,
+                    qty: e.dataValues.cart_prod.dataValues.qty, 
+                    price_prod_cart: price_prod_cart
+                }
+
+                compras.push(c);
+                totales.push(price_prod_cart);
+
+                // db.Products.findOne({
+        //     where:{id:req.params.id }
+        // }).then((rta)=> {
+        //     let price=rta.price
+        //     console.log(price)
+
+            db.Carts.findOne({
+            where:{ user_id: req.session.usuarioLogeado.id,
+             status: true}
+         }).then((rta)=> {
+            db.Cart_prod.update(
+                {price: price_prod_cart},
+               {where: {product_id: e.dataValues.id, cart_id: rta.id}}
+           )
+        })
+            })
+
+            const reducer=(accumulator, currentValue)=>accumulator+currentValue;
+
+            let user=req.session.usuarioLogeado.id;
+            let total_cart= totales.reduce(reducer);
+            let status=resp.dataValues.status;
+            let id_cart=resp.dataValues.total;
+          
+            let data_cart={user, total_cart, status, id_cart};
+            
+            // console.log(compras);
+
+          res.render('carrito', {data_cart:data_cart, data:compras})
+            
+        }
+           })
+           .catch(function(){
+            res.send('Error')
+        })
+    },
     enter: (req, res)=>{
         
         db.Users.findOne({
@@ -76,8 +158,7 @@ const users = {
                 
             }
         }).then((resultado)=> {
-            
-            
+           
             if (resultado==null) {
                 //¡¡ojo! está mandando la vista de error desde acá, no desde el middleware guest
                 res.render('errorLogin');
@@ -185,8 +266,19 @@ const users = {
             }}
             
             ).then((resultado)=> {
-                res.redirect('/')
-                // res.render('vistaPerfil', {userShow:req.session.usuarioLogeado});
+
+                db.Users.findOne({
+                    where: {
+                        email: req.session.usuarioLogeado.email
+                        
+                    }
+                }).then((resultado)=> {
+                    req.session.usuarioLogeado=resultado.dataValues;
+                 })
+
+
+                // res.redirect('/')
+                res.render('vistaPerfil', {userShow:req.session.usuarioLogeado});
             })
         },
         editForm: (req, res) => {

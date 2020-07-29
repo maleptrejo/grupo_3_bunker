@@ -45,31 +45,38 @@ const apiUsersController = {
     },
     listApi: (req, res) =>{
         
-        let lim = req.query.limit == undefined ? 5 : Number(req.query.limit);
-        let off = req.query.start == undefined ? 0 : Number(req.query.start);
-        let ord = req.query.sort == undefined ? `ASC` : Number(req.query.sort);
-        db.Users.findAndCountAll({
-            where: { email: {[db.Sequelize.Op.like]: req.query.search == undefined ? `%%` : `%`+req.query.search+`%`}},
-            include: [{association: `admins`}, {association: `customers`}],
-            order: [[`email`, ord]],
-            offset: off,
-            limit: lim
-        })
+        
+        // let lim = req.query.limit == undefined ? 5 : Number(req.query.limit);
+        // let off = req.query.start == undefined ? 0 : Number(req.query.start);
+        // let ord = req.query.sort == undefined ? `ASC` : Number(req.query.sort);
+
+        // db.Users.findAndCountAll({
+        //     where: { email: {[db.Sequelize.Op.like]: req.query.search == undefined ? `%%` : `%`+req.query.search+`%`}},
+        //     include: [{association: `admins`}, {association: `customers`}],
+        //     order: [[`email`, ord]],
+        //     offset: off,
+        //     limit: lim
+        // })
+        db.Users.findAll({include: [{association: `admins`}, {association: `customers`}],})
         .then((users) => {
             
             let fields= [];
             
             
-            users.rows.forEach((user)=> {
-                let a= 
-                {id:user.dataValues.id,
-                    email: user.dataValues.email,
-                    name: user.dataValues.customers.name + " " + user.dataValues.customers.surname,
-                detail: `http://localhost:3000/api/users/${user.dataValues.id}` }
-                    
-                  
-                    
-                    fields.push(a)
+            users.forEach((user)=> {
+                if(user.dataValues.customers!=null){
+                    let a= 
+                    {id:user.dataValues.id,
+                        email: user.dataValues.email,
+                        name: user.dataValues.customers.name + " " + user.dataValues.customers.surname,
+                    detail: `http://localhost:3000/api/users/${user.dataValues.id}` }
+                        
+                      
+                        
+                        fields.push(a)
+                }
+            
+             
                 })
                 console.log(fields)
                 
@@ -77,13 +84,13 @@ const apiUsersController = {
                 let listadoJSON = {
                     meta: {
                         status: 200,
-                        elements_in_page: lim,
-                        pagination: {
-                            first_page: `http://localhost:3000/api/users?start=0`,
-                            next_page: users.count > (off+lim) ? `http://localhost:3000/api/users?start=` + (off+lim) : null,
-                            prev_page: off == 0 ? null : `http://localhost:3000/api/users?start=` + (off-lim),
-                            last_page: users.count % lim <= 5 ? `http://localhost:3000/api/users?start=` + (Math.round(users.count/lim,0)*lim) : `http://localhost:3000/api/products?start=` + ((Math.round(users.count/lim,0) + 1)*lim)
-                        }
+                        // elements_in_page: lim,
+                        // pagination: {
+                        //     first_page: `http://localhost:3000/api/users?start=0`,
+                        //     next_page: users.count > (off+lim) ? `http://localhost:3000/api/users?start=` + (off+lim) : null,
+                        //     prev_page: off == 0 ? null : `http://localhost:3000/api/users?start=` + (off-lim),
+                        //     last_page: users.count % lim <= 5 ? `http://localhost:3000/api/users?start=` + (Math.round(users.count/lim,0)*lim) : `http://localhost:3000/api/products?start=` + ((Math.round(users.count/lim,0) + 1)*lim)
+                        // }
                     },
                     
                     data: {count: users.count, fields: fields}

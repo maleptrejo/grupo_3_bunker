@@ -36,7 +36,8 @@ router.get (`/create`, productsController.createForm);
 router.post(`/carga`, createProducts, upload.any(), productsController.create);
 router.get(`/search`, productsController.search);
 router.get(`/extras`, productsController.brandsCategoriesDiscounts);
-router.post(`/extras/update`, productsController.extrasUpdate)
+router.post(`/extras/update`, productsController.extrasUpdate);
+router.get(`/categories/:id`, productsController.catsShow);
 
 //a partir de acá, toma el segundo valor post /products/ como relativo
 router.get(`/:id`, productsController.detail);

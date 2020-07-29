@@ -5,16 +5,16 @@ const {check, validationResult, body} = require(`express-validator`);
 
 /************** MODULE TO EXPORT **************/
 const apiProducts = {
-/************** LIST PROPERTIES **************
-
-1.PARA MODIFICAR LA CANTIDAD DE ELEMENTOS POR HOJA EN EL PAGINADO HAY QUE ENVIAR POR QUERYSTRING  UNA KEY "limit", POR DEFECTO ES 5 ELEMENTOS POR PAGINA.-
-
-2.PARA MODIFICAR EL INICIO DEL LISDATO DE RESULTADOS HAY QUE ENVIAR POR QUERYSTRING UNA KEY "start", POR DEFECTO ES 0.-
-
-3. PARA MODIFICAR EL ORDEN ASCENDENTE O DESCENDENTE DE LA LOS ELEMENTOS SEGUN EL NOMBRE DEL PRODUCTO HAY QUE ENVIAR POR QUERYSTRING UNA KEY "sort", POR DEFECTO ES `ASC`.-
-
-4.PARA HACER UNA BUSQUEDA POR NOMBRE DE PRODUCTO HAY QUE ENVIAR POR QUERYSTRING UNA KEY "search", POR DEFECTO EL ISTADO PROPORCIONA TODOS LOS ELEMENTOS DISPONIBLES EN LA BASE DE DATOS.-
-*/
+    /************** LIST PROPERTIES **************
+    
+    1.PARA MODIFICAR LA CANTIDAD DE ELEMENTOS POR HOJA EN EL PAGINADO HAY QUE ENVIAR POR QUERYSTRING  UNA KEY "limit", POR DEFECTO ES 5 ELEMENTOS POR PAGINA.-
+    
+    2.PARA MODIFICAR EL INICIO DEL LISDATO DE RESULTADOS HAY QUE ENVIAR POR QUERYSTRING UNA KEY "start", POR DEFECTO ES 0.-
+    
+    3. PARA MODIFICAR EL ORDEN ASCENDENTE O DESCENDENTE DE LA LOS ELEMENTOS SEGUN EL NOMBRE DEL PRODUCTO HAY QUE ENVIAR POR QUERYSTRING UNA KEY "sort", POR DEFECTO ES `ASC`.-
+    
+    4.PARA HACER UNA BUSQUEDA POR NOMBRE DE PRODUCTO HAY QUE ENVIAR POR QUERYSTRING UNA KEY "search", POR DEFECTO EL ISTADO PROPORCIONA TODOS LOS ELEMENTOS DISPONIBLES EN LA BASE DE DATOS.-
+    */
     list: (req, res) => {
         let lim = req.query.limit == undefined ? 5 : Number(req.query.limit);
         let off = req.query.start == undefined ? 0 : Number(req.query.start);
@@ -55,8 +55,8 @@ const apiProducts = {
             // limit: lim
         })
         .then((products) => {
-
-            console.log(products.rows[0])
+            
+          
             // console.log(products.rows[0].dataValues.categories.dataValues.name)
             let productsShow=[];
             products.rows.forEach((product)=>{
@@ -64,17 +64,22 @@ const apiProducts = {
                     id: product.dataValues.id,
                     name: product.dataValues.name,
                     description: product.dataValues.description,
+                    cat_id:product.dataValues.categories.dataValues.id,
+                    cat_name:product.dataValues.categories.dataValues.name,
+                    image: product.dataValues.image1,
+                    price: product.dataValues.price,
+                    discount:product.dataValues.discounts.dataValues.level,
                     relations: {brand: product.dataValues.brands.dataValues.name, categories:product.dataValues.categories.dataValues.name, discounts: product.dataValues.discounts.dataValues.id },
                     detail:   `http://localhost:3000/api/products/${product.dataValues.id}` 
                 }
                 productsShow.push(a)
             })
-
-                console.log(productsShow)
-
-
-          
-                //con esto que sigue armo el array de cats con productos.
+            
+    
+            
+            
+            
+            //con esto que sigue armo el array de cats con productos.
             let cat_ids=[];
             let cat_names=[];
             products.rows.forEach(prod=>{
@@ -83,7 +88,7 @@ const apiProducts = {
                 let b=prod.dataValues.categories.dataValues.name
                 cat_names.push(b)
             })
-
+            
             function foo(cat_names) {
                 var a = [], b = [], prev;
                 
@@ -101,12 +106,12 @@ const apiProducts = {
             }
             
             var [names,quantities] = foo(cat_names);       
-  
-        let categorias={}
-         names.forEach((n, i)=>{
-            categorias[n]=quantities[i]
+            
+            let categorias={}
+            names.forEach((n, i)=>{
+                categorias[n]=quantities[i]
             })
-
+            
             let listadoJSON = {
                 meta: {
                     status: 200,
@@ -118,13 +123,14 @@ const apiProducts = {
                     //     last_page: products.count % lim <= 5 ? `http://localhost:3000/api/products?start=` + (Math.round(products.count/lim,0)*lim) : `http://localhost:3000/api/products?start=` + ((Math.round(products.count/lim,0) + 1)*lim)
                     // }
                 },
-                countByCategory: categorias, products:productsShow
+                data: {count: products.count, countByCategory: categorias, products:productsShow}
+                
             }
             res.json(listadoJSON)
         })
     },
     prodDetail: (req, res)=>{
-  
+        
         db.Products.findOne({
             where: {
                 id: req.params.id,
@@ -146,16 +152,16 @@ const apiProducts = {
                 data: prod
             }
             res.json(userJson)
-
-           }).catch(function(){
+            
+        }).catch(function(){
             res.send('Error')
         })
     },
     create: (req, res) => {
-/************** CREATE PROPERTIES **************
-
-1.PARA CREAR UN PRODUCTO DE DEBEN ENVIAR LAS OBLIGATORIAMENTE POR QUERYSTRING LAS KEY "name", "price", "desc", "brand", "disc", "cat" Y "stock". LA KEY "image" NO ES OBLIGATORIA, PERO EL ARTICULO TOMARA EL VALOR "noFoto" PARA EL PRODUCTO QUE SE ESTE CARGANDO-
-*/
+        /************** CREATE PROPERTIES **************
+        
+        1.PARA CREAR UN PRODUCTO DE DEBEN ENVIAR LAS OBLIGATORIAMENTE POR QUERYSTRING LAS KEY "name", "price", "desc", "brand", "disc", "cat" Y "stock". LA KEY "image" NO ES OBLIGATORIA, PERO EL ARTICULO TOMARA EL VALOR "noFoto" PARA EL PRODUCTO QUE SE ESTE CARGANDO-
+        */
         let errors = validationResult(req).errors;
         if (errors.length > 0) {
             res.send(errors)
@@ -205,14 +211,14 @@ const apiProducts = {
             include: [{
                 association: `products`,
                 through: {
-                  attributes: ['qty', 'price'],
+                    attributes: ['qty', 'price'],
                 }
-              }]
+            }]
         })
         .then((resp)=> {
-            console.log(resp)
+       
             if(resp==null){
-
+                
             }else{
                 let cartJson={
                     meta: {
@@ -222,98 +228,146 @@ const apiProducts = {
                 }
                 res.json(cartJson)
             }
-           }).catch(function(){
+        }).catch(function(){
             res.send('Error')
         })
     },
     addCart: async function (req, res){
-       let cart= await db.Carts.findOne({
-            where:{ user_id: req.session.usuarioLogeado.id,
-             status: true}
-        })
-        if(cart!=null) {
-            cart.addProduct(req.body.product_id)
-        } else {
-            db.Carts.create({
-                user_id: req.session.usuarioLogeado.id,
-             status: true,
-             total: 0
-            }).then((rta)=>{
-                rta.addProduct(req.body.product_id)
-            })
-            .then((fin)=>{
-                res.json(fin)
-            })
-        }
-        
-
-     //crear carrito si no hay ninguno
-    },
-    deleteCart: async function (req, res){
-        // console.log('acà')
         let cart= await db.Carts.findOne({
             where:{ user_id: req.session.usuarioLogeado.id,
-             status: true}
-        })
-        console.log(req.body.product_id)
-        cart.removeProduct(req.params.id)
-    },
-    editCart: async function (req, res){
-
-
-        db.Carts.findOne({
-            where:{ user_id: req.session.usuarioLogeado.id,
-             status: true}
-        }).then((cart)=> {
-
-            // cart.getProducts().then((rta)=>{
-            //     console.log(rta)
-            // })
-
-            // cart.removeProduct()
-            // cart.addProduct(req.params.id, {trough:{qty: req.body.qty}}, )
-
-
-            db.Cart_prod.update(
-                {qty: req.body.qty},
-                {where: {product_id: req.params.id, cart_id: cart.id}}
-            )
-        })
-        .then((fin)=>{
-            res.json(fin)
-        })
-    },
-    finishCart: async function(req, res){
-        console.log(req.body)
-
-
-       let cart= await db.Carts.findOne({
-            where:{ user_id: req.session.usuarioLogeado.id,
-             status: true}
-        })
-        cart.update(
-                
-                {total: req.body.total, status: false}
-                // {where: {user_id: req.session.usuarioLogeado.id, cart_id: rta.id}}
-            ).then((fin)=>{
-                console.log('......')
-                console.log(fin)
-                res.json(fin)
+                status: true}
             })
+            if(cart!=null) {
+                cart.addProduct(req.body.product_id)
+            } else {
+                db.Carts.create({
+                    user_id: req.session.usuarioLogeado.id,
+                    status: true,
+                    total: 0
+                }).then((rta)=>{
+                    rta.addProduct(req.body.product_id)
+                })
+                .then((fin)=>{
+                    res.json(fin)
+                })
+            }
+            
+            
+            //crear carrito si no hay ninguno
+        },
+        deleteCart: async function (req, res){
            
-         
-
-        // db.Carts.update(
-        //     {total: req.body.total},
-        //     {where:{ user_id: req.session.usuarioLogeado.id,
-        //              status: true}}
-        //     )
-
-
-
-    }
-
-};
-
-/************** EXPORTING MODULE **************/
-module.exports = apiProducts;
+            let cart= await db.Carts.findOne({
+                where:{ user_id: req.session.usuarioLogeado.id,
+                    status: true}
+                })
+            
+                cart.removeProduct(req.params.id)
+            },
+            editCart: async function (req, res){
+                
+                
+                db.Carts.findOne({
+                    where:{ user_id: req.session.usuarioLogeado.id,
+                        status: true}
+                    }).then((cart)=> {
+                        
+                        // cart.getProducts().then((rta)=>{
+                        //     console.log(rta)
+                        // })
+                        
+                        // cart.removeProduct()
+                        // cart.addProduct(req.params.id, {trough:{qty: req.body.qty}}, )
+                        
+                        
+                        db.Cart_prod.update(
+                            {qty: req.body.qty},
+                            {where: {product_id: req.params.id, cart_id: cart.id}}
+                            )
+                        })
+                        .then((fin)=>{
+                            res.json(fin)
+                        })
+                    },
+                    finishCart: async function(req, res){
+                      
+                        
+                        
+                        let cart= await db.Carts.findOne({
+                            where:{ user_id: req.session.usuarioLogeado.id,
+                                status: true}
+                            })
+                            cart.update(
+                                
+                                {total: req.body.total, status: false}
+                                // {where: {user_id: req.session.usuarioLogeado.id, cart_id: rta.id}}
+                                ).then((fin)=>{
+                                    
+                                   
+                                    res.json(fin)
+                                })
+                                
+                                
+                                
+                                // db.Carts.update(
+                                //     {total: req.body.total},
+                                //     {where:{ user_id: req.session.usuarioLogeado.id,
+                                //              status: true}}
+                                //     )
+                                
+                                
+                                
+                            },
+                            verFav: async function(req, res){
+                                db.Favs.findOne({
+                                    where:{ user_id: req.session.usuarioLogeado.id,
+                                        product_id: req.body.product_id}
+                                    })
+                                    .then(resp=> {
+                                        if(resp==null){
+                                            db.Favs.create({
+                                                user_id: req.session.usuarioLogeado.id,
+                                                product_id: req.body.product_id
+                                            },{
+                                                include:[{association:`users`},{association:`products`}]
+                                            })
+                                        }
+                                    })
+                                    
+                                    
+                                },
+                                deleteFav: async function (req, res){
+                                 
+                                    db.Favs.destroy({
+                                        where:{ user_id: req.session.usuarioLogeado.id,
+                                            product_id: req.params.id}
+                                        })
+                                    },
+                                    categories: (req, res)=>{
+                                  
+                                        db.Categories.findAll({
+                                            // include: [{association: `products`}],
+                                        })
+                                        .then((cat)=> {
+                                            
+                                            let catsJson = {
+                                                meta: {
+                                                    status: 200
+                                                },
+                                                data: cat
+                                            }
+                                            res.json(catsJson)
+                                        })
+                                        .catch(function(){
+                                            res.send('Error')
+                                        })
+                                    },
+                                    categoriesId: (req, res)=>{
+                                       
+                                    }
+                                    
+                                };
+                                
+                                /************** EXPORTING MODULE **************/
+                                module.exports = apiProducts;
+                                

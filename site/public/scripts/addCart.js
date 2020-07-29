@@ -1,5 +1,5 @@
-let elemento=document.querySelector('button#prod')
-elemento.addEventListener('click', function(e){
+let cartButton=document.querySelector('button#prod')
+cartButton.addEventListener('click', function(e){
 
   
 
@@ -13,7 +13,7 @@ elemento.addEventListener('click', function(e){
             })
         })
         .then(response=> response.json())
-        .then(json=> console.log(json) )
+        .then(json=> console.log('en carrito') )
 
 
 

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include(`partials/head`, {title: `Inicio`}) %>
+
+
+<main>
+    <div class="container">
+        <div aria-label="breadcrumb rounded-0 ">
+            <ol class="breadcrumb pl-0 bg-white">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                 <li class="breadcrumb-item item-cat"><a href="#"><%= infoCat.name %></a></li> 
+                <!-- <li class="breadcrumb-item"><a href="/products">Products</a></li> -->
+               
+            </ol>
+        </div>
+    </div> 
+    
+  
+            
+            <section class=" container">
+                <div>
+                    <h3 class="font-weight-bold mb-3">Productos en <%= infoCat.name %></h3>
+                </div>
+                <div class="card-deck" >
+                        <!-- <div class="card">
+                          <img class="card-img-top" src="..." alt="Card image cap">
+                          <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <img class="card-img-top" src="..." alt="Card image cap">
+                          <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <img class="card-img-top" src="..." alt="Card image cap">
+                          <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                          </div>
+                        </div> -->
+                      </div>
+                      <div class="container products-wrapper">
+                            <div class="row d-flex justify-content-around container-tarjetas">
+                              
+                                
+                            </div>
+                        </div>
+                
+                    
+            </section> 
+            <script src="../../scripts/prodCats.js"></script> 
+        </main>
+        <%- include(`partials/footer`) %>
+        
+    </body>	
+    </html>

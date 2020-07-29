@@ -9,40 +9,18 @@ const db = require(path.join(__dirname,`..`,`..`,`database`,`models`));
 /******************* ROUTES *******************/
 router.get(`/`, apiProductsController.list);
 router.get(`/por_cats`, apiProductsController.listPorCats);
-router.get(`/:id`, apiProductsController.prodDetail);
 router.post(`/`, apiProductsCreateValidaror, apiProductsController.create);
 router.post(`/cart/:id`, apiProductsController.addCart);
 router.delete(`/cart/:id`, apiProductsController.deleteCart);
 router.put(`/cart/:id`, apiProductsController.editCart);
 router.put(`/cart/:id/check_out`, apiProductsController.finishCart);
-router.post(`/favs/:id`, async function(req, res){
-   db.Favs.findOne({
-       where:{ user_id: req.session.usuarioLogeado.id,
-        product_id: req.body.product_id}
-   })
-   .then(resp=> {
-    if(resp==null){
-        db.Favs.create({
-            user_id: req.session.usuarioLogeado.id,
-            product_id: req.body.product_id
-        },{
-            include:[{association:`users`},{association:`products`}]
-        })
-    }
-   })
-
- 
-});
-router.delete(`/favs/:id`, async function (req, res){
-    console.log(req.body)
-    db.Favs.destroy({
-        where:{ user_id: req.session.usuarioLogeado.id,
-            product_id: req.params.id}
-    })
-});
+router.post(`/favs/:id`, apiProductsController.verFav);
+router.delete(`/favs/:id`, apiProductsController.deleteFav);
 router.get('/carts',apiProductsController.getAll );
 router.get('/carts/:customer', apiProductsController.getOne )
-
+router.get('/categories',apiProductsController.categories );
+router.get('/categories/:id',apiProductsController.categoriesId );
+router.get(`/:id`, apiProductsController.prodDetail);
 
 
 /************** EXPORTING MODULE **************/

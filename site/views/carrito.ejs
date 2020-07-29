@@ -5,49 +5,62 @@
 
 
 <main class="container container-user">
-    
+
     <div class="container">
         <div aria-label="breadcrumb rounded-0 breadcrumb-user">
             <ol class="breadcrumb pl-0 bg-white">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item"><a href="#">Carrito</a></li>
-                
+
             </ol>
         </div>
     </div>
-    
-    
+
+
     <section class="container container-favs-table table-responsive-sm">
         <table class="table favs-table" id="cart">
             <thead>
                 <h1 class="mb-4">Mis Compras</h1>
             </thead>
             <tbody class="list-cart" id="list-cart">
-                
+
                 <% data.forEach(dat=> { %>
-                    <!-- <a href="/products/<%=dat.id%>">   -->
-                        
-                        <tr class="tr-fav" >
+                <!-- <a href="/products/<%=dat.id%>">   -->
+
+                <tr class="tr-fav">
+
+                    <td style="width: 15%"><img src="../images/productos/<%= dat.image1 %>"></td>
+
+                    <td><a href="/products/<%=dat.id%>">
+                            <p><%= dat.name %></p>
+                            <p>$<%= dat.price %></p>
+                        </a></td>
+                    <td>
+                        <!-- <a href="" value="<%= dat.id %>"> -->
                             
-                            <td style= "width: 15%"><img src="../images/productos/<%= dat.image1 %>"></td>
-                            
-                            <td ><a href="/products/<%=dat.id%>"><p><%= dat.name %></p><p>$<%= dat.price %></p></a></td>
-                            <td ><a href="../api/products/cart/<%= dat.id %>" value="<%= dat.id %>"><p><input type="number" name="qty" min="0"  class="form-control form-input cart-edit" id="price" value="<%= dat.qty %>" required></p><p>$<%= dat.price_prod_cart %></p></a></td>
-                            <!-- <td><%= dat.brand %></td> -->
-                            
-                            <!-- <td> $ <%= dat.price %></td> -->
-                            
-                            
-                            <!-- <td><%= dat.description %></td> -->
-                            
-                            
-                            <td class="td-fav" ><a href= "../api/products/cart/<%= dat.id %>" value="<%= dat.id %>" class="btn cart-quitar" onClick="delete_row(this)" ><i class="fa fa-trash-o"></i></a></td>
-                            
-                            
-                        </tr>
-                    </a>
-                    <% }) %>
-                    <!-- <tfoot>
+                                <input data-url="../api/products/cart/<%= dat.id %>" data-value="<%= dat.id %>" type="number" name="qty" min="0" class="form-control form-input cart-edit"
+                                    id="price" value="<%= dat.qty %>" required>
+
+                
+                            <p>$<%= dat.price_prod_cart %></p>
+                        <!-- </a> -->
+                    </td>
+                    <!-- <td><%= dat.brand %></td> -->
+
+                    <!-- <td> $ <%= dat.price %></td> -->
+
+
+                    <!-- <td><%= dat.description %></td> -->
+
+
+                    <td class="td-fav"><a href="../api/products/cart/<%= dat.id %>" value="<%= dat.id %>"
+                            class="btn cart-quitar" onClick="delete_row(this)"><i class="fa fa-trash-o"></i></a></td>
+
+
+                </tr>
+                </a>
+                <% }) %>
+                <!-- <tfoot>
                         <tr class="visible-xs">
                             <td colspan="3" class="hidden-xs"></td>
                             <td class="text-center"><strong>Total $<%= data_cart.total_cart %></strong></td>
@@ -59,43 +72,46 @@
                             <td colspan="2"><a href="#" class="btn btn-comprar btn-block">PROCESAR COMPRA <i class="fa fa-angle-right"></i></a></td>
                         </tr>
                     </tfoot> -->
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td><p>$<%= data_cart.total_cart %></p> </td>
-                        <td><a href= "../api/products/cart/<%= data_cart.id_cart %>/check_out" class="btn fav-quitar" id="check-out" value="<%= data_cart.total_cart %>"><i class="far fa-share-square"></i></a></td>
-                        
-                    </tr>
-                    
-                    
-                    
-                    
-                    
-                </tbody>
-            </table>
-        </section>
-        
-        <script src="../../scripts/change_cart.js"></script> 
-        <script src="../../scripts/deleteCart.js"></script> 
-        <script>function delete_row(e)
-            {
-                e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
-            }</script>
-            <script src="../../scripts/checkOut.js"></script> 
-            
-            
-            
-        </main>
-        
-        
-        
-        
-        
-        
-        <%- include('partials/footer') %>
-        
-    </body>
-    </html>
-    
-    
-    
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <p>$<%= data_cart.total_cart %></p>
+                    </td>
+                    <td><a href="../api/products/cart/<%= data_cart.id_cart %>/check_out" class="btn fav-quitar"
+                            id="check-out" value="<%= data_cart.total_cart %>"><i class="far fa-share-square"></i></a>
+                    </td>
+
+                </tr>
+
+
+
+
+
+            </tbody>
+        </table>
+    </section>
+
+    <script src="/scripts/change_cart.js"></script>
+    <script src="/scripts/deleteCart.js"></script>
+    <script>
+        function delete_row(e) {
+            e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
+        }
+    </script>
+    <script src="/scripts/checkOut.js"></script>
+
+
+
+</main>
+
+
+
+
+
+
+<%- include('partials/footer') %>
+
+</body>
+
+</html>

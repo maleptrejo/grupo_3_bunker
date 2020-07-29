@@ -1,7 +1,8 @@
-let cartButton=document.querySelector('button#prod')
+// let cartButton=document.querySelector('button#prod')
+let cartButton=document.querySelector('#prod')
 cartButton.addEventListener('click', function(e){
 
-  
+ 
 
  fetch("http://localhost:3000/api/products/cart/"+this.value, {
             method:'post',

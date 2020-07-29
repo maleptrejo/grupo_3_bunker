@@ -10,7 +10,8 @@
         <div aria-label="breadcrumb rounded-0 breadcrumb-user">
             <ol class="breadcrumb pl-0 bg-white">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Carrito</a></li>
+                <li class="breadcrumb-item"><a href="/users/cart">Carrito</a></li>
+                <li class="breadcrumb-item"><a href="#">Check out</a></li>
                 
             </ol>
         </div>
@@ -19,12 +20,12 @@
     
     <table class="table container table-cart">
             <thead>
-                    <h1 class="mb-4 ">Mis Compras</h1>
+                    <h1 class="mb-4">Confirmación de compra</h1>
               <tr>
                 <th scope="col"></th>
                 <th scope="col">Producto</th>
                 <th scope="col">Cantidad</th>
-                <th scope="col"></th>
+                <th scope="col">Subtotal</th>
               
               </tr>
             </thead>
@@ -37,25 +38,22 @@
 
                 <th ><img id="img-cart" src="../images/productos/<%= dat.image1 %>"></th>
                 
-                <td><p><%= dat.name %></p><p>$<%= dat.price %></p></td>
-
-                <td><input type="number" name="qty" min="0"  class="form-control form-input cart-edit" id="price" value="<%= dat.qty %>" data-url="../api/products/cart/<%= dat.id %>"required></p></td>
-                <td id="trash" scope="row"><a href="../api/products/cart/<%= dat.id %>" value="<%= dat.id %>"
-                    class="btn cart-quitar" onClick="delete_row(this)"><i class="fa fa-trash-o"></i></a></td>
+                <td><p><%= dat.name %></p></td>
+                <td><p><%= dat.qty %></p></td>
+                <td><p>$ <%= dat.price_prod_cart %></p></td>
+                
+            
+             
               </tr>
               <% }) %>
-
-
-              
-              <tr id="final-cart">
+              <tr>
                     <th scope="row"></th>
-                    <td class="final-cart">Subtotal:</td>
-                    <td class="final-cart">$<%= data_cart.total_cart %></td>
-               
-                        <td><a href="../users/check_out" class="btn fav-quitar"
-                            id="check-out" value="<%= data_cart.total_cart %>">CHECK-OUT</a>
+                    <td>Total:</td>
+                    <td>$<%= data_cart.total_cart %></td>
+                    <td><a href="../api/products/cart/<%= data_cart.id_cart %>/check_out" class="btn fav-quitar"
+                        id="check-out" value="<%= data_cart.total_cart %>">FINALIZAR </a>
                 </td>
-                  
+                    <!-- <td id="check-out">Continuar <i class="fas fa-sign-out-alt"></i></td> -->
                   </tr>
             </tbody>
           </table>
@@ -73,15 +71,10 @@
                 </table>
             </section>
             
-            <script src="../../scripts/change_cart.js"></script> 
-            <script src="../../scripts/deleteCart.js"></script> 
-            <script>function delete_row(e)
-                {
-                    e.parentNode.parentNode.parentNode.removeChild(e.parentNode.parentNode);
-                }
-            </script>
+ 
+         
 
-            <!-- <script src="../../scripts/checkOut.js"></script>  -->
+            <script src="../../scripts/checkOut.js"></script> 
                 
                 
                 

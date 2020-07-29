@@ -1,13 +1,15 @@
 let cartEdit= document.getElementsByClassName("cart-edit")
 
+
+
+
 Array.from(cartEdit).forEach(cartEd=> { 
   
 
     cartEd.addEventListener('click', function(e){ 
-        e.preventDefault()
+        // e.preventDefault()
         // alert(this.parentElement.parentElement.href)
-   
-        console.log(cartEd.value)
+//    alert(this.dataset.url)
 
         fetch(this.dataset.url, {
             method: 'put', 
@@ -27,14 +29,7 @@ Array.from(cartEdit).forEach(cartEd=> {
             console.log('aca')
         
     })
-    location.reload();
+   
     })
 })
-
-// let cart=document.querySelector('#cart')
-
-
-// cart.addEventListener('click', function(e) {
-// alert('ok')
-// })
 

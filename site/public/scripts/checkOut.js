@@ -2,8 +2,8 @@ let seguir=document.getElementById('check-out')
 
 seguir.addEventListener('click', function(e){
     e.preventDefault()
-// alert('ok')
 
+   
 
 
 fetch(this.href, {
@@ -27,7 +27,7 @@ $('#check-out').confirm({
     columnClass: 'col-lg-5',
     icon: 'fa fa-spinner fa-spin',
     title: 'Su compra está siendo procesada',
-    content: 'Para ver tu orden, presioná ok',
+    content: 'Revisá tu mail para ver los detalles de tu compra',
     animationBounce: 1.5,
 
     buttons: {

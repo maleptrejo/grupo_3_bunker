@@ -40,9 +40,9 @@
                                     <!-- <td><%= dat.description %></td> -->
                                     
                                    
-                                    <td class="td-fav" ><a id="fav-comprar" class="btn" type="submit"><i class="fas fa-shopping-cart"></i></a><a href= "../api/products/favs/<%= dat.id %>" value="<%= dat.id %>" class="btn fav-quitar" onClick="delete_row(this)" >Quitar</a></td>
+                                    <td class="td-fav" ><a href= "../api/products/favs/<%= dat.id %>" value="<%= dat.id %>" class="btn fav-quitar" onClick="delete_row(this)" >Quitar</a></td>
                                   
-                               
+                                    <!-- <a id="prod" data-value="<%= dat.id %>" class="btn" type="submit"><i class="fas fa-shopping-cart"></i></a> -->
                                   </tr>
                                 </a>
                        <% }) %>

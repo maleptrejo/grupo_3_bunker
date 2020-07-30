@@ -14,6 +14,7 @@ var usersRouter = require(`./routes/users`);
 var productsRouter = require(`./routes/products`);
 var apiRouter = require(`./routes/api/apiProductsRouter`);
 var apiRouterUsers = require(`./routes/api/apiUsersRouter`);
+var apiRouterContact = require (`./routes/api/apiContactRouter`);
 
 
 /**************** APP EXPRESS ****************/
@@ -67,9 +68,10 @@ app.use(function(req,res,next) {
 app.use(`/`, indexRouter);
 app.use(`/users`, usersRouter);
 app.use(`/products`, productsRouter);
+app.use(`/contact`, indexRouter);
 app.use(`/api/products`, apiRouter);
 app.use(`/api/users`, apiRouterUsers);
-
+app.use(`/api/contact`, apiRouterContact);
 
 /*** CATCH 404 & FORWARD TO ERROR HANDLER ***/
 app.use(function(req, res, next) {

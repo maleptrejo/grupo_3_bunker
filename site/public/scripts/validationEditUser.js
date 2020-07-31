@@ -7,13 +7,24 @@ window.onload=function() {
        
 
 
-        console.log(checkname, checksurname, checkCountry, checkAdress, checkMail);
+        console.log(checkname, checksurname, checkCountry, checkAdress, checkMail, checkPass, checkPass2 );
 
-        if(checkname && checksurname && checkCountry && checkAdress && checkMail) {
+        if(checkname && checksurname && checkCountry && checkAdress && checkMail && checkPass && checkPass2 ) {
+
+            // event.preventDefault();
+            // alert('ok')
            
          }else{
-       alert('Completá el formulario antes de continuar')
+    //    alert('Completá el formulario antes de continuar')
          event.preventDefault();
+
+
+
+
+         let ed_user=document.querySelector('#edicion-usuario-valid')
+         ed_user.classList.add('login')
+         ed_user.innerHTML="Ingresá datos válidos para validar"
+       
         }
 
     }
@@ -23,14 +34,22 @@ window.onload=function() {
     let formMail=document.querySelector('#email');
 
     let formConfMail= document.querySelector('#cemail');
+
+    let formPass=document.querySelector('#password');
+
+    let formConfPass= document.querySelector('#cPassword');
  
     let checkname=true; 
     let checksurname=true;
     let checkCountry=true; 
     let checkAdress =true; 
     let checkMail= true;
+    let checkPass=false;
+    let checkPass2=false;
 
-    console.log(checkname, checksurname, checkCountry, checkAdress, checkMail);
+    // let checkname, checksurname, checkCountry, checkAdress, checkMail, checkPass, checkPass2=false;
+
+    console.log(checkname, checksurname, checkCountry, checkAdress, checkMail, checkPass, checkPass2 );
     
 
     
@@ -116,7 +135,31 @@ window.onload=function() {
                 }
         })
 
-       
+        formPass.addEventListener('keyup', function(event){
+
+            if (event.target.value.length<8 | event.target.value.length>12 ){
+                event.target.classList.add('is-invalid')
+                checkPass=false;
+            }else{
+                event.target.classList.replace('is-invalid', 'is-valid')
+                checkPass=true;
+            }
+        })
+
+        formConfPass.addEventListener('keyup', function(event){
+            let pass1= formPass.value;
+            let pass2= formConfPass.value;
+            let matchPass= pass1===pass2;
+
+            if (!matchPass){
+                event.target.classList.add('is-invalid')
+                return false;
+            }else{
+                event.target.classList.replace('is-invalid', 'is-valid')
+                checkPass2=true;
+                
+            }
+        })
 
         
 }

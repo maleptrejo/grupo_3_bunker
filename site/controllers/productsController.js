@@ -124,6 +124,7 @@ const products = {
                     order: [[`name`, `ASC`]],
                     limit: 4
                 })
+                
                 let lastArrival = db.Products.findAll({
                     include: [{association: `brands`}, {association: `discounts`}, {association: `categories`}],
                     order: [[`name`, `DESC`]],
@@ -134,6 +135,8 @@ const products = {
                 })
                 Promise.all([promotions, lastArrival, categories])
                 .then(([promotions, lastArrival, categories]) => {
+                    console.log(promotions)
+                    console.log(categories.length)
                     res.render(`index`, {promotions: promotions, lastArrival: lastArrival, categories: categories})
                 })
             })

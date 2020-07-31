@@ -4,9 +4,9 @@
     <%- include(`partials/head`, {title: `Inicio`}) %>
 
 
-<main>
+<main >
       
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div id="carouselExampleControls" class="carousel slide mb-5" data-ride="carousel">
 <div class="carousel-inner">
 <div class="carousel-item active">
 <img src="./imagenes/placeimg_1000_250_tech.jpg" class="d-block w-100" alt="...">
@@ -29,7 +29,7 @@
 </div>
 
   
-  <section class="container caja-tarjetas">
+  <section class="container caja-tarjetas ">
       <div class="row">
           <div class="col-12 col-lg-6">
               <div class="container cont-tarjeta1">
@@ -68,200 +68,143 @@
       </div>
   </section>
 
+<!-- Sección de ofertas********* -->
 
-  
-  
-  <section class="tarjetas-ofertas ">
-      <div class="titulos">
-          <h2 class="products-title">Ofertas </h2><i class="fas fa-angle-double-right"></i>
-      </div>
-      <div class="container products-wrapper">
-          <div class="row d-flex justify-content-around">
-              
-              <% promotions.forEach(product=> { %>
-              
-            
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <section class="product-box">
-                        <a href="/products/<%=product.id%>" class="cont-imagen-data">
-                            <figure class="product-box_image">
-                                <img src="./images/productos/<%=product.image1%>" class="center-cropped" alt="imagen de producto">
-                            </figure>
-                            <article class="product-box_data">
-                                <div class="precio-oferta">
-                                    
-                                    <h2>$<%=product.price%></h2>
-                                    <span><%=product.discounts.level*100%>% OFF</span>
-                                </div>
-                                
-                                
-                                <p><%=product.name%> <span>
-                                </span> <span><%=product.brand%></span></p>
-                                
-                            </article>
-                        </a>
-                    </section>
-                </div>
-             <% }) %>
-              
-          </div>
-      </div>
-      
-  </section>
-  
-  <section class="secciones-sitio">
-      
- 
-              <div class="titulos">
-          <h2 class="products-title">Categorías Destacadas </h2><i class="fas fa-angle-double-right"></i>
-      </div>
+<section class="container">
+        <div class="titulos-index">
+                <h2 class="products-title">Ofertas </h2>
+            </div>
+            <div class="card-deck card-deck-index">
 
-      
-      <div class="container-fluid">
-          <div class="row no-gutters">
-            <% categories.forEach(category => { %>
-              <div class="col-12 col-lg-4 secciones">
-                  <div class="imagen-cat">
-                      <img src="./imagenes/<%= category.image %>" alt="">
-                  </div>
-                  <div class="texto-cat">
-                      <p><%= category.name %></p>
-                  </div>
-              </div>
-            <% }) %>
-          </div>
-          
-          
-          
-      </div>
-      
-  </section>
-  
-  
-  <section class="tarjetas-interés ">
-          <div class="titulos">
-              <h2 class="products-title">Quizás te interesen </h2><i class="fas fa-angle-double-right"></i>
-          </div>
-          <div class="container products-wrapper">
-              <div class="row d-flex justify-content-around">
-                  
+                    <% promotions.forEach(product=> { %>
+                        <a href="/products/<%=product.id%>">
+                    <div class="card">
+                      <img src="./images/productos/<%=product.image1%>"  class="card-img-top" alt="...">
 
-                <% lastArrival.forEach(product=> { %>
-              
-            
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <section class="product-box">
-                            <a href="/products/<%=product.id%>">
-                                <figure class="product-box_image">
-                                    <img src="./images/productos/<%=product.image1%>" class="center-cropped" alt="imagen de producto">
-                                </figure>
-                                <article class="product-box_data">
-                                    <div class="precio-oferta">
-                                        
-                                        <h2>$<%=product.price%></h2>
-                                        <span><%=product.discounts.level*100%>% OFF</span>
-                                    </div>
-                                    
-                                    
-                                    <p><%=product.name%> <span>
-                                        
-                                    </span> <span><%=product.brand%></span></p>
-                                    
-                                </article>
-                            </a>
-                        </section>
+                      <div class="card-body">
+                        <div><h2>$<%=product.price%></h2><span><%=product.discounts.level*100%>% OFF</span></div>
+                        <h3><%=product.brand%></h3>
+                
+                        <h4 class="card-title"><%=product.name%> <span></span></h4>
+                        <h5><%=product.brands.name%></h5>
+                        
+                       
+                      </div>
+
                     </div>
-    
-    
-    
-                 <% }) %>
-                  
-                  
-                  <!-- <div class="col-12 col-sm-6 col-lg-3">
-                      <section class="product-box">
-                          <a href="producto.html">
-                              <figure class="product-box_image">
-                                  <img src="./imagenes/reloj.png" alt="imagen de producto">
-                              </figure>
-                              <article class="product-box_data">
-                                  <div class="precio-oferta">
-                                      
-                                      <h2>$6.500</h2>
-                                      <span>40% OFF</span>
-                                  </div>
-                                  
-                                  
-                                  <p>Reloj Baby-G <span>Casio</span></p>
-                                  
-                              </article>
-                          </a>
-                      </section>
-                  </div>
-                  <div class="col-12 col-sm-6 col-lg-3">
-                      <section class="product-box">
-                          <a href="producto.html">
-                              <figure class="product-box_image">
-                                  <img src="./imagenes/carpa.png" alt="imagen de producto">
-                              </figure>
-                              <article class="product-box_data">
-                                  <div class="precio-oferta">
-                                      
-                                      <h2>$3500</h2>
-                                      <span>50% OFF</span>
-                                  </div>
-                                  
-                                  
-                                  <p>Carpa 2 personas <span>Waterdog</span></p>
-                                  
-                              </article>
-                          </a>
-                      </section>
-                  </div>
-                  <div class="col-12 col-sm-6 col-lg-3">
-                      <section class="product-box">
-                          <a href="producto.html">
-                              <figure class="product-box_image">
-                                  <img src="./imagenes/mochila.png" alt="imagen de producto">
-                              </figure>
-                              <article class="product-box_data">
-                                  <div class="precio-oferta">
-                                      
-                                      <h2>$8.300</h2>
-                                      <span>20% OFF</span>
-                                  </div>
-                                  
-                                  
-                                  <p>Mochila 80lt <span>Montagne</span></p>
-                                  
-                              </article>
-                          </a>
-                      </section>
-                  </div>
-                  <div class="col-12 col-sm-6 col-lg-3">
-                      <section class="product-box">
-                          <a href="producto.html">
-                              <figure class="product-box_image">
-                                  <img src="./imagenes/vaso-termico.png" alt="imagen de producto">
-                              </figure>
-                              <article class="product-box_data">
-                                  <div class="precio-oferta">
-                                      
-                                      <h2>$1.500</h2>
-                                      <span>20% OFF</span>
-                                  </div>
-                                  
-                                  
-                                  <p>Vaso Térmico <span>Contigo</span></p>
-                                  
-                              </article>
-                          </a>
-                      </section>
-                  </div> -->
-              </div>
-          </div>
-          
-      </section>
+                </a>
+                    <% }) %>  
+            </div>
+</section>
 
+
+<!-- 
+<div class="card-group card-group-categories">
+
+        <% categories.forEach(category => { %>
+            <a href="/products/categories/<%=category.id%>"> 
+        <div class="card card-cats">
+            <div class="card-cats-img">
+                    <img src="./imagenes/<%= category.image %>" alt="">
+            </div>
+                
+          <div class="card-body card-over-img">
+            <h5 class="card-title"><%= category.name %></h5>
+            
+          </div>
+        </div>
+    </a>
+        <% }) %>
+</div>  -->
+
+<section class="seccion-categorias">
+    <!-- <div class="container">
+            <div class="titulos">
+                    <h2 class="products-title">Categorías </h2><i class="fas fa-angle-double-right"></i>
+                </div>
+        <ul class="lista-list-cats">
+                <li class="list-cats"><span> </span> </li>
+                <% categories.forEach(category => { %>
+    
+                    <li class="list-cats"> <img src="./imagenes/<%= category.image %>" alt=""></li>
+                    <% }) %>
+                    <% categories.forEach(category => { %>
+    
+                        <li class="list-cats"> <img src="./imagenes/<%= category.image %>" alt=""></li>
+                        <% }) %>
+                   
+    
+        </ul>
+    
+    </div> -->
+
+    <div  class="jumbotron jumbotron-fluid" style="background-image: url(./imagenes/<%= categories[0].image %>); background-repeat: no-repeat;
+        background-size: 2440px">
+            <div class="container " id="contenido-jumbotron">
+                <h2 class="display-4"><%= categories[0].name %></h2>
+                <hr class="my-4">
+                <h3> Nuevos ingresos, descuentos, promociones. Cliqueá <a  href="/products/categories/<%=categories[0].id%>" role="button">acá</a> para ver las opciones.</h3>
+            </div>
+          </div>
+
+    <!-- <div class="jumbotron" style="background-image: url(./imagenes/<%= categories[0].image %>); background-repeat: no-repeat;
+    background-size: 2440px">
+        <div id="contenido-jumbotron">
+                <h1 class="display-4"><%= categories[0].name %></h1>
+                <h2 class="lead">¡15% off en tu primera compra! </h2>
+                <hr class="my-4">
+                <h3>Categoría destacada del mes: nuevos ingresos, descuentos, promociones. Cliqueá acá para ver las opciones.</h3>
+                <p class="lead">
+                  <a  href="/products/categories/<%=categories[0].id%>" role="button">Learn more</a>
+                </p>
+              </div>
+        </div> -->
+           
+</section>
+
+
+
+
+
+
+
+
+ 
+
+<!-- Sección de intereses********* -->
+<section class="container">
+        <div class="titulos-index">
+                <h2 class="products-title">Quizás te interese </h2>
+            </div>
+            <div class="card-deck card-deck-index">
+
+                    <% lastArrival.forEach(product=> { %>
+                        <a href="/products/<%=product.id%>"> 
+                    <div class="card">
+                      <img src="./images/productos/<%=product.image1%>"  class="card-img-top" alt="...">
+
+                      <div class="card-body">
+                        <div><h2>$<%=product.price%></h2><span><%=product.discounts.level*100%>% OFF</span></div>
+                        <h3><%=product.brand%></h3>
+                
+                        <h4 class="card-title"><%=product.name%> <span></span></h4>
+                        <h5><%=product.brands.name%></h5>
+                        
+                       
+                      </div>
+
+                    </div>
+                </a>
+                    <% }) %>  
+            </div>
+</section>
+
+
+
+
+
+  
+  
 
 
       <section class="main-footer">

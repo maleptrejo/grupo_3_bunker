@@ -32,7 +32,7 @@ var upload = multer({ storage: storage })
 const usersController = require(path.join(__dirname,`../controllers/usersController`));
 
 /****************** ROUTES ******************/
-router.get('/perfil', usersController.vistaPerfil);
+// router.get('/perfil',cartAccess, usersController.vistaPerfil);
 router.get('/login',guest, usersController.formLogin);
 router.get('/favoritos',guestFav, usersController.verFavs);
 router.get('/cart',cartAccess, usersController.verCart);
@@ -45,15 +45,17 @@ router.post('/create',  createUserValidator, usersController.registro);
 router.get(`/check_out`, cartAccess, usersController.proceedCheckOut);
 router.get(`/logout`,logout, usersController.close);
 router.get(`/avatar`,cartAccess, usersController.avatar);
-router.post(`/avatar`, upload.any(), usersController.cargarAvatar);
-router.get('/edit', usersController.editForm);
-router.post('/edit', createUserValidator, usersController.editData);
-router.get('/delete', usersController.deleteForm);
-router.get('/delete/ok', usersController.deleteOk);
+router.post(`/avatar`,cartAccess, upload.any(), usersController.cargarAvatar);
+router.get('/edit',cartAccess, usersController.editForm);
+router.post('/edit',cartAccess, createUserValidator, usersController.editData);
+router.get('/delete',cartAccess, usersController.deleteForm);
+router.get('/delete/ok',cartAccess, usersController.deleteOk);
 router.get('/admins/edit', authorization, usersController.editFormAdmin);
-router.post('/admins/edit', usersController.editAdminData);
+router.get('/admins/create_admin', authorization, usersController.create_admin);
+router.post('/admins/create_admin',createUserValidator, authorization, usersController.create_admin_post);
+router.post('/admins/edit',authorization, usersController.editAdminData);
 router.get('/admins/avatar', authorization, usersController.avatar)
-router.post('/admins/avatar', usersController.cargarAvatar);
+router.post('/admins/avatar',authorization, usersController.cargarAvatar);
 router.get('/admins/control',authorization, usersController.controlVer);
 
 router.get('/admins/contacts', authorization, usersController.controlContacts);

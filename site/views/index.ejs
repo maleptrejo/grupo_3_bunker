@@ -9,13 +9,13 @@
   <div id="carouselExampleControls" class="carousel slide mb-5" data-ride="carousel">
 <div class="carousel-inner">
 <div class="carousel-item active">
-<img src="./imagenes/placeimg_1000_250_tech.jpg" class="d-block w-100" alt="...">
+<img src="./imagenes/3800969.jpg" class="d-block w-100" alt="...">
 </div>
 <div class="carousel-item">
-<img src="./imagenes/placeimg_1000_250_people.jpg" class="d-block w-100" alt="...">
+<img src="./imagenes/positivism.jpg" class="d-block w-100" alt="...">
 </div>
 <div class="carousel-item">
-<img src="./imagenes/placeimg_1000_250_arch.jpg" class="d-block w-100" alt="...">
+<img src="./imagenes/sales.jpg" class="d-block w-100" alt="...">
 </div>
 </div>
 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -98,48 +98,11 @@
 </section>
 
 
-<!-- 
-<div class="card-group card-group-categories">
-
-        <% categories.forEach(category => { %>
-            <a href="/products/categories/<%=category.id%>"> 
-        <div class="card card-cats">
-            <div class="card-cats-img">
-                    <img src="./imagenes/<%= category.image %>" alt="">
-            </div>
-                
-          <div class="card-body card-over-img">
-            <h5 class="card-title"><%= category.name %></h5>
-            
-          </div>
-        </div>
-    </a>
-        <% }) %>
-</div>  -->
-
 <section class="seccion-categorias">
-    <!-- <div class="container">
-            <div class="titulos">
-                    <h2 class="products-title">Categorías </h2><i class="fas fa-angle-double-right"></i>
-                </div>
-        <ul class="lista-list-cats">
-                <li class="list-cats"><span> </span> </li>
-                <% categories.forEach(category => { %>
-    
-                    <li class="list-cats"> <img src="./imagenes/<%= category.image %>" alt=""></li>
-                    <% }) %>
-                    <% categories.forEach(category => { %>
-    
-                        <li class="list-cats"> <img src="./imagenes/<%= category.image %>" alt=""></li>
-                        <% }) %>
-                   
-    
-        </ul>
-    
-    </div> -->
+ 
 
     <div  class="jumbotron jumbotron-fluid" style="background-image: url(./imagenes/<%= categories[0].image %>); background-repeat: no-repeat;
-        background-size: 2440px">
+        background-attachment: fixed ">
             <div class="container " id="contenido-jumbotron">
                 <h2 class="display-4"><%= categories[0].name %></h2>
                 <hr class="my-4">
@@ -147,29 +110,10 @@
             </div>
           </div>
 
-    <!-- <div class="jumbotron" style="background-image: url(./imagenes/<%= categories[0].image %>); background-repeat: no-repeat;
-    background-size: 2440px">
-        <div id="contenido-jumbotron">
-                <h1 class="display-4"><%= categories[0].name %></h1>
-                <h2 class="lead">¡15% off en tu primera compra! </h2>
-                <hr class="my-4">
-                <h3>Categoría destacada del mes: nuevos ingresos, descuentos, promociones. Cliqueá acá para ver las opciones.</h3>
-                <p class="lead">
-                  <a  href="/products/categories/<%=categories[0].id%>" role="button">Learn more</a>
-                </p>
-              </div>
-        </div> -->
+ 
            
 </section>
 
-
-
-
-
-
-
-
- 
 
 <!-- Sección de intereses********* -->
 <section class="container">
@@ -250,9 +194,9 @@
                   <br>
                   <div>
                       <ul>
-                          <li><a href="">Acerca de  nosotros</a></li>
+                          <li><a href="/nosotros">Acerca de  nosotros</a></li>
                           <li><a href="">Trabajá con nosotros</a></li>
-                          <li><a href="">Equipo</a></li>
+                          <li><a href="/equipo">Equipo</a></li>
                       </ul>
                   </div>
                   
@@ -264,8 +208,8 @@
                   <br>
                   <div>
                       <ul>
-                          <li><a href="">Cambios y devoluciones</a></li>
-                          <li><a href="">FAQs</a></li>
+                          <li><a href="/cambios">Política de cambios y devoluciones</a></li>
+                          <li><a href="/faq">FAQs</a></li>
                           <li><a href="">Contacto</a></li>
                       </ul>
                   </div>

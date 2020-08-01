@@ -30,6 +30,7 @@ fetch('http://localhost:3000/api/products/por_cats')
                 name: prod.name,
                 price:prod.price,
                 discount: prod.discount*100,
+                encabezado: prod.img_cat
             }
 
 
@@ -38,155 +39,128 @@ fetch('http://localhost:3000/api/products/por_cats')
     })
     // console.log(filtro)
 
-    let container_tarjetas=document.querySelector('.container-tarjetas')
+   let jumbo= document.querySelector('.jumbo-encabezado')
+   jumbo.style.backgroundImage=`url(../../imagenes/${filtro[0].encabezado} )`
+   let titulo= document.querySelector('h1.display-4')
+   titulo.innerHTML+=filtro[0].cat_name
+   titulo.style.fontSize="8em"
+   titulo.style.color="#E9e9e9"
+   titulo.style.textShadow= "2px 2px 6px #353535";
+   titulo.style.height="300px"
 
+   console.log(filtro[0].encabezado)
 
     for (let i=0; i< filtro.length; i++) {
-        console.log(filtro[i])
-        console.log(filtro[i].name)
-
-        // <div class="col-12 col-sm-6 col-lg-3">
-        let div1=document.createElement('div')
-        div1.classList.add(`col-12`)
-        div1.classList.add(`col-sm-6`)
-        div1.classList.add(`col-lg-3`)
-
-        // <section class="product-box">
-        let section=document.createElement('section')
-        section.classList.add("product-box")
+      
 
         // <a href="/products/<%=product.id%>">
         let a=document.createElement('a')
         a.setAttribute('href', `/products/${filtro[i].prod_id}`)
 
-        // <figure class="product-box_image">
 
-        let figure=document.createElement('figure')
-        figure.classList.add("product-box_image")
-
-        // <img src="./images/productos/<%=product.image1%>" class="center-cropped" alt="imagen de producto">
-
-        let img=document.createElement('img')
-        img.classList.add("center-cropped")
-        img.setAttribute('src', `../../images/productos/${filtro[i].image}`)
-        img.setAttribute(`alt`, `Card image cap`)
-
-    
-
-        // <article class="product-box_data">
-        let article=document.createElement('article')
-        article.classList.add("product-box_data")
-
-            // <div class="precio-oferta">
-                    
-            //         <h2>$<%=product.price%></h2>
-            //         
-            let div2=document.createElement('div')
-            div2.classList.add("precio-oferta")
-
-            let h2=document.createElement('h2')
-            h2.innerHTML+='$'+filtro[i].price
-
-            let span=document.createElement('span')
-        span.innerHTML+='%'+filtro[i].discount+' '+'OFF'
-        
-        // <span><%=product.brand%></span>
-
-        //    <p><%=product.name%> <span>
+         // <div class="col-12 col-sm-6 col-lg-3">
+         let div1=document.createElement('div')
+         div1.classList.add(`card`)
        
 
-        let p=document.createElement('p')
-        p.innerHTML+=filtro[i].name
+          // <img src="./images/productos/<%=product.image1%>" class="center-cropped" alt="imagen de producto">
+
+          let img=document.createElement('img')
+          img.classList.add("card-img-top")
+          img.setAttribute('src', `../../images/productos/${filtro[i].image}`)
+          img.setAttribute(`alt`, `Card image cap`)
+
+        div1.append(img)
+
+        let div2=document.createElement('div')
+        div2.classList.add("card-body")
+
+
+        // <div><h2>$<%=product.price%></h2><span><%=product.discounts.level*100%>% OFF</span></div>
+        let div3=document.createElement('div')
+        let h2=document.createElement('h2')
+        h2.innerHTML+='$'+filtro[i].price
+        let span1=document.createElement('span')
+        span1.innerHTML+='%'+filtro[i].discount+' '+'OFF'
+        div3.append(h2)
+        div3.append(span1)
 
        
-
-       
-        container_tarjetas.append(div1)
-        div1.append(section)
-        section.append(a)
-        a.append(figure)
-        figure.appendChild(img)
-        a.append(article)
-        div2.append(h2)
-        div2.append(span)
-        article.append(div2)
-        article.append(p)
-
+        let h4=document.createElement('h4')
+        h4.innerHTML+=filtro[i].name
         
 
-        
+        div2.append(div3)
+        div2.append(h4)
+        div1.append(div2)
+        let contenedor= document.querySelector('.card-deck-index')
+        a.append(div1)
+        contenedor.append(a)
 
-        
 
-        // *****
-               
+       //CÓDIGO INICIAL: CON PROBLEMAS EN RESPONSIVENESS
+
+        // let container_tarjetas=document.querySelector('.container-tarjetas')
+        
         // let div1=document.createElement('div')
-        // div1.classList.add('card')
-        // div1.setAttribute('style', '18rem')
+        // div1.classList.add(`col-12`)
+        // div1.classList.add(`col-sm-6`)
+        // div1.classList.add(`col-lg-3`)
 
+       
+        // let section=document.createElement('section')
+        // section.classList.add("product-box")
 
+        
+        // let a=document.createElement('a')
+        // a.setAttribute('href', `/products/${filtro[i].prod_id}`)
+
+        // let figure=document.createElement('figure')
+        // figure.classList.add("product-box_image")
+
+       
         // let img=document.createElement('img')
-        // img.classList.add('card-img-top')
+        // img.classList.add("center-cropped")
         // img.setAttribute('src', `../../images/productos/${filtro[i].image}`)
         // img.setAttribute(`alt`, `Card image cap`)
-        // div1.appendChild(img)
 
+    
+        // let article=document.createElement('article')
+        // article.classList.add("product-box_data")
 
-        // style="width: 18rem;"
+                  
+        //     let div2=document.createElement('div')
+        //     div2.classList.add("precio-oferta")
 
-        // console.log(filtro[i].image)
+        //     let h2=document.createElement('h2')
+        //     h2.innerHTML+='$'+filtro[i].price
 
-        // let div2=document.createElement('div')
-        // div2.classList.add('card-body')
-
-        // let h5=document.createElement('h5')
-        // h5.classList.add('card-title')
-        // h5.innerHTML+=filtro[i].name
-
-        // div2.appendChild(h5)
-
-        // let h4=document.createElement('h4')
-        // h4.classList.add('card-text')
-        // h4.innerHTML+="$"+filtro[i].price
-        
-       
-        // div2.append(h4)
+        //     let span=document.createElement('span')
+        // span.innerHTML+='%'+filtro[i].discount+' '+'OFF'
+           
 
         // let p=document.createElement('p')
-        // p.classList.add('card-text')
-        // p.innerHTML+=filtro[i].description
+        // p.innerHTML+=filtro[i].name
 
-        // div2.append(p)
+       
 
-        // div1.append(div2)
+       
+        // container_tarjetas.append(div1)
+        // div1.append(section)
+        // section.append(a)
+        // a.append(figure)
+        // figure.appendChild(img)
+        // a.append(article)
+        // div2.append(h2)
+        // div2.append(span)
+        // article.append(div2)
+        // article.append(p)
 
-        // card_box.append(div1)
 
     }
 
 
-     
-    // <div class="col-12 col-sm-6 col-lg-3">
-    // <section class="product-box">
-        // <a href="/products/<%=product.id%>">
-            // <figure class="product-box_image">
-            //     <img src="./images/productos/<%=product.image1%>" class="center-cropped" alt="imagen de producto">
-            // </figure>
-            // <article class="product-box_data">
-                {/* <div class="precio-oferta">
-                    
-                    <h2>$<%=product.price%></h2>
-                    <span><%=product.discounts.level*100%>% OFF</span>
-                </div> */}
-                
-                
-                {/* <p><%=product.name%> <span>
-                </span> <span><%=product.brand%></span></p>
-                
-            </article> */}
-{/* //         </a> */}
-{/* //     </section> */}
-{/* </div> */}
+    
 
 })
 }

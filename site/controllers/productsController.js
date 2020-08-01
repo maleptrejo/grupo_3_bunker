@@ -16,6 +16,7 @@ const products = {
             order: [[`name`, `ASC`]],
         })
         .then((productoDetallado) => {
+      
             res.render(`productList`, {productoDetallado: productoDetallado});
         })
     },
@@ -30,7 +31,7 @@ const products = {
         .then(([lastArrival, product]) => {
             let productoDetallado = []
             productoDetallado.push(product)
-            
+            console.log(productoDetallado[0].categories.name)
             res.render(`producto2`, {productoDetallado: productoDetallado, lastArrival: lastArrival})
         })
     },
@@ -221,7 +222,7 @@ const products = {
                 }
             })
             .catch(function(){
-                res.send('Error')
+                res.render('errorFile')
             })   
         }
         

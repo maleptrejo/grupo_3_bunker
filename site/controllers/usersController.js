@@ -252,7 +252,7 @@ const users = {
                 }
             })
             .catch(function () {
-                res.send('Error')
+                res.render('errorFile')
             })
     },
 

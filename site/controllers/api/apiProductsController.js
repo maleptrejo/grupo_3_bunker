@@ -83,7 +83,7 @@ const apiProducts = {
             .then((products) => {
 
 
-                // console.log(products.rows[0].dataValues.categories.dataValues.name)
+                // console.log(products.rows[0].dataValues.categories.dataValues.image)
                 let productsShow = [];
                 products.rows.forEach((product) => {
                     let a = {
@@ -100,11 +100,13 @@ const apiProducts = {
                             categories: product.dataValues.categories.dataValues.name,
                             discounts: product.dataValues.discounts.dataValues.id
                         },
-                        detail: `http://localhost:3000/api/products/${product.dataValues.id}`
+                        detail: `http://localhost:3000/api/products/${product.dataValues.id}`,
+                        img_cat: product.dataValues.categories.dataValues.image
                     }
                     productsShow.push(a)
                 })
 
+                console.log(productsShow)
 
 
 
@@ -201,7 +203,8 @@ const apiProducts = {
                 res.json(userJson)
 
             }).catch(function () {
-                res.send('Error')
+               res.send('Error')
+               
             })
     },
     create: (req, res) => {

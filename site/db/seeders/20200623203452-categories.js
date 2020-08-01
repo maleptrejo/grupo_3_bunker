@@ -10,27 +10,27 @@ module.exports = {
         {
           id: 1,
           name: "Outdoor",
-          image: "outdoor.png"
+          image: "wet-empty-road-wallpaper.jpg"
         },
         {
           id: 2,
           name: "Diseño Sustentable",
-          image: "muebles.jpg"
+          image: "SUSTENTABLE.jpg"
         },
         {
           id: 3,
           name: "Sado",
-          image: "greyshadows.jpg"
+          image: "SADO.jpg"
         },
         {
           id: 4,
           name: "Taller",
-          image: "herramientas.jpg"
+          image: "tools-installation-floor.jpg"
         },
         {
           id: 5,
           name: "Bazar",
-          image: "bazar.jpg"
+          image: "BAZARBOT.jpg"
         }
 
       ], {});

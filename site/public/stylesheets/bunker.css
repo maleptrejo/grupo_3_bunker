@@ -108,6 +108,106 @@ tbody.list-users td {
   font-size: 2em;
 }
 
+span.bunker{
+  font-family: 'Black Ops One', cursive;
+}
+
+h2 span{
+  font-family: 'Black Ops One', cursive;
+ 
+}
+
+.container-nosotros h2{
+  font-size: 4em;
+  
+}
+
+.container-nosotros h3{
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.container-nosotros p{
+  font-size: 2em;
+}
+
+.container-nosotros div div {
+  margin-top: 30px;
+  text-align: justify;
+}
+
+.container-equipo div img{
+  object-fit: cover;
+  object-position: center;
+  width: 150px;
+  height: 150px;
+}
+
+.container-equipo div:nth-child(4) img{
+  object-fit: cover;
+  object-position: 100% 30%;
+  width: 150px;
+  height: 150px;
+
+}
+
+.container-equipo div:nth-child(1){
+  margin-bottom: 70px;
+}
+
+.equipo-contenido {
+  display: flex;
+  text-align: center;
+}
+
+.equipo-contenido div:nth-child(2){
+
+  font-size: 2.5em;
+  text-align: justify;
+  margin-left: 30px;
+}
+.container-equipo {
+  margin-top: 40px;
+}
+
+.card-deck-promociones .card .card-body p.card-text {
+  height: 60px;
+
+}
+
+.card-deck-promociones .card .card-body h5 {
+  font-size: 2em;
+
+}
+
+.container-promociones div {
+  margin-top: 40px;
+}
+
+.container-promociones div h2 {
+  font-size: 4em;
+}
+
+.cambios div {
+  font-size: 2.5em;
+  text-align: justify;
+}
+
+.container-equipo div h2 {
+  font-size: 3.5em;
+}
+
+.container-equipo h3 {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #c2c2c2;
+
+}
+.container-equipo div {
+  margin-bottom: 30px;
+}
+
+
 /* ########## */
 /* tbody.list-cart img,  */
 #img-cart {
@@ -742,6 +842,7 @@ header {
   top: 0;
   z-index: 1;
   box-shadow: 0 3px 3px  gray;
+  height: 55px;
 }
 
 .icono {
@@ -777,21 +878,21 @@ margin-left: 1vw;
   padding-left: 7vw;
   text-align: center;
   min-height: 17vh;
-  background-color:  #E9e9e9;
-  border-bottom: 4px solid #c2c2c2;
+  /* background-color:  #E9e9e9; */
+  border-bottom: 2px solid #c2c2c2;
   overflow: scroll;
-
+  background-color: #353535;
 }
 
 .logo-bunker>a>h1 {
   font-family: 'Black Ops One', cursive;
   letter-spacing: 5px;
   font-size: 5em;
-/* color: #E9e9e9; */
+ color: #E9e9e9; */
 /* color:#c2c2c2; */
-color: #353535;
+/* color: #353535; */
 margin-top: 4vh;
-text-shadow: 2px 2px 6px #c2c2c2;
+/* text-shadow: 2px 2px 6px #c2c2c2; */
 }
 .logo-bunker>a>h1>span {
   font-family: 'Black Ops One', cursive;

@@ -18,59 +18,86 @@ function fetchUsers(url) {
             let users = json.data.rows;
             //  console.log(users[2])
 
-
-
             listUsers.innerHTML = "";
 
             for (let i = 0; i < users.length; i++) {
 
+                // if (users[i].customers != null) {
+                    console.log(users[i])
+                    let nombre;
+
+                    if (users[i].customers == null) { 
+                        
+                        nombre = users[i].admins.name + " " + users[i].admins.surname ;
+                    }else{
+                        
+                        nombre = users[i].customers.name + " " + users[i].customers.surname ;
+                    }
+                    
+
+                    let th = "<th><img src= ../../images/usuarios/" + users[i].avatar + "></th>";
+                    let td = "<td>" + users[i].email + "</td>";
+                    let tdname="<td>"+nombre+"</td>"
+
+                    if (users[i].customers == null) { 
+                        tdLink=  "<td></td>";
+                    }else{
+                        tdLink=  "<td>" + "<a href=/users/customers/"+users[i].id + ">" + "<i class='far fa-address-card'></i>"+"</a>" + "</td>";
+                    }
 
 
-                let th = "<th><img src= ../../images/usuarios/" + users[i].avatar + "></th>";
-                let td = "<td>" + users[i].email + "</td>";
+                   
 
+                    let tr = "<tr>" + th + td + tdname +tdLink+ "</tr>"
+                    listUsers.innerHTML += tr;
 
-                let td2 = document.createElement('td')
-                let a = document.createElement('a')
-                a.setAttribute('href', '/')
-                let icon = document.createElement('i')
-                icon.classList.add('far')
-                icon.classList.add('fa-address-card')
-                a.append(icon)
-                td2.append(a)
-
-
-
-                // let tdname;
-
-                // if (users[i].customers == null) {
-                //     tdname = "<td>" + users[i].admins.name + " " + users[i].admins.surname + "</td>";
-                // } else {
-                //     tdname = "<td>" + users[i].customers.name + " " + users[i].customers.surname + "</td>";
                 // }
-
-
-                let tr = "<tr>" + th + td + tdname + "</tr>"
-
-                listUsers.innerHTML += tr;
-
 
             }
 
-            let next = document.querySelector('#next')
-            next.addEventListener('click', function (e) {
-                listUsers.innerHTML = "";
-                fetchUsers(json.meta.pagination.next_page)
+          
+
+
+            let old_next = document.querySelector('#next')
+            let next =old_next.cloneNode(true)
+            old_next.parentNode.replaceChild(next, old_next)
+            
+            next.addEventListener('click', function  (e) {
+
+                    if(!json.meta.pagination.next_page){
+                        console.log("estoy en null")
+                    }
+                    else {
+                        listUsers.innerHTML = "";
+                        console.log('voy a la pagina '+ json.meta.pagination.next_page )
+                        fetchUsers(json.meta.pagination.next_page)
+                    }
+
+                   
+               
+
             })
 
-            let prev = document.querySelector('#prev')
+
+            let old_prev = document.querySelector('#prev')
+            let prev =old_prev.cloneNode(true)
+            old_prev.parentNode.replaceChild(prev, old_prev)
+
             prev.addEventListener('click', function (e) {
-                listUsers.innerHTML = "";
-                console.log(json.meta.pagination.prev_page)
-                fetchUsers(json.meta.pagination.prev_page)
+                 if(json.meta.pagination.prev_page==null) {
+                     console.log('en null')
+                 }else{
+                    console.log('voy a la pagina '+ json.meta.pagination.prev_page)
+                    listUsers.innerHTML = "";
+                    fetchUsers(json.meta.pagination.prev_page)
+                 }
             })
 
-            let last = document.querySelector('#last')
+
+            let old_last = document.querySelector('#last')
+            let last =old_last.cloneNode(true)
+            old_last.parentNode.replaceChild(last, old_last)
+
             last.addEventListener('click', function (e) {
                 listUsers.innerHTML = "";
                 fetchUsers(json.meta.pagination.last_page)
@@ -80,6 +107,7 @@ function fetchUsers(url) {
 
         })
         .catch(error => {
+            console.log('error')
             let tr = document.createElement('tr')
             tr.classList.add('list-group-item', 'text-danger')
             tr.innerHTML = error

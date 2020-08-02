@@ -111,11 +111,15 @@ const apiUsersController = {
                       }]
                 })
                 .then((resp)=> {
+                   
                     let user={
                         id: resp.dataValues.id,
                         email: resp.dataValues.email,
                         name: resp.dataValues.customers.dataValues.name+ " "+ resp.dataValues.customers.dataValues.surname,
-                        avatar: `http://localhost:3000/images/usuarios/${resp.dataValues.avatar}`
+                        avatar: `http://localhost:3000/images/usuarios/${resp.dataValues.avatar}`,
+                        avatar_plain:resp.dataValues.avatar,
+                        address: resp.dataValues.customers.dataValues.adress,
+                        country: resp.dataValues.customers.dataValues.country,
                     }
                     let userJson = {
                         meta: {

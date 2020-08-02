@@ -708,6 +708,11 @@ const users = {
 
     favsShow: (req, res) => {
         res.render('favs')
+    },
+    customerDetail: (req, res)=>{
+        user_id=req.params.id
+      
+        res.render('vistaUserDetail', {user_id:user_id})
     }
 
     // avatarAdmin: (req, res) => {

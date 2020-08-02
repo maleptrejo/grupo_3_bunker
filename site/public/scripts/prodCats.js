@@ -40,7 +40,7 @@ fetch('http://localhost:3000/api/products/por_cats')
     // console.log(filtro)
 
    let jumbo= document.querySelector('.jumbo-encabezado')
-   jumbo.style.backgroundImage=`url(../../imagenes/${filtro[0].encabezado} )`
+   jumbo.style.backgroundImage=`url(../../images/productos/${filtro[0].encabezado} )`
    let titulo= document.querySelector('h1.display-4')
    titulo.innerHTML+=filtro[0].cat_name
    titulo.style.fontSize="8em"

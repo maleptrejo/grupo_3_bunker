@@ -64,6 +64,8 @@ router.get('/admins/delete', authorization, usersController.deleteFormAdmin);
 router.get('/admins/delete/ok', authorization, usersController.deleteOkAdmin);
 
 router.get('/favs', usersController.favsShow);
+router.get('/customers/:id', authorization, usersController.customerDetail);
+
 
 /************** EXPORTED MODULE **************/
 module.exports = router;

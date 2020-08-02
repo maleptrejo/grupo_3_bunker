@@ -72,6 +72,52 @@ button:focus {
 
 /* ########## */
 
+#avatar_user{
+  width:170px;
+  height: 170px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.detail-user-row-1 {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  margin-right: 3vw;
+  margin-left: 3vw;
+}
+
+
+
+.detail-user-row-1 div h3 {
+  font-size: 3em;
+}
+.second-column {
+  max-width: 20vw;
+}
+
+.detail-user-row-1 div p span {
+  font-size: 2em;
+}
+
+.detail-user-row-1 div p span:nth-child(2) {
+  margin-left: 0.5vw;
+}
+
+.detail-user-row-1 div p span:nth-child(1) {
+  font-weight: 700;
+}
+
+.name_user{
+  align-self: center;
+ 
+}
+
+.name_user h2{
+  
+  font-size: 6em;
+}
+
 .container-contacts-table {
   margin-left: 1vw;
   margin-top: 3vh;

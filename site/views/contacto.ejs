@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<%- include(`partials/head`, {title: `Inicio`}) %>
+<main class="container">
+    
+    <form  action="/contact" method="post" class="product mt-3 form-ingresar-prod" id="formContact" >
+        <h2 class="c-acc m-3 pt-3">Enviar Consulta</h2>
+        <h5 class="acc-subs pt-3">Complete todos los campos</h5>
+        <% if (typeof errors != `undefined`) { %>
+            <% for (let i = 0; i < errors.length; i++) { %>
+                <div class="alert alert-danger" role="alert">
+                <%=errors[i].msg%>
+                </div>
+            <% } %>
+        <% } %>
+        <div class="form-row flex-row ">
+            <div class="col-12 col-md-6 mb-6 div-form-carga">
+                <label for="name">Nombre</label>
+                <input type="text" class="form-control form-input" name= "name" id="name" placeholder="Nombre" required>
+            </div>
+            <div class="col-12 col-md-6 mb-6 div-form-carga">
+                <label for="sName">Apellido</label>
+                <input type="text" class="form-control form-input" name= "sName" id="sName" placeholder="Apellido" required>
+            </div>
+        </div>
+        <div class="form-row flex-row ">
+            <div class="col-12 col-md-12 mb-12 div-form-carga">
+                <label for="email">Ingrese su email</label>
+                <input type="text" class="form-control form-input" name= "email" id="email" placeholder="Email" required>
+            </div>
+        </div>
+        
+        <div class="form-row flex-column">
+            <div class="col-12 col-md-12 mb-6">
+                <textarea name="message" id="message" class="form-control form-input" cols="30" rows="10" placeholder="Realice su consulta"></textarea>
+            </div>
+        </div>
+        <div class="alert alert-success" role="alert" style="display: none;" id="">Gracias por contactarnos!</div>
+        <div class="button-container-submit">
+            <button class="btn btn-bunker mb-5 mt-5" type="submit" id="enviar">Enviar</button>
+        </div>
+    </form>
+
+
+
+    <script src="../scripts/validationContact.js"></script>
+</main>
+<%- include(`partials/footer`) %>
+</body>
+</html>

@@ -1286,8 +1286,39 @@ object-position: center; */
   margin-bottom: 0;
 
 }
+/* ***** */
+[17:46, 2/8/2020] Federico García (DH): .btn-bunker-destroy {
+  background-color: #666666 ;
+  font-size: 2em;
+  color: #ebebeb;
+}
 
+.btn-bunker-ok {
+  background-color: #666666 ;
+  font-size: 2em;
+  color: #ebebeb;
+}
 
+a.btn-bunker {
+  background-color: #666666 ;
+  font-size: 2em;
+  color: #ebebeb;
+}
+
+.btn-bunker:hover {
+  color: #FFCA00;
+  box-shadow: 5px 5px 10px grey;
+}
+
+.btn-bunker-destroy:hover {
+  color: red;
+  box-shadow: 5px 5px 10px grey;
+}
+
+.btn-bunker-ok:hover {
+  color: greenyellow;
+  box-shadow: 5px 5px 10px grey;
+}
 
 
 /* *********main-footer-index****** */

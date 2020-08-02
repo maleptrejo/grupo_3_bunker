@@ -17,6 +17,7 @@ fetch('http://localhost:3000/api/products/por_cats')
     let idCat= ((window.location.pathname).split('/')).pop()
 
     let filtro=[]
+    console.log(filtro)
     products.forEach(prod=>{
         if(prod.cat_id==idCat){
 
@@ -39,6 +40,9 @@ fetch('http://localhost:3000/api/products/por_cats')
     })
     // console.log(filtro)
 
+   
+
+    
    let jumbo= document.querySelector('.jumbo-encabezado')
    jumbo.style.backgroundImage=`url(../../images/productos/${filtro[0].encabezado} )`
    let titulo= document.querySelector('h1.display-4')
@@ -160,7 +164,7 @@ fetch('http://localhost:3000/api/products/por_cats')
     }
 
 
-    
+
 
 })
 }

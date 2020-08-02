@@ -12,28 +12,28 @@
     <form  action="/products/carga" method="post" class="product mt-3 form-ingresar-prod" id="formProd" >
         <h2 class="c-acc m-3 pt-3">Crear producto</h2>
         <h5 class="acc-subs pt-3">Datos del Producto</h5>
-        <div class="form-row flex-row ">
-            <div class="col-12 col-md-6 mb-6 div-form-carga">
+        <div class="form-row flex-row d-flex justify-content-around">
+            <div class="col-12 col-md-3 mb-6 div-form-carga">
                 <label for="name">Nombre</label>
                 <input type="text" class="form-control form-input" name= "name" id="name" placeholder="Nombre del producto" required>
             </div>
-            <div class="col-12 col-md-6 mb-6 div-form-carga">
+            <div class="col-12 col-md-3 mb-6 div-form-carga">
                 <label for="brand_id">Marca</label>
-                <select name="brand_id" class="form-input" id="brand_id">
+                <select name="brand_id" class="form-control form-input bsf-select" id="brand_id">
                     <% for (let i=0; i<brands.length ; i++) { %>
                         <option value="<%= brands[i].id %>"><%= brands[i].name %></option>
                         <% } %>
                 </select>
             </div>
         </div>
-        <div class="form-row flex-row ">
-            <div class="col-12 col-md-6 mb-6 div-form-carga">
+        <div class="form-row flex-row d-flex justify-content-around">
+            <div class="col-12 col-md-3 mb-6">
                 <label for="price">Precio</label>
-                <input type="number" name="price" min="0" step=".1" class="form-control form-input" id="price" placeholder="Precio unitario" required>
+                <input type="number"  min="0" name="price" step="0.1" class="form-control form-input" id="price" placeholder="Precio Unitario" required>
             </div>
-            <div class="col-12 col-md-6 mb-6 div-form-carga">
+            <div class="col-12 col-md-3 mb-6 div-form-carga">
                 <label for="discount_id">Descuento </label>
-                <select name="discount_id" class="form-input" id="discount_id">
+                <select name="discount_id" class="form-control form-input bsf-select" id="discount_id">
                     <% for (let i=0; i<discounts.length ; i++) { %>
                         <option value="<%= discounts[i].id %>"><%= discounts[i].level*100 %> %</option>
                     <% } %>
@@ -41,20 +41,22 @@
             </div>
         </div>
         <div class="form-row flex-column">
-            <div class="col-12 col-md-12 mb-6">
-                <textarea name="description" id="description" class="form-control form-input" cols="30" rows="10" placeholder="Escriba una breve descripción"></textarea>
+            <div class="col-12 col-md-12 mb-6 d-flex justify-content-around">
+                <textarea name="description" id="description" class="form-control form-input bsf-textArea" cols="30" rows="10" placeholder="Escriba una breve descripción"></textarea>
             </div>
-            <div class="col-md-6 mb-6">
-                <label for="category_id"></label>
-                <select name="category_id" class="form-input" id="category_id">
+        </div>
+        <div class="form-row flex-row d-flex justify-content-around">
+            <div class="col-12 col-md-3 mb-6">
+                <label for="category_id">Categoría </label>
+                <select name="category_id" class="form-control form-input bsf-select" id="category_id">
                     <% for (let i=0; i<categories.length ; i++) { %>
                         <option value="<%= categories[i].id %>"><%= categories[i].name %></option>
                         <% } %>
                 </select>
             </div>
-            <div class="col-md-6 mb-6">
-                <label for="stock"></label>
-                    <input type="number"  min="0" name="stock" class="form-control form-input" id="stock" placeholder="cantidad a ingresar" required>
+            <div class="col-12 col-md-3 mb-6">
+                <label for="stock">Cantidad</label>
+                <input type="number"  min="0" name="stock" class="form-control form-input" id="stock" placeholder="Cantidad Ingresando" required>
             </div>
         </div>
         <div class="alert alert-success" role="alert" style="display: none;" id="">Información enviada</div>

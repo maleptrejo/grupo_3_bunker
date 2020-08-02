@@ -494,15 +494,42 @@ const apiProducts = {
     categories: (req, res) => {
 
         db.Categories.findAll({
-                // include: [{association: `products`}],
+               include: [{association: `products`}],
             })
             .then((cat) => {
+
+               
+            let categorias=[];
+           let objeto= cat
+
+        for(let i=0; i<cat.length; i++){
+
+           
+
+            function isEmpty(obj) {
+                for(var key in obj) {
+                    if(obj.hasOwnProperty(key))
+                        return false;
+                }
+                return true;
+            }
+            
+             if (isEmpty(cat[i].dataValues.products)){
+                console.log(' es nulo')
+            }else{
+                let a=cat[i]
+                categorias.push(a)
+            }
+           
+        }
+    
+               
 
                 let catsJson = {
                     meta: {
                         status: 200
                     },
-                    data: cat
+                    data: categorias
                 }
                 res.json(catsJson)
             })

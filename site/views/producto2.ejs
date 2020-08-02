@@ -22,12 +22,16 @@
         <div class="row">
             <div class="col">
                 <div class="descripcion-producto mb-5 mt-4">
-                    <div class="producto-marca">
+                    <!-- <div class="producto-marca">
                         <h4><%= productoDetallado[i].brand %></h4>
-                    </div>
+                    </div> -->
+
                     <div class="producto-titulo ">
                         <h2 class=""><%= productoDetallado[i].name %></h2>
                     </div>
+                    <div class="producto-marca">
+                            <h4>Marca: <%= productoDetallado[i].brands.name %> - Categoría: <%= productoDetallado[i].categories.name %></h4>
+                        </div>
                 </div>
             </div>
         </div>
@@ -65,13 +69,17 @@
                             <div class="datos-prod">
                                 <div class="precio-producto">
 
+                                        <h3><%= format(productoDetallado[i].price) %></h3>
+                                        <div class="wrap">
+                                            <h4>Descuento del <%= productoDetallado[i].discounts.level*100 %> %</h4>
+                                            <p class="ml-3">o pagalo en 12 cuotas de <%= format(productoDetallado[i].price/(1-productoDetallado[i].discounts.level)/12) %></p>
+                                        </div>
 
-
-                                    <h3>$ <%= productoDetallado[i].price %></h3>
+                                    <!-- <h3>$ <%= productoDetallado[i].price %></h3>
                                     <div class="wrap">
                                         <h4>Descuento del <%= productoDetallado[i].discounts.level*100 %> %</h4>
                                         <p class="ml-3">12 cuotas de $250</p>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <%   if (usuarioLogeado) { %>

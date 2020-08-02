@@ -117,9 +117,6 @@ tbody.list-users td {
   object-position: center;
 }
 
-input#price{
-  max-width: 70px;
-}
 
 #check-out {
   
@@ -140,6 +137,7 @@ object-fit: cover;
 width: 35vw;
 height: 65vh;
 }
+
 
 
 table.table-cart{
@@ -1018,11 +1016,10 @@ height: 220px;
 
 }
 
-
-
 .carousel-prod> .carousel-item>img {
   height: 400px;
-
+  width: 100%;
+  object-fit: cover;
   margin: auto;
 }
 
@@ -1088,6 +1085,7 @@ height: 220px;
 
 .producto-mobile h3 {
   font-size: 3em;
+  padding-left: 15px;
 }
 
 
@@ -1326,15 +1324,41 @@ textarea#descripcion{
   justify-content: center;
 }
 .btn-bunker {
-
   background-color: #666666 ;
+  font-size: 2em;
+  color: #ebebeb;
+}
 
+.btn-bunker-destroy {
+  background-color: #666666 ;
+  font-size: 2em;
+  color: #ebebeb;
+}
+
+.btn-bunker-ok {
+  background-color: #666666 ;
+  font-size: 2em;
+  color: #ebebeb;
+}
+
+a.btn-bunker {
+  background-color: #666666 ;
   font-size: 2em;
   color: #ebebeb;
 }
 
 .btn-bunker:hover {
   color: #FFCA00;
+  box-shadow: 5px 5px 10px grey;
+}
+
+.btn-bunker-destroy:hover {
+  color: red;
+  box-shadow: 5px 5px 10px grey;
+}
+
+.btn-bunker-ok:hover {
+  color: greenyellow;
   box-shadow: 5px 5px 10px grey;
 }
 
@@ -1863,10 +1887,10 @@ h2.c-acc-user {
         width: 20vw;
     }
 
-    .form-ingresar-prod input {
+    /* .form-ingresar-prod input {
 
       width: 20vw;
-  }
+  } */
 
   .display-mobile {
     display: none;
@@ -2028,3 +2052,10 @@ table#cart tfoot td .btn{display:block;}
 
 }
 
+/* ********BUNKER STORE FORMAT CLASSES******** */
+.bsf-textArea {
+  width: 75%;
+}
+.bsf-select {
+  font-size: 1.3em;
+}

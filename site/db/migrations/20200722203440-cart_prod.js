@@ -38,7 +38,7 @@ module.exports = {
     price: {
       type: Types.DOUBLE(12,2).UNSIGNED,
       allowNull: false,
-      defaultValue: Types.INTEGER(0)
+      defaultValue: 0
     },
     created_at: {
       type: Types.DATE,

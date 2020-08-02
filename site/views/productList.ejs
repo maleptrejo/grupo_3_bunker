@@ -22,11 +22,11 @@
             <div class="row">
                 <div class="col">
                     <div class="descripcion-producto mb-5 mt-4">
-                        <div class="producto-marca">
-                            <h4><%= productoDetallado[i].brand %></h4>
-                        </div>
                         <div class="producto-titulo ">
                             <h2 class=""><%= productoDetallado[i].name %></h2>
+                        </div>
+                        <div class="producto-marca">
+                            <h4>Marca: <%= productoDetallado[i].brands.name %> - Categoría: <%= productoDetallado[i].categories.name %></h4>
                         </div>
                     </div>
                 </div>
@@ -36,14 +36,14 @@
                     <div id="carouselExampleControls" class="carousel slide " data-ride="carousel">
                         <div class="carousel-inner carousel-prod">
                             <div class="carousel-item active ">
-                                <img src="../images/productos/<%= productoDetallado[i].image %>" class="d-block w-60 imagen-carousel" alt="...">
+                                <img src="../images/productos/<%= productoDetallado[i].image1 %>" class="d-block w-60 imagen-carousel" alt="...">
                                 
                             </div>
                             <div class="carousel-item">
-                                <img src="../images/productos/<%= productoDetallado[i].image %>" class="d-block w-60" alt="...">
+                                <img src="../images/productos/<%= productoDetallado[i].image2 %>" class="d-block w-60" alt="...">
                             </div>
                             <div class="carousel-item">
-                                <img src="../images/productos/<%= productoDetallado[i].image %>" class="d-block w-60" alt="...">
+                                <img src="../images/productos/<%= productoDetallado[i].image3 %>" class="d-block w-60" alt="...">
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -64,19 +64,9 @@
                                     <div class="precio-producto">
                                         <h3>$ <%= productoDetallado[i].price %></h3>
                                         <div class="wrap">
-                                            <h4>Descuento del <%= productoDetallado[i].discount %> %</h4>
-                                            <p class="ml-3">12 cuotas de $250</p>
+                                            <h4>Descuento del <%= productoDetallado[i].discounts.level*100 %> %</h4>
                                         </div>
                                     </div>
-                                    <div class="favorito pt-1  pr-2">
-                                        <div clas="icono">
-                                            <button class="heart"><i class="fas fa-heart "></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="tarjetas-producto">
-                                    <!-- <p>12 cuotas de $250</p> -->
-                                    <a href=""><p>Ver planes de pago <i class="fas fa-chevron-right"></i></p></a>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -89,8 +79,9 @@
                                         <div class="button-container-submit">
                                                 <button class="btn btn-secondary btn-block  mb-5 mt-5 " type="button"><a href="/products/<%= productoDetallado[i].id%>/edit">Editar</a></button>
                                         </div>
-
-                                        <button class="btn btn-secondary btn-block  mb-5 mt-5 " type="button"><a href="/products/<%= productoDetallado[i].id%>/edit">Eliminar</a></button>
+                                        <form action="/products/<%= productoDetallado[i].id %>?_method=DELETE" method="post">
+                                            <button class="btn btn-secondary btn-block  mb-5 mt-5 " type="submit">Eliminar</button>
+                                        </form>
                                     </div>
 
                                    

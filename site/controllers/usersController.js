@@ -306,7 +306,15 @@ const users = {
             res.render(`cart`);
         },
         avatar: (req, res) => {
-            res.render(`avatar`);
+            db.Users.findOne({
+                where: {
+                    email: req.session.usuarioLogeado.email   
+                },
+                include: [{association: `customers`}]
+            }).then((usuario)=> {
+                console.log(usuario);
+                res.render(`avatar`, {userShow: usuario.dataValues});
+            })    
         },
         cargarAvatar: (req, res) => {
             

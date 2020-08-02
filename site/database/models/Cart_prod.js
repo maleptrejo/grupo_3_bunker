@@ -31,12 +31,12 @@ module.exports = (sequelize, Types) => {
             qty: {
                 type: Types.INTEGER,
                 allowNull: false,
-                defaultValue: Types.INTEGER(1)
+                defaultValue: 1
               },
               price: {
                 type: Types.DOUBLE(12,2).UNSIGNED,
                 allowNull: false,
-                defaultValue: Types.INTEGER(0)
+                defaultValue: 0
               },
 
         },

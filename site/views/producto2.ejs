@@ -21,11 +21,11 @@
             <div class="row">
                 <div class="col">
                     <div class="descripcion-producto mb-5 mt-4">
-                        <div class="producto-marca">
-                            <h4><%= productoDetallado[i].brand %></h4>
-                        </div>
                         <div class="producto-titulo ">
                             <h2 class=""><%= productoDetallado[i].name %></h2>
+                        </div>
+                        <div class="producto-marca">
+                            <h4>Marca: <%= productoDetallado[i].brands.name %> - Categoría: <%= productoDetallado[i].categories.name %></h4>
                         </div>
                     </div>
                 </div>
@@ -63,10 +63,10 @@
 
                                         
 
-                                        <h3>$ <%= productoDetallado[i].price %></h3>
+                                        <h3><%= format(productoDetallado[i].price) %></h3>
                                         <div class="wrap">
                                             <h4>Descuento del <%= productoDetallado[i].discounts.level*100 %> %</h4>
-                                            <p class="ml-3">12 cuotas de $250</p>
+                                            <p class="ml-3">o pagalo en 12 cuotas de <%= format(productoDetallado[i].price/(1-productoDetallado[i].discounts.level)/12) %></p>
                                         </div>
                                     </div>
                                     <div class="favorito pt-1  pr-2">
@@ -198,6 +198,9 @@
             <script src="../../scripts/favs.js"></script>
            
             <script src="../../scripts/addCart.js"></script>
+            <script>
+                
+            </script>
         </main>
         <%- include(`partials/footer`) %>
         

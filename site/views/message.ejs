@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include(`partials/head`, {title: `Inicio`}) %>
+
+
+<main class="container container-user">
+
+    <div class="container">
+        <div aria-label="breadcrumb rounded-0 breadcrumb-user">
+            <ol class="breadcrumb pl-0 bg-white">
+                <li class="breadcrumb-item"><a href="/users/login">Perfil</a></li>
+                <li class="breadcrumb-item"><a href="/users/admins/control">Panel de control</a></li>
+                <li class="breadcrumb-item"><a href="/admins/contact">Bandeja de entrada</a></li>
+                <li class="breadcrumb-item"><a href="/admins/contact">Mensaje</a></li>
+
+            </ol>
+        </div>
+    </div>
+
+
+    <section class="container">
+        <div class="card-user">
+            <div class="jumbotron  jumbo-user-detail">
+                <div class="detail-user-row-1" >
+                   
+                    <div class="name_user second-column">
+                      
+                            <h3 class="display-4" id="name_user"> 
+                            </h3>
+                        
+                    </div>
+                </div>
+                <hr class="my-4">
+                <div class="detail-user-row-1" style="display: flex;  
+                    flex-wrap: wrap;">
+                    <div>
+                        <h3>Mensaje:</h3>
+                    </div>
+                    <div class="second-column" id="mensaje-api" style="font-size: 3em">
+                        
+                      
+                    </div>
+                    <div class="mt-5 espacio-archivo">
+                            <button class="btn btn-dark" id="archivar-boton">ARCHIVAR</button>
+                            
+                        </div>
+                        <div class="mt-5 espacio-respuesta">
+                            <a href="" id="respuesta"><i class="far fa-paper-plane"></i></a>
+                               
+                               
+                                
+                            </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="../scripts/seeMessage.js"></script>
+<script src="../scripts/deleteMessage.js"></script>
+
+
+
+<%- include(`partials/footer`) %>
+
+</body>
+
+</html>

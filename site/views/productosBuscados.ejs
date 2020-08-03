@@ -2,6 +2,16 @@
 <html lang="en">
     <%- include(`partials/head`, {title: `Inicio`}) %>
     <main class="container">
+
+            <div class="container">
+                    <div aria-label="breadcrumb rounded-0 ">
+                            <ol class="breadcrumb pl-0 bg-white">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                       
+                                <li class="breadcrumb-item active" aria-current="page">Resultados</li>
+                            </ol>
+                        </div>
+            </div> 
         <div class="row">
             <% prductsSearch.forEach(product=> { %>
                 <div class="col-12 col-sm-6 col-lg-3">

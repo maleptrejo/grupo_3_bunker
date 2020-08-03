@@ -16,6 +16,42 @@
         </div>
     </div>
 
+
+    <section class="container">
+        <div class="card-user">
+            <div class="jumbotron  jumbo-user-detail">
+                <div class="detail-user-row-1" style="display: flex;  
+                    flex-wrap: wrap;">
+                    <div class=" avatar">
+                        <a href="/users/avatar"><img id="avatar_user" src="../images/usuarios/<%=userShow.avatar%>"
+                                alt=""></a>
+                    </div>
+                    <div class="name_user second-column">
+                        <a href="/users/edit">
+                            <h2 class="display-4" id="name_user"><%=userShow.name%> <span> </span> <%=userShow.surname%>
+                            </h2>
+                        </a>
+                    </div>
+                </div>
+                <hr class="my-4">
+                <div class="detail-user-row-1" style="display: flex;  
+                    flex-wrap: wrap;">
+                    <div>
+                        <h3>Información del usuario</h3>
+                    </div>
+                    <div class="second-column">
+                        <p><span>Email:</span><span id="email_user"><%= userShow.email%></span></p>
+                        <p><span>Dirección:</span><span id="address_user"><%= userShow.adress%></span></p>
+                        <p><span>País:</span><span id="country_user"><%= userShow.country%></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- 
     <section class="container-wide">
 
    
@@ -34,7 +70,7 @@
                                     <a href="/users/avatar"><img src="../images/usuarios/<%=userShow.avatar%>" alt=""></a>
                                     <!-- <img src="../images/usuarios/<%=userShow.avatar%>" alt=""> -->
 
-                                </div>
+    <!-- </div>
 
                                 <div class="display-large">
                                         <div class="button-profile">
@@ -48,9 +84,9 @@
 
 
 
-                   </div>
+                   </div> -->
 
-                   <!-- <div class="col col-sm-12 col-md-6">
+    <!-- <div class="col col-sm-12 col-md-6">
 
 
                               <div>
@@ -60,11 +96,11 @@
                                   </div>
                               </div>
                      </div> -->
-
+    <!-- 
                     <div class="col col-sm-12 col-md-6">
                        <div class="user-data">
-                            <div class="datos-personales ">
-                                    <p class="font-weight-bold"><%=userShow.name%> <span> </span>  <%=userShow.surname%> </p>
+                            <div class="datos-personales "> -->
+    <!-- <p class="font-weight-bold"><%=userShow.name%> <span> </span>  <%=userShow.surname%> </p>
                                     <p><%= userShow.email%></p>
                                     <p><%= userShow.adress%></p>
                                     <p><%= userShow.country%></p>
@@ -82,9 +118,9 @@
 
                        </div>
 
-                    </div>
+                    </div> -->
 
-                    <!-- <div class="col col-sm-12 col-md-6">
+    <!-- <div class="col col-sm-12 col-md-6">
                             <div>
                                     <div class="button-profile">
                                             <button type="button" class="btn btn-secondary btn-lg btn-block rounded-sm mt-5 mb-3"><a href="/users/edit">Cambiar datos personales</a></button>
@@ -100,7 +136,7 @@
 
 
 
-
+    <!-- 
                 </div>
 
 
@@ -117,7 +153,7 @@
     </div>
 
 
-</section>
+</section> -->
 
 
 
@@ -129,6 +165,5 @@
 <%- include(`partials/footer`) %>
 
 </body>
+
 </html>
-
-

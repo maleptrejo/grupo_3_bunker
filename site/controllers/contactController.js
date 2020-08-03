@@ -29,6 +29,10 @@ const contact = {
 
     messages: (req, res)=> {
         res.render('readContact')
+    },
+    messagesId: (req,res)=>{
+
+        res.render('message')
     }
 
 

@@ -49,6 +49,7 @@ const apiContactController = {
                 name: contData.dataValues.name,
                 surname: contData.dataValues.surname,
                 message: contData.dataValues.message,
+                email:contData.dataValues.email,
                 status: contData.dataValues.status
             }
             let contactJson = {

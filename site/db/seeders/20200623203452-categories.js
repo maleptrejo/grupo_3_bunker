@@ -20,7 +20,7 @@ module.exports = {
         {
           id: 3,
           name: "Sado",
-          image: "SADO.jpg"
+          image: "SADO2.jpg"
         },
         {
           id: 4,

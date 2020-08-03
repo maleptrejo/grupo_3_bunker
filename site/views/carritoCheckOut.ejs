@@ -47,7 +47,8 @@
               </tr>
               <% }) %>
               <tr>
-                    <th scope="row"></th>
+                    <th scope="row"><a href="/users/cart" class="btn fav-quitar"
+                      id="" value="<%= data_cart.total_cart %>"><i class="fas fa-chevron-left mr-2"></i>MODIFICAR </a></th>
                     <td>Total:</td>
                     <td>$<%= data_cart.total_cart %></td>
                     <td><a href="../api/products/cart/<%= data_cart.id_cart %>/check_out" class="btn fav-quitar"

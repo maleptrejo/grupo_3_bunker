@@ -969,9 +969,14 @@ padding-left: 1vw;
 
 
 
+.pie-sitio{
+  background-color: #353535;
+}
 
-
-
+.imagen-carousel {
+  object-fit: contain;
+  object-position: center;
+}
 
 /* barrita buscadora */
 

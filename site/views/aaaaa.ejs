@@ -1,0 +1,295 @@
+
+
+  <section class="tarjetas-ofertas ">
+        <div class="titulos">
+            <h2 class="products-title">Ofertas </h2><i class="fas fa-angle-double-right"></i>
+        </div>
+        <div class="container products-wrapper">
+            <div class="row d-flex justify-content-around">
+                
+                <% promotions.forEach(product=> { %>
+                
+              
+                  <div class="col-12 col-sm-6 col-lg-3 ">
+                      <section class="product-box container">
+                          <a href="/products/<%=product.id%>" class="cont-imagen-data">
+                              <figure class="product-box_image limites-tarjeta-prod">
+                                  <img src="./images/productos/<%=product.image1%>" class="center-cropped" alt="imagen de producto">
+                              </figure>
+                              <article class="product-box_data limites-tarjeta-prod">
+                                  <div class="precio-oferta">
+                                      
+                                      <h2>$<%=product.price%></h2>
+                                      <span><%=product.discounts.level*100%>% OFF</span>
+                                  </div>
+                                  
+                                  
+                                  <p><%=product.name%> <span>
+                                  </span> <span><%=product.brand%></span></p>
+                                  
+                              </article>
+                          </a>
+                      </section>
+                  </div>
+               <% }) %>
+                
+            </div>
+        </div>
+        
+    </section>
+    
+    <section class="secciones-sitio">
+        
+   
+                <div class="titulos">
+            <h2 class="products-title">Categorías Destacadas </h2><i class="fas fa-angle-double-right"></i>
+        </div>
+  
+        
+        <div class="container-fluid">
+            <div class="row no-gutters">
+              <% categories.forEach(category => { %>
+                <div class="col-12 col-lg-4 secciones">
+                    <div class="imagen-cat">
+                        <img src="./imagenes/<%= category.image %>" alt="">
+                    </div>
+                    <div class="texto-cat">
+                        <p><%= category.name %></p>
+                    </div>
+                </div>
+              <% }) %>
+            </div>
+            
+            
+            
+        </div>
+        
+    </section>
+    
+    
+    <section class="tarjetas-interés ">
+            <div class="titulos">
+                <h2 class="products-title">Quizás te interesen </h2><i class="fas fa-angle-double-right"></i>
+            </div>
+            <div class="container products-wrapper">
+                <div class="row d-flex justify-content-around">
+                    
+  
+                  <% lastArrival.forEach(product=> { %>
+                
+              
+                      <div class="col-12 col-sm-6 col-lg-3">
+                          <section class="product-box">
+                              <a href="/products/<%=product.id%>">
+                                  <figure class="product-box_image">
+                                      <img src="./images/productos/<%=product.image1%>" class="center-cropped" alt="imagen de producto">
+                                  </figure>
+                                  <article class="product-box_data">
+                                      <div class="precio-oferta">
+                                          
+                                          <h2>$<%=product.price%></h2>
+                                          <span><%=product.discounts.level*100%>% OFF</span>
+                                      </div>
+                                      
+                                      
+                                      <p><%=product.name%> <span>
+                                          
+                                      </span> <span><%=product.brand%></span></p>
+                                      
+                                  </article>
+                              </a>
+                          </section>
+                      </div>
+      
+      
+      
+                   <% }) %>
+                    
+                    
+                    <!-- <div class="col-12 col-sm-6 col-lg-3">
+                        <section class="product-box">
+                            <a href="producto.html">
+                                <figure class="product-box_image">
+                                    <img src="./imagenes/reloj.png" alt="imagen de producto">
+                                </figure>
+                                <article class="product-box_data">
+                                    <div class="precio-oferta">
+                                        
+                                        <h2>$6.500</h2>
+                                        <span>40% OFF</span>
+                                    </div>
+                                    
+                                    
+                                    <p>Reloj Baby-G <span>Casio</span></p>
+                                    
+                                </article>
+                            </a>
+                        </section>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <section class="product-box">
+                            <a href="producto.html">
+                                <figure class="product-box_image">
+                                    <img src="./imagenes/carpa.png" alt="imagen de producto">
+                                </figure>
+                                <article class="product-box_data">
+                                    <div class="precio-oferta">
+                                        
+                                        <h2>$3500</h2>
+                                        <span>50% OFF</span>
+                                    </div>
+                                    
+                                    
+                                    <p>Carpa 2 personas <span>Waterdog</span></p>
+                                    
+                                </article>
+                            </a>
+                        </section>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <section class="product-box">
+                            <a href="producto.html">
+                                <figure class="product-box_image">
+                                    <img src="./imagenes/mochila.png" alt="imagen de producto">
+                                </figure>
+                                <article class="product-box_data">
+                                    <div class="precio-oferta">
+                                        
+                                        <h2>$8.300</h2>
+                                        <span>20% OFF</span>
+                                    </div>
+                                    
+                                    
+                                    <p>Mochila 80lt <span>Montagne</span></p>
+                                    
+                                </article>
+                            </a>
+                        </section>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        <section class="product-box">
+                            <a href="producto.html">
+                                <figure class="product-box_image">
+                                    <img src="./imagenes/vaso-termico.png" alt="imagen de producto">
+                                </figure>
+                                <article class="product-box_data">
+                                    <div class="precio-oferta">
+                                        
+                                        <h2>$1.500</h2>
+                                        <span>20% OFF</span>
+                                    </div>
+                                    
+                                    
+                                    <p>Vaso Térmico <span>Contigo</span></p>
+                                    
+                                </article>
+                            </a>
+                        </section>
+                    </div> -->
+                </div>
+            </div>
+            
+        </section>
+  
+
+
+
+
+
+
+
+
+
+
+******* -->
+    <% data.forEach(dat=> { %>
+        <img src="../images/productos/<%= dat.image1 %>">
+        <td><a href="/products/<%=dat.id%>">
+            <p><%= dat.name %></p>
+            <p>$<%= dat.price %></p>
+        </a></td>
+        <input data-url="../api/products/cart/<%= dat.id %>" data-value="<%= dat.id %>" type="number" step=1 name="qty" min="1" max="99" class="form-control form-input cart-edit"
+                                    id="price" value="<%= dat.qty %>" required>
+                                    <p>$<%= dat.price_prod_cart %></p>
+
+                                    <td class="td-fav"><a href="../api/products/cart/<%= dat.id %>" value="<%= dat.id %>"
+                                        class="btn cart-quitar" onClick="delete_row(this)"><i class="fa fa-trash-o"></i></a></td>
+                                        <% }) %> -->
+******* -->
+
+
+
+    <section class="container container-favs-table table-responsive-sm">
+        <table class="table favs-table" id="cart">
+            <thead>
+                <h1 class="mb-4">Mis Compras</h1>
+            </thead>
+            <tbody class="list-cart" id="list-cart">
+
+                <% data.forEach(dat=> { %> -->
+                <a href="/products/<%=dat.id%>">   -->
+
+                <tr class="tr-fav">
+
+                    <td style="width: 15%"><img src="../images/productos/<%= dat.image1 %>"></td>
+
+                    <td><a href="/products/<%=dat.id%>">
+                            <p><%= dat.name %></p>
+                            <p>$<%= dat.price %></p>
+                        </a></td>
+                    <td> -->
+                        <a href="" value="<%= dat.id %>"> -->
+                            
+                                <input data-url="../api/products/cart/<%= dat.id %>" data-value="<%= dat.id %>" type="number" step=1 name="qty" min="1" max="99" class="form-control form-input cart-edit"
+                                    id="price" value="<%= dat.qty %>" required>
+
+                
+                            <p>$<%= dat.price_prod_cart %></p> -->
+                        </a> -->
+                    </td> -->
+                    <td><%= dat.brand %></td> -->
+
+                    <td> $ <%= dat.price %></td> -->
+
+
+                    <td><%= dat.description %></td> -->
+
+
+                    <td class="td-fav"><a href="../api/products/cart/<%= dat.id %>" value="<%= dat.id %>"
+                            class="btn cart-quitar" onClick="delete_row(this)"><i class="fa fa-trash-o"></i></a></td>
+                            <% }) %>
+
+                </tr>
+                </a>
+                <% }) %> -->
+                <tfoot>
+                        <tr class="visible-xs">
+                            <td colspan="3" class="hidden-xs"></td>
+                            <td class="text-center"><strong>Total $<%= data_cart.total_cart %></strong></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#" class="btn btn-seguir" ><i class="fa fa-angle-left"></i> Seguir Comprando</a></td>
+                            <td colspan="1" class="hidden-xs"></td>
+                            <td class="hidden-xs text-center"></td>
+                            <td colspan="2"><a href="#" class="btn btn-comprar btn-block">PROCESAR COMPRA <i class="fa fa-angle-right"></i></a></td>
+                        </tr>
+                    </tfoot> -->
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <p>$<%= data_cart.total_cart %></p>
+                    </td>
+                    <td><a href="../api/products/cart/<%= data_cart.id_cart %>/check_out" class="btn fav-quitar"
+                            id="check-out" value="<%= data_cart.total_cart %>"><i class="far fa-share-square"></i></a>
+                    </td>
+
+                </tr> -->
+
+
+
+
+
+            </tbody>
+        </table>
+    </section> -->

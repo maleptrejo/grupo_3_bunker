@@ -1,126 +1,349 @@
 /************** REQUIRED MODULES **************/
-var bcrypt = require('bcrypt');
-var fs = require('fs');
-const path = require('path');
-var {check, validationResult, body} = require('express-validator');
+var bcrypt = require(`bcrypt`);
+var fs = require(`fs`);
+const path = require(`path`);
+var {
+    check,
+    validationResult,
+    body
+} = require(`express-validator`);
 
-const db= require('../database/models');
+const db = require(`../database/models`);
 /*************** REQUIRED FILES ***************/
 
 
 /****************** AUXILIAR ******************/
 let user = {
-         email: '',
-   password: '',
- }
+    email: ``,
+    password: ``,
+}
 
-
-
-const usersFilePath= path.join(__dirname, '../data/usuarios.json');
-let usuarios = JSON.parse(fs.readFileSync(usersFilePath, {encoding: 'utf-8'}));
-
-function isEmptyObject(objeto){
+function isEmptyObject(objeto) {
     return !Object.keys(objeto).length;
 };
 /************** MODULE TO EXPORT **************/
 const users = {
     vistaPerfil: (req, res, next) => {
-        res.render('vistaPerfil');
+        res.render(`vistaPerfil`);
     },
     formLogin: (req, res, next) => {
-        if (req.session.usuarioLogeado !=undefined) {
+        if (req.session.usuarioLogeado != undefined) {
             // console.log(req.session)
-            res.redirect('/');
+            res.redirect(`/`);
         }
-        res.render('formLogin');
+        res.render(`formLogin`);
     },
-    enter: (req, res)=>{
+    verFavs: (req, res) => {
 
-       db.Users.findOne({
-             where: {
-                 email: req.body.email
+        db.Favs.findAll({
+                where: {
+                    user_id: req.session.usuarioLogeado.id
+                },
+                include: [{
+                    association: `users`
+                }, {
+                    association: `products`,
+                    include: [{
+                        association: `brands`
+                    }, {
+                        association: `categories`
+                    }, {
+                        association: `discounts`
+                    }]
+                }],
+            })
+            .then((favs) => {
 
-             }
-         }).then((resultado)=> {
+                //   if (isEmptyObject(favs)) {
+
+                // res.send('no tenes favoritos')
+                // }else {
+
+                let favoritos = [];
+
+                favs.forEach(element => {
+
+                    let a = {
+                        id: element.dataValues.products.dataValues.id,
+                        name: element.dataValues.products.dataValues.name,
+                        price: element.dataValues.products.dataValues.price,
+                        description: element.dataValues.products.dataValues.description,
+                        image1: element.dataValues.products.dataValues.image1,
+                        // image2: element.dataValues.products.dataValues.image2,
+                        // image3: element.dataValues.products.dataValues.image3,
+                        brand: element.dataValues.products.dataValues.brands.dataValues.name
+
+                    }
+                    favoritos.push(a);
+
+                    console.log(element.dataValues.products.dataValues)
+                });
+                res.render('Favs', {
+                    data: favoritos
+                });
+                // res.json(favs)
 
 
-            if (resultado==null) {
-                  //¡¡ojo! está mandando la vista de error desde acá, no desde el middleware guest
-               res.render('errorLogin');
+                // }     
+            })
+    },
+
+    verCart: (req, res) => {
+        db.Carts.findOne({
+                where: {
+                    user_id: req.session.usuarioLogeado.id,
+                    status: true
+                },
+                include: [{
+                    association: `products`,
+                    through: {
+                        attributes: ['qty', 'price'],
+                    }
+                }]
+            })
+            .then((resp) => {
+                console.log(resp)
+                if (resp == null) {
+                    res.render('carritoVacio')
+                } else {
+                    let compras = [];
+                    const totales = [];
+                    let x = resp.dataValues.products;
+                    x.forEach(e => {
+                        //e.datavalues.price=e.price
+                        let price_prod = e.dataValues.price;
+                        let cantidad = e.dataValues.cart_prod.dataValues.qty;
+                        let price_prod_cart = price_prod * cantidad;
+
+                        let c = {
+                            id: e.dataValues.id,
+                            name: e.dataValues.name,
+                            price: e.dataValues.price,
+                            image1: e.dataValues.image1,
+                            qty: e.dataValues.cart_prod.dataValues.qty,
+                            price_prod_cart: price_prod_cart
+                        }
+
+                        compras.push(c);
+                        totales.push(price_prod_cart);
+
+                        db.Carts.findOne({
+                            where: {
+                                user_id: req.session.usuarioLogeado.id,
+                                status: true
+                            }
+                        }).then((rta) => {
+                            db.Cart_prod.update({
+                                price: price_prod_cart
+                            }, {
+                                where: {
+                                    product_id: e.dataValues.id,
+                                    cart_id: rta.id
+                                }
+                            })
+                        })
+                    })
+
+                    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+                    let user = req.session.usuarioLogeado.id;
+                    let total_cart = totales.reduce(reducer);
+                    let status = resp.dataValues.status;
+                    let id_cart = resp.dataValues.total;
+
+                    let data_cart = {
+                        user,
+                        total_cart,
+                        status,
+                        id_cart
+                    };
+
+                    // console.log(compras);
+
+                    res.render('carrito', {
+                        data_cart: data_cart,
+                        data: compras
+                    })
+
+                }
+            })
+            .catch(function () {
+                res.render('carritoVacio')
+            })
+    },
+    proceedCheckOut: function (req, res) {
+
+        db.Carts.findOne({
+                where: {
+                    user_id: req.session.usuarioLogeado.id,
+                    status: true
+                },
+                include: [{
+                    association: `products`,
+                    through: {
+                        attributes: ['qty', 'price'],
+                    }
+                }]
+            })
+            .then((resp) => {
+                console.log(resp)
+                if (resp == null) {
+                    res.render('carritoVacio')
+                } else {
+                    let compras = [];
+                    const totales = [];
+                    let x = resp.dataValues.products;
+                    x.forEach(e => {
+                        //e.datavalues.price=e.price
+                        let price_prod = e.dataValues.price;
+                        let cantidad = e.dataValues.cart_prod.dataValues.qty;
+                        let price_prod_cart = price_prod * cantidad;
+
+                        let c = {
+                            id: e.dataValues.id,
+                            name: e.dataValues.name,
+                            price: e.dataValues.price,
+                            image1: e.dataValues.image1,
+                            qty: e.dataValues.cart_prod.dataValues.qty,
+                            price_prod_cart: price_prod_cart
+                        }
+
+                        compras.push(c);
+                        totales.push(price_prod_cart);
+
+                        db.Carts.findOne({
+                            where: {
+                                user_id: req.session.usuarioLogeado.id,
+                                status: true
+                            }
+                        }).then((rta) => {
+                            db.Cart_prod.update({
+                                price: price_prod_cart
+                            }, {
+                                where: {
+                                    product_id: e.dataValues.id,
+                                    cart_id: rta.id
+                                }
+                            })
+                        })
+                    })
+
+                    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+                    let user = req.session.usuarioLogeado.id;
+                    let total_cart = totales.reduce(reducer);
+                    let status = resp.dataValues.status;
+                    let id_cart = resp.dataValues.total;
+
+                    let data_cart = {
+                        user,
+                        total_cart,
+                        status,
+                        id_cart
+                    };
+
+                    // console.log(compras);
+
+                    res.render('carritoCheckOut', {
+                        data_cart: data_cart,
+                        data: compras
+                    })
+
+                }
+            })
+            .catch(function () {
+                res.render('errorFile')
+            })
+    },
+
+    enter: (req, res) => {
+
+        db.Users.findOne({
+            where: {
+                email: req.body.email
+
+            }
+        }).then((resultado) => {
+
+            if (resultado == null) {
+                //¡¡ojo! está mandando la vista de error desde acá, no desde el middleware guest
+                res.render('errorLogin');
                 // res.send ('No existe el usuario');
             } else {
 
-                if(bcrypt.compareSync(req.body.password, resultado.password)){
+                if (bcrypt.compareSync(req.body.password, resultado.password)) {
 
-                    req.session.usuarioLogeado=resultado.dataValues;
+                    req.session.usuarioLogeado = resultado.dataValues;
 
                     // console.log(req.session.usuarioLogeado)
 
-                   res.redirect('/')
+                    res.redirect('/')
 
-            }else {
-                res.render('errorLogin');
+                } else {
+                    res.render('errorLogin');
+                }
             }
-}
 
-    })
+        })
 
 
     },
     check: (req, res) => {
-        if (req.session.usuarioLogeado==undefined) {
-            res.render ('redireccion')
-        }else {
-            res.send ('el usuario es' + req.session.usuarioLogeado.email)
+        if (req.session.usuarioLogeado == undefined) {
+            res.render(`redireccion`)
+        } else {
+            res.send(`el usuario es` + req.session.usuarioLogeado.email)
         }
     },
-    createUser: (req,res,next)=>{
+    createUser: (req, res, next) => {
 
-        res.render('registro', {data: user, errors: []});
+        res.render('registro', {
+            data: user,
+            errors: []
+        });
 
 
     },
     registro: (req, res, next) => {
         let errors = validationResult(req);
-        if (errors.isEmpty()){
+        if (errors.isEmpty()) {
             let passEncripted = bcrypt.hashSync(req.body.password, 10);
-
-          
-
 
             db.Users.create({
 
                 email: req.body.email,
                 password: passEncripted,
                 avatar: 'noAvatar.jpeg',
-                customers: [{name: req.body.name,
+                customers: [{
+                    name: req.body.name,
                     surname: req.body.sName,
                     country: req.body.country,
-                    adress: req.body.adress}]
-                },
-            {
+                    adress: req.body.adress
+                }]
+            }, {
                 include: {
                     model: db.Customers,
                     as: 'customers',
                 }
-             }
-            )
+            })
 
-
-
-            res.render('registro', {errors:undefined})
-        }else{
-            res.render('registro', {errors:errors.errors});
+            res.render(`registro`, {
+                errors: undefined
+            })
+        } else {
+            res.render('registro', {
+                errors: errors.errors
+            });
         };
     },
     // avatar:(req, res) => {
     //     if (req.files.length == 0){
-    //         usuarios[usuarios.length-1].avatar = 'noAvatar.jpeg';
+    //         usuarios[usuarios.length-1].avatar = `noAvatar.jpeg`;
     //     } else{
     //         usuarios[usuarios.length-1].avatar = req.files[0].filename;
     //     };
     //     fs.writeFileSync(usersFilePath, JSON.stringify(usuarios));
-    //     res.render('vistaPerfil', {userShow:usuarios[usuarios.length-1]});
+    //     res.render(`vistaPerfil`, {userShow:usuarios[usuarios.length-1]});
     // },
     close: (req, res) => {
         req.session.destroy();
@@ -129,32 +352,46 @@ const users = {
     },
     cartEnter: (req, res) => {
 
-        res.render('cart');
+        res.render(`cart`);
     },
     avatar: (req, res) => {
-        res.render('avatar');
+        res.render(`avatar`);
     },
     cargarAvatar: (req, res) => {
 
 
-        if(req.session.usuarioLogeado==undefined ) {
-            res.render('errorSession')
+        if (req.session.usuarioLogeado == undefined) {
+            res.render(`errorSession`)
         }
 
         db.Users.update({
 
-            avatar: req.files[0].filename
+                avatar: req.files[0].filename
 
-            },
-           {where: {
-                email: req.session.usuarioLogeado.email
-            }}
+            }, {
+                where: {
+                    email: req.session.usuarioLogeado.email
+                }
+            }
 
-            ).then((resultado)=> {
-                res.redirect('/')
-                // res.render('vistaPerfil', {userShow:req.session.usuarioLogeado});
+        ).then((resultado) => {
+
+            db.Users.findOne({
+                where: {
+                    email: req.session.usuarioLogeado.email
+
+                }
+            }).then((resultado) => {
+                req.session.usuarioLogeado = resultado.dataValues;
             })
-        },
+
+
+            // res.redirect('/')
+            res.render('vistaPerfil', {
+                userShow: req.session.usuarioLogeado
+            });
+        })
+    },
     editForm: (req, res) => {
 
 
@@ -162,91 +399,92 @@ const users = {
             where: {
                 user_id: req.session.usuarioLogeado.id
             }
-        }).then((resultado)=> {
+        }).then((resultado) => {
 
             let userData;
-        if (resultado!=null) {
+            if (resultado != null) {
 
-            userData= {
-               avatar: req.session.usuarioLogeado.avatar ,
-               name: resultado.dataValues.name,
-               surname: resultado.dataValues.surname ,
-               adress: resultado.dataValues.adress,
-               country: resultado.dataValues.country,
-               email: req.session.usuarioLogeado.email
-           }
+                userData = {
+                    avatar: req.session.usuarioLogeado.avatar,
+                    name: resultado.dataValues.name,
+                    surname: resultado.dataValues.surname,
+                    adress: resultado.dataValues.adress,
+                    country: resultado.dataValues.country,
+                    email: req.session.usuarioLogeado.email
+                }
 
-         }
+            }
 
-        res.render('editUserForm', {userData: userData});
+            res.render('editUserForm', {
+                userData: userData
+            });
 
         })
-},
+    },
     editData: (req, res) => {
 
-
-
-        // esto no anda. Hcaer que cambie el pass por otro lado.
-        if(req.session.usuarioLogeado==undefined ) {
-            res.render ('redireccion')
+        if (req.session.usuarioLogeado == undefined) {
+            res.render(`redireccion`)
         }
-
+        let passEncripted = bcrypt.hashSync(req.body.password, 10);
 
         db.Users.update({
             email: req.body.email,
-            },
-           {where: {
+            password: passEncripted
+
+
+        }, {
+            where: {
                 email: req.session.usuarioLogeado.email
-            }}).then((user)=> {
+            }
+        }).then((user) => {
 
-               console.log(req.session.usuarioLogeado)
+            console.log(req.session.usuarioLogeado)
 
+            db.Customers.findOne({
+                where: {
+                    user_id: req.session.usuarioLogeado.id
+                }
+            }).then((result) => {
+
+                db.Customers.update({
+                    name: req.body.name,
+                    surname: req.body.sName,
+                    country: req.body.country,
+                    adress: req.body.adress
+                }, {
+                    where: {
+                        user_id: req.session.usuarioLogeado.id
+                    }
+                })
+            }).then((data) => {
                 db.Customers.findOne({
                     where: {
                         user_id: req.session.usuarioLogeado.id
                     }
-                }).then((result)=> {
-    // let customer = user.getCustomer()
-    db.Customers.update({
-        name: req.body.name,
-        surname: req.body.sName,
-        country: req.body.country,
-        adress: req.body.adress
-    }, {
-        where: {
-            user_id: req.session.usuarioLogeado.id
-        }
-    } )
-}).then((data)=> {
-    db.Customers.findOne({
-        where: {
-            user_id: req.session.usuarioLogeado.id
-        }
-    }).then((resultado)=> {
+                }).then((resultado) => {
 
-        let userData;
-    if (resultado!=null) {
+                    let userData;
+                    if (resultado != null) {
 
-        userData= {
-           avatar: req.session.usuarioLogeado.avatar ,
-           name: resultado.dataValues.name,
-           surname: resultado.dataValues.surname ,
-           adress: resultado.dataValues.adress,
-           country: resultado.dataValues.country,
-           email: req.session.usuarioLogeado.email
-       }
+                        userData = {
+                            avatar: req.session.usuarioLogeado.avatar,
+                            name: resultado.dataValues.name,
+                            surname: resultado.dataValues.surname,
+                            adress: resultado.dataValues.adress,
+                            country: resultado.dataValues.country,
+                            email: req.session.usuarioLogeado.email
+                        }
 
-     }
-
-     //no logro cargar la nueva data en la nueva vista de perfil.
-    //  res.render('vistaPerfil', {userShow:req.session.usuarioLogeado, userData});
-    res.redirect('/')
-    })
-})
+                    }
 
 
-                // res.render('vistaPerfil', {userShow:req.session.usuarioLogeado, userData});
+                    res.redirect('/')
+                })
             })
+
+
+        })
 
 
     },
@@ -258,122 +496,179 @@ const users = {
             where: {
                 user_id: req.session.usuarioLogeado.id
             }
-        }).then((resultado)=> {
+        }).then((resultado) => {
 
             let userData;
-        if (resultado!=null) {
+            if (resultado != null) {
 
-            userData= {
-               avatar: req.session.usuarioLogeado.avatar ,
-               name: resultado.dataValues.name,
-               surname: resultado.dataValues.surname ,
-               adress: resultado.dataValues.adress,
-               country: resultado.dataValues.country,
-               email: req.session.usuarioLogeado.email
-           }
+                userData = {
+                    avatar: req.session.usuarioLogeado.avatar,
+                    name: resultado.dataValues.name,
+                    surname: resultado.dataValues.surname,
+                    adress: resultado.dataValues.adress,
+                    country: resultado.dataValues.country,
+                    email: req.session.usuarioLogeado.email
+                }
 
-         }
+            }
 
-        res.render('editAdminForm', {userData: userData});
+            res.render('editAdminForm', {
+                userData: userData
+            });
 
         })
-},
+    },
+    create_admin: (req, res) => {
+        res.render('createAdmin', {
+            created: false
+        })
+    },
+    create_admin_post: async (req, res) => {
+        let errors = validationResult(req);
+        if (errors.isEmpty()) {
+            let passEncripted = bcrypt.hashSync(req.body.password, 10);
 
-editAdminData: (req, res) => {
+            await db.Users.create({
+
+                email: req.body.email,
+                password: passEncripted,
+                avatar: 'noAvatar.jpeg',
+                admins: [{
+                    name: req.body.name,
+                    surname: req.body.sName,
+                    country: req.body.country,
+                    adress: req.body.adress
+                }]
+            }, {
+                include: {
+                    model: db.Admins,
+                    as: 'admins',
+                }
+            })
+
+            res.render(`createAdmin`, {
+
+                created: true
+            })
 
 
 
-    // esto no anda. Hcaer que cambie el pass por otro lado.
-    if(req.session.usuarioLogeado==undefined ) {
-        res.render ('redireccion')
-    }
+        } else {
+            res.render('createAdmin', {
+                errors: errors.errors
+            });
+        };
+
+    },
+    editAdminData: (req, res) => {
 
 
-    db.Users.update({
-        email: req.body.email,
-        },
-       {where: {
-            email: req.session.usuarioLogeado.email
-        }}).then((user)=> {
 
-           console.log(req.session.usuarioLogeado)
+
+        if (req.session.usuarioLogeado == undefined) {
+            res.render('redireccion')
+        }
+        let passEncripted = bcrypt.hashSync(req.body.password, 10);
+
+
+
+
+        db.Users.update({
+            email: req.body.email,
+            password: passEncripted
+        }, {
+            where: {
+                email: req.session.usuarioLogeado.email
+            }
+        }).then((user) => {
+
+            console.log(req.session.usuarioLogeado)
 
             db.Admins.findOne({
                 where: {
                     user_id: req.session.usuarioLogeado.id
                 }
-            }).then((result)=> {
-// let customer = user.getCustomer()
-db.Admins.update({
-    name: req.body.name,
-    surname: req.body.sName,
-    country: req.body.country,
-    adress: req.body.adress
-}, {
-    where: {
-        user_id: req.session.usuarioLogeado.id
-    }
-} )
-}).then((data)=> {
-db.Admins.findOne({
-    where: {
-        user_id: req.session.usuarioLogeado.id
-    }
-}).then((resultado)=> {
+            }).then((result) => {
+                // let customer = user.getCustomer()
+                db.Admins.update({
+                    name: req.body.name,
+                    surname: req.body.sName,
+                    country: req.body.country,
+                    adress: req.body.adress
+                }, {
+                    where: {
+                        user_id: req.session.usuarioLogeado.id
+                    }
+                })
+            }).then((data) => {
+                db.Admins.findOne({
+                    where: {
+                        user_id: req.session.usuarioLogeado.id
+                    }
+                }).then((resultado) => {
 
-    let userData;
-if (resultado!=null) {
+                    let userData;
+                    if (resultado != null) {
 
-    userData= {
-       avatar: req.session.usuarioLogeado.avatar ,
-       name: resultado.dataValues.name,
-       surname: resultado.dataValues.surname ,
-       adress: resultado.dataValues.adress,
-       country: resultado.dataValues.country,
-       email: req.session.usuarioLogeado.email
-   }
+                        userData = {
+                            avatar: req.session.usuarioLogeado.avatar,
+                            name: resultado.dataValues.name,
+                            surname: resultado.dataValues.surname,
+                            adress: resultado.dataValues.adress,
+                            country: resultado.dataValues.country,
+                            email: req.session.usuarioLogeado.email
+                        }
 
- }
+                    }
 
- //no logro cargar la nueva data en la nueva vista de perfil.
-//  res.render('vistaPerfil', {userShow:req.session.usuarioLogeado, userData});
-res.redirect('/')
-})
-})
+                    //no logro cargar la nueva data en la nueva vista de perfil.
+                    //  res.render('vistaPerfil', {userShow:req.session.usuarioLogeado, userData});
+                    res.redirect('/')
+                })
+            })
 
 
             // res.render('vistaPerfil', {userShow:req.session.usuarioLogeado, userData});
         })
 
 
-},
+    },
 
 
-    controlVer: (req,res)=> {
+    controlVer: (req, res) => {
         res.render('panelControlAdmin')
     },
-    deleteForm: (req, res)=> {
+
+    controlContacts: (req, res) => {
+        res.render('agenda')
+    },
+
+    deleteForm: (req, res) => {
         res.render('destroyUser')
     },
-    deleteFormAdmin: (req, res)=> {
+    deleteFormAdmin: (req, res) => {
         res.render('destroyAdmin')
     },
     deleteOk: (req, res) => {
 
-        console.log('customers'+ req.session.usuarioLogeado.id)
-        let variable= req.session.usuarioLogeado.id;
+        console.log('customers' + req.session.usuarioLogeado.id)
+        let variable = req.session.usuarioLogeado.id;
 
-         db.Customers.destroy({
+        db.Customers.destroy({
 
-             where: { user_id: req.session.usuarioLogeado.id}
-        }).then((resultado)=> {
-            console.log('users'+ variable)
+            where: {
+                user_id: req.session.usuarioLogeado.id
+            }
+        }).then((resultado) => {
+            console.log('users' + variable)
 
             db.Users.destroy({
 
-               where: {id: variable}
-             })
-         })
+                where: {
+                    id: variable
+                }
+            })
+        })
 
 
 
@@ -384,20 +679,24 @@ res.redirect('/')
     },
     deleteOkAdmin: (req, res) => {
 
-        console.log('customers'+ req.session.usuarioLogeado.id)
-        let variable= req.session.usuarioLogeado.id;
+        console.log('customers' + req.session.usuarioLogeado.id)
+        let variable = req.session.usuarioLogeado.id;
 
-         db.Admins.destroy({
+        db.Admins.destroy({
 
-             where: { user_id: req.session.usuarioLogeado.id}
-        }).then((resultado)=> {
-            console.log('users'+ variable)
+            where: {
+                user_id: req.session.usuarioLogeado.id
+            }
+        }).then((resultado) => {
+            console.log('users' + variable)
 
             db.Users.destroy({
 
-               where: {id: variable}
-             })
-         })
+                where: {
+                    id: variable
+                }
+            })
+        })
 
 
 
@@ -406,6 +705,16 @@ res.redirect('/')
 
 
     },
+
+    favsShow: (req, res) => {
+        res.render('favs')
+    },
+    customerDetail: (req, res)=>{
+        user_id=req.params.id
+      
+        res.render('vistaUserDetail', {user_id:user_id})
+    }
+
     // avatarAdmin: (req, res) => {
     //     res.render('avatarAdmin');
     // },

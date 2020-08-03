@@ -1,59 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
 
-    <%- include('partials/head', {title: 'Inicio'}) %>
-    <main class="">
-        
-        <div class="container">
-                <div aria-label="breadcrumb rounded-0 ">
-                        <ol class="breadcrumb pl-0 bg-white">
-                            <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item"><a href="/users/login">Login</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Editar usuario</li>
-                        </ol>
-                    </div>
-        </div> 
+<%- include(`partials/head`, {title: `Inicio`}) %>
+<main class="">
+
+    <div class="container">
+        <div aria-label="breadcrumb rounded-0 ">
+            <ol class="breadcrumb pl-0 bg-white">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/users/login">Login</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Editar usuario</li>
+            </ol>
+        </div>
+    </div>
 
     <section class="container registro">
-    
-    <% if (typeof errors != 'undefined') { %>
+
+        <% if (typeof errors != `undefined`) { %>
         <% for (let i = 0; i < errors.length; i++) { %>
-            <div class="alert alert-danger" role="alert">
-                <%=errors[i].msg%>
-            </div>
+        <div class="alert alert-danger" role="alert">
+            <%=errors[i].msg%>
+        </div>
         <% } %>
-    <% } %>
-    
-    <!--PARA PODER USAR EXPRESS-VALIDATOR EN VEZ DE LA VALIDACION DEL FORMULARIO TUVE QUE ELIMINAR "needs-validation" DE LA CLASS -->       
-    <form action="/users/edit" method="post" class="mt-3 form-new-user form-edit">
+        <% } %>
+
+        <!--PARA PODER USAR EXPRESS-VALIDATOR EN VEZ DE LA VALIDACION DEL FORMULARIO TUVE QUE ELIMINAR "needs-validation" DE LA CLASS -->
+        <form action="/users/edit" method="post" class="mt-3 form-new-user form-edit">
+
             <h2 class="c-acc">Editar cuenta</h2>
-            
+
+
             <div class=" datos-usuario">
                 <h5 class="acc-subs">Datos del usuario</h5>
                 <div class="form-row flex-column">
                     <div class="col-12 col-md-6 mb-6">
                         <label for="name"></label>
-                        <input name="name" type="text" class="form-control" id="name" placeholder="<%=userData.name%>" value= "<%=userData.name%>">
+                        <input name="name" type="text" class="form-control" id="name" placeholder="<%=userData.name%>"
+                            value="<%=userData.name%>">
                     </div>
                     <div class="col-md-6 mb-6">
                         <label for="sName"></label>
-                        <input name="sName" type="text" class="form-control" id="sName" placeholder="<%=userData.surname%>"value= "<%=userData.surname%>">
-                        
+                        <input name="sName" type="text" class="form-control" id="sName"
+                            placeholder="<%=userData.surname%>" value="<%=userData.surname%>">
+
                     </div>
-                     
-                   
+
+
 
                 </div>
-                
+
             </div>
-            
-            
+
+
             <div class=" info-cuenta">
                 <h5 class="acc-subs">Información de la cuenta</h5>
                 <div class="form-row">
                     <div class="col-md-6 mb-6">
+
                         <label for="email"></label>
-                        <input name ="email" type="email" class="form-control" id="email" placeholder="Email" value= "<%=userData.email%>">
+                        <input name="email" type="email" class="form-control" id="email" placeholder="Email"
+                            value="<%=userData.email%>">
                     </div>
                     <!-- <div class="col-md-6 mb-6">
                         <label for="validationCustomX"></label>
@@ -64,69 +70,102 @@
                     </div> -->
 
                     <div class="col-md-6 mb-6">
-                            <label for="cmail"></label>
-                            <input name ="cemail" type="email" class="form-control" id="cemail" placeholder="Confirmar email" value= "<%=userData.email%>">
-                        </div>
-                    
-                        <div class="col-md-6 mb-6">
-                                <label for="adress"></label>
-                                <input name ="adress" type="text" class="form-control" id="adress" placeholder="<%=userData.adress%>" value= "<%=userData.adress%>">
-                            </div>
-                            <div class="col-md-6 mb-6">
-                                    <label for="country"></label>
-                                    <input name ="country" type="text" class="form-control" id="country" placeholder="<%=userData.country%>" value= "<%=userData.country%>">
-                                </div>
-                    
-                    
+                        <label for="cmail"></label>
+                        <input name="cemail" type="email" class="form-control" id="cemail" placeholder="Confirmar email"
+                            value="<%=userData.email%>">
+                    </div>
+
+                    <div class="col-md-6 mb-6">
+                        <label for="adress"></label>
+                        <input name="adress" type="text" class="form-control" id="adress"
+                            placeholder="<%=userData.adress%>" value="<%=userData.adress%>">
+                    </div>
+                    <div class="col-md-6 mb-6">
+                        <label for="country"></label>
+                        <input name="country" type="text" class="form-control" id="country"
+                            placeholder="<%=userData.country%>" value="<%=userData.country%>">
+                    </div>
+
+
                 </div>
-                
-                 <!-- <div class="form-row">
+
+                <div class="form-row">
                     <div class="col-md-6 mb-6">
                         <label for="password"></label>
-                        <input name="password" type="password" class="form-control" id="password" placeholder="Contraseña" name="password">    
+                        <input name="password" type="password" class="form-control" id="password"
+                            placeholder="Contraseña" name="password">
                     </div>
-                    
+
                     <div class="col-md-6 mb-6">
                         <label for="cPassword"></label>
-                        <input name="cPassword" type="password" class="form-control" id="cPassword" placeholder="Confirmar contraseña" name="cPassword">
-                        
+                        <input name="cPassword" type="password" class="form-control" id="cPassword"
+                            placeholder="Confirmar contraseña" name="cPassword">
+
                     </div>
-                    
-                </div>  -->
-                
+
+                </div>
+
             </div>
-            
+
             <div class="form-row">
-              
-    
-                </div>   
+
+
+            </div>
             </div>
             <div class="form-row mt-5">
                 <div class="col-12">
-                    <h4 class="mb-4 pb-4">Los cambios se verán reflejados luego de reiniciar sesión.</h4>
+                    <h4 class="mb-4 pb-4  " id="edicion-usuario-valid">Los cambios se verán reflejados luego de reiniciar sesión.</h4>
                 </div>
-                <div class="col-md-6">
-                    <button class="btn  boton-registro js-boton-editar" type="submit">Editar cuenta</button>
+                <div class="col-12 container-buttons">
+                    <div class="col-md-6">
+                        <button class="btn  boton-registro js-boton-editar" type="submit">Editar cuenta</button>
                     </div>
                     <div class="col-md-6">
-                        <button class="btn  boton-registro"><a href="/users/delete">ELIMINAR cuenta</a></button>
-                        </div>
+                        <button class="btn  boton-registro delete"><a class="delete" href="/users/delete/ok">ELIMINAR
+                                cuenta</a></button>
+                    </div>
+
+                </div>
             </div>
-        
-        
-    </form>
-    <script src="../scripts/validationEditUser.js"></script>
+
+
+        </form>
+        <script src="../scripts/validationEditUser.js"></script>
+
+
+        <script>
+            $('a.delete').confirm({
+                columnClass: 'col-lg-8',
+
+                title: 'Estas seguro?',
+                content: 'Lamentamos verte partir...',
+                animationBounce: 1.5,
+
+                buttons: {
+                    'Me voy!': function () {
+                        location.href = this.$target.attr('href');
+                    },
+                    'No no!': {
+                        text: 'No no!',
+                        btnClass: 'btn-red',
+                        action: function () {
+
+                        }
+                    }
+                }
+            });
+        </script>
 
 
 
 
-    
-  
+
 
     </section>
-        
-    </main>
-    <%- include('partials/footer') %>
 
-</body>	
+</main>
+<%- include(`partials/footer`) %>
+
+</body>
+
 </html>

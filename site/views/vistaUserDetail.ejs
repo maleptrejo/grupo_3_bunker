@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include(`partials/head`, {title: `Inicio`}) %>
+
+
+<main class="container container-user">
+
+    <div class="container">
+        <div aria-label="breadcrumb rounded-0 breadcrumb-user">
+            <ol class="breadcrumb pl-0 bg-white">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/users/admins/control">Panel de control</a></li>
+                <li class="breadcrumb-item"><a href="/users/admins/contacts">Agenda</a></li>
+                <li class="breadcrumb-item"><a href="#">Perfil de cliente</a></li>
+
+            </ol>
+        </div>
+    </div>
+
+    <section class="container">
+
+        <div class="card-user">
+            <div class="jumbotron  jumbo-user-detail">
+                <div class="detail-user-row-1">
+
+
+                    <div>
+                        <img id="avatar_user" src="" alt="avatar">
+                    </div>
+                    <div class="name_user second-column">
+                        <h2 class="display-4" id="name_user">Nombre</h2>
+                    </div>
+
+                </div>
+                <hr class="my-4">
+                <div class="detail-user-row-1">
+                    <div>
+                        <h3>Información de contacto:</h3>
+                    </div>
+                    <div class="second-column">
+                        <p><span>Nombre:</span><span id="name_user_card">algo</span></p>
+                        <p><span>Email:</span><span id="email_user">algo</span></p>
+                        <p><span>Dirección:</span><span id="address_user">algo</span></p>
+                        <p><span>País:</span><span id="country_user">algo</span></p>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </section>
+
+    <script src="../../scripts/userDetail.js"></script>
+
+</main>
+
+
+
+
+<%- include(`partials/footer`) %>
+
+</body>
+
+</html>

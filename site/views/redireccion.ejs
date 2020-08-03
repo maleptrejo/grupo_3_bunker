@@ -1,35 +1,51 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<%- include('partials/head', {title: 'Inicio'}) %>
+<%- include(`partials/head`, {title: `Inicio`}) %>
 
-<main class="container redireccion">
-                <div class="container">
-                                <div aria-label="breadcrumb rounded-0 breadcrumb-user">
-                                    <ol class="breadcrumb pl-0 bg-white">
-                                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                        <li class="breadcrumb-item"><a href="/users/login">Login</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Error</a></li>
-                                        
-                                    </ol>
-                                </div>
-                            </div> 
-<div class="mt-5 mb-5 ml-3">
-    <h1>Tenés que estar logueado para continuar.</h1>
-</div>
 
-        <div class="button-container-submit">
-                        <div>
-                                        <img src="../../images/error.png" alt="">
-                                    </div>
+<main class="container container-user">
+    
+    <div class="container">
+        <div aria-label="breadcrumb rounded-0 breadcrumb-user">
+            <ol class="breadcrumb pl-0 bg-white">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/users/login">Login</a></li>
+                <li class="breadcrumb-item"><a href="#">Error</a></li>
+                
+            </ol>
         </div>
+    </div> 
+    
+    <section class="container-wide destroy">
+        
+        <div class="m-5">
+            <h3>Tenés que estar logueado para continuar!</h3>
+            
+
+            
+        </div>
+        <div>
+            <img class="destroy-user"src="../../images/error.png" alt="">
+        </div>
+        
+       
+        
+   
+    
+    
+</section>
+
 
 
 </main>
 
 
 
-        <%- include('partials/footer') %>
-        
-    </body>	
-    </html>
+
+<%- include(`partials/footer`) %>
+
+</body>	
+</html>
+
+

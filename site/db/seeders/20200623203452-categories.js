@@ -9,23 +9,28 @@ module.exports = {
       return queryInterface.bulkInsert('categories', [
         {
           id: 1,
-          name: "Outdoor"
+          name: "Outdoor",
+          image: "wet-empty-road-wallpaper.jpg"
         },
         {
           id: 2,
-          name: "Diseño Sustentable"
+          name: "Diseño Sustentable",
+          image: "SUSTENTABLE.jpg"
         },
         {
           id: 3,
-          name: "Sado"
+          name: "Sado",
+          image: "SADO.jpg"
         },
         {
           id: 4,
-          name: "Taller"
+          name: "Taller",
+          image: "tools-installation-floor.jpg"
         },
         {
           id: 5,
-          name: "Bazar"
+          name: "Bazar",
+          image: "BAZARBOT.jpg"
         }
 
       ], {});

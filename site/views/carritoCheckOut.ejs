@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include('partials/head', {title: 'Inicio'}) %>
+
+
+<main class="container container-user">
+    
+    <div class="container">
+        <div aria-label="breadcrumb rounded-0 breadcrumb-user">
+            <ol class="breadcrumb pl-0 bg-white">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/users/cart">Carrito</a></li>
+                <li class="breadcrumb-item"><a href="#">Check out</a></li>
+                
+            </ol>
+        </div>
+    </div>
+    
+    
+    <table class="table container table-cart">
+            <thead>
+                    <h1 class="mb-4">Confirmación de compra</h1>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Subtotal</th>
+              
+              </tr>
+            </thead>
+            <tbody>
+
+
+                    <% data.forEach(dat=> { %>
+              <tr>
+                
+
+                <th ><img id="img-cart" src="../images/productos/<%= dat.image1 %>"></th>
+                
+                <td><p><%= dat.name %></p></td>
+                <td><p><%= dat.qty %></p></td>
+                <td><p>$ <%= dat.price_prod_cart %></p></td>
+                
+            
+             
+              </tr>
+              <% }) %>
+              <tr>
+                    <th scope="row"></th>
+                    <td>Total:</td>
+                    <td>$<%= data_cart.total_cart %></td>
+                    <td><a href="../api/products/cart/<%= data_cart.id_cart %>/check_out" class="btn fav-quitar"
+                        id="check-out" value="<%= data_cart.total_cart %>">FINALIZAR </a>
+                </td>
+                    <!-- <td id="check-out">Continuar <i class="fas fa-sign-out-alt"></i></td> -->
+                  </tr>
+            </tbody>
+          </table>
+
+
+
+
+  
+                        
+                        
+                        
+                        
+                        
+                    </tbody>
+                </table>
+            </section>
+            
+ 
+         
+
+            <script src="../../scripts/checkOut.js"></script> 
+                
+                
+                
+            </main>
+            
+            
+            
+            
+            
+            
+            <%- include('partials/footer') %>
+            
+        </body>
+        </html>
+        

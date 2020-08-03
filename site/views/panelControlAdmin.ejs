@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<%- include('partials/head', {title: 'Inicio'}) %>
+<%- include(`partials/head`, {title: `Inicio`}) %>
 
 
 <main class="container container-user">
@@ -9,50 +9,57 @@
         <div aria-label="breadcrumb rounded-0 breadcrumb-user">
             <ol class="breadcrumb pl-0 bg-white">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Perfil</a></li>    
+                <li class="breadcrumb-item"><a href="#">Perfil</a></li>
             </ol>
         </div>
-    </div> 
-    <section class="verTodo">
-            <div>
-                <h1>Ver todos los productos</h1>
-            </div>
-            <div class="button-profile">
-                <button type="button" class="btn btn-secondary btn-lg  rounded-sm mt-5 mb-3"><a href="/products/extras">icono</a></button>
-            </div>
-        </section>
-    <section class="crear">
-        <div>
-            <h1>Crear nuevo producto</h1>    
-        </div>
-        <div class="button-profile">
-            <button type="button" class="btn btn-secondary btn-lg  rounded-sm mt-5 mb-3"><a href="/products/create">icono</a></button>
-        </div>
+    </div>
+
+
+    <section class="container-control-panel-table">
+        <table class="table control-panel-table">
+            <thead>
+                <h1 class="mb-4">Panel de Control</h1>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"><i class="fas fa-list-alt"></i></th>
+                    <td><a href="/products">Listar productos (eliminar y modificar)</a></td>
+                </tr>
+                <tr>
+                    <th scope="row"><i class="fas fa-plus-circle"></i></th>
+                    <td><a href="/products/create">Crear nuevo producto</a></td>
+                </tr>
+                <tr>
+                    <th scope="row"><i class="fas fa-pencil-alt"></i></th>
+                    <td><a href="/products/extras">Modificar categorías, marcas y descuentos</a></td>
+                </tr>
+                <tr>
+                    <th scope="row"><i class="fas fa-user-friends"></i></th>
+                    <td><a href="/users/admins/contacts">Agenda de contactos</a></td>
+                </tr>
+                <tr>
+                    <th scope="row"><i class="fas fa-crown"></i></th>
+                    <td><a href="/users/admins/create_admin">Crear administradores</a></td>
+                </tr>
+                <tr>
+                    <th scope="row"><i class="fas fa-crown"></i></th>
+                    <td><a href="/admins/contact">Consultas</a></td>
+                </tr>
+            </tbody>
+        </table>
     </section>
-    <section class="editar">
-        <div>
-            <h1>Editar o eliminar producto</h1>
-        </div>
-        <div class="button-profile">
-            <button type="button" class="btn btn-secondary btn-lg  rounded-sm mt-5 mb-3"><a href="/products/search">icono</a></button>
-        </div>        
-    </section>
-    <section class="parametros">
-        <div>
-            <h1>Modificar categorias, marcas y escuentos</h1>
-        </div>
-        <div class="button-profile">
-            <button type="button" class="btn btn-secondary btn-lg  rounded-sm mt-5 mb-3"><a href="/products/extras">icono</a></button>
-        </div>
-    </section>
+
+
+
+
+
 </main>
 
 
 
 
-<%- include('partials/footer') %>
+<%- include(`partials/footer`) %>
 
-</body>	
+</body>
+
 </html>
-
-

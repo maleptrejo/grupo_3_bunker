@@ -31,6 +31,62 @@ module.exports = {
         password: bcrypt.hashSync('12345678', 10),
         avatar: '1591744954745.jpg',
         
+      },
+      {
+        id: 3,
+        email: faker.internet.email(),
+        password: bcrypt.hashSync('12345678', 10),
+        avatar: '1591578789301.jpg',
+        
+      },
+      {
+        id: 4,
+        email: faker.internet.email(),
+        password: bcrypt.hashSync('12345678', 10),
+        avatar: '1591579375497.jpg',
+        
+      },
+      {
+        id: 5,
+        email: faker.internet.email(),
+        password: bcrypt.hashSync('12345678', 10),
+        avatar: '1591744954745.jpg',
+        
+      },
+      {
+        id: 6,
+        email: faker.internet.email(),
+        password: bcrypt.hashSync('12345678', 10),
+        avatar: '1591744954745.jpg',
+        
+      },
+      {
+        id: 7,
+        email: faker.internet.email(),
+        password: bcrypt.hashSync('12345678', 10),
+        avatar: '1591578789301.jpg',
+        
+      },
+      {
+        id: 8,
+        email: faker.internet.email(),
+        password: bcrypt.hashSync('12345678', 10),
+        avatar: '1591579375497.jpg',
+        
+      },
+      {
+        id: 9,
+        email: faker.internet.email(),
+        password: bcrypt.hashSync('12345678', 10),
+        avatar: '1591578789301.jpg',
+        
+      },
+      {
+        id: 10,
+        email: faker.internet.email(),
+        password: bcrypt.hashSync('12345678', 10),
+        avatar: '1591579375497.jpg',
+        
       }
     ] , {})
 

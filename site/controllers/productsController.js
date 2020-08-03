@@ -1,246 +1,297 @@
 /************** REQUIRED MODULES **************/
-const fs = require('fs');
-const path = require('path');
+const path = require(`path`);
 const db = require(path.join(__dirname,`..`,`database`,`models`));
-const Sequelize = db.sequelize;
-const Op = Sequelize.Op;
-//const multer=require('multer');
-
-/*************** REQUIRED FILES ***************/
-const usersFilePath= path.join(__dirname, '../data/usuarios.json');
-const usersObjeto = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
-
-const prod2FilePath= path.join(__dirname, '../data/productos2.json');
-var prod2Objeto = JSON.parse(fs.readFileSync(prod2FilePath, 'utf-8'));
-
-let arrayUsuarios=[];
-arrayUsuarios.push(usersObjeto[1]);
-arrayUsuarios.push(usersObjeto[2]);
+const {check, validationResult, body} = require(`express-validator`);
 
 /****************** AUXILIAR ******************/
-function isEmptyObject(objeto){
-    return !Object.keys(objeto).length;
-};
+// function isEmptyObject(objeto){
+//     return !Object.keys(objeto).length;
+// };
+const format = n => new Intl.NumberFormat("en-US", {style: "currency", currency: "USD"}).format(n)
 
 /************** MODULE TO EXPORT **************/
 const products = {
-    list: (req, res, next) => {
-        res.render('productList', {productoDetallado:prod2Objeto});
+    list: (req, res) => {
+        db.Products.findAll({
+            include: [{association: `brands`}, {association: `discounts`}, {association: `categories`}],
+            order: [[`name`, `ASC`]],
+        })
+        .then((productoDetallado) => {
+      
+            res.render(`productList`, {productoDetallado: productoDetallado});
+        })
     },
-    detail: (req, res, next) => {
-        let encontrado = prod2Objeto.find(producto => producto.id == req.params.id);
-        if(encontrado == undefined){
-            res.send ("No existe el producto");
-        };
-        let productoDetallado =[];
-        productoDetallado.push(encontrado);
-        let lastArrival = prod2Objeto.slice (prod2Objeto.length-4);
-        res.render('producto2', {productoDetallado:productoDetallado, lastArrival});
+    detail: (req, res) => {
+        let lastArrival = db.Products.findAll({
+            include: [{association: `brands`}, {association: `discounts`}, {association: `categories`}],
+            order: [[`name`, `DESC`]],
+            limit: 4
+        })
+        let product = db.Products.findByPk(req.params.id, {include: [{association: `brands`}, {association: `discounts`}, {association: `categories`}]})
+        Promise.all([lastArrival, product])
+        .then(([lastArrival, product]) => {
+            let productoDetallado = []
+            productoDetallado.push(product)
+
+            console.log(productoDetallado[0].categories.name)
+            res.render(`producto2`, {format:format, productoDetallado: productoDetallado, lastArrival: lastArrival})
+        })
     },
     editForm: (req, res) => {
-        let productId = req.params.productId;
-        let productToEdit=prod2Objeto.find(producto=> producto.id==productId);
-        res.render('edicion', {prod2Objeto: prod2Objeto, productToEdit});
+        let errors = undefined
+        let categories = db.Categories.findAll({attributes: [`id`, `name`]});   
+        let brands = db.Brands.findAll({attributes: [`id`, `name`]});
+        let discounts = db.Discounts.findAll({attributes: [`id`, `level`], raw: true});
+        let productToEdit = db.Products.findByPk(req.params.productId, {include: [{association: `brands`}, {association: `discounts`}, {association: `categories`}]})
+        Promise.all([productToEdit, categories, brands, discounts])    
+        .then(([productToEdit, categories, brands, discounts]) => {
+            res.render(`edicion`, {errors:errors, productToEdit: productToEdit, categories: categories, brands: brands, discounts: discounts});
+        })
     },
     edit: (req, res) => {
-        let productId = req.params.productId;
-        let index = prod2Objeto.findIndex(producto => producto.id === req.params.productId);
-        let productToEdit=prod2Objeto.find(producto=> producto.id==productId);
-        productToEdit.nombre=req.body.nombre;
-        productToEdit.marca=req.body.marca;
-        productToEdit.descripcion=req.body.descripcion;
-        productToEdit.precio=req.body.precio;
-        productToEdit.descuento=req.body.descuento;
-        let productoEditado = [];
-        prod2Objeto[index] = productToEdit;
-        productoEditado.push(productToEdit);
-        fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
-        res.render('producto2', {productoDetallado:productoEditado});
-    },
-    createForm: async(req, res) => {
-        let categories = await db.Categories.findAll({attributes: [`id`, `name`], raw: true});   
-        let brands = await db.Brands.findAll({attributes: [`id`, `name`], raw: true});
-        let discounts = await db.Discounts.findAll({attributes: [`id`, `level`], raw: true});
-        res.render(`carga`, {categories: categories, brands: brands, discounts: discounts});
-    },
-    create: (req, res) => {
-        let idCat = db.Categories.findOne({where:{name: req.body.categoria}})
-        let idBran = db.Brands.findOne({where:{name: req.body.marca}})
-        let idDisc = db.Discounts.findOne({where:{level: req.body.descuento/100}})
-        Promise.all([idCat, idBran, idDisc])
-            .then(([categoria, marca, descuento]) => {
-                let imagen;
-                if (req.files.length == 0) {
-                        imagen = 'noFoto.png';
-                    } else {
-                        imagen = req.files[0].filename;
-                };
+        let errors = validationResult(req);
+            if (errors.isEmpty()){
+                db.Products.update(
+                    {
+                        name: req.body.name,
+                        price: req.body.price,
+                        description: req.body.description,
+                        brand_id: req.body.brand_id,
+                        discount_id: req.body.discount_id,
+                        category_id: req.body.category_id,
+                        stock: req.body.stock
+                    },
+                    {
+                        where:{
+                            id: req.params.productId
+                        }
+                }).then((edited) => {
+                        console.log(edited);
+                        res.redirect(`/products/cargaImagenesForm/${req.params.productId}`);
+                })
+            }else {
+                let categories = db.Categories.findAll({attributes: [`id`, `name`]});   
+                let brands = db.Brands.findAll({attributes: [`id`, `name`]});
+                let discounts = db.Discounts.findAll({attributes: [`id`, `level`], raw: true});
+                let productToEdit = db.Products.findByPk(req.params.productId, {include: [{association: `brands`}, {association: `discounts`}, {association: `categories`}]})
+                Promise.all([productToEdit, categories, brands, discounts])    
+                .then(([productToEdit, categories, brands, discounts]) => {
+                    res.render(`edicion`, {productToEdit: productToEdit, categories: categories, brands: brands, discounts: discounts, errors:errors.errors});
+        })
+            }
+                
+        },
+        createForm: async(req, res) => {
+            let errors = undefined
+            let categories = await db.Categories.findAll({attributes: [`id`, `name`], raw: true});   
+            let brands = await db.Brands.findAll({attributes: [`id`, `name`], raw: true});
+            let discounts = await db.Discounts.findAll({attributes: [`id`, `level`], raw: true});
+            res.render(`carga`, {categories: categories, brands: brands, discounts: discounts, errors:errors});
+        },
+        create: async(req, res) => {
+            let errors = validationResult(req);
+            if (errors.isEmpty()){
                 db.Products.create({
-                    name: req.body.nombre,
-                    price: req.body.precio,
-                    description: req.body.descripcion,
-                    brand_id: marca.id,
-                    discount_id: descuento.id,
-                    image: imagen,
-                    category_id: categoria.id,
-                    stock: req.body.cantidad
+                    name: req.body.name,
+                    price: req.body.price,
+                    description: req.body.description,
+                    brand_id: req.body.brand_id,
+                    discount_id: req.body.discount_id,
+                    image1: `noFoto.jpg`,
+                    image2: `noFoto.jpg`,
+                    image3: `noFoto.jpg`,
+                    category_id: req.body.category_id,
+                    stock: req.body.stock
+                }).then((created) => {
+                    res.redirect(`/products/cargaImagenesForm/${created.id}`);
+                })
+            } else {
+                let categories = await db.Categories.findAll({attributes: [`id`, `name`], raw: true});   
+                let brands = await db.Brands.findAll({attributes: [`id`, `name`], raw: true});
+                let discounts = await db.Discounts.findAll({attributes: [`id`, `level`], raw: true});
+                res.render('carga', {errors:errors.errors, categories: categories, brands: brands, discounts: discounts});
+            }
+        },
+        uploadImagesForm: (req, res) => {
+            archivos = [];
+            db.Products.findByPk(req.params.id, {
+                include: [{association: `brands`}, {association: `categories`}]
+            })
+            .then((created) => {
+                res.render(`cargaImagenes`, {created: created})
+            })   
+        },
+        uploadImages: (req, res) => {
+            let [image1, image2, image3] = [`noFoto.jpg`,`noFoto.jpg`,`noFoto.jpg`]
+            console.log(req.files);
+            if (req.files.length > 0){
+                image1 = req.files[0].filename;
+                image2 = (req.files[1] != undefined) ? req.files[1].filename : req.files[0].filename;
+                image3 = (req.files[2] != undefined) ? req.files[2].filename : req.files[0].filename;
+            }
+            db.Products.update(
+                {
+                    image1: image1,
+                    image2: image2,
+                    image3: image3
+                },
+                {
+                    where:{
+                        id: req.params.id
+                    }
+                })
+                .then(() => {
+                    res.redirect(`/products/${req.params.id}`)
+                })
+        },
+        delete: (req,res)=>{
+            db.Products.destroy({
+                where: {
+                    id: req.params.productId
+                }
+            })
+            res.redirect (`/products`);
+        },
+        root: (req, res) => {
+            db.Discounts.findAll({
+                where: {
+                    level: {[db.Sequelize.Op.gte]: 0.5} 
+                }
+            }).then((discounts) => {
+                let idDiscounts = []
+                discounts.forEach(discount => idDiscounts.push(discount.id))
+                let promotions = db.Products.findAll({
+                    where: {
+                        discount_id : idDiscounts
+                    },
+                    include: [{association: `brands`}, {association: `discounts`}, {association: `categories`}],
+                    order: [[`name`, `ASC`]],
+                    limit: 4
+                })
+                
+                let lastArrival = db.Products.findAll({
+                    include: [{association: `brands`}, {association: `discounts`}, {association: `categories`}],
+                    order: [[`name`, `DESC`]],
+                    limit: 4
+                })
+                let categories = db.Categories.findAll({
+                    limit: 3
+                })
+                Promise.all([promotions, lastArrival, categories])
+                .then(([promotions, lastArrival, categories]) => {
+                    console.log(promotions)
+                    console.log(categories.length)
+                    res.render(`index`, {promotions: promotions, lastArrival: lastArrival, categories: categories})
                 })
             })
-    },
-    delete: (req,res)=>{
-        let productosFiltrados=prod2Objeto.filter(producto=> producto.id!=req.params.productId);
-        prod2Objeto=productosFiltrados;
-        fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
-        res.redirect ('/products');
-    },
-    root: (req, res) => {
-            let prodPromotion=prod2Objeto.filter(producto=>{
-                
-                return Number(producto.descuento)>0
-            });
-            let promotions= prodPromotion.slice(prodPromotion.length-4);
-        let lastArrival = prod2Objeto.slice (prod2Objeto.length-4);
-        res.render('index', {prod2Objeto: prod2Objeto, promotions, lastArrival });
-    },
-    search: (req, res) => {
-        db.Products.findAll({
-            where: {
-                name:{[db.Sequelize.Op.like]:`%`+req.query.search+`%`}
-            },
-                include: [{association: 'brands'}, {association: 'discounts'}, {association: 'categories'}],
-                order: [['name', 'ASC']]
+        },
+        search: (req, res) => {
+            db.Products.findAll({
+                where: {
+                    name:{[db.Sequelize.Op.like]:`%`+req.query.search+`%`}
+                },
+                include: [{association: `brands`}, {association: `discounts`}, {association: `categories`}],
+                order: [[`name`, `ASC`]]
             })
             .then((prductsSearch) => {
-                res.render('productosBuscados', {productoDetallado:prductsSearch})
+                res.render(`productosBuscados`, {prductsSearch:prductsSearch})
+                
             })
-    },
-    results: (req, res) => {
-      res.render('searchResults')
-    },
-    brandsCategoriesDiscounts: (req, res) => {
-        let idCat = db.Categories.findAll({order: [['name', 'ASC']]})
-        let idBran = db.Brands.findAll({order: [['name', 'ASC']]})
-        let idDisc = db.Discounts.findAll({order: [['level', 'ASC']]})
-        Promise.all([idCat, idBran, idDisc])
+        },
+        brandsCategoriesDiscounts: (req, res) => {
+            let idCat = db.Categories.findAll({order: [[`name`, `ASC`]]})
+            let idBran = db.Brands.findAll({order: [[`name`, `ASC`]]})
+            let idDisc = db.Discounts.findAll({order: [[`level`, `ASC`]]})
+            Promise.all([idCat, idBran, idDisc])
             .then(([idCat, idBran, idDisc]) => {
-                res.render('extras', {categories:idCat, brands:idBran, discounts:idDisc})
+                res.render(`extras`, {categories:idCat, brands:idBran, discounts:idDisc})
             })
-    },
-    extrasUpdate: (req, res) => {
-        if (req.body.categoryDeleteChk = 'on'){
-            db.Categories.findOne({where:{name:req.body.categoryDelete}}).then((resultado) =>{
-                db.Products.destroy({where:{category_id:resultado.id}}).then(() => {
-                    db.Categories.destroy({where:{name:req.body.categoryDelete}})
+        },
+        extrasUpdate: (req, res) => {
+            if (req.body.categoryDeleteChk = `on`){
+                db.Categories.findOne({where:{name:req.body.categoryDelete}}).then((resultado) =>{
+                    db.Products.destroy({where:{category_id:resultado.id}}).then(() => {
+                        db.Categories.destroy({where:{name:req.body.categoryDelete}})
+                    })
                 })
-            })
-        }
-        if(req.body.categoryCreate != '' && req.body.categoryCreate != ' ' && req.body.categoryCreate != undefined) {
-            db.Categories.create({
-                name: req.body.categoryCreate,
-            })
-        }
-        if (req.body.brandDeleteChk = 'on'){
-            db.Brands.findOne({where:{name:req.body.brandDelete}}).then((resultado) =>{
-                db.Products.destroy({where:{brand_id:resultado.id}}).then(() => {
-                    db.Brands.destroy({where:{name:req.body.brandDelete}})
+            }
+            if(req.body.categoryCreate != `` && req.body.categoryCreate != ` ` && req.body.categoryCreate != undefined) {
+                db.Categories.create({
+                    name: req.body.categoryCreate,
+                    image: 'noCategoryPhoto.jpg'
                 })
-            })
-        }
-        if(req.body.brandCreate != '' && req.body.brandCreate != ' ' && req.body.brandCreate != undefined) {
-            db.Brands.create({
-                name: req.body.brandCreate,
-            })
-        }
-        if (req.body.discountDeleteChk = 'on'){
-            console.log(req.body.discountDelete);
-            
-            let discountToDelete = db.Discounts.findOne({where:{level:Number(req.body.discountDelete)}})
-            let discountZero = db.Discounts.findOne({where:{level:0}})
-            Promise.all([discountToDelete, discountZero])
+            }
+            if (req.body.brandDeleteChk = `on`){
+                db.Brands.findOne({where:{name:req.body.brandDelete}}).then((resultado) =>{
+                    db.Products.destroy({where:{brand_id:resultado.id}}).then(() => {
+                        db.Brands.destroy({where:{name:req.body.brandDelete}})
+                    })
+                })
+            }
+            if(req.body.brandCreate != `` && req.body.brandCreate != ` ` && req.body.brandCreate != undefined) {
+                db.Brands.create({
+                    name: req.body.brandCreate,
+                })
+            }
+            if (req.body.discountDeleteChk = `on`){
+                let discountToDelete = db.Discounts.findOne({where:{level:Number(req.body.discountDelete)}})
+                let discountZero = db.Discounts.findOne({where:{level:0}})
+                Promise.all([discountToDelete, discountZero])
                 .then(([discountToDelete, discountZero]) => {
-                    db.Products.update({discount_id: discountZero.id},{where:{discount_id:discountToDelete.id}}).then(() => {
+                    db.Products.update({discount_id: discountZero.id},{where:{discount_id:discountToDelete.id}})
+                    .then(() => {
                         db.Discounts.destroy({where:{id:discountToDelete.id}})
+                    })
                 })
+            }
+            if(req.body.discountCreate != `` && req.body.discountCreate != ` ` && req.body.discountCreate != undefined) {
+                db.Discounts.create({
+                    level: Number(req.body.discountCreate),
+                })
+            }
+        },
+        catsShow: (req, res) =>{
+            
+            db.Categories.findOne({where:{id:req.params.id}})
+            .then(rta=>{
+                if(rta!=null){
+                    let infoCat={
+                        id:rta.dataValues.id,
+                        name:rta.dataValues.name
+                    }
+                    console.log(infoCat)
+                    res.render('prodCats', {infoCat:infoCat})
+                }else{
+                    return Promise.reject('Error...')
+                }
             })
-        }
-        if(req.body.discountCreate != '' && req.body.discountCreate != ' ' && req.body.discountCreate != undefined) {
-            db.Discounts.create({
-                level: Number(req.body.discountCreate),
-            })
-        }
-    }
-};
+            .catch(function(){
+                res.render('errorFile')
+            })   
+        },
+        categoryPhotoForm: (req, res) => {
+            db.Categories.findAll({order: [[`name`, `ASC`]]})
+            .then((categories) => {
+                res.render(`categoryPhoto`, {categories: categories})
+            })   
+        },
+        categoryPhoto: (req, res) => {
+            db.Categories.update(
+                {
+                    image: req.files[0].filename,
+                },
+                {
+                    where:{
+                        id: req.body.categorySelect
+                    }
+                })
+                .then(() => {
+                    res.redirect(`/`)
+                })
+        },
 
-/************** EXPORTED MODULE **************/
-module.exports = products;
-
-
-
-
-
-
-/************** CREATE DB MALE **************/
-        // let producto ={
-        //     id: 0,
-        //     nombre: null,
-        //     marca: null,
-        //     descripcion: null,
-        //     imagen1: undefined,
-        //     precio: null,
-        //     descuento: null}
         
-
-        //     producto.nombre=req.body.nombre;
-        //     producto.marca=req.body.marca;
-        //     producto.descripcion=req.body.descripcion;
-        //     producto.precio=req.body.precio;
-        //     producto.descuento=req.body.descuento;
-
-        // let productoCargado = [];
-
-        // productoCargado.push(producto);
-
-//codigo a probar cuando tengamos DB productos andando:
-
-// db.Product.findOne({
-//     where: {
-//         name: req.body.name
-//     }
-// }).then((resultado)=> {
-//     producto.nombre=resultado.name;
-//     res.render ('searchResults', {productoDetallado:productoCargado});
-//  }).catch(function(){
-//     res.send('no existe el producto')
-// })
-
-
-/************** CREATE CON JSON **************/
-// let producto ={
-        //     id: 0,
-        //     nombre: null,
-        //     marca: null,
-        //     descripcion: null,
-        //     imagen1: undefined,
-        //     precio: null,
-        //     descuento: null,
-        // };
-        // if (isEmptyObject(prod2Objeto)){
-        //     producto.id=1;
-        // } else {
-        //     producto.id=prod2Objeto[prod2Objeto.length-1].id+1;
-        // };
-        // if (req.files == undefined) {
-        //     producto.imagen1 = 'n/a';
-        // } else {
-        //     producto.imagen1 = req.files[0].filename;
-        // };
-        // producto.nombre=req.body.nombre;
-        // producto.marca=req.body.marca;
-        // producto.descripcion=req.body.descripcion;
-        // producto.precio=req.body.precio;
-        // producto.descuento=req.body.descuento;
-        // let productoCargado = [];
-        // prod2Objeto.push(producto);
-        // productoCargado.push(producto);
-        // fs.writeFileSync(prod2FilePath, JSON.stringify(prod2Objeto));
-        // res.render ('producto2', {productoDetallado:productoCargado});
+    };
+    
+    /************** EXPORTED MODULE **************/
+    module.exports = products;

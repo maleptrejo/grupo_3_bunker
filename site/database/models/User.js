@@ -1,7 +1,7 @@
 module.exports= (sequelize, Types) => {
     const Users=sequelize.define (
         //alias
-        'Users',
+        `Users`,
 
          //columns
         {
@@ -30,8 +30,8 @@ module.exports= (sequelize, Types) => {
         {tableName: "users",
         underscored: true,
         timestamps: true,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        createdAt: `created_at`,
+        updatedAt: `updated_at`
         }
 
         )
@@ -44,6 +44,10 @@ module.exports= (sequelize, Types) => {
             Users.hasOne(models.Admins, {
                 foreignKey: 'user_id',
                 as: 'admins'
+            }),
+            Users.hasMany(models.Carts, {
+                foreignKey: 'user_id',
+                as: 'carts'
             })
 
         }

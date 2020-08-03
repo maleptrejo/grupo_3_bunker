@@ -1,5 +1,5 @@
 module.exports = (sequelize, dataTypes) => {
-    let alias = 'Products';
+    let alias = `Products`;
     let cols = {
         id: {
             type: dataTypes.BIGINT,
@@ -15,10 +15,15 @@ module.exports = (sequelize, dataTypes) => {
         description: {
             type: dataTypes.TEXT
         },
-        image: {
-            type: dataTypes.STRING(30)
+        image1: {
+            type: dataTypes.STRING
         },
-        
+        image2: {
+            type: dataTypes.STRING
+        },
+        image3: {
+            type: dataTypes.STRING
+        },
         brand_id: {
             type: dataTypes.BIGINT
         },
@@ -33,10 +38,10 @@ module.exports = (sequelize, dataTypes) => {
         }
     };
     let config = {
-        tableName: 'products',
+        tableName: `products`,
         timestamps: true,
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+        createdAt: `created_at`,
+        updatedAt: `updated_at`
     };
     const Product = sequelize.define(alias, cols, config)
 
@@ -53,6 +58,21 @@ module.exports = (sequelize, dataTypes) => {
             as: "categories",
             foreignKey: "category_id"
         })
+        Product.hasMany(models.Favs, {
+            as:"favs",
+            foreignKey: "product_id"
+        })
+        Product.belongsToMany(models.Carts,{
+            as: 'carts',
+            through: 'cart_prod',
+            foreignKey: 'product_id',
+            otherKey:'cart_id'
+        })
+        // *****
+        // Product.belongsTo(models.Cart_prod, {
+        //     foreignKey: 'products_id',
+        //     as: 'products'
+        // })
     }
 
     return Product;

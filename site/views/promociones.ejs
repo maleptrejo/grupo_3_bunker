@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<%- include(`partials/head`, {title: `Inicio`}) %>
+
+
+<main>
+    <div class="container">
+        <div aria-label="breadcrumb rounded-0 ">
+            <ol class="breadcrumb pl-0 bg-white">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+      
+                <li class="breadcrumb-item active" aria-current="page">Promociones</li>
+            </ol>
+        </div>
+    </div>
+
+    <section>
+        <div class="container container-promociones">
+            <div>
+                <h2>Promociones Bancarias</h2>
+            </div>
+                <div class="card-deck card-deck-promociones">
+                        <div class="card">
+                          <img class="card-img-top" src="imagenes/ahora12.png" alt="Card image cap">
+                          <div class="card-body">
+                            <h5 class="card-title">Ahora 12</h5>
+                            <p class="card-text">Plan Ahora 12 en compras superiores a $3000.</p>
+                            <p class="card-text"><small class="text-muted"><a href="https://www.argentina.gob.ar/ahora-12">Ver bases y condiciones</a></small></p>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <img class="card-img-top" src="imagenes/Banco-Galicia-01.png" alt="Card image cap">
+                          <div class="card-body">
+                            <h5 class="card-title">-20% todos los Jueves</h5>
+                            <p class="card-text">Vamos los jueves! con todas tus tarjetas de Banco Galicia</p>
+                            <p class="card-text"><small class="text-muted"><a href="https://www.bancogalicia.com/banca/online/web/Personas">Ver bases y condiciones</a></small></p>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <img class="card-img-top" src="imagenes/banconacion2015_0.png" alt="Card image cap">
+                          <div class="card-body">
+                            <h5 class="card-title">-25% los miércoles</h5>
+                            <p class="card-text">Todos los miércoles. Tope de reintegro $500.</p>
+                            <p class="card-text"><small class="text-muted"><a href="https://www.bna.com.ar/Personas/DescuentosYPromociones">Ver bases y condiciones</a></small></p>
+                          </div>
+                        </div>
+                      </div>
+        </div>
+    </section>
+   
+
+   
+  
+</main>
+<%- include(`partials/footer`) %>
+
+</body>
+
+</html>

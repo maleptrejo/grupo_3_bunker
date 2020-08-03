@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('partials/head', {title: 'Inicio'}) %>
+<%- include(`partials/head`, {title: `Inicio`}) %>
 <main class="">
     <div class="container">
         <div aria-label="breadcrumb rounded-0 ">
@@ -10,10 +10,11 @@
                 <li class="breadcrumb-item active" aria-current="page">Login</li>
             </ol>
         </div>
-    </div> 
+    </div>
     <section class="container registro">
         <form action="/users/login/val" method="POST" class="needs-validation mt-3 form-new-user" novalidate>
             <h2 class="c-acc-user">Iniciar Sesión</h2>
+            
             <div class=" info-cuenta">
                 <div class="form-row email mb-5">
                     <div class="col-md-6 mb-6">
@@ -35,20 +36,25 @@
                 </label>
             </div>
         </div>
+       
         <div class="mt-5">
-            <button class="btn  boton-registro" type="submit">Iniciar Sesión</button>
+            <button class="btn login boton-registro" type="submit">Iniciar Sesión</button>
         </div>
+        <div class="message">
+
+            </div>
     </form>
     <div>
-        <h2>Si no tenés cuenta, creala aquí</h2>
-        <div class="button-container-submit">
-                                    
-                <button class="btn btn-bunker mb-5 mt-5" type="submit"><a href="/users/create" >CREAR CUENTA</a></button>
-        </div>
+        <h2>Si no tenés cuenta, creala <a href="/users/create" class="link-hover">aquí</a>.</h2>
+        <!-- <div class="button-container-submit">
+
+                <button class="btn btn-bunker mb-5 mt-5" type="submit"><a href="/users/create" >aquí</a></button>
+        </div> -->
 
     </div>
 </section>
+<script src="../scripts/validLogin.js"></script>
 </main>
-<%- include('partials/footer') %>
-</body>	
+<%- include(`partials/footer`) %>
+</body>
 </html>

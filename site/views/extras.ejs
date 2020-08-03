@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<%- include('partials/head', {title: 'Inicio'}) %>
+<%- include(`partials/head`, {title: `Inicio`}) %>
         <main class="container">
             <div class="row">
                 <div class="col bks-controlPanelForm">
@@ -23,8 +23,9 @@
                             <input class="form-control" type="text" placeholder="Categoria a agregar" name="categoryCreate" id="categoryCreate">
                         </div>
                         <div class="alert alert-success" role="alert" style="display: none;" id="categoryAlert">Información enviada</div>
-                        <button type="submit" class="btn btn-secondary" id="categoryBtn" disabled>Modificar</button>
+                        <button type="submit" class="btn btn-secondary" id="categoryBtn" disabled>Modificar</button>    
                     </form>
+                    <a href="/products/categoryphoto/" class="btn btn-bunker mb-5 mt-5">Cambiar Foto</a>
                 </div>
                 <div class="col bks-controlPanelForm">
                     <form action="/products/extras/update" method="post">
@@ -75,6 +76,6 @@
             </div>
         </main>
         <script src="../scripts/extrasValidations.js"></script>
-        <%- include('partials/footer') %>    
+        <%- include(`partials/footer`) %>    
     </body>	
 </html>

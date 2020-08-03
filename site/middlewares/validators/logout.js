@@ -1,6 +1,6 @@
 function logout (req, res, next) {
     if (req.session.usuarioLogeado==undefined){
-        res.redirect('/')
+        res.redirect(`/`)
     } else {
         next();
     }

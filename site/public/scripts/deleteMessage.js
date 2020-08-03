@@ -1,65 +1,41 @@
-/*console.log("Corriendo");
-let deleteMessages= document.getElementsByClassName("message-borrar");
-console.log(deleteMessages);
+let archivar=document.getElementById('archivar-boton')
 
-Array.from(botones).forEach(boton=> {
-    deleteMessages.addEventListener("onClick", function (e){
-        e.preventDefault()  
-    
-        fetch("http://localhost:3000/api/contact/"+this.value,{
-            method: 'DELETE',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body: JSON.stringify({
-                status : this.value,
-            })
-        })
-        .then(response=> response.json())
 
-    })
-})      
+    archivar.addEventListener('click', function(e){ 
+        e.preventDefault() 
+       
 
-/*Array.from(deleteMessages).forEach(del=> { 
-    console.log(deleteMessages.length)
-
-    del.addEventListener('click', function(e){ 
-        console.log("Toque el boton")  
-        e.preventDefault()
-       console.log(this.href)
-        fetch(this.href, {
-            method: 'delete',
+        fetch("http://localhost:3000/api/contact/"+this.value, {
+            method: 'delete', 
             headers:{
             'Content-Type':'application/json'
         },
         body: JSON.stringify({
-            name: this.value
+        
+            id:this.value
         })
         
     }).then(response=> response.json())
-    .then (json=>{
+   
+   
+    let espacio=document.querySelector('.espacio-archivo')
 
-        
-    //deleteMessages.parentElement.parentElement.remove()
-        
-    })*/
+    let p=document.createElement('p')
+    espacio.classList.add('exito')
+    // espacio.style.fontSize="2em"
+    p="El mensaje se archivó con éxito"
+    espacio.innerHTML=p
 
-   /* let deleteMessages2= document.getElementsByClassName("message-borrar")
-    console.log(deleteMessages2.length)
-    if(deleteMessages2.length==0){
-        
-        let final1= document.getElementsByClassName('final-cart')
-         final1.forEach(f=>{
-             f.innerHTML=""
-         })
-        let final= document.querySelector('#final-cart')
-        final.innerHTML="";
-        let td=document.createElement('td')
-        td.innerHTML+='Consulta Borrada.'
-        final.append(td)
+    window.setTimeout(function(){
 
-     
-    }
-   // })
-//})
+        // Move to a new location or you can do something else
+        window.location.href = "http://localhost:3000/admins/contact ";
+
+    }, 2000);
+
+
+
+
+     })
+
 

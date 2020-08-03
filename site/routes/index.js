@@ -38,5 +38,6 @@ router.get('/promociones', (req, res)=>{
 router.get("/contact", contactController.form);
 router.post("/contact", contactValidator, contactController.send);
 router.get("/admins/contact", authorization, contactController.messages);
+router.get("/contact/:id", authorization, contactController.messagesId);
 
 module.exports = router;

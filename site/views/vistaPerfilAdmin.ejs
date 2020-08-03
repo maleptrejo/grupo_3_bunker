@@ -16,6 +16,56 @@
         </div>
     </div> 
     
+    <section class="container">
+        
+            <div class="card-user">
+                <div class="jumbotron  jumbo-user-detail">
+
+                    
+                    <div class="detail-user-row-1" style="display: flex;  
+                        flex-wrap: wrap;">
+                        <div class=" avatar">
+                                <a href="/users/admins/avatar"><img id="avatar_user" src="../images/usuarios/<%=userShow.avatar%>" alt=""></a>
+                        </div>
+                        <div class="name_user second-column">
+                            <a href="/users/admins/edit">
+                                <h2 class="display-4" id="name_user"><%=userShow.name%> <span> </span> <%=userShow.surname%>
+                                </h2>
+                            </a>
+                        </div>
+                    </div>
+                    <hr class="my-4">
+                    <div class="detail-user-row-1" style="display: flex;  
+                        flex-wrap: wrap;">
+                        <div>
+                            <h3>Información del usuario</h3>
+                        </div>
+                        <div class="second-column">
+                            <p><span>Email:</span><span id="email_user"><%= userShow.email%></span></p>
+                            <p><span>Dirección:</span><span id="address_user"><%= userShow.adress%></span></p>
+                            <p><span>País:</span><span id="country_user"><%= userShow.country%></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-wide">
+     
+                            <div class="link-control-panel">
+                                    <a href="/users/admins/control"> <h2>Panel de Control</h2></a>
+                            </div>
+            </div>
+
+
+        </section>
+
+
+
+
+
+
+
+<!-- 
     <section class="container-wide">
         
        
@@ -24,7 +74,7 @@
             <div class="">
                 <h1>Perfil de <span >administrador </span></h1>
             </div>
-
+            </div>
 
                
 
@@ -47,7 +97,7 @@
                                                           <button type="button" class="boton-registro btn btn-secondary btn-lg btn-block rounded-sm mt-5 mb-3"><a href="/users/admins/edit">Editar cuenta</a></button>
                                                   </div>
                                           </div> -->
-          
+<!--           
                                 </div>
         
                              </div>
@@ -113,7 +163,7 @@
     </div>
     
     
-</section>
+</section> -->
 
 
 

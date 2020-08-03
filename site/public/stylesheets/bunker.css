@@ -11,6 +11,7 @@
 
 main {
   min-height: 700px;
+ 
 }
 
 html {
@@ -92,9 +93,9 @@ button:focus {
 .detail-user-row-1 div h3 {
   font-size: 3em;
 }
-.second-column {
+/* .second-column {
   max-width: 20vw;
-}
+} */
 
 .detail-user-row-1 div p span {
   font-size: 2em;
@@ -397,6 +398,8 @@ padding: 15px;
    letter-spacing: normal !important;}
 }
 
+
+
 @media (min-width: 768px) {
   .card-cats img{
     
@@ -409,6 +412,10 @@ padding: 15px;
     font-size: 2em !important;
     background-color: rgba(102, 102, 102, 0.5);
     width: 255px;
+}
+
+textarea.form-control {
+  max-width: 75%;
 }
 }
 
@@ -1511,7 +1518,7 @@ height: 220px;
 
 .carousel-prod> .carousel-item>img {
   height: 400px;
-
+  object-fit: cover;
   margin: auto;
 }
 
@@ -1640,6 +1647,23 @@ footer>div>h6{
   font-weight: bold;
 }
 
+.link-control-panel {
+  border-bottom: 1px solid #666666;
+  font-size: 2em;
+}
+
+.link-control-panel a h2 {
+  font-size: 1.5em;
+}
+
+.link-control-panel a h2:hover {
+  color: #FFCA00;
+}
+
+#name_user:hover{
+  color: #FFCA00;
+}
+
 .container-control-panel {
   border-top: 1px solid #666666;
 }
@@ -1653,6 +1677,10 @@ footer>div>h6{
 
 .container-control-panel h2:hover {
   color: #FF2d53;
+}
+
+.container-prod-cats {
+  margin-top: 30px;
 }
 
 /* ******Panel de Control******* */
@@ -2353,9 +2381,26 @@ h2.c-acc-user {
     }
 
     .form-ingresar-prod input {
-
-      width: 20vw;
+      width: 100%;
   }
+
+  .exito{
+    font-size: 2em;
+    
+    border: 1px solid #666666;
+    border-radius:5px;
+    padding: 0 15px;
+  } 
+
+  .espacio-respuesta {
+    font-size: 3em;
+  }
+  .espacio-respuesta:hover {
+    color:#FFCA00;
+    
+  }
+
+  
 
   .display-mobile {
     display: none;

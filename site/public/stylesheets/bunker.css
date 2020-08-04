@@ -1468,6 +1468,10 @@ height: 220px;
 
 }
 
+.card-deck-index {
+  justify-content: space-around;
+}
+
 .boton-registro:hover {
   color: #FFCA00;
 }

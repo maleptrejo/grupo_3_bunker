@@ -12,7 +12,38 @@
                             </ol>
                         </div>
             </div> 
-        <div class="row">
+
+<section>
+        <div class="container mt-5 mb-5" >
+                <h2 style="font-size: 4em" >Resultados</h2>
+            </div>
+   
+
+        <div class="card-deck card-deck-index" style="justify-content: space-around">
+
+                <% prductsSearch.forEach(product=> { %>
+                    <a href="/products/<%=product.id%>">
+                <div class="card" >
+                  <img src="../images/productos/<%=product.image1%>" class="card-img-top" alt="...">
+
+                  <div class="card-body">
+                    <div><h2>$<%=product.price%></h2> <span><%=product.discounts.level*100%>% OFF</span></div>
+                    <h3><%=product.brand%></h3>
+            
+                    <h4 class="card-title"><%=product.name%> <span></span></h4>
+                    <h5><%=product.brand%></h5>
+                    
+                   
+                  </div>
+
+                </div>
+            </a>
+                <% }) %>  
+        </div>
+</section>
+
+
+        <!-- <div class="row">
             <% prductsSearch.forEach(product=> { %>
                 <div class="col-12 col-sm-6 col-lg-3">
                     <section class="product-box">
@@ -31,7 +62,7 @@
                     </section>
                 </div>
             <% }) %>
-        </div>
+        </div> -->
     </main>
     <%- include(`partials/footer`) %>
 </body>

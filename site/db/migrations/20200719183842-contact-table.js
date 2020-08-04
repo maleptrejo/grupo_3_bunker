@@ -20,7 +20,7 @@ module.exports = {
       email: {
         type: Types.STRING(150),
         allowNull: false,
-        unique: true
+      
       },
       message: {
         type: Types.TEXT

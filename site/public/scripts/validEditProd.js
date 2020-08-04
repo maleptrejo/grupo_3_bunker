@@ -1,12 +1,16 @@
 window.onload = function(){
     let btn= document.querySelector('#butenv');
+  
 
     btn.onclick= function(event){
 
-       
+     
+
+        
+        console.log(checknombre, checkdescripcion, checkprice, checkcantidad)
             
         if(checknombre && checkdescripcion && checkprice && checkcantidad) {
-           
+          
         }else{
            
             alert('Completá el formulario antes de continuar')
@@ -17,14 +21,28 @@ window.onload = function(){
 
     let form= document.querySelector('#formProd');
 
+
+    let checknombre= true;
+    let checkdescripcion= true;
+    let checkprice= true;
+    let checkcantidad= true;
+
+
+    form.name.classList.add('is-valid')
+    form.description.classList.add('is-valid')
+    form.price.classList.add('is-valid')
+    form.stock.classList.add('is-valid')
+
+
    
-    let checknombre, checkdescripcion, checkprice, checkcantidad= false;
+
 
     form.name.addEventListener('keyup', function(event){
                 
               if (event.target.value.length<3){
                   
-                  event.target.classList.add('is-invalid')
+                //   event.target.classList.add('is-invalid')
+                event.target.classList.replace('is-valid', 'is-invalid')
                   checknombre= false;
                   console.log(event.target.classList)
                  
@@ -38,20 +56,23 @@ window.onload = function(){
 
     form.description.addEventListener ('keyup', function(event){
        
-        if (event.target.value.length<3){
-            event.target.classList.add('is-invalid')
+        if (event.target.value.length<15){
+            // event.target.classList.add('is-invalid')
+            event.target.classList.replace('is-valid', 'is-invalid')
             checkdescripcion= false;
            
         }else{
             event.target.classList.replace('is-invalid', 'is-valid')
             checkdescripcion= true;
         }
+       
     })
 
     form.price.addEventListener ('input', function(event){
 
         if (event.target.value<1){
-            event.target.classList.add('is-invalid')
+            // event.target.classList.add('is-invalid')
+            event.target.classList.replace('is-valid', 'is-invalid')
             checkprice= false;
            
         }else{
@@ -63,7 +84,8 @@ window.onload = function(){
     form.stock.addEventListener ('input', function(event){
 
         if (event.target.value<1){
-            event.target.classList.add('is-invalid')
+            // event.target.classList.add('is-invalid')
+            event.target.classList.replace('is-valid', 'is-invalid')
             checkcantidad= false;
            
         }else{

@@ -263,10 +263,10 @@ h2 span{
   object-fit: cover;
   object-position: center;
 }
-
+/* 
 input#price{
   max-width: 70px;
-}
+} */
 
 #check-out {
 

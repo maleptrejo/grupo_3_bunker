@@ -25,8 +25,10 @@ module.exports = {
     allowNull: false,
     references: {
         model: 'products',
-        key: 'id'
-    }
+        key: 'id',
+       
+    },
+    
 },
     created_at: {
       type: Types.DATE,

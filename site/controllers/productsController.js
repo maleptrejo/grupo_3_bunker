@@ -150,7 +150,12 @@ const products = {
                     id: req.params.productId
                 }
             })
-            res.redirect (`/products`);
+            .then(()=> {
+                res.redirect (`/products`);
+            }
+                
+            )
+            
         },
         root: (req, res) => {
             db.Discounts.findAll({

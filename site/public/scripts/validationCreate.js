@@ -32,7 +32,7 @@ window.onload = function () {
 
     form.name.addEventListener('keyup', function (event) {
 
-        if (event.target.value.length < 3) {
+        if (event.target.value.length < 4) {
             event.target.classList.add('is-invalid')
             checkname = false;
 
@@ -44,7 +44,7 @@ window.onload = function () {
 
     form.sName.addEventListener('keyup', function (event) {
 
-        if (event.target.value.length < 3) {
+        if (event.target.value.length < 4) {
             event.target.classList.add('is-invalid')
             checksurname = false;
 

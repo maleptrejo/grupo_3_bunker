@@ -47,22 +47,48 @@ function fetchContact(url) {
         }
 
 
+        let old_next = document.querySelector('#next')
+        let next =old_next.cloneNode(true)
+        old_next.parentNode.replaceChild(next, old_next)
 
-
-        let next=document.querySelector('#next')
+      
         next.addEventListener('click', function(e){
-            listContact.innerHTML="";
-            fetchContact( json.meta.pagination.next_page)
+
+            if(!json.meta.pagination.next_page){
+              
+            }
+            else {
+                listContact.innerHTML="";
+                fetchContact( json.meta.pagination.next_page)
+            }
+
         })
 
-        let prev=document.querySelector('#prev')
+        let old_prev = document.querySelector('#prev')
+            let prev =old_prev.cloneNode(true)
+            old_prev.parentNode.replaceChild(prev, old_prev)
+
+       
         prev.addEventListener('click', function(e){
-            listContact.innerHTML="";
-            console.log(json.meta.pagination.prev_page)
-            fetchContact( json.meta.pagination.prev_page)
+           
+
+            if(json.meta.pagination.prev_page==null) {
+                
+            }else{
+                listContact.innerHTML="";
+                console.log(json.meta.pagination.prev_page)
+                fetchContact( json.meta.pagination.prev_page)
+            }
+
+
+
         })
 
-        let last=document.querySelector('#last')
+        let old_last = document.querySelector('#last')
+        let last =old_last.cloneNode(true)
+        old_last.parentNode.replaceChild(last, old_last)
+
+       
        last.addEventListener('click', function(e){
             listContact.innerHTML="";
             fetchContact( json.meta.pagination.last_page)

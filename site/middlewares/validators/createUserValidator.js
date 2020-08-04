@@ -6,8 +6,8 @@ const { check, validationResult, body } = require('express-validator');
 
 var validator = [
     
-        check('name').isLength({min:1}).withMessage('El campo nombre debe contener al menos un caracter'),
-        check('sName').isLength({min:1}).withMessage('El campo apellido debe contener al menos un caracter'),
+        check('name').isLength({min:4}).withMessage('El campo nombre debe contener al menos cuatro caracteres'),
+        check('sName').isLength({min:4}).withMessage('El campo apellido debe contener al menos cuatro caracteres'),
         check('email').isEmail().withMessage('El formato del email no es válido'),
         check('password').isLength({min:8, max:12}).withMessage('La contraseña debe contener entre 8 y 12 caracteres'),
       body('cPassword').custom(function(cpassword,{req}){

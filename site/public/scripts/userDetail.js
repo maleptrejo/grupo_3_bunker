@@ -32,6 +32,8 @@ fetch(`http://localhost:3000/api/users/${idUser}`)
     let country_user=document.querySelector('#country_user')
     country_user.innerHTML=json.data.country
  
+    let escribir=document.querySelector('#espacio-escribir')
+    escribir.innerHTML=`<a href= mailto:${json.data.email}?subject = Estimado cliente id="respuesta"><i class="far fa-paper-plane" style="font-size:1.2em"></i></a>`
 
 
 

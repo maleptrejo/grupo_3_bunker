@@ -22,7 +22,7 @@ window.onload = function(){
 
     form.name.addEventListener('keyup', function(event){
                 
-              if (event.target.value.length<3){
+              if (event.target.value.length<5){
                   
                   event.target.classList.add('is-invalid')
                   checkname= false;
@@ -38,7 +38,7 @@ window.onload = function(){
 
     form.description.addEventListener ('keyup', function(event){
        
-        if (event.target.value.length<3){
+        if (event.target.value.length<15){
             event.target.classList.add('is-invalid')
             checkdescription= false;
            
@@ -58,6 +58,10 @@ window.onload = function(){
             event.target.classList.replace('is-invalid', 'is-valid')
             checkprice= true;
         }
+        if(event.target.value>0.1){
+            event.target.classList.add('is-valid')
+            checkprice = true;
+        }
     })
 
     form.stock.addEventListener ('input', function(event){
@@ -69,6 +73,10 @@ window.onload = function(){
         }else{
             event.target.classList.replace('is-invalid', 'is-valid')
             checkstock= true;
+        }
+        if(event.target.value>0.1){
+            event.target.classList.add('is-valid')
+            checkstock = true;
         }
     })
   

@@ -1,61 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
 <%- include(`partials/head`, {title: `Inicio`}) %>
-<main class="container d-flex justify-content-center">
+<main class="container ">
 
         <div class="container">
                 <div aria-label="breadcrumb rounded-0 ">
                         <ol class="breadcrumb pl-0 bg-white">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="/users/login">Perfil</a></li>
+                            <li class="breadcrumb-item"><a href="/users/login">Administrador</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Imágenes</li>
                         </ol>
                     </div>
         </div> 
-    <div class="card">
-        <div class="card-body">
-          <h3 class="card-title"><strong><%= created.name %></strong></h3>
-          <p class="card-title"><strong>Descripción: </strong><%= created.description %></p>
-          <div class="row">
-                <div class="col-6">
-                    <p class="card-title"><strong>Marca: </strong><%= created.brands.name %></p>
-                </div>
-                <div class="col-6">
-                    <p class="card-title"><strong>Categoría: </strong><%= created.categories.name %></p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <div class="button-container-submit">
-                        <a href="/products/<%= created.id %>" class="btn btn-bunker mb-5 mt-5"><i class="far fa-times-circle"></i> Sin Fotos</a>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="button-container-submit">
-                        <form action="/products/<%= created.id %>?_method=DELETE" method="POST">
-                            <button class="btn btn-bunker-ok btn-bunker-destroy mb-5 mt-5" type="submit"><i class="fas fa-skull"></i> Destroy</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <form action="/products/cargaImagenes/<%= created.id %>" method="post" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="col d-flex flex-column align-items-center">
-                        <input name="image1" class="my-2 form-input" type="file">
-                        <input name="image2" class="my-2 form-input" type="file">
-                        <input name="image3" class="my-2 form-input" type="file">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="button-container-submit">
-                            <button class="btn btn-bunker-ok mb-5 mt-5" type="submit"><i class="far fa-thumbs-up"></i> Listo</button>
+
+   <section class="d-flex justify-content-center">
+
+        <div class="card" >
+                <div class="card-body">
+                  <h3 class="card-title"><strong><%= created.name %></strong></h3>
+                  <p class="card-title"><strong>Descripción: </strong><%= created.description %></p>
+                  <div class="row">
+                        <div class="col-6">
+                            <p class="card-title"><strong>Marca: </strong><%= created.brands.name %></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="card-title"><strong>Categoría: </strong><%= created.categories.name %></p>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="button-container-submit">
+                                <a href="/products/<%= created.id %>" class="btn btn-bunker mb-5 mt-5"><i class="far fa-times-circle"></i> Sin Fotos</a>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="button-container-submit">
+                                <form action="/products/<%= created.id %>?_method=DELETE" method="POST">
+                                    <button class="btn btn-bunker-ok btn-bunker-destroy mb-5 mt-5" type="submit"><i class="fas fa-skull"></i> Destroy</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="/products/cargaImagenes/<%= created.id %>" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col d-flex flex-column align-items-center">
+                                <input name="image1" class="my-2 form-input" type="file">
+                                <input name="image2" class="my-2 form-input" type="file">
+                                <input name="image3" class="my-2 form-input" type="file">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="button-container-submit">
+                                    <button class="btn btn-bunker-ok mb-5 mt-5" type="submit"><i class="far fa-thumbs-up"></i> Listo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-    </div>
+            </div>
+   </section >     
+    
 </main>
 <%- include(`partials/footer`) %>
 </body>

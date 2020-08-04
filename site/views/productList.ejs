@@ -9,7 +9,7 @@
         <div aria-label="breadcrumb rounded-0 ">
             <ol class="breadcrumb pl-0 bg-white">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item"><a href="/users/login">Cuenta</a></li>
+                <li class="breadcrumb-item"><a href="/users/admins/control">Panel de control</a></li>
               
                 <li class="breadcrumb-item"><a href="#">Productos</a></li>
             </ol>
@@ -79,9 +79,10 @@
                                         <div class="button-container-submit">
                                                 <button class="btn btn-secondary btn-block  mb-5 mt-5 " type="button"><a href="/products/<%= productoDetallado[i].id%>/edit">Editar</a></button>
                                         </div>
-                                        <form action="/products/<%= productoDetallado[i].id %>?_method=DELETE" method="post">
+                                       <form action="/products/<%= productoDetallado[i].id %>?_method=DELETE" method="post">
                                             <button class="btn btn-secondary btn-block  mb-5 mt-5 " type="submit">Eliminar</button>
                                         </form>
+                                       
                                     </div>
 
                                    

@@ -93,6 +93,7 @@ function fetchUsers(url) {
                  }
             })
 
+            
 
             let old_last = document.querySelector('#last')
             let last =old_last.cloneNode(true)
